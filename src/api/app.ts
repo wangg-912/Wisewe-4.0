@@ -1,0 +1,28 @@
+import qs from 'qs';
+import request from '/@/utils/request';
+import { AxiosResponse } from 'axios';
+
+export function login(param: object): Promise<AxiosResponse> {
+  return request({
+    url: '/test',
+    method: 'post',
+    data: param,
+  });
+}
+
+export function testget(param?: any): Promise<AxiosResponse> {
+  return request({
+    url: '/test/get',
+    method: 'get',
+    params: param,
+  });
+}
+
+export function testpostform(data: any): Promise<AxiosResponse> {
+  return request({
+    url: '/test/posrform',
+    method: 'post',
+    headers: { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    data: qs.stringify(data),
+  });
+}
