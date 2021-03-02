@@ -1,28 +1,27 @@
-import {defineAsyncComponent} from 'vue'
-import Skeleton from './Skeleton.vue'
-import Empty from './Empty.vue'
+import { defineAsyncComponent } from 'vue';
+import Skeleton from './Skeleton.vue';
+import Empty from './Empty.vue';
 
-const noop = ()=>{};
+const noop = () => {};
 
-interface Options{
-  size?:'default' | 'small' | 'large',
+interface Options {
+  size?: 'default' | 'small' | 'large';
   delay?: number;
   timeout?: number;
   loading?: boolean;
   retry?: boolean;
 }
 
+export function createAsyncComponent(loader: Fn, options: Options = {}) {
+  const { size = 'small', delay = 650, timeout = 30000, loading = false, retry = true } = options;
+  const dyCp = (loading: boolean) => {
+    return loading ? Skeleton : undefined;
+  };
 
-export function createAsyncComponent(loader: Fn, options: Options = {}){
-  const { size = 'small', delay = 650, timeout = 30000, loading = false, retry = true} = options;
-  const dyCp=(loading:boolean)=>{
-    return loading?Skeleton:undefined;
-  }
- 
   return defineAsyncComponent({
     loader,
     loadingComponent: dyCp(loading),
-    errorComponent:Empty,
+    errorComponent: Empty,
     timeout,
     // errorComponent
     //定义组件是否可疑。默认值：true。
@@ -38,7 +37,7 @@ export function createAsyncComponent(loader: Fn, options: Options = {}){
       ? noop
       : (error, retry, fail, attempts) => {
           if (error.message.match(/fetch/) && attempts <= 3) {
-            //重试提取错误，最多3次尝试 
+            //重试提取错误，最多3次尝试
             retry();
           } else {
             //请注意，重试/失败类似于承诺的解决/拒绝：
@@ -46,7 +45,5 @@ export function createAsyncComponent(loader: Fn, options: Options = {}){
             fail();
           }
         },
-  })
+  });
 }
-
-
