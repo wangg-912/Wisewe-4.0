@@ -18,6 +18,13 @@ export default defineConfig({
   resolve: {
     alias,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "src/style/variables/variable.scss";`,
+      },
+    },
+  },
   server: {
     host: '192.168.2.44',
     port: 9404,

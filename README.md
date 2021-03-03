@@ -120,3 +120,101 @@ evolution-v4
 └─ yarn.lock
 
 ```
+
+```
+evolution-v4
+├─ .editorconfig
+├─ .eslintignore
+├─ .eslintrc.js
+├─ index.html
+├─ LICENSE
+├─ package.json
+├─ postcss.config.js
+├─ prettier.config.js
+├─ public
+│  └─ favicon.ico
+├─ README.md
+├─ src
+│  ├─ api
+│  │  └─ app.ts
+│  ├─ App.vue
+│  ├─ assets
+│  │  └─ logo.png
+│  ├─ components
+│  │  ├─ Applications
+│  │  │  ├─ index.ts
+│  │  │  └─ src
+│  │  │     ├─ AppLogo
+│  │  │     │  └─ index.vue
+│  │  │     ├─ AppProvider
+│  │  │     │  └─ index.vue
+│  │  │     └─ useAppContext.ts
+│  │  └─ home
+│  │     └─ index.vue
+│  ├─ enums
+│  │  └─ appEnum.ts
+│  ├─ hooks
+│  │  ├─ core
+│  │  │  └─ useContext.ts
+│  │  └─ web
+│  │     └─ useDesign.ts
+│  ├─ layout
+│  │  ├─ components
+│  │  │  ├─ aside
+│  │  │  ├─ content
+│  │  │  │  └─ index.vue
+│  │  │  ├─ feature
+│  │  │  │  └─ index.vue
+│  │  │  ├─ footer
+│  │  │  ├─ header
+│  │  │  │  └─ index.vue
+│  │  │  ├─ logo
+│  │  │  ├─ menus
+│  │  │  ├─ setting
+│  │  │  │  └─ index.vue
+│  │  │  └─ tags
+│  │  ├─ index.vue
+│  │  └─ page
+│  │     └─ index.vue
+│  ├─ main.ts
+│  ├─ router
+│  │  ├─ asyncRouter.ts
+│  │  ├─ index.ts
+│  │  ├─ scrollBehavior.ts
+│  │  └─ types.ts
+│  ├─ settings
+│  │  └─ designSetting.ts
+│  ├─ shims-vue.d.ts
+│  ├─ store
+│  │  ├─ index.ts
+│  │  └─ modules
+│  │     └─ app.ts
+│  ├─ style
+│  │  ├─ common.scss
+│  │  ├─ index.scss
+│  │  ├─ layout
+│  │  │  └─ index.scss
+│  │  └─ variables
+│  │     ├─ color.scss
+│  │     ├─ easing.scss
+│  │     ├─ screen.scss
+│  │     └─ variable.scss
+│  ├─ type
+│  │  └─ config.ts
+│  ├─ utils
+│  │  ├─ factory
+│  │  │  ├─ asyncComponents.ts
+│  │  │  ├─ Empty.vue
+│  │  │  └─ Skeleton.vue
+│  │  ├─ request.ts
+│  │  └─ tools.ts
+│  └─ views
+│     └─ error
+│        └─ 404.vue
+├─ stylelint.config.js
+├─ tsconfig.json
+├─ vite.config.ts
+├─ yarn-error.log
+└─ yarn.lock
+
+```
