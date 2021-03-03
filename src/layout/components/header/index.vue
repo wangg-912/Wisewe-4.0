@@ -8,7 +8,7 @@
   import { defineComponent } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
-  import LayoutTypePicker from './components/LayoutTypePicker.vue';
+  /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
