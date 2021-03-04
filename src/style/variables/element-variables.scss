@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+
+/* Typography
+-------------------------- */
+$--font-path: "~element-plus/lib/theme-chalk/fonts";
+$--font-display: "auto";
+/// fontSize|1|Font Size|0
+$--font-size-extra-large: 20px;
+/// fontSize|1|Font Size|0
+$--font-size-large: 18px;
+/// fontSize|1|Font Size|0
+$--font-size-medium: 16px;
+/// fontSize|1|Font Size|0
+$--font-size-base: 14px;
+/// fontSize|1|Font Size|0
+$--font-size-small: 13px;
+/// fontSize|1|Font Size|0
+$--font-size-extra-small: 12px;
+/// fontWeight|1|Font Weight|1
+$--font-weight-primary: 500;
+/// fontWeight|1|Font Weight|1
+$--font-weight-secondary: 100;
+/// fontLineHeight|1|Line Height|2
+$--font-line-height-primary: 24px;
+/// fontLineHeight|1|Line Height|2
+$--font-line-height-secondary: 16px;
+$--font-color-disabled-base: #bbb;

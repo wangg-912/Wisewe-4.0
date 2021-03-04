@@ -10,7 +10,7 @@ import '/@/style/index.scss';
 
 const app = createApp(App);
 
-app.use(ElementPlus);
+app.use(ElementPlus, { size: 'small', zIndex: 3000 });
 
 setupStore(app);
 setupRouter(app);

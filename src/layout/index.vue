@@ -1,8 +1,9 @@
 <template>
   <!-- 默认排版 -->
-  <el-container>
+  <el-container :class="[`${prefixCls}--sidebar`]">
     <LayoutFeatures />
-    <el-aside width="200px">Aside</el-aside>
+    <!-- <el-aside width="200px">Aside</el-aside> -->
+    <LayoutSider />
     <el-container :calss="!prefixCls">
       <LayoutHeader />
       <LayoutContent />
@@ -20,6 +21,7 @@
     components: {
       LayoutFeatures: createAsyncComponent(() => import('/@/layout/components/feature/index.vue')),
       LayoutHeader: createAsyncComponent(() => import('/@/layout/components/header/index.vue')),
+      LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
       LayoutContent: createAsyncComponent(() => import('/@/layout/components/content/index.vue')),
     },
     setup() {
@@ -32,8 +34,7 @@
   });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-default-layout {
-    flex-direction: column;
+  .#{$namespace}-default-layout--sidebar {
     height: inherit;
     min-height: inherit;
   }

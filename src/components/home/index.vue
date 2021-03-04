@@ -2,7 +2,9 @@
   <div :class="{ active: isActive, 'text-danger': hasError }">
     <el-button type="primary" icon="el-icon-edit" @click="removeCount">-</el-button>
     {{ getcount }}
-    <el-button type="primary" icon="el-icon-edit" @click="addCount">+</el-button>
+    <el-button type="primary" @click="addCount">
+      <svg-icon type="icon-Word" />
+      +</el-button>
     <span>
       <label>{{ status }}</label>
       <el-button type="primary" icon="el-icon-edit" @click="toggleState">切换状态</el-button>
@@ -16,10 +18,14 @@
   import { defineComponent, computed, onMounted } from 'vue';
   import { appStore } from '/@/store/modules/app';
   import { login, testpostform } from '/@/api/app';
+  import SvgIcon from '/@/components/SvgIcon/index.vue'
 
   export default defineComponent({
     name: 'HelloWorld',
     props: {},
+    components:{
+      SvgIcon,
+    },
     setup() {
       const getcount = computed(() => appStore.getCount);
       const status = computed(() => appStore.getStatus);

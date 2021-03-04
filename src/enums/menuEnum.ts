@@ -2,20 +2,20 @@
  * @description: menu type
  */
 export enum MenuTypeEnum {
-  // left menu
+  // 左侧菜单模式
   SIDEBAR = 'sidebar',
-
+  // 左侧菜单混合模式
   MIX_SIDEBAR = 'mix-sidebar',
-  // mixin menu
+  // 顶部菜单混合模式
   MIX = 'mix',
-  // top menu
+  // 顶部菜单模式
   TOP_MENU = 'top-menu',
 }
 
 // menu mode
 export enum MenuModeEnum {
-  VERTICAL = 'vertical',
-  HORIZONTAL = 'horizontal',
-  VERTICAL_RIGHT = 'vertical-right',
-  INLINE = 'inline',
+  VERTICAL = 'vertical',//垂直
+  HORIZONTAL = 'horizontal',//水平
+  VERTICAL_RIGHT = 'vertical-right',//垂直右侧
+  INLINE = 'inline',//嵌入
 }

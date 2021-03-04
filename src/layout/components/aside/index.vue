@@ -1,0 +1,104 @@
+<template>
+  <div :class="prefixCls">
+    <el-aside :class="[`${prefixCls}-wrapper`]" width="240px">
+      <AppLogo />
+      <el-menu
+        :uniqueOpened="true"
+        default-active="1-1"
+        :class="`${prefixCls}-aside`"
+        background-color="transparent"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+      >
+        <el-submenu index="1" class="test">
+          <template #title>
+            <i class="el-icon-location"></i>
+            <span>导航一</span>
+          </template>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+          <el-menu-item index="1-3">选项3</el-menu-item>
+          <el-menu-item index="1-4">选项4</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="2">
+          <i class="el-icon-menu"></i>
+          <template #title>导航二</template>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <i class="el-icon-document"></i>
+          <template #title>导航三</template>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <i class="el-icon-setting"></i>
+          <template #title>导航四</template>
+        </el-menu-item>
+        <el-submenu index="5">
+          <template #title>
+            <i class="el-icon-location"></i>
+            <span>导航一</span>
+          </template>
+          <el-menu-item index="5-1">选项1</el-menu-item>
+          <el-menu-item index="5-2">选项2</el-menu-item>
+          <el-menu-item index="5-3">选项3</el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
+  </div>
+</template>
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { AppLogo } from '/@/components/Applications';
+
+  export default defineComponent({
+    name: 'LayoutSider',
+    components: { AppLogo },
+    setup() {
+      const { prefixCls } = useDesign('layout-sider');
+      return {
+        prefixCls,
+      };
+    },
+  });
+</script>
+<style lang="scss" scoped>
+  .#{$namespace}-layout-sider {
+    background: var(--sider-dark-bg-color);
+    height: inherit;
+    &-wrapper {
+      height: inherit;
+    }
+    &-aside {
+      border-right: none;
+
+      .el-submenu__title,
+      .el-submenu__title i,
+      .submenu__title span {
+        background: transparent;
+      }
+
+      ::v-deep(.el-submenu .el-menu-item),
+      ::v-deep(.el-menu-item),
+      ::v-deep(.el-submenu__title) {
+        height: 46px;
+        line-height: 46px;
+        & i {
+          color: $--color-white !important;
+        }
+        &:not(.is-active):hover {
+          background-color: rgb(198, 226, 255) !important;
+          color: $--color-primary !important;
+          & i {
+            color: $--color-primary !important;
+          }
+        }
+      }
+      ::v-deep(.el-menu-item) {
+        &.is-active {
+          background-color: #0960bd !important;
+          color: $--color-white !important;
+        }
+      }
+    }
+  }
+</style>

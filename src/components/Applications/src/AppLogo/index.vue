@@ -1,7 +1,7 @@
 <template>
   <div :class="[prefixCls]">
-    <el-image style="width: 32px; height: 32px;" :src="url" :fit="fit" />
-    <div>{{ title }}</div>
+    <el-image style="width: 32px; height: 32px" :src="url" :fit="fit" />
+    <div :class="[`${prefixCls}-titlt`]">{{ title }}</div>
   </div>
 </template>
 <script lang="ts">
@@ -17,7 +17,7 @@
     },
     data() {
       return {
-        title: 'ABC',
+        title: '智汇校园服务系统',
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         fit: 'contain',
       };
@@ -31,5 +31,13 @@
     padding-left: 7px;
     cursor: pointer;
     transition: all 0.2s ease;
+    height: $headers-height;
+    &-titlt{
+      padding-left: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      color: $--color-white;
+    }
   }
 </style>
+ 

@@ -1,5 +1,19 @@
+
+  :root {
+    // header
+    --header-bg-color: #394664;
+    --header-bg-hover-color: #273352;
+    --header-active-menu-bg-color: #273352;
+  
+    // sider
+    --sider-dark-bg-color: #273352;
+    --sider-dark-darken-bg-color: #273352;
+    --sider-dark-lighten-1-bg-color: #273352;
+    --sider-dark-lighten-2-bg-color: #273352;
+  }
+  
   $--color-white:#ffffff !default;
-  $--color-primary: #409EFF !default;
+  $--color-primary: #1890ff !default;
   $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
   $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
   $--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
@@ -14,6 +28,10 @@
   $--color-warning: #e6a23c !default;
   $--color-danger: #f56c6c !default;
   $--color-info: #909399 !default;
+
+
+  /* Menus style */
+
 
 
   $border-color-dark:#b6b7b9;
