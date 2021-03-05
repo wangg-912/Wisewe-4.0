@@ -26,6 +26,7 @@
 
   .#{$namespace}-layout-container{
     flex-direction: row;
+    padding: 8px !important;
   }
 
 </style>

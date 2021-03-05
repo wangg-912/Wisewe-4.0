@@ -7,9 +7,7 @@
       <div :class="`${prefixCls}-left--breadcrumb`">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item
-            ><a href="/"><i class="el-icon-bicycle"></i> 活动管理</a></el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/404' }"><i class="el-icon-bicycle"></i> 活动管理</el-breadcrumb-item>
           <el-breadcrumb-item><i class="el-icon-s-home"></i> 活动详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -46,10 +44,22 @@
         <i class="el-icon-full-screen" size="18"></i>
       </div>
       <div :class="`${prefixCls}-right--item`">
-        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
       </div>
-      <div :class="[`${prefixCls}-right--item`,`${prefixCls}-right--user`]">
-        管理员
+      <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
+        <el-dropdown>
+          <span class="el-dropdown-link" style="fontsize: 12px">管理员</span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="modify">
+                <i class="el-icon-edit"></i>修改密码
+              </el-dropdown-item>
+              <el-dropdown-item divided command="loginout">
+                <i class="el-icon-switch-button"></i>退出登录
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
       <div :class="`${prefixCls}-right--item`">
         <i class="el-icon-setting" size="18"></i>
@@ -61,13 +71,13 @@
   import { defineComponent } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
-  import SvgIcon from '/@/components/SvgIcon/index.vue'
+  import SvgIcon from '/@/components/SvgIcon/index.vue';
   /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       AppLogo,
-      SvgIcon
+      SvgIcon,
       /* LayoutTypePicker, */
     },
     setup() {
@@ -124,18 +134,18 @@
           border-bottom: inherit;
           height: 48px;
           line-height: 48px;
-          padding:0 10px;
+          padding: 0 10px;
         }
         ::v-deep(.el-menu-item.is-active),
-        ::v-deep(.el-submenu.is-active .el-submenu__title){
+        ::v-deep(.el-submenu.is-active .el-submenu__title) {
           border-bottom: 2px solid #0960bd;
           color: #0960bd;
         }
       }
     }
-    &-right{
+    &-right {
       min-width: 180px;
-      &--item{
+      &--item {
         display: flex;
         height: 48px;
         padding: 0 8px;
@@ -143,9 +153,9 @@
         cursor: pointer;
         align-items: center;
       }
-      &--user{
-        padding-left:0;
-        font-size:$--font-size-extra-small;
+      &--user {
+        padding-left: 0;
+        font-size: $--font-size-extra-small;
       }
     }
   }

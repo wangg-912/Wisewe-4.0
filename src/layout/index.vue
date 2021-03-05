@@ -6,6 +6,7 @@
     <LayoutSider />
     <el-container :calss="!prefixCls">
       <LayoutHeader />
+      <LayoutTags />
       <LayoutContent />
       <el-footer>Footer</el-footer>
     </el-container>
@@ -22,6 +23,7 @@
       LayoutFeatures: createAsyncComponent(() => import('/@/layout/components/feature/index.vue')),
       LayoutHeader: createAsyncComponent(() => import('/@/layout/components/header/index.vue')),
       LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
+      LayoutTags: createAsyncComponent(() => import('/@/layout/components/tags/index.vue')),
       LayoutContent: createAsyncComponent(() => import('/@/layout/components/content/index.vue')),
     },
     setup() {

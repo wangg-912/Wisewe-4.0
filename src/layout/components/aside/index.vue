@@ -10,7 +10,7 @@
         text-color="#fff"
         active-text-color="#ffd04b"
       >
-        <el-submenu index="1" class="test">
+        <el-submenu index="1">
           <template #title>
             <i class="el-icon-location"></i>
             <span>导航一</span>
@@ -62,6 +62,10 @@
   });
 </script>
 <style lang="scss" scoped>
+  @mixin set-menu-item($backgroun, $color) {
+    background-color: $backgroun !important;
+    color: $color !important;
+  }
   .#{$namespace}-layout-sider {
     background: var(--sider-dark-bg-color);
     height: inherit;
@@ -86,8 +90,7 @@
           color: $--color-white !important;
         }
         &:not(.is-active):hover {
-          background-color: rgb(198, 226, 255) !important;
-          color: $--color-primary !important;
+          @include set-menu-item(rgb(217, 236, 255), $--color-primary);
           & i {
             color: $--color-primary !important;
           }
@@ -95,8 +98,7 @@
       }
       ::v-deep(.el-menu-item) {
         &.is-active {
-          background-color: #0960bd !important;
-          color: $--color-white !important;
+          @include set-menu-item(#0960bd, $--color-white);
         }
       }
     }
