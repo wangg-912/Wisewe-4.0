@@ -1,14 +1,20 @@
 <template>
   <div :class="[prefixCls]">
     <el-image style="width: 32px; height: 32px" :src="url" :fit="fit" />
-    <div :class="[`${prefixCls}-titlt`]">{{ title }}</div>
+    <div v-if="showTitle" :class="[`${prefixCls}-titlt`]">{{ title }}</div>
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, onMounted, watchEffect } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   export default defineComponent({
     name: 'AppLogo',
+    props: {
+      showTitle: {
+        type: Boolean,
+        default: true,
+      },
+    },
     setup() {
       const { prefixCls } = useDesign('app-logo');
       return {

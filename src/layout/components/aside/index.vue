@@ -1,14 +1,16 @@
 <template>
   <div :class="prefixCls">
-    <el-aside :class="[`${prefixCls}-wrapper`]" width="240px">
-      <AppLogo />
+    <el-aside :class="[`${prefixCls}-wrapper`]" :width="isCollapse ? '64px' : '240px'">
+      <AppLogo :showTitle="!isCollapse" />
       <el-menu
+        :collapse="isCollapse"
         :uniqueOpened="true"
         default-active="1-1"
         :class="`${prefixCls}-aside`"
         background-color="transparent"
         text-color="#fff"
         active-text-color="#ffd04b"
+        :collapse-transition="false"
       >
         <el-submenu index="1">
           <template #title>
@@ -46,7 +48,8 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, computed } from 'vue';
+  import { appStore } from '/@/store/modules/app';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
 
@@ -54,8 +57,10 @@
     name: 'LayoutSider',
     components: { AppLogo },
     setup() {
+      const isCollapse = computed(() => appStore.isCollapse);
       const { prefixCls } = useDesign('layout-sider');
       return {
+        isCollapse,
         prefixCls,
       };
     },

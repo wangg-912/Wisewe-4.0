@@ -18,8 +18,8 @@
       },
       size: {
         type: Number,
-        default: 14,
-      }
+        default: 16,
+      },
     },
     setup(props) {
       const xlinkHref = computed(() => `#${props.type}`);

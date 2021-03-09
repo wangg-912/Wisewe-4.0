@@ -5,15 +5,28 @@ const NAME = 'app';
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class App extends VuexModule {
+  private collapse = false;
   private count = 0;
   private status = false;
 
+  get isCollapse() {
+    return this.collapse;
+  }
   get getCount() {
     return this.count;
   }
   get getStatus() {
     return this.status;
   }
+  /**
+   * 设置伸缩
+   * @param collapase {Boolean}
+   */
+  @Mutation
+  SETCOLLAPSE(collapse: boolean): void {
+    this.collapse = collapse;
+  }
+
   @Mutation
   SETCOUNT(count: number): void {
     this.count = count;
@@ -21,6 +34,14 @@ class App extends VuexModule {
   @Mutation
   UPDATESTATE(status: boolean): void {
     this.status = status;
+  }
+  /**
+   * 设置伸缩动作
+   * @param collapse
+   */
+  @Action
+  public setCollapse(collapse: boolean): void {
+    this.SETCOLLAPSE(collapse);
   }
 
   @Action

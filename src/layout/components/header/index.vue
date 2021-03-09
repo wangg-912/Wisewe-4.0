@@ -3,7 +3,7 @@
     <!-- <AppLogo /> -->
     <!-- <LayoutTypePicker /> -->
     <div :class="`${prefixCls}-left`">
-      <span :class="`${prefixCls}-left--collapse`"><i class="el-icon-s-fold"></i></span>
+      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="collapseHandler"><i class="el-icon-s-fold" :class="isCollapse?'el-icon--collapse':'el-icon--expend'"></i></span>
       <div :class="`${prefixCls}-left--breadcrumb`">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -33,7 +33,7 @@
     </div>
     <div :class="`${prefixCls}-right`">
       <div :class="`${prefixCls}-right--item`">
-        <svg-icon type="icon-sousuo4" size="16" />
+        <svg-icon type="icon-sousuo4" />
       </div>
       <div :class="`${prefixCls}-right--item`">
         <el-badge is-dot type="danger">
@@ -68,7 +68,8 @@
   </el-header>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, computed } from 'vue';
+  import { appStore } from '/@/store/modules/app'
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
   import SvgIcon from '/@/components/SvgIcon/index.vue';
@@ -81,14 +82,23 @@
       /* LayoutTypePicker, */
     },
     setup() {
+      const isCollapse = computed(() => appStore.isCollapse);
       const { prefixCls } = useDesign('layout-header');
+      function collapseHandler() {
+        appStore.setCollapse(!isCollapse.value);
+      }
       return {
+        isCollapse,
         prefixCls,
+        collapseHandler,
       };
     },
   });
 </script>
 <style lang="scss" scoped>
+  @mixin turnRotate($ease, $tf) {
+    transition: $ease $tf;
+  }
   .#{$namespace}-layout-header {
     width: 100%;
     height: $headers-height !important;
@@ -111,6 +121,14 @@
         i {
           font-size: $--font-size-medium;
           cursor: pointer;
+          &.el-icon--expend{
+            transform: rotate(0deg);
+            @include turnRotate(200ms, $ease-in);
+          }
+          &.el-icon--collapse{
+            transform: rotate(90deg);
+            transition: 200ms $ease-in;
+          }
         }
       }
       &--breadcrumb {
