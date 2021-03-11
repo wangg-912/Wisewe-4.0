@@ -48,7 +48,7 @@
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown>
-          <span class="el-dropdown-link" style="fontsize: 12px">管理员</span>
+          <span class="el-dropdown-link" style="fontSize: 12px">管理员</span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="modify">
@@ -69,7 +69,7 @@
 </template>
 <script lang="ts">
   import { defineComponent, computed } from 'vue';
-  import { appStore } from '/@/store/modules/app'
+  import { appStore } from '/@/store/modules/app';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
   import SvgIcon from '/@/components/SvgIcon/index.vue';
