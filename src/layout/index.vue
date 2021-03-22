@@ -4,11 +4,11 @@
     <LayoutFeatures />
     <!-- <el-aside width="200px">Aside</el-aside> -->
     <LayoutSider />
-    <el-container :calss="!prefixCls">
+    <el-container direction="vertical" :calss="!prefixCls">
       <LayoutHeader />
       <LayoutTags />
       <LayoutContent />
-      <el-footer>Footer</el-footer>
+      <LayoutFooter />
     </el-container>
   </el-container>
 </template>
@@ -25,6 +25,7 @@
       LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
       LayoutTags: createAsyncComponent(() => import('/@/layout/components/tags/index.vue')),
       LayoutContent: createAsyncComponent(() => import('/@/layout/components/content/index.vue')),
+      LayoutFooter: createAsyncComponent(() => import('/@/layout/components/footer/index.vue')),
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');
