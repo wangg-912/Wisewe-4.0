@@ -48,10 +48,11 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
+  import { defineComponent, computed, onMounted } from 'vue';
   import { appStore } from '/@/store/modules/app';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
+  import { getMenusDate } from '/@/api/app'
 
   export default defineComponent({
     name: 'LayoutSider',
@@ -59,6 +60,16 @@
     setup() {
       const isCollapse = computed(() => appStore.isCollapse);
       const { prefixCls } = useDesign('layout-sider');
+      onMounted(()=>{ 
+        getMenusDate()
+        .then(res=>{ 
+          debugger
+          const {success, content} = res.data;
+          if(success){
+            console.log(content)
+          }
+       }).then(err=>{}) })
+
       return {
         isCollapse,
         prefixCls,

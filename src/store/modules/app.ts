@@ -1,14 +1,19 @@
+import type { ProjectConfig } from '/@/type/config';
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import store from '/@/store';
-
+import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
 const NAME = 'app';
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class App extends VuexModule {
+  // 菜单伸缩状态
   private collapse = false;
   private count = 0;
   private status = false;
-
+  // 页面配置
+  private pageLoadingState = false;
+  // 项目配置
+  private projectConfigState: ProjectConfig | null;
   get isCollapse() {
     return this.collapse;
   }
@@ -17,6 +22,18 @@ class App extends VuexModule {
   }
   get getStatus() {
     return this.status;
+  }
+  /**
+   * @description 获取页面加载状态
+   */
+  get getPageLoading() {
+    return this.pageLoadingState;
+  }
+  /**
+   *  @description 获取页面配置
+   */
+  get getProjectConfig(): ProjectConfig {
+    return this.projectConfigState || ({} as ProjectConfig);
   }
   /**
    * 设置伸缩

@@ -9,6 +9,12 @@ export function login(param: object): Promise<AxiosResponse> {
     data: param,
   });
 }
+export function getMenusDate(): Promise<AxiosResponse> {
+  return request({
+    url: '/api/platform/permission/menu/tree',
+    method: 'get'
+  });
+}
 
 export function testget(param?: any): Promise<AxiosResponse> {
   return request({
