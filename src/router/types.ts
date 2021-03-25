@@ -2,10 +2,13 @@ export interface IMenubarList {
   id?: number | string;
   name?: string;
   path: string;
+  fullPath: string;
   redirect?: string | { name: string };
   meta?: {
     icon: string;
     title: string;
+    frameSrc?: string;
+    frameOpenType?: string;
     activeMenu?: string;
     noCache?: boolean;
     hidden?: boolean;

@@ -4,6 +4,7 @@ import ElementPlus from 'element-plus';
 import { setupStore } from '/@/store';
 import { setupRouter } from '/@/router';
 import App from './App.vue';
+
 import 'nprogress/nprogress.css';
 import 'element-plus/lib/theme-chalk/index.css';
 import '/@/style/index.scss';

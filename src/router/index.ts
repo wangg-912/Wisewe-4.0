@@ -1,6 +1,7 @@
 import type { App } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { createGuard } from './guard/';
 import { scrollBehavior } from './scrollBehavior';
 import { IMenubarList } from './types';
 
@@ -48,7 +49,6 @@ export const allowRouter: Array<IMenubarList> = [
       },
     ],
   },
-  { path: '/:pathMatch(.*)*', redirect: '/' },
 ];
 
 const router = createRouter({
@@ -59,6 +59,6 @@ const router = createRouter({
 
 export function setupRouter(app: App<Element>) {
   app.use(router);
+  createGuard(router);
 }
-
 export default router;

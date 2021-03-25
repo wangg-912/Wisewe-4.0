@@ -15,7 +15,7 @@
     "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" \"!dist/**/*\""
   },
-  "build":{
+  "build": {
     "files": [
       "!node_modules",
       "dist/assets/**"

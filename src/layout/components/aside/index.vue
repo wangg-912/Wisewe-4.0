@@ -26,49 +26,32 @@
           <i class="el-icon-menu"></i>
           <template #title>导航二</template>
         </el-menu-item>
-        <el-menu-item index="3">
-          <i class="el-icon-document"></i>
-          <template #title>导航三</template>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <template #title>导航四</template>
-        </el-menu-item>
-        <el-submenu index="5">
-          <template #title>
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
-          </template>
-          <el-menu-item index="5-1">选项1</el-menu-item>
-          <el-menu-item index="5-2">选项2</el-menu-item>
-          <el-menu-item index="5-3">选项3</el-menu-item>
-        </el-submenu>
       </el-menu>
     </el-aside>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, computed, onMounted } from 'vue';
+  import { useRouter } from 'vue-router';
   import { appStore } from '/@/store/modules/app';
+  import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
-  import { getMenusDate } from '/@/api/app'
-
+ 
   export default defineComponent({
     name: 'LayoutSider',
     components: { AppLogo },
     setup() {
+      const $routes = useRouter();
       const isCollapse = computed(() => appStore.isCollapse);
       const { prefixCls } = useDesign('layout-sider');
-      onMounted(()=>{ 
-        getMenusDate()
-        .then(res=>{ 
-          debugger
-          const {success, content} = res.data;
-          if(success){
-            console.log(content)
-          }
-       }).then(err=>{}) })
+      const routes = computed(() => routeStore.getRoutes);
+
+      onMounted(() => {
+        setTimeout(() => {
+          console.log($routes, '3', routes);
+        }, 1000);
+      });
 
       return {
         isCollapse,

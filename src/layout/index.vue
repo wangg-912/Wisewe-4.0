@@ -17,6 +17,9 @@
   import { defineComponent } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
+  import { getMenusDate } from '/@/api/app'
+  import { generatorDynamicRouter } from '/@/router/asyncRouter'
+  /* import router from '/@/router'; */
   export default defineComponent({
     name: 'Layout',
     components: {
@@ -29,7 +32,13 @@
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');
-
+      getMenusDate().then(res=>{ /* debugger */ 
+        const {success, content} = res.data; 
+        if(success){
+            /* console.log(content)  */
+           generatorDynamicRouter(content)
+          } 
+          }).then(err=>{})
       return {
         prefixCls,
       };

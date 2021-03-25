@@ -3,6 +3,7 @@ import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-dec
 import store from '/@/store';
 import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
 const NAME = 'app';
+let timeId: TimeoutHandle;
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class App extends VuexModule {
@@ -14,6 +15,8 @@ class App extends VuexModule {
   private pageLoadingState = false;
   // 项目配置
   private projectConfigState: ProjectConfig | null;
+
+
   get isCollapse() {
     return this.collapse;
   }
@@ -23,6 +26,7 @@ class App extends VuexModule {
   get getStatus() {
     return this.status;
   }
+  
   /**
    * @description 获取页面加载状态
    */
@@ -35,6 +39,7 @@ class App extends VuexModule {
   get getProjectConfig(): ProjectConfig {
     return this.projectConfigState || ({} as ProjectConfig);
   }
+
   /**
    * 设置伸缩
    * @param collapase {Boolean}
@@ -42,6 +47,14 @@ class App extends VuexModule {
   @Mutation
   SETCOLLAPSE(collapse: boolean): void {
     this.collapse = collapse;
+  }
+  /**
+   * 设置页面加载状态
+   * @param loading
+   */
+  @Mutation
+  SETPAGELOADINGSTATE(loading: boolean): void {
+    this.pageLoadingState = loading;
   }
 
   @Mutation
@@ -59,6 +72,23 @@ class App extends VuexModule {
   @Action
   public setCollapse(collapse: boolean): void {
     this.SETCOLLAPSE(collapse);
+  }
+  /**
+   *  设置页面加载状态动作
+   * @param loading
+   */
+  @Action
+  public async setPageLoadingAction(loading: boolean): Promise<void> {
+    if (loading) {
+      clearTimeout(timeId);
+      // Prevent flicker
+      timeId = setTimeout(() => {
+        this.SETPAGELOADINGSTATE(loading);
+      }, 50);
+    } else {
+      this.SETPAGELOADINGSTATE(loading);
+      clearTimeout(timeId);
+    }
   }
 
   @Action

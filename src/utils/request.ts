@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
-import { ElLoading, ElMessage } from 'element-plus';
+import { ElMessage } from 'element-plus';
 
-let loading: { close(): void };
+/* let loading: { close(): void }; */
 const request = axios.create({
   // API 请求的默认前缀
   baseURL: import.meta.env.VUE_APP_API_BASE_URL as string | undefined,
@@ -40,7 +40,7 @@ const handleCode = (code: number, msg?: string) => {
 
 // 异常拦截处理器
 const errorHandler = (error: any) => {
-  loading.close();
+  /* loading.close(); */
   const { response, message } = error;
 
   if (response && !response.data) {
@@ -66,12 +66,12 @@ const errorHandler = (error: any) => {
 
 request.interceptors.request.use(
   (config) => {
-    loading = ElLoading.service({
+    /* loading = ElLoading.service({
       lock: true,
       text: 'Loading',
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.4)',
-    });
+    }); */
     return config;
   },
   (error) => {
@@ -81,7 +81,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use((response: AxiosResponse) => {
   const { data } = response;
-  loading.close();
+  /* loading.close(); */
   if (!data.success) {
     ElMessage({
       message: data.message,

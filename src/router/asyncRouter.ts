@@ -1,78 +1,84 @@
+
+import { RouteRecordRaw } from 'vue-router'
+import { routeStore } from '/@/store/modules/route';
 import { IMenubarList } from './types';
+import { transPinYin } from '/@/utils/pinyin'
+import router from '/@/router';
+
 
 /* import { store } from '/@/store/index' */
 // 引入动态路由页面
-const modules = import.meta.glob('../views/**/**.vue');
 const components: IObject<() => Promise<typeof import('*.vue')>> = {
   Layout: ((() => import('/@/layout/index.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
+  PagePanel: ((() => import('/@/layout/page.pagePanel.vue')) as unknown) as () => Promise<
+    typeof import('*.vue')
+  >,
+  404: ((() => import('/@/views/error/404.vue')) as unknown) as () => Promise<
+    typeof import('*.vue')
+  >,
 };
-const componentsIngore: Array<string> = ['login', 'Workplace']; // 忽略的页面
-
 /**
  * list结构转tree
  * @param data list原始数据
  * @param pid 最外层pid
  */
-/* export function listToTree(data:Array<IMenubarList>, pid: string | number = 1, isChildNull = false):Array<IMenubarList> {
-    const d:Array<IMenubarList> = []
-    data.forEach(val => {
-        if(val.parentId == pid) {
-            const list = listToTree(data, val.id, isChildNull)
-            const obj:IMenubarList = { ...val }
-            if(!isChildNull || list.length !== 0) {
-                obj.children = list
-            }
-            d.push(obj)
-        }
-    })
-    return d
-} */
 
-Object.keys(modules).forEach((key) => {
-  const nameMatch = key.match(/^\.\.\/views\/(.*)\/(.*)\.vue/);
-  if (!nameMatch) return;
-  let [, , name] = nameMatch;
-  // 如果页面以Index命名，则使用父文件夹作为name
-  if (nameMatch[2] === 'Index') {
-    const nameSplit = nameMatch[1].split('/');
-    name = nameSplit[nameSplit.length - 1];
-  }
-  if (!componentsIngore.includes(name)) {
-    components[name] = modules[key] as () => Promise<typeof import('*.vue')>;
-  }
-});
+/* id?: number | string;
+   name?: string;
+   path: string;
+   meta?: {
+     icon: string;
+     title: string;
+     frameSrc?: string;
+     activeMenu?: string;
+     noCache?: boolean;
+     hidden?: boolean;
+   };
+   component?: (() => Promise<typeof import('*.vue')>) | string;
+   children?: Array<IMenubarList>; */
 
-const asyncRouter: Array<IMenubarList> = [
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: components['404'],
-    meta: {
-      title: 'NotFound',
-      icon: '',
-      hidden: true,
-    },
-    redirect: {
-      name: '404',
-    },
-  },
-];
+
+export function listToTree(data: Array<IMenubarList>, fullPath = '/'): Array<IMenubarList> {
+  const d: Array<IMenubarList> = [];
+  data.forEach(val => {
+    const { id, text, iconCls, children, attributes } = val;
+    /* console.log(transPinYin(text)) */
+    let obj = {
+      id,
+      name: transPinYin(text),
+      fullPath: `${fullPath}${transPinYin(text)}`,
+      path: `/${transPinYin(text)}`,
+      meta: {
+        icon: iconCls,
+        title: text,
+        noCache: false,
+        hidden: false,
+      }
+    };
+    let isFrame = attributes && attributes.url && attributes.url.indexOf('html') > -1;
+    if (isFrame) {
+      obj.meta.frameSrc = attributes.url;
+      obj.component = components['PagePanel'];
+    }else{
+      obj.component = ((() => import(`${attributes.url}`)) as unknown) as () => Promise<typeof import('*.vue')>
+    }
+    if (val.children && val.children.length) {
+      obj.children = listToTree(val.children, `${fullPath}${transPinYin(text)}/`);
+    }
+    d.push(obj);
+  })
+  return d;
+}
+const asyncRouter: Array<IMenubarList> = [{ path: '/:pathMatch(.*)*', redirect: '/' }];
 
 export const generatorDynamicRouter = (data: Array<IMenubarList>): void => {
-  //const routerList:Array<IMenubarList> = listToTree(data, 0)
-  /*  asyncRouter.forEach(v => routerList.push(v))
-    const f = (data:Array<IMenubarList>, pData:IMenubarList|null) => {
-        for(let i = 0,len = data.length;i < len;i++) {
-            const v:IMenubarList = data[i]
-            if(typeof v.component === 'string') v.component = components[v.component]
-            
-            if(v.children && v.children.length > 0) {
-                f(v.children, v)
-            }
-        }
-    }
-    f(routerList, null) */
-  //store.commit('layout/setRoutes', routerList)
+  const routerList: Array<IMenubarList> = listToTree(data);
+  const finallyRoutes = [...routerList, ...asyncRouter];
+  finallyRoutes.forEach((item) => {
+    router.addRoute('Layout', item as RouteRecordRaw);
+  })
+  routeStore.setRoutes(finallyRoutes);
+  /* router.addRoutes(finallyRoutes); */
 };
