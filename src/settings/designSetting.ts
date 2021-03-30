@@ -1,8 +1,8 @@
 export default {
-  prefixCls: 'ww',
+  prefixCls: 'wisewe',
 };
 
-// app theme preset color
+//应用主题预设颜色
 export const APP_PRESET_COLOR_LIST: string[] = [
   '#0084f4',
   '#009688',
@@ -14,7 +14,7 @@ export const APP_PRESET_COLOR_LIST: string[] = [
   '#ff9800',
 ];
 
-// header preset color
+// 头部预设颜色
 export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
   '#ffffff',
   '#009688',
@@ -28,7 +28,7 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
   '#383f45',
 ];
 
-// sider preset color
+// 侧边预设颜色
 export const SIDE_BAR_BG_COLOR_LIST: string[] = [
   '#001529',
   '#273352',

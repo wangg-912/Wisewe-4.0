@@ -1,32 +1,21 @@
 <template>
   <div :class="prefixCls">
     <el-aside :class="[`${prefixCls}-wrapper`]" :width="isCollapse ? '64px' : '240px'">
-      <AppLogo :showTitle="!isCollapse" />
-      <el-menu
-        :collapse="isCollapse"
-        :uniqueOpened="true"
-        default-active="1-1"
-        :class="`${prefixCls}-aside`"
-        background-color="transparent"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-        :collapse-transition="false"
-      >
-        <el-submenu index="1">
-          <template #title>
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
-          </template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-          <el-menu-item index="1-3">选项3</el-menu-item>
-          <el-menu-item index="1-4">选项4</el-menu-item>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <template #title>导航二</template>
-        </el-menu-item>
-      </el-menu>
+      <AppLogo v-if="showLogo" :showTitle="!isCollapse" />
+      <el-scrollbar wrap-class='scrollbar-wrapper' :style="{ height:showLogo?'calc(100% - 50px)':'100%'}">
+        <el-menu
+          :collapse="isCollapse"
+          :uniqueOpened="true"
+          default-active="1-1"
+          :class="`${prefixCls}-aside`"
+          background-color="transparent"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          :collapse-transition="false"
+        >
+          <menu-items v-for="v in menuLists" :key="v.name" :menu="v" :index="v.path" />
+        </el-menu>
+      </el-scrollbar>
     </el-aside>
   </div>
 </template>
@@ -37,25 +26,29 @@
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { AppLogo } from '/@/components/Applications';
+  import MenuItems from './menus.vue';
  
   export default defineComponent({
     name: 'LayoutSider',
-    components: { AppLogo },
+    components: { AppLogo, MenuItems },
     setup() {
       const $routes = useRouter();
       const isCollapse = computed(() => appStore.isCollapse);
+      const showLogo = computed(()=> appStore.getProjectConfig.showLogo);
       const { prefixCls } = useDesign('layout-sider');
-      const routes = computed(() => routeStore.getRoutes);
+      const menuLists = computed(() => routeStore.getRoutes);
 
       onMounted(() => {
         setTimeout(() => {
-          console.log($routes, '3', routes);
+          console.log($routes, '3');
         }, 1000);
       });
 
       return {
         isCollapse,
+        showLogo,
         prefixCls,
+        menuLists,
       };
     },
   });

@@ -62,7 +62,7 @@
         </el-dropdown>
       </div>
       <div :class="`${prefixCls}-right--item`">
-        <i class="el-icon-setting" size="18"></i>
+        <i class="el-icon-setting" size="18" @click="showConfig"></i>
       </div>
     </div>
   </el-header>
@@ -87,10 +87,14 @@
       function collapseHandler() {
         appStore.setCollapse(!isCollapse.value);
       }
+      function showConfig() {
+        //TODO
+      }
       return {
         isCollapse,
         prefixCls,
         collapseHandler,
+        showConfig,
       };
     },
   });

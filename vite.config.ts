@@ -2,7 +2,7 @@ import { resolve, join } from 'path';
 import { UserConfig } from 'vite';
 import dotenv from 'dotenv';
 import vue from '@vitejs/plugin-vue';
-
+import vueJsx from '@vitejs/plugin-vue-jsx';
 dotenv.config({ path: join(__dirname, '.env') });
 
 const alias = parseAlias({
@@ -57,7 +57,7 @@ const config: UserConfig = {
     include: ['axios', 'nprogress'],
     exclude: ['electron-is-dev'],
   },
-  plugins: [vue()],
+  plugins: [vue(), vueJsx()],
 }
 // https://vitejs.dev/config/
 export default config;

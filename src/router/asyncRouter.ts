@@ -12,7 +12,7 @@ const components: IObject<() => Promise<typeof import('*.vue')>> = {
   Layout: ((() => import('/@/layout/index.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
-  PagePanel: ((() => import('/@/layout/page.pagePanel.vue')) as unknown) as () => Promise<
+  PagePanel: ((() => import('/@/layout/page/pagePanel.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
   404: ((() => import('/@/views/error/404.vue')) as unknown) as () => Promise<

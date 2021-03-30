@@ -1,7 +1,9 @@
 import type { ProjectConfig } from '/@/type/config';
+
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import store from '/@/store';
 import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
+import { deepMerge } from '/@/utils/tools';
 const NAME = 'app';
 let timeId: TimeoutHandle;
 
@@ -55,6 +57,12 @@ class App extends VuexModule {
   @Mutation
   SETPAGELOADINGSTATE(loading: boolean): void {
     this.pageLoadingState = loading;
+  }
+
+  @Mutation
+  COMMITPROJECTCONFIGSTATE(proCfg: DeepPartial<ProjectConfig>): void {
+    this.projectConfigState = deepMerge(this.projectConfigState || {}, proCfg);
+    setLocal(PROJ_CFG_KEY, this.projectConfigState);
   }
 
   @Mutation

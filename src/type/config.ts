@@ -1,4 +1,4 @@
-import { RouterTransitionEnum } from '/@/enums/appEnum';
+import { RouterTransitionEnum,ThemeEnum } from '/@/enums/appEnum';
 /**
  * 
  */
@@ -12,7 +12,18 @@ export interface MultiTabsSetting{
   
 }
 export interface HeaderSetting{
+  bgColor: string;
+  fixed: boolean;
+  show: boolean;
+  theme: ThemeEnum;
+  // 显示全屏按钮
+  showFullScreen: boolean;
+  // 开启全屏功能
+  useLockPage: boolean;
+  // 显示消息中心按钮
+  showNotice: boolean;
 
+  showSearch: boolean;
 }
 
 /**
@@ -68,7 +79,16 @@ export interface ProjectConfig {
   // 切换界面的时候是否取消已经发送但是未响应的http请求。
   removeAllHttpPending: boolean;
 }
-
 interface ProjectSettingWrap {
   projectSetting: Readonly<ProjectConfig>;
+}
+
+export interface GlobEnvConfig {
+  // 网站标题
+  VITE_GLOB_APP_TITLE: string;
+  // 项目路径
+  VITE_GLOB_API_URL: string;
+  VITE_GLOB_API_URL_PREFIX?: string;
+  VITE_GLOB_APP_SHORT_NAME: string;
+  VITE_GLOB_UPLOAD_URL?: string;
 }

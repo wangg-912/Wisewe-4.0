@@ -1,6 +1,6 @@
 <template>
   <i class="svg-icon">
-    <svg class="icon svgfont" aria-hidden="true" :style="{'font-size':`${size}px`}">
+    <svg class="icon svgfont" aria-hidden="true" :style="{'font-size':`${size}px`,'color':`${color}`}">
       <use :xlink:href="xlinkHref" />
     </svg>
   </i>
@@ -19,6 +19,10 @@
       size: {
         type: Number,
         default: 16,
+      },
+      color: {
+        type: String,
+        default: '#ffffff',
       },
     },
     setup(props) {

@@ -53,6 +53,7 @@
 <style lang="scss" scoped>
   .#{$namespace}-setting-layout-type-picker {
     display: flex;
+    justify-content: center;
     &__item {
       position: relative;
       width: 56px;

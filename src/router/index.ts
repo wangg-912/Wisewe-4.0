@@ -54,6 +54,7 @@ export const allowRouter: Array<IMenubarList> = [
 const router = createRouter({
   history: createWebHashHistory(), // createWebHistory
   routes: (allowRouter as unknown) as RouteRecordRaw[],
+  strict: true,
   scrollBehavior: scrollBehavior,
 });
 
