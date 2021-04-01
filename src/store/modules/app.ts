@@ -1,16 +1,15 @@
 import type { ProjectConfig } from '/@/type/config';
-
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import store from '/@/store';
 import { PROJ_CFG_KEY } from '/@/enums/cacheEnum';
+import { setLocal } from '/@/utils/helper/persistent';
 import { deepMerge } from '/@/utils/tools';
 const NAME = 'app';
 let timeId: TimeoutHandle;
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class App extends VuexModule {
-  // 菜单伸缩状态
-  private collapse = false;
+
   private count = 0;
   private status = false;
   // 页面配置
@@ -19,9 +18,7 @@ class App extends VuexModule {
   private projectConfigState: ProjectConfig | null;
 
 
-  get isCollapse() {
-    return this.collapse;
-  }
+
   get getCount() {
     return this.count;
   }
@@ -42,14 +39,6 @@ class App extends VuexModule {
     return this.projectConfigState || ({} as ProjectConfig);
   }
 
-  /**
-   * 设置伸缩
-   * @param collapase {Boolean}
-   */
-  @Mutation
-  SETCOLLAPSE(collapse: boolean): void {
-    this.collapse = collapse;
-  }
   /**
    * 设置页面加载状态
    * @param loading
@@ -73,14 +62,7 @@ class App extends VuexModule {
   UPDATESTATE(status: boolean): void {
     this.status = status;
   }
-  /**
-   * 设置伸缩动作
-   * @param collapse
-   */
-  @Action
-  public setCollapse(collapse: boolean): void {
-    this.SETCOLLAPSE(collapse);
-  }
+ 
   /**
    *  设置页面加载状态动作
    * @param loading

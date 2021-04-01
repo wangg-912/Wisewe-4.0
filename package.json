@@ -24,6 +24,7 @@
   "dependencies": {
     "@types/nprogress": "^0.2.0",
     "axios": "^0.21.1",
+    "crypto-es": "^1.2.7",
     "element-plus": "^1.0.2-beta.32",
     "nprogress": "^0.2.0",
     "vue": "^3.0.5",

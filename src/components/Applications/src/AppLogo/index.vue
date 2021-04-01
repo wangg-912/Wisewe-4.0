@@ -1,17 +1,24 @@
 <template>
   <div :class="[prefixCls]">
     <el-image style="width: 32px; height: 32px" :src="url" :fit="fit" />
-    <div v-if="showTitle" :class="[`${prefixCls}-titlt`]">{{ title }}</div>
+    <div v-if="showLogoTitle" :class="[`${prefixCls}-titlt`]">{{ title }}</div>
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, onMounted, watchEffect } from 'vue';
+  import { defineComponent, PropType } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   export default defineComponent({
     name: 'AppLogo',
+    data() {
+      return {
+        title: '智汇校园服务系统',
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        fit: 'contain',
+      };
+    },
     props: {
-      showTitle: {
-        type: Boolean,
+      showLogoTitle: {
+        type: Boolean as PropType<boolean>,
         default: true,
       },
     },
@@ -19,13 +26,6 @@
       const { prefixCls } = useDesign('app-logo');
       return {
         prefixCls,
-      };
-    },
-    data() {
-      return {
-        title: '智汇校园服务系统',
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        fit: 'contain',
       };
     },
   });
@@ -38,7 +38,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     height: $headers-height;
-    &-titlt{
+    &-titlt {
       padding-left: 8px;
       font-size: 16px;
       font-weight: 700;
@@ -46,4 +46,3 @@
     }
   }
 </style>
- 

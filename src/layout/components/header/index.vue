@@ -3,7 +3,7 @@
     <!-- <AppLogo /> -->
     <!-- <LayoutTypePicker /> -->
     <div :class="`${prefixCls}-left`">
-      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="collapseHandler"><i class="el-icon-s-fold" :class="isCollapse?'el-icon--collapse':'el-icon--expend'"></i></span>
+      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="toggleCollapsed"><i class="el-icon-s-fold" :class="isCollapse?'el-icon--collapse':'el-icon--expend'"></i></span>
       <div :class="`${prefixCls}-left--breadcrumb`">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -68,9 +68,9 @@
   </el-header>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
-  import { appStore } from '/@/store/modules/app';
+  import { defineComponent, computed, unref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { AppLogo } from '/@/components/Applications';
   import SvgIcon from '/@/components/SvgIcon/index.vue';
   /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
@@ -82,19 +82,13 @@
       /* LayoutTypePicker, */
     },
     setup() {
-      const isCollapse = computed(() => appStore.isCollapse);
+      const { getCollapsed, toggleCollapsed } = useMenuSetting();
+      const isCollapse = computed(() => unref(getCollapsed));
       const { prefixCls } = useDesign('layout-header');
-      function collapseHandler() {
-        appStore.setCollapse(!isCollapse.value);
-      }
-      function showConfig() {
-        //TODO
-      }
       return {
         isCollapse,
         prefixCls,
-        collapseHandler,
-        showConfig,
+        toggleCollapsed,
       };
     },
   });

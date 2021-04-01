@@ -1,17 +1,24 @@
-import { RouterTransitionEnum,ThemeEnum } from '/@/enums/appEnum';
+import { RouterTransitionEnum, ThemeEnum } from '/@/enums/appEnum';
 /**
- * 
+ *
  */
 export interface MenuSetting {
-
+  bgColor: string;
+  fixed: boolean;
+  collapsed: boolean;
+  showLogoTitle: boolean;
+  menuWidth: number;
+  mode: string;
+  type: string;
+  theme: string;
+  topMenuAlign: string;
+  trigger: string;
 }
 /**
- * 
+ *
  */
-export interface MultiTabsSetting{
-  
-}
-export interface HeaderSetting{
+export interface MultiTabsSetting {}
+export interface HeaderSetting {
   bgColor: string;
   fixed: boolean;
   show: boolean;
@@ -52,7 +59,7 @@ export interface ProjectConfig {
   colorWeak: boolean;
   // 主题色
   themeColor: string;
- /*  themeMode: ThemeMode; */
+  /*  themeMode: ThemeMode; */
   // 全屏显示主界面,不显示菜单,及顶部
   fullContent: boolean;
   // 是否显示logo
@@ -83,6 +90,15 @@ interface ProjectSettingWrap {
   projectSetting: Readonly<ProjectConfig>;
 }
 
+export interface GlobConfig {
+  // 网站标题
+  title: string;
+  // 项目路径
+  apiUrl: string;
+  uploadUrl?: string;
+  urlPrefix?: string;
+  shortName: string;
+}
 export interface GlobEnvConfig {
   // 网站标题
   VITE_GLOB_APP_TITLE: string;

@@ -1,4 +1,4 @@
-import { DEFAULT_CACHE_TIME,cacheCipher } from '/@/settings/encryptionSetting';
+import { DEFAULT_CACHE_TIME, cacheCipher } from '/@/settings/encryptionSetting';
 import Encryption, { EncryptionParams } from '/@/utils/encryption/aesEncryption';
 
 export interface CreateStorageParams extends EncryptionParams {
@@ -18,13 +18,13 @@ export const createStorage = ({
   }
 
   const encryption = new Encryption({ key, iv });
-   /**
+  /**
    * 缓存类
    * 构造参数可以传递到sessionStorage，localStorage，
    * @class Cache
    * @example
    */
-   const WebStorage = class WebStorage {
+  const WebStorage = class WebStorage {
     private storage: Storage;
     private prefixKey?: string;
     private encryption: Encryption;

@@ -1,6 +1,6 @@
 import type { ProjectConfig } from '/@/types/config'; //系统配置接口
 import { ContentEnum, ThemeEnum, RouterTransitionEnum } from '/@/enums/appEnum'; // app 枚举
-
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
 const setting: ProjectConfig = {
   // 网站为灰色模式
   grayMode: false,
@@ -37,9 +37,29 @@ const setting: ProjectConfig = {
     fixed: true,
     // 菜单合并状态
     collapsed: false,
-    // Whether to display the menu name when folding the menu
-    collapsedShowTitle: false,
-  }
+    // 是否显示LOGO TITLE
+    showLogoTitle: true,
+    menuWidth: 240,
+    // 菜单模式
+    mode: MenuModeEnum.INLINE,
+    // 菜单类型
+    type: MenuTypeEnum.SIDEBAR,
+    // 菜单主题
+    theme: ThemeEnum.DARK,
+    // 顶部菜单布局
+    topMenuAlign: 'center',
+    // Fold trigger position
+    trigger: TriggerEnum.HEADER,
+  },
+  // 是否启用KeepAlive缓存最好在开发过程中关闭，否则每次都需要清除缓存
+  openKeepAlive: true,
+  // 是否显示面包屑
+  showBreadCrumb: true,
+  // 是否显示面包屑图标
+  showBreadCrumbIcon: false,
+  // 是否可以嵌入iframe页面
+  canEmbedIFramePage: true
+
 };
 
 export default setting;

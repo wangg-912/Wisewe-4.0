@@ -1,8 +1,11 @@
 <template>
   <div :class="prefixCls">
-    <el-aside :class="[`${prefixCls}-wrapper`]" :width="isCollapse ? '64px' : '240px'">
-      <AppLogo v-if="showLogo" :showTitle="!isCollapse" />
-      <el-scrollbar wrap-class='scrollbar-wrapper' :style="{ height:showLogo?'calc(100% - 50px)':'100%'}">
+    <el-aside :class="[`${prefixCls}-wrapper`]" :width="`${menusWidth}px`">
+      <AppLogo v-if="showLogo" :showLogoTitle="logoTitle" />
+      <el-scrollbar
+        wrap-class="scrollbar-wrapper"
+        :style="{ height: showLogo ? 'calc(100% - 50px)' : '100%' }"
+      >
         <el-menu
           :collapse="isCollapse"
           :uniqueOpened="true"
@@ -20,32 +23,39 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, onMounted } from 'vue';
+  import { defineComponent, computed, unref } from 'vue';
   import { useRouter } from 'vue-router';
   import { appStore } from '/@/store/modules/app';
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { AppLogo } from '/@/components/Applications';
   import MenuItems from './menus.vue';
- 
+
   export default defineComponent({
     name: 'LayoutSider',
     components: { AppLogo, MenuItems },
     setup() {
+      const { getMenuWidth, getCollapsed, getShowLogoTitle} = useMenuSetting();
       const $routes = useRouter();
-      const isCollapse = computed(() => appStore.isCollapse);
-      const showLogo = computed(()=> appStore.getProjectConfig.showLogo);
+      const isCollapse = computed(() => unref(getCollapsed));
+      const menusWidth = computed(() => unref(getMenuWidth));
+      const logoTitle = computed(() => {unref(getShowLogoTitle);});
+      console.log(logoTitle,"444")
+
+      const showLogo = computed(() => appStore.getProjectConfig.showLogo);
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
-
-      onMounted(() => {
+      /*  onMounted(() => {
         setTimeout(() => {
           console.log($routes, '3');
         }, 1000);
-      });
+      }); */
 
       return {
         isCollapse,
+        logoTitle,
+        menusWidth,
         showLogo,
         prefixCls,
         menuLists,

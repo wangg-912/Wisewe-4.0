@@ -38,7 +38,7 @@
     setup() {
       const router = useRouter();
       const route = useRoute();
-      console.log(router,route)
+      /* console.log(router,route) */
       const { prefixCls } = useDesign('layout-tags');
       const state = reactive({
         showScroll: false,
