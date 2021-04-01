@@ -1,21 +1,15 @@
 <template>
   <div :class="[prefixCls]">
-    <el-image style="width: 32px; height: 32px" :src="url" :fit="fit" />
+    <el-image style="width: 32px; height: 32px" src="/src/assets/images/logo/logo.png" fit="contain" />
     <div v-if="showLogoTitle" :class="[`${prefixCls}-titlt`]">{{ title }}</div>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useGlobSetting } from '/@/hooks/setting';
   export default defineComponent({
     name: 'AppLogo',
-    data() {
-      return {
-        title: '智汇校园服务系统',
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        fit: 'contain',
-      };
-    },
     props: {
       showLogoTitle: {
         type: Boolean as PropType<boolean>,
@@ -24,8 +18,11 @@
     },
     setup() {
       const { prefixCls } = useDesign('app-logo');
+      const { title } = useGlobSetting();
+
       return {
         prefixCls,
+        title,
       };
     },
   });
