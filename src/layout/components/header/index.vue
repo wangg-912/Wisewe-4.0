@@ -3,17 +3,18 @@
     <AppLogo v-if="showHeadLogo" />
     <!-- <LayoutTypePicker /> -->
     <div v-if="getShowBread" :class="`${prefixCls}-left`">
-      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="toggleCollapsed"
-        ><i class="el-icon-s-fold" :class="isCollapse ? 'el-icon--collapse' : 'el-icon--expend'"></i
-      ></span>
+      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="toggleCollapsed">
+        <i class="el-icon-s-fold" :class="isCollapse ? 'el-icon--collapse' : 'el-icon--expend'"></i>
+      </span>
       <div :class="`${prefixCls}-left--breadcrumb`">
-        <el-breadcrumb separator="/">
+        <BreadCrumb />
+        <!-- <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/404' }"
-            ><i class="el-icon-bicycle"></i> 活动管理</el-breadcrumb-item
-          >
+          <el-breadcrumb-item :to="{ path: '/404' }">
+            <i class="el-icon-bicycle"></i> 活动管理
+          </el-breadcrumb-item>
           <el-breadcrumb-item><i class="el-icon-s-home"></i> 活动详情</el-breadcrumb-item>
-        </el-breadcrumb>
+        </el-breadcrumb> -->
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
@@ -78,12 +79,15 @@
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { AppLogo } from '/@/components/Applications';
+
+  import BreadCrumb from "./components/BreadCrumb.vue"
   
   /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       AppLogo,
+      BreadCrumb,
       /* LayoutTypePicker, */
     },
     props: {
@@ -102,6 +106,7 @@
         getShowHeaderLogo,
         getShowHeader,
       } = useHeaderSetting();
+      debugger;
       const { getCollapsed, toggleCollapsed } = useMenuSetting();
       const isCollapse = computed(() => unref(getCollapsed));
       const showHeadLogo = computed(() => unref(getShowHeaderLogo));

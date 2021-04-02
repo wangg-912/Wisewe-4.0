@@ -18,7 +18,7 @@ const setting: ProjectConfig = {
     bgColor: '#ffffff',
     // 是否固定头部
     fixed: true,
-    // 是否显示会都顶部
+    // 是否显示Header容器
     show: true,
     // 主题
     theme: ThemeEnum.LIGHT,
@@ -58,7 +58,7 @@ const setting: ProjectConfig = {
   // 是否显示面包屑图标
   showBreadCrumbIcon: false,
   // 是否可以嵌入iframe页面
-  canEmbedIFramePage: true
+  canEmbedIFramePage: true,
 
 };
 
