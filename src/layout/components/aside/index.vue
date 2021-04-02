@@ -36,14 +36,13 @@
     name: 'LayoutSider',
     components: { AppLogo, MenuItems },
     setup() {
-      const { getMenuWidth, getCollapsed, getShowLogoTitle} = useMenuSetting();
+      const { getMenuWidth, getCollapsed, getShowLogoTitle } = useMenuSetting();
       const $routes = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const menusWidth = computed(() => unref(getMenuWidth));
-      const logoTitle = computed(() => {unref(getShowLogoTitle);});
-      console.log(logoTitle,"444")
-
+      const logoTitle = computed(() => unref(getShowLogoTitle));
       const showLogo = computed(() => appStore.getProjectConfig.showLogo);
+      
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
       /*  onMounted(() => {

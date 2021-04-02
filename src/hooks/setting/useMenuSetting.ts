@@ -1,5 +1,6 @@
 import { computed, unref } from 'vue';
 import type { MenuSetting } from '/@/type/config';
+import { MenuModeEnum, MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
 import { appStore } from '/@/store/modules/app';
 
 const getMenuSetting = computed(() => appStore.getProjectConfig.menuSetting);
@@ -13,8 +14,23 @@ const getMenuType = computed(() => unref(getMenuSetting).type);
 const getMenuTheme = computed(() => unref(getMenuSetting).theme);
 const getMenuMode = computed(() => unref(getMenuSetting).mode);
 const getTopMenuAlign = computed(() => unref(getMenuSetting).topMenuAlign);
+const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 const getTrigger = computed(() => unref(getMenuSetting).trigger);
+const getSplit = computed(() => unref(getMenuSetting).split);
+const getShowMenu = computed(() => unref(getMenuSetting).show);
+const getMenuHidden = computed(() => unref(getMenuSetting).hidden);
 
+const getShowTopMenu = computed(() => {
+  return unref(getMenuMode) === MenuModeEnum.HORIZONTAL || unref(getSplit);
+});
+
+const getShowHeaderTrigger = computed(() => {
+  if (unref(getMenuType) === MenuTypeEnum.TOP_MENU || !unref(getShowMenu) || unref(getMenuHidden)) {
+    return false;
+  }
+
+  return unref(getTrigger) === TriggerEnum.HEADER;
+});
 /**
  * @description 设置菜单配置
  * @param menuSetting
@@ -29,7 +45,7 @@ function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
 function toggleCollapsed() {
   setMenuSetting({
     collapsed: !unref(getCollapsed),
-    menuWidth: !getCollapsed.value ? 64 : 240,
+    menuWidth: !getCollapsed.value ? 56 : 240,
     showLogoTitle: !getCollapsed.value ? false : true,
   });
 }
@@ -48,5 +64,8 @@ export function useMenuSetting() {
     getMenuMode,
     getTopMenuAlign,
     getTrigger,
+    getShowTopMenu,
+    getShowHeaderTrigger,
+    getIsSidebarType,
   };
 }

@@ -26,13 +26,21 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 4. Open the VSCode command palette 5. Search and run "Select TypeScript version" -> "Use workspace version"
 
 
+
 ```
 evolution-v4
 ├─ .editorconfig
+├─ .env
 ├─ .eslintignore
 ├─ .eslintrc.js
+├─ electrons
+│  ├─ index.html
+│  ├─ main.js
+│  └─ main.ts
+├─ favicon.ico
 ├─ index.html
 ├─ LICENSE
+├─ package-lock.json
 ├─ package.json
 ├─ postcss.config.js
 ├─ prettier.config.js
@@ -44,7 +52,17 @@ evolution-v4
 │  │  └─ app.ts
 │  ├─ App.vue
 │  ├─ assets
-│  │  └─ logo.png
+│  │  ├─ icons
+│  │  │  ├─ index.js
+│  │  │  └─ svg
+│  │  │     ├─ iconfont.json
+│  │  │     └─ iconfont.svg
+│  │  └─ images
+│  │     ├─ 404
+│  │     │  ├─ 404.png
+│  │     │  └─ 404_cloud.png
+│  │     └─ logo
+│  │        └─ logo.png
 │  ├─ components
 │  │  ├─ Applications
 │  │  │  ├─ index.ts
@@ -54,60 +72,118 @@ evolution-v4
 │  │  │     ├─ AppProvider
 │  │  │     │  └─ index.vue
 │  │  │     └─ useAppContext.ts
-│  │  └─ home
+│  │  ├─ Drawer
+│  │  │  ├─ index.ts
+│  │  │  └─ src
+│  │  │     └─ BasicDrawer.vue
+│  │  ├─ home
+│  │  │  └─ index.vue
+│  │  ├─ Loading
+│  │  │  ├─ index.ts
+│  │  │  └─ src
+│  │  │     ├─ createLoading.ts
+│  │  │     ├─ index.vue
+│  │  │     ├─ types.ts
+│  │  │     └─ useLoading.ts
+│  │  └─ SvgIcon
 │  │     └─ index.vue
+│  ├─ config
+│  │  ├─ initAppConfig.ts
+│  │  └─ shortName.ts
 │  ├─ enums
-│  │  └─ appEnum.ts
+│  │  ├─ appEnum.ts
+│  │  ├─ cacheEnum.ts
+│  │  └─ menuEnum.ts
 │  ├─ hooks
-│  │  └─ core
-│  │     └─ useContext.ts
+│  │  ├─ core
+│  │  │  ├─ useAttrs.ts
+│  │  │  └─ useContext.ts
+│  │  ├─ setting
+│  │  │  ├─ index.ts
+│  │  │  ├─ useHeaderSetting.ts
+│  │  │  ├─ useMenuSetting.ts
+│  │  │  ├─ useRootSetting.ts
+│  │  │  └─ useTransitionSetting.ts
+│  │  └─ web
+│  │     └─ useDesign.ts
 │  ├─ layout
 │  │  ├─ components
 │  │  │  ├─ aside
+│  │  │  │  ├─ index.vue
+│  │  │  │  ├─ item.vue
+│  │  │  │  └─ menus.vue
 │  │  │  ├─ content
 │  │  │  │  └─ index.vue
 │  │  │  ├─ feature
 │  │  │  │  └─ index.vue
 │  │  │  ├─ footer
+│  │  │  │  └─ index.vue
 │  │  │  ├─ header
+│  │  │  │  ├─ components
+│  │  │  │  │  └─ LayoutTypePicker.vue
+│  │  │  │  ├─ enums.ts
 │  │  │  │  └─ index.vue
-│  │  │  ├─ logo
-│  │  │  ├─ menus
 │  │  │  ├─ setting
-│  │  │  │  └─ index.vue
+│  │  │  │  ├─ index.vue
+│  │  │  │  └─ SettingDrawer.tsx
 │  │  │  └─ tags
+│  │  │     └─ index.vue
+│  │  ├─ iframe
+│  │  │  ├─ iframeView.vue
+│  │  │  └─ index.vue
 │  │  ├─ index.vue
 │  │  └─ page
-│  │     └─ index.vue
+│  │     ├─ index.vue
+│  │     ├─ pagePanel.vue
+│  │     └─ useCache.ts
 │  ├─ main.ts
 │  ├─ router
 │  │  ├─ asyncRouter.ts
+│  │  ├─ data.json
+│  │  ├─ guard
+│  │  │  ├─ createPageLoadingGuard.ts
+│  │  │  └─ index.ts
 │  │  ├─ index.ts
 │  │  ├─ scrollBehavior.ts
 │  │  └─ types.ts
 │  ├─ settings
-│  │  └─ designSetting.ts
+│  │  ├─ designSetting.ts
+│  │  ├─ encryptionSetting.ts
+│  │  └─ projectSetting.ts
 │  ├─ shims-vue.d.ts
 │  ├─ store
 │  │  ├─ index.ts
 │  │  └─ modules
-│  │     └─ app.ts
+│  │     ├─ app.ts
+│  │     └─ route.ts
 │  ├─ style
 │  │  ├─ common.scss
 │  │  ├─ index.scss
-│  │  └─ layout
-│  │     ├─ index.scss
-│  │     └─ variables
-│  │        ├─ color.scss
-│  │        ├─ easing.scss
-│  │        └─ screen.scss
+│  │  └─ variables
+│  │     ├─ color.scss
+│  │     ├─ easing.scss
+│  │     ├─ element-variables.scss
+│  │     ├─ screen.scss
+│  │     └─ variable.scss
 │  ├─ type
 │  │  └─ config.ts
 │  ├─ utils
+│  │  ├─ cache
+│  │  │  ├─ index.ts
+│  │  │  └─ storageCache.ts
+│  │  ├─ color.ts
+│  │  ├─ encryption
+│  │  │  └─ aesEncryption.ts
+│  │  ├─ env.ts
 │  │  ├─ factory
 │  │  │  ├─ asyncComponents.ts
 │  │  │  ├─ Empty.vue
 │  │  │  └─ Skeleton.vue
+│  │  ├─ helper
+│  │  │  ├─ envHelper.ts
+│  │  │  └─ persistent.ts
+│  │  ├─ log.ts
+│  │  ├─ pinyin.ts
 │  │  ├─ request.ts
 │  │  └─ tools.ts
 │  └─ views
@@ -120,4 +196,3 @@ evolution-v4
 └─ yarn.lock
 
 ```
-

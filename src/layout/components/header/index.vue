@@ -1,19 +1,23 @@
 <template>
-  <el-header :class="[prefixCls]">
-    <!-- <AppLogo /> -->
+  <el-header v-if="getShowHeader" :class="getHeaderClass">
+    <AppLogo v-if="showHeadLogo" />
     <!-- <LayoutTypePicker /> -->
-    <div :class="`${prefixCls}-left`">
-      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="toggleCollapsed"><i class="el-icon-s-fold" :class="isCollapse?'el-icon--collapse':'el-icon--expend'"></i></span>
+    <div v-if="getShowBread" :class="`${prefixCls}-left`">
+      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="toggleCollapsed"
+        ><i class="el-icon-s-fold" :class="isCollapse ? 'el-icon--collapse' : 'el-icon--expend'"></i
+      ></span>
       <div :class="`${prefixCls}-left--breadcrumb`">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/404' }"><i class="el-icon-bicycle"></i> 活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/404' }"
+            ><i class="el-icon-bicycle"></i> 活动管理</el-breadcrumb-item
+          >
           <el-breadcrumb-item><i class="el-icon-s-home"></i> 活动详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
-      <el-menu default-active="1" :class="`${prefixCls}-center--menus`" mode="horizontal">
+      <!-- <el-menu default-active="1" :class="`${prefixCls}-center--menus`" mode="horizontal">
         <el-menu-item index="1">处理中心</el-menu-item>
         <el-submenu index="2">
           <template #title>我的工作台</template>
@@ -29,18 +33,18 @@
         </el-submenu>
         <el-menu-item index="3">消息中心</el-menu-item>
         <el-menu-item index="4">订单管理</el-menu-item>
-      </el-menu>
+      </el-menu> -->
     </div>
     <div :class="`${prefixCls}-right`">
       <div :class="`${prefixCls}-right--item`">
-        <svg-icon type="icon-sousuo4" />
+        <i class="el-icon-search" size="18"></i>
       </div>
-      <div :class="`${prefixCls}-right--item`">
+      <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
         <el-badge is-dot type="danger">
           <i class="el-icon-bell" size="18"></i>
         </el-badge>
       </div>
-      <div :class="`${prefixCls}-right--item`">
+      <div v-if="getShowFullScreen" :class="`${prefixCls}-right--item`">
         <i class="el-icon-full-screen" size="18"></i>
       </div>
       <div :class="`${prefixCls}-right--item`">
@@ -48,7 +52,7 @@
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown>
-          <span class="el-dropdown-link" style="fontSize: 12px">管理员</span>
+          <span class="el-dropdown-link" style="fontsize: 12px">管理员</span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="modify">
@@ -68,27 +72,60 @@
   </el-header>
 </template>
 <script lang="ts">
+  import type { PropType } from 'vue';
   import { defineComponent, computed, unref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { AppLogo } from '/@/components/Applications';
-  import SvgIcon from '/@/components/SvgIcon/index.vue';
+  
   /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       AppLogo,
-      SvgIcon,
       /* LayoutTypePicker, */
     },
-    setup() {
+    props: {
+      fixed: {
+        type: Boolean as PropType<boolean>,
+        default: true,
+      }
+    },
+    setup(props) {
+      const { prefixCls } = useDesign('layout-header');
+      const {
+        getHeaderTheme,
+        getShowFullScreen,
+        getShowNotice,
+        getShowBread,
+        getShowHeaderLogo,
+        getShowHeader,
+      } = useHeaderSetting();
       const { getCollapsed, toggleCollapsed } = useMenuSetting();
       const isCollapse = computed(() => unref(getCollapsed));
-      const { prefixCls } = useDesign('layout-header');
+      const showHeadLogo = computed(() => unref(getShowHeaderLogo));
+      const getHeaderClass = computed(() => {
+        const theme = unref(getHeaderTheme);
+        return [
+          prefixCls,
+          {
+            [`${prefixCls}--fixed`]: props.fixed,
+            [`${prefixCls}--${theme}`]: theme,
+          },
+        ];
+      });
+
       return {
-        isCollapse,
         prefixCls,
+        isCollapse,
+        getHeaderClass,
         toggleCollapsed,
+        showHeadLogo,
+        getShowBread,
+        getShowNotice,
+        getShowFullScreen,
+        getShowHeader,
       };
     },
   });
@@ -119,11 +156,11 @@
         i {
           font-size: $--font-size-medium;
           cursor: pointer;
-          &.el-icon--expend{
+          &.el-icon--expend {
             transform: rotate(0deg);
             @include turnRotate(200ms, $ease-in);
           }
-          &.el-icon--collapse{
+          &.el-icon--collapse {
             transform: rotate(90deg);
             transition: 200ms $ease-in;
           }
