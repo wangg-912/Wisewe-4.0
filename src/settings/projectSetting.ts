@@ -59,7 +59,6 @@ const setting: ProjectConfig = {
   showBreadCrumbIcon: false,
   // 是否可以嵌入iframe页面
   canEmbedIFramePage: true,
-
 };
 
 export default setting;

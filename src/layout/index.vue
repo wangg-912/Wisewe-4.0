@@ -32,13 +32,14 @@
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');
-      getMenusDate().then(res=>{ /* debugger */ 
+      generatorDynamicRouter();
+      /* getMenusDate().then(res=>{  
         const {success, content} = res.data; 
         if(success){
-            /* console.log(content)  */
+            
            generatorDynamicRouter(content)
           } 
-          }).then(err=>{})
+          }).then(err=>{}) */
       return {
         prefixCls,
       };

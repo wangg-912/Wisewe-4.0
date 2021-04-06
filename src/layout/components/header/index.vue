@@ -106,7 +106,6 @@
         getShowHeaderLogo,
         getShowHeader,
       } = useHeaderSetting();
-      debugger;
       const { getCollapsed, toggleCollapsed } = useMenuSetting();
       const isCollapse = computed(() => unref(getCollapsed));
       const showHeadLogo = computed(() => unref(getShowHeaderLogo));
