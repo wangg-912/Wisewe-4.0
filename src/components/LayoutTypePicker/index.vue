@@ -20,7 +20,7 @@
 <script lang="ts">
   import { defineComponent, watchEffect, PropType, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { menuTypeList } from './../enums';
+  import { menuTypeList } from '/@/layout/components/header/enums';
   export default defineComponent({
     name: 'LayoutTypePicker',
     props: {

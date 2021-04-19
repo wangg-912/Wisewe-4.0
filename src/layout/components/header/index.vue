@@ -66,28 +66,30 @@
           </template>
         </el-dropdown>
       </div>
-      <div :class="`${prefixCls}-right--item`">
-        <i class="el-icon-setting" size="18" @click="showConfig"></i>
-      </div>
+      <SettingDrawer v-if="getShowSettingButton" :class="`${prefixCls}-right--item`" />
     </div>
   </el-header>
 </template>
 <script lang="ts">
   import type { PropType } from 'vue';
   import { defineComponent, computed, unref } from 'vue';
+  import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
+  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { SettingButtonPositionEnum } from '/@/enums/appEnum';
   import { AppLogo } from '/@/components/Applications';
-
   import BreadCrumb from "./components/BreadCrumb.vue"
-  
   /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       AppLogo,
       BreadCrumb,
+      SettingDrawer: createAsyncComponent(() => import('/@/layout/components/setting/index.vue'), {
+        loading: true,
+      }),
       /* LayoutTypePicker, */
     },
     props: {
@@ -97,6 +99,7 @@
       }
     },
     setup(props) {
+      const { getShowSetting, getSettingPosition } = useRootSetting();
       const { prefixCls } = useDesign('layout-header');
       const {
         getHeaderTheme,
@@ -119,6 +122,18 @@
           },
         ];
       });
+      const getShowSettingButton = computed(() => {
+        if (!unref(getShowSetting)) {
+          return false;
+        }
+        const settingButtonPosition = unref(getSettingPosition);
+
+        if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
+          return unref(getShowHeader);
+        }
+        return settingButtonPosition === SettingButtonPositionEnum.HEADER;
+      });
+
 
       return {
         prefixCls,
@@ -130,6 +145,7 @@
         getShowNotice,
         getShowFullScreen,
         getShowHeader,
+        getShowSettingButton,
       };
     },
   });

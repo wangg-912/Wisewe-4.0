@@ -387,6 +387,18 @@
   resolved "https://registry.npm.taobao.org/@types/json-schema/download/@types/json-schema-7.0.7.tgz?cache=0&sync_timestamp=1613378919536&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fjson-schema%2Fdownload%2F%40types%2Fjson-schema-7.0.7.tgz#98a993516c859eb0d5c4c8f098317a9ea68db9ad"
   integrity sha1-mKmTUWyFnrDVxMjwmDF6nqaNua0=
 
+"@types/lodash-es@^4.17.4":
+  version "4.17.4"
+  resolved "https://registry.npm.taobao.org/@types/lodash-es/download/@types/lodash-es-4.17.4.tgz#b2e440d2bf8a93584a9fd798452ec497986c9b97"
+  integrity sha1-suRA0r+Kk1hKn9eYRS7El5hsm5c=
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.168"
+  resolved "https://registry.npm.taobao.org/@types/lodash/download/@types/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
+  integrity sha1-/iRjLnm3rePxMoka//hsql5c4Ag=
+
 "@types/mdast@^3.0.0":
   version "3.0.3"
   resolved "https://registry.npm.taobao.org/@types/mdast/download/@types/mdast-3.0.3.tgz#2d7d671b1cd1ea3deb306ea75036c2a0407d2deb"
@@ -2678,6 +2690,11 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
+lodash-es@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.npm.taobao.org/lodash-es/download/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha1-Q+YmxG5lkbd1C+srUBFzkMYJ4+4=
+
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npm.taobao.org/lodash.camelcase/download/lodash.camelcase-4.3.0.tgz?cache=0&sync_timestamp=1577806297529&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash.camelcase%2Fdownload%2Flodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
@@ -4277,10 +4294,10 @@ vue-router@^4.0.4:
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-4.0.5.tgz?cache=0&sync_timestamp=1615477530268&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-4.0.5.tgz#dd0a4134bc950c37aef64b973e9ee1008428d8fa"
   integrity sha1-3QpBNLyVDDeu9kuXPp7hAIQo2Po=
 
-vue-types@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npm.taobao.org/vue-types/download/vue-types-2.0.3.tgz#d4d3b124e8ae09e2d58785054451a6eb7e672d6d"
-  integrity sha1-1NOxJOiuCeLVh4UFRFGm635nLW0=
+vue-types@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npm.taobao.org/vue-types/download/vue-types-3.0.2.tgz#ec16e05d412c038262fc1efa4ceb9647e7fb601d"
+  integrity sha1-7BbgXUEsA4Ji/B76TOuWR+f7YB0=
   dependencies:
     is-plain-object "3.0.1"
 

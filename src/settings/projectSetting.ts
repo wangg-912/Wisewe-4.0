@@ -1,7 +1,18 @@
 import type { ProjectConfig } from '/@/types/config'; //系统配置接口
-import { ContentEnum, ThemeEnum, RouterTransitionEnum } from '/@/enums/appEnum'; // app 枚举
+import {
+  ContentEnum,
+  ThemeEnum,
+  RouterTransitionEnum,
+  SettingButtonPositionEnum,
+} from '/@/enums/appEnum'; // app 枚举
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
 const setting: ProjectConfig = {
+  //是否显示配置按钮
+  showSetting: true,
+  //配置按钮显示位置
+  settingButtonPosition: SettingButtonPositionEnum.AUTO,
+  //
+  themeColor: '#0960bd',
   // 网站为灰色模式
   grayMode: false,
   // 颜色弱点模式

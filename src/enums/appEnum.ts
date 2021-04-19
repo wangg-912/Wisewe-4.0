@@ -5,6 +5,12 @@ export enum ContentEnum {
   // fixed width
   FIXED = 'fixed',
 }
+// 应用主题模式枚举
+export enum ThemeModeEnum {
+  LIGHT = 'light-mode',
+  DARK = 'dark-mode',
+  SEMI_DARK = 'semi-dark-mode',
+}
 
 // 菜单主题枚举
 export enum ThemeEnum {
@@ -20,4 +26,10 @@ export enum RouterTransitionEnum {
   FADE = 'fade',
   FADE_BOTTOM = 'fade-bottom',
   FADE_SCALE = 'fade-scale',
+}
+// 配置按钮显示位置
+export enum SettingButtonPositionEnum {
+  AUTO = 'auto',
+  HEADER = 'header',
+  FIXED = 'fixed',
 }

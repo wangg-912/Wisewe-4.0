@@ -1,4 +1,4 @@
-import { HandlerEnum } from './enum';
+import { HandlerEnum } from './enums';
 import { appStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/@/type/config';
 
@@ -30,6 +30,7 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       if (getThemeColor.value === value) {
         return {};
       }
+      debugger;
       /* changeTheme(value); */
       return { themeColor: value };
   }

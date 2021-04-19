@@ -1,3 +1,10 @@
+import type {
+  UseDrawerReturnType,
+  DrawerInstance,
+  ReturnMethods,
+  DrawerProps,
+  UseDrawerInnerReturnType,
+} from './types';
 import {
   ref,
   getCurrentInstance,
@@ -8,13 +15,6 @@ import {
   toRaw,
   computed,
 } from 'vue';
-import type {
-  UseDrawerReturnType,
-  DrawerInstance,
-  ReturnMethods,
-  DrawerProps,
-  UseDrawerInnerReturnType,
-} from './types';
 
 import { isProdMode } from '/@/utils/env';
 import { isFunction } from '/@/utils/tools';
@@ -28,6 +28,7 @@ export function useDrawer(): UseDrawerReturnType {
   isInSetup();
 
   const drawerRef = ref<DrawerInstance | null>(null);
+  const loadedRef = ref<Nullable<boolean>>(false);
   const uidRef = ref<string>('');
 
   function register(drawerInstance: DrawerInstance, uuid: string) {
@@ -36,11 +37,12 @@ export function useDrawer(): UseDrawerReturnType {
         drawerRef.value = null;
         dataTransferRef[unref(uidRef)] = null;
       });
-    if (isProdMode() && drawerInstance === unref(drawerRef)) {
+    if (unref(loadedRef) && isProdMode() && drawerInstance === unref(drawerRef)) {
       return;
     }
     uidRef.value = uuid;
     drawerRef.value = drawerInstance;
+    loadedRef.value = true;
     drawerInstance.emitVisible = (visible: boolean, uid: number) => {
       visibleData[uid] = visible;
     };
@@ -92,4 +94,57 @@ export function useDrawer(): UseDrawerReturnType {
   return [register, methods];
 }
 //TODO
-export const useDrawerInner = () => {};
+export const useDrawerInner =  (callbackFn?: Fn): UseDrawerInnerReturnType => {
+  const drawerInstanceRef = ref<Nullable<DrawerInstance>>(null);
+  const currentInstance = getCurrentInstance();
+  const uidRef = ref<string>('');
+  
+  if (!currentInstance) {
+    error('useDrawerInner instance is undefined!');
+  }
+  const getInstance = () => {
+    const instance = unref(drawerInstanceRef);
+    if (!instance) {
+      error('useDrawerInner instance is undefined!');
+      return;
+    }
+    return instance;
+  };
+
+  const register = (modalInstance: DrawerInstance, uuid: string) => {
+    isProdMode() &&
+      tryOnUnmounted(() => {
+        drawerInstanceRef.value = null;
+      });
+
+    uidRef.value = uuid;
+    drawerInstanceRef.value = modalInstance;
+    currentInstance?.emit('register', modalInstance, uuid);
+  };
+  watchEffect(() => {
+    const data = dataTransferRef[unref(uidRef)];
+    if (!data) return;
+    if (!callbackFn || !isFunction(callbackFn)) return;
+    nextTick(() => {
+      callbackFn(data);
+    });
+  });
+  return [
+    register,
+    {
+      changeLoading: (loading = true) => {
+        getInstance()?.setDrawerProps({ loading });
+      },
+      getVisible: computed((): boolean => {
+        return visibleData[~~unref(uidRef)];
+      }),
+      closeDrawer: () => {
+        getInstance()?.setDrawerProps({ visible: false });
+      },
+
+      setDrawerProps: (props: Partial<DrawerProps>) => {
+        getInstance()?.setDrawerProps(props);
+      },
+    }
+  ]
+};

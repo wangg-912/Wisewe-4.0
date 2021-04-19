@@ -1,7 +1,7 @@
 <template>
-  <el-drawer :class="prefixCls" @close="onClose">
+  <el-drawer :class="prefixCls" @close="onClose" v-bind="getBindValues" v-model="getBindValues.visible" :close-on-press-escape="false">
     <template #title v-if="!$slots.title">
-      <div>1234</div>
+      <div>{{ getMergeProps.title }}</div>
     </template>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <slot></slot>
@@ -9,8 +9,18 @@
   </el-drawer>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, ref, unref, toRaw, nextTick, getCurrentInstance } from 'vue';
-  import { isFunction, isNumber, deepMerge } from '/@/utils/tools';
+  import {
+    defineComponent,
+    computed,
+    ref,
+    unref,
+    toRaw,
+    nextTick,
+    getCurrentInstance,
+    watchEffect,
+    watch,
+  } from 'vue';
+  import { isFunction, deepMerge } from '/@/utils/tools';
   import type { DrawerInstance, DrawerProps } from './type';
   import { basicProps } from './props';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -19,7 +29,7 @@
     name: 'BasicDrawer',
     inheritAttrs: false,
     props: basicProps,
-    emits: ['register'],
+    emits: ['visible-change', 'close', 'register'],
     setup(props, { emit }) {
       const visibleRef = ref(false);
       const attrs = useAttrs();
@@ -46,7 +56,7 @@
             ...unref(getMergeProps),
             visible: unref(visibleRef),
           };
-          opt.title = undefined;
+          opt.title = '设置管理';
           return opt as DrawerProps;
         }
       );

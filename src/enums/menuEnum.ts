@@ -26,11 +26,11 @@ export enum MenuModeEnum {
  */
 export enum TriggerEnum {
   // 不显示
-  NONE = 'NONE',
+  NONE = 'none',
   // 菜单底部
-  FOOTER = 'FOOTER',
+  FOOTER = 'footer',
   // 头部
-  HEADER = 'HEADER',
+  HEADER = 'header',
 }
 /**
  * @description 菜单显示位置
