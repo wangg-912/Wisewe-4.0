@@ -1,4 +1,5 @@
 import { HandlerEnum } from './enums';
+import {updateHeaderBgColor} from '/@/theme/updateBackground'
 import { appStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/@/type/config';
 
@@ -30,8 +31,16 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       if (getThemeColor.value === value) {
         return {};
       }
-      debugger;
+      /* debugger; */
       /* changeTheme(value); */
       return { themeColor: value };
+    /* ==============菜单=============== */
+    case HandlerEnum.MENU_THEME:
+      /* updateSidebarBgColor(value); */
+      return { menuSetting: { bgColor: value } };
+    /* ==============顶栏=============== */
+    case HandlerEnum.HEADER_THEME:
+      updateHeaderBgColor(value);
+      return { headerSetting: { bgColor: value } };
   }
 }

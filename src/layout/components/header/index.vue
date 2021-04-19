@@ -1,20 +1,11 @@
 <template>
   <el-header v-if="getShowHeader" :class="getHeaderClass">
-    <AppLogo v-if="showHeadLogo" />
-    <!-- <LayoutTypePicker /> -->
-    <div v-if="getShowBread" :class="`${prefixCls}-left`">
-      <span :class="`${prefixCls}-left--collapse`" :collapse="isCollapse" @click="toggleCollapsed">
-        <i class="el-icon-s-fold" :class="isCollapse ? 'el-icon--collapse' : 'el-icon--expend'"></i>
-      </span>
-      <div :class="`${prefixCls}-left--breadcrumb`">
-        <BreadCrumb />
-        <!-- <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/404' }">
-            <i class="el-icon-bicycle"></i> 活动管理
-          </el-breadcrumb-item>
-          <el-breadcrumb-item><i class="el-icon-s-home"></i> 活动详情</el-breadcrumb-item>
-        </el-breadcrumb> -->
+    <div :class="`${prefixCls}-left`">
+      <AppLogo v-if="showHeadLogo" :class="[`${prefixCls}-logo`, `${prefixCls}--${theme}`]" />
+      <!-- <LayoutTypePicker /> -->
+      <div v-if="getShowBread" :class="`${prefixCls}-left--bread`">
+        <LayoutTrigger :theme="theme" />
+        <BreadCrumb :theme="theme" />
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
@@ -36,7 +27,7 @@
         <el-menu-item index="4">订单管理</el-menu-item>
       </el-menu> -->
     </div>
-    <div :class="`${prefixCls}-right`">
+    <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${theme}`]">
       <div :class="`${prefixCls}-right--item`">
         <i class="el-icon-search" size="18"></i>
       </div>
@@ -53,7 +44,7 @@
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown>
-          <span class="el-dropdown-link" style="fontsize: 12px">管理员</span>
+          <span class="el-dropdown-link drop--user--text" style="font-size: 12px">管理员</span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="modify">
@@ -77,15 +68,16 @@
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { SettingButtonPositionEnum } from '/@/enums/appEnum';
   import { AppLogo } from '/@/components/Applications';
-  import BreadCrumb from "./components/BreadCrumb.vue"
+  import BreadCrumb from './components/BreadCrumb.vue';
+  import LayoutTrigger from "./components/Trigger.vue"
   /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       AppLogo,
+      LayoutTrigger,
       BreadCrumb,
       SettingDrawer: createAsyncComponent(() => import('/@/layout/components/setting/index.vue'), {
         loading: true,
@@ -96,7 +88,7 @@
       fixed: {
         type: Boolean as PropType<boolean>,
         default: true,
-      }
+      },
     },
     setup(props) {
       const { getShowSetting, getSettingPosition } = useRootSetting();
@@ -109,8 +101,6 @@
         getShowHeaderLogo,
         getShowHeader,
       } = useHeaderSetting();
-      const { getCollapsed, toggleCollapsed } = useMenuSetting();
-      const isCollapse = computed(() => unref(getCollapsed));
       const showHeadLogo = computed(() => unref(getShowHeaderLogo));
       const getHeaderClass = computed(() => {
         const theme = unref(getHeaderTheme);
@@ -122,6 +112,9 @@
           },
         ];
       });
+      const theme = computed(() => {
+        return unref(getHeaderTheme);
+      })
       const getShowSettingButton = computed(() => {
         if (!unref(getShowSetting)) {
           return false;
@@ -134,12 +127,10 @@
         return settingButtonPosition === SettingButtonPositionEnum.HEADER;
       });
 
-
       return {
         prefixCls,
-        isCollapse,
         getHeaderClass,
-        toggleCollapsed,
+        theme,
         showHeadLogo,
         getShowBread,
         getShowNotice,
@@ -150,86 +141,7 @@
     },
   });
 </script>
+
 <style lang="scss" scoped>
-  @mixin turnRotate($ease, $tf) {
-    transition: $ease $tf;
-  }
-  .#{$namespace}-layout-header {
-    width: 100%;
-    height: $headers-height !important;
-    border-bottom: 1px solid #eee;
-    padding: 0 !important;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &-left,
-    &-center,
-    &-right {
-      display: flex;
-      align-items: center;
-    }
-    &-left {
-      height: 100%;
-      &--collapse {
-        padding: 0 12px;
-        i {
-          font-size: $--font-size-medium;
-          cursor: pointer;
-          &.el-icon--expend {
-            transform: rotate(0deg);
-            @include turnRotate(200ms, $ease-in);
-          }
-          &.el-icon--collapse {
-            transform: rotate(90deg);
-            transition: 200ms $ease-in;
-          }
-        }
-      }
-      &--breadcrumb {
-        margin-top: -1px;
-        ::v-deep(.el-breadcrumb__inner.is-link),
-        ::v-deep(.el-breadcrumb__inner a) {
-          font-weight: 400 !important;
-        }
-        ::v-deep(.el-breadcrumb__separator) {
-          margin: 0 2px !important;
-        }
-      }
-    }
-
-    &-center {
-      &--menus {
-        height: 48px;
-        border-bottom: none;
-        ::v-deep(.el-submenu__title),
-        ::v-deep(.el-menu-item) {
-          border-bottom: inherit;
-          height: 48px;
-          line-height: 48px;
-          padding: 0 10px;
-        }
-        ::v-deep(.el-menu-item.is-active),
-        ::v-deep(.el-submenu.is-active .el-submenu__title) {
-          border-bottom: 2px solid #0960bd;
-          color: #0960bd;
-        }
-      }
-    }
-    &-right {
-      min-width: 180px;
-      &--item {
-        display: flex;
-        height: 48px;
-        padding: 0 8px;
-        font-size: 1.2em;
-        cursor: pointer;
-        align-items: center;
-      }
-      &--user {
-        padding-left: 0;
-        font-size: $--font-size-extra-small;
-      }
-    }
-  }
+  @import './index.scss';
 </style>
