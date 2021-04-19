@@ -35,3 +35,26 @@ const SIDER_LIGHTEN_2_BG_COLOR = '--sider-dark-lighten-2-bg-color';
     },
   });
 }
+
+/**
+ * Change the background color of the left menu
+ * @param color  bg color
+ */
+ export function updateSidebarBgColor(color: string) {
+  if (!isHexColor(color)) return;
+
+  setCssVar(SIDER_DARK_BG_COLOR, color);
+  setCssVar(SIDER_DARK_DARKEN_BG_COLOR, darken(color, 6));
+  setCssVar(SIDER_LIGHTEN_1_BG_COLOR, lighten(color, 5));
+  setCssVar(SIDER_LIGHTEN_2_BG_COLOR, lighten(color, 8));
+
+  // only #ffffff is light
+  // Only when the background color is #fff, the theme of the menu will be changed to light
+  const isLight = ['#fff', '#ffffff'].includes(color.toLowerCase());
+
+  appStore.COMMITPROJECTCONFIGSTATE({
+    menuSetting: {
+      theme: isLight ? ThemeEnum.LIGHT : ThemeEnum.DARK,
+    },
+  });
+}

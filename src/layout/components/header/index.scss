@@ -58,13 +58,13 @@
     }
     &--light{
       color: $breadcrumb-item-normal-color;
-        .drop--user--text{
+        .drop--user--text {
           color: $breadcrumb-item-normal-color !important;
         }
     }
     &--dark{
       color: rgba(255, 255, 255, 0.8);
-        .drop--user--text{
+        .drop--user--text {
           color: rgba(255, 255, 255, 0.8) !important;
         }
     }

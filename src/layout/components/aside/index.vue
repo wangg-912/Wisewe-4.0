@@ -1,6 +1,9 @@
 <template>
   <div :class="prefixCls">
-    <el-aside :class="[`${prefixCls}-wrapper`]" :width="`${menusWidth}px`">
+    <el-aside
+      :class="[`${prefixCls}-wrapper`, `${prefixCls}--${theme}`]"
+      :width="`${menusWidth}px`"
+    >
       <AppLogo v-if="showLogo" :showLogoTitle="logoTitle" />
       <el-scrollbar
         wrap-class="scrollbar-wrapper"
@@ -10,13 +13,10 @@
           :collapse="isCollapse"
           :uniqueOpened="true"
           default-active="1-1"
-          :class="`${prefixCls}-aside`"
-          background-color="transparent"
-          text-color="#fff"
-          active-text-color="#ffd04b"
+          :class="[`${prefixCls}-aside`, `${prefixCls}-aside--${theme}`]"
           :collapse-transition="false"
         >
-          <menu-items v-for="v in menuLists" :key="v.name" :menu="v" :index="v.path" />
+          <menu-items v-for="v in menuLists" :key="v.name" :menu="v" :index="v.path" :theme="theme" />
         </el-menu>
       </el-scrollbar>
     </el-aside>
@@ -29,6 +29,7 @@
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  
   import { AppLogo } from '/@/components/Applications';
   import MenuItems from './menus.vue';
 
@@ -36,15 +37,15 @@
     name: 'LayoutSider',
     components: { AppLogo, MenuItems },
     setup() {
-      const { getMenuWidth, getCollapsed, getShowLogoTitle } = useMenuSetting();
+      const { getMenuWidth, getCollapsed, getShowLogoTitle, getMenuTheme } = useMenuSetting();
       const $routes = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const menusWidth = computed(() => unref(getMenuWidth));
       const logoTitle = computed(() => unref(getShowLogoTitle));
       const showLogo = computed(() => appStore.getProjectConfig.showLogo);
-      
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
+      const theme = computed(() => unref(getMenuTheme));
       /*  onMounted(() => {
         setTimeout(() => {
           console.log($routes, '3');
@@ -57,14 +58,15 @@
         menusWidth,
         showLogo,
         prefixCls,
+        theme,
         menuLists,
       };
     },
   });
 </script>
 <style lang="scss" scoped>
-  @mixin set-menu-item($backgroun, $color) {
-    background-color: $backgroun !important;
+  @mixin set-menu-item($background, $color) {
+    background-color: $background !important;
     color: $color !important;
   }
   .#{$namespace}-layout-sider {
@@ -101,6 +103,12 @@
         &.is-active {
           @include set-menu-item(#0960bd, $--color-white);
         }
+      }
+      &--light{
+
+      }
+      &--dark{
+        background: var(--sider-dark-bg-color);
       }
     }
   }

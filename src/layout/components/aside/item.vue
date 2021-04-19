@@ -1,7 +1,9 @@
 <template>
   <el-menu-item v-if="iName" :index="iPath">
       <svg-icon v-if="iIcon" :type="iIcon.split('iconfont ')[1]" size="16" style="padding-right:8px;" />
-      <template #title>{{iTitle}}</template>
+      <template #title>
+        <span>{{iTitle}}</span>
+      </template>
     </el-menu-item>
 </template>
 <script lang="ts">
