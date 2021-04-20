@@ -111,6 +111,12 @@ export default defineComponent({
             def={unref(getShowLogo)}
             disabled={unref(getIsMixSidebar)}
           />
+
+          <SwitchItem
+            title="显示顶栏"
+            event={HandlerEnum.HEADER_SHOW}
+            def={unref(getShowHeader)}
+          />
           
           <SwitchItem
             title="显示面包屑"

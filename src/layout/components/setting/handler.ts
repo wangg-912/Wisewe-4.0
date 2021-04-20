@@ -48,12 +48,16 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.SHOW_LOGO:
       return { showLogo: value };
 
+    case HandlerEnum.HEADER_SHOW:
+      return { headerSetting: { show: value } };
+
     case HandlerEnum.SHOW_BREADCRUMB:
       return { showBreadCrumb: value };
 
     case HandlerEnum.SHOW_BREADCRUMB_ICON:
       return { showBreadCrumbIcon: value };
-      
 
+    default:
+      return {};
   }
 }
