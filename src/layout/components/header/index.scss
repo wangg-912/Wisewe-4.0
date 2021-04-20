@@ -51,6 +51,9 @@
       font-size: 1.2em;
       cursor: pointer;
       align-items: center;
+      ::v-deep(.el-overlay){
+        background-color: rgba(0,0,0,.3)!important;
+      }
     }
     &--user {
       padding-left: 0;

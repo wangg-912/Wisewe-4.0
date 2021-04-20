@@ -6,7 +6,6 @@ import { ProjectConfig } from '/@/type/config';
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 
 export function baseHandler(event: HandlerEnum, value: any) {
-  debugger;
   const config = handler(event, value);
   appStore.COMMITPROJECTCONFIGSTATE(config);
 }

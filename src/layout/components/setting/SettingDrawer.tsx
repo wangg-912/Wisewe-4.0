@@ -141,8 +141,7 @@ export default defineComponent({
     <BasicDrawer
         {...attrs}
         title="设置中心"
-        width={340}
-        modal={false}>
+        width={340}>
         <el-divider >系统布局</el-divider>
         {renderLayoutPicker()}
         <el-divider >系统主题</el-divider>
