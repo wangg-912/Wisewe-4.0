@@ -21,7 +21,7 @@ const setting: ProjectConfig = {
   fullContent: false,
   // 主窗体模式
   contentMode: ContentEnum.FULL,
-  // 是否显示Logo
+  // 是否显示标签栏
   showLogo: true,
   // 头部配置
   headerSetting: {

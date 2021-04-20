@@ -1,13 +1,15 @@
 import { defineComponent, computed, unref } from 'vue';
 import { BasicDrawer } from '/@/components/Drawer/index';
-import {ThemePicker} from './components'
+import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from '/@/settings/designSetting'
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+import {ThemePicker,SwitchItem} from './components'
 import { baseHandler } from './handler';
-import {HandlerEnum} from "./enums"
-import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from '/@/settings/designSetting'
+import {HandlerEnum, menuTypeList } from "./enums"
+
 import LayoutTypePicker from '/@/components/LayoutTypePicker/index.vue'; 
+
 export default defineComponent({
   name: 'SettingDrawer',
   components:{
@@ -16,7 +18,6 @@ export default defineComponent({
   setup(_,{ attrs }){
     const {
       getContentMode,
-      getShowFooter,
       getShowBreadCrumb,
       getShowBreadCrumbIcon,
       getShowLogo,
@@ -57,6 +58,21 @@ export default defineComponent({
      * @description 渲染系统主题
      * @returns {Element} ThemePicker
      */
+    function renderLayoutPicker(){
+      return (
+        <LayoutTypePicker
+          menuTypeList={menuTypeList}
+          handler={(item: typeof menuTypeList[0]) => {
+            baseHandler(HandlerEnum.CHANGE_LAYOUT, {
+              mode: item.mode,
+              type: item.type,
+              split: unref(getIsHorizontal) ? false : undefined,
+            });
+          }}
+          def={unref(getMenuType)}
+        ></LayoutTypePicker>
+      )
+    }
     function renderAppTheme() {
       return (
         <ThemePicker
@@ -86,14 +102,43 @@ export default defineComponent({
       );
     }
 
+    function renderOtherSetting(){
+      return(
+        <>
+        <SwitchItem
+            title="显示标签栏"
+            event={HandlerEnum.SHOW_LOGO}
+            def={unref(getShowLogo)}
+            disabled={unref(getIsMixSidebar)}
+          />
+          
+          <SwitchItem
+            title="显示面包屑"
+            event={HandlerEnum.SHOW_BREADCRUMB}
+            def={unref(getShowBreadCrumb)}
+            disabled={!unref(getShowHeader)}
+          />
+
+          <SwitchItem
+            title="显示面包屑图标"
+            event={HandlerEnum.SHOW_BREADCRUMB_ICON}
+            def={unref(getShowBreadCrumbIcon)}
+            disabled={!unref(getShowHeader)}
+          />
+        
+        </>
+      )
+    }
+
 
     return () => (
     <BasicDrawer
         {...attrs}
         title="设置中心"
-        width={340}>
+        width={340}
+        modal={false}>
         <el-divider >系统布局</el-divider>
-        <LayoutTypePicker />
+        {renderLayoutPicker()}
         <el-divider >系统主题</el-divider>
         {renderAppTheme()}
         <el-divider >顶栏主题</el-divider>
@@ -101,7 +146,7 @@ export default defineComponent({
         <el-divider >菜单主题</el-divider>
         {renderSiderTheme()}
         <el-divider >其他配置</el-divider>
-        {/* TODO */}
+        {renderOtherSetting()}
 
     </BasicDrawer>
     )

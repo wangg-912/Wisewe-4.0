@@ -1,8 +1,10 @@
 <template>
   <el-submenu v-if="haChild" :index="menu.path" :class="`${prefixCls}--${theme}`">
     <template #title>
-        <svg-icon v-if="menu.meta.icon" :type="menu.meta.icon.split('iconfont ')[1]" size="16" style="padding-right:8px;" />
-        <span v-if="menu.meta && menu.meta.title" :class="`${prefixCls}--${theme}_sub-title`">{{ menu.meta.title }}</span>
+      <font-icon v-if="menu.meta.icon" :type="menu.meta.icon" style="padding-right: 8px" />
+      <span v-if="menu.meta && menu.meta.title" :class="`${prefixCls}--${theme}_sub-title`">{{
+        menu.meta.title
+      }}</span>
     </template>
     <!-- TODO -->
     <MenuItems
@@ -20,7 +22,7 @@
   import { defineComponent, computed, onMounted, PropType } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';
-  import SvgIcon from '/@/components/SvgIcon/index.vue';
+  import FontIcon from '/@/components/FontIcon/index.vue';
   import MenuItem from './item.vue';
   export default defineComponent({
     name: 'MenuItems',
@@ -31,7 +33,7 @@
         default: () => {},
       },
     },
-    components: { MenuItem, SvgIcon },
+    components: { MenuItem, FontIcon },
     setup(context) {
       const { prefixCls } = useDesign('sider-menu');
       const { menu } = context;
@@ -40,8 +42,7 @@
         if (menu.children) return menu.children.filter((v) => !v.meta.hidden);
         return [];
       });
-      
-      
+
       /* onMounted(() => {
         console.log(context.menu);
       }); */
@@ -54,12 +55,12 @@
   });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-sider-menu{
-    &--light{
-
+  .#{$namespace}-sider-menu {
+    &--light {
     }
-    &--dark{
-      &_item,::v-deep(.el-submenu__title){
+    &--dark {
+      &_item,
+      ::v-deep(.el-submenu__title) {
         background-color: var(--sider-dark-bg-color);
         color: $--color-white;
       }

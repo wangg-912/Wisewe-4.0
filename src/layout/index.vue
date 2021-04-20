@@ -4,7 +4,7 @@
     <LayoutFeatures />
     <!-- <el-aside width="200px">Aside</el-aside> -->
     <LayoutSider />
-    <el-container direction="vertical" :calss="!prefixCls">
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
       <LayoutHeader fixed />
       <LayoutTags />
       <LayoutContent />

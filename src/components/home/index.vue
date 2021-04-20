@@ -11,6 +11,8 @@
 
       <el-button type="primary" icon="el-icon-edit" @click="testThrottle">测试节流</el-button>
     </span>
+    <font-icon type="iconfont icon-pingjiao" size="12" color="red" />
+    <font-icon type="" size="12" color="red" />
   </div>
 </template>
 
@@ -19,12 +21,14 @@
   import { appStore } from '/@/store/modules/app';
   import { login, testpostform } from '/@/api/app';
   import SvgIcon from '/@/components/SvgIcon/index.vue'
+  import FontIcon from '/@/components/FontIcon/index.vue'
 
   export default defineComponent({
     name: 'HelloWorld',
     props: {},
     components:{
       SvgIcon,
+      FontIcon,
     },
     setup() {
       const getcount = computed(() => appStore.getCount);

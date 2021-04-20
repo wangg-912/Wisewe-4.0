@@ -1,6 +1,6 @@
 <template>
   <el-menu-item v-if="iName" :index="iPath">
-      <svg-icon v-if="iIcon" :type="iIcon.split('iconfont ')[1]" size="16" style="padding-right:8px;" />
+      <font-icon v-if="iIcon" :type="iIcon" style="padding-right: 8px" />
       <template #title>
         <span>{{iTitle}}</span>
       </template>
@@ -8,16 +8,16 @@
 </template>
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  import SvgIcon from '/@/components/SvgIcon/index.vue';
+  import FontIcon from '/@/components/FontIcon/index.vue';
   export default defineComponent({
     name:"MenuItem",
     props:{
       item: {
         type: Object as PropType<object>,
-        default: () => {}
+        default: ''
       }
     },
-    components:{SvgIcon},
+    components:{FontIcon},
     setup(context){
       return{
         iPath:context.item.path,

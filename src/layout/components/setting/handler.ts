@@ -6,6 +6,7 @@ import { ProjectConfig } from '/@/type/config';
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 
 export function baseHandler(event: HandlerEnum, value: any) {
+  debugger;
   const config = handler(event, value);
   appStore.COMMITPROJECTCONFIGSTATE(config);
 }
@@ -42,5 +43,17 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.HEADER_THEME:
       updateHeaderBgColor(value);
       return { headerSetting: { bgColor: value } };
+
+    /* =============其他配置================= */
+    case HandlerEnum.SHOW_LOGO:
+      return { showLogo: value };
+
+    case HandlerEnum.SHOW_BREADCRUMB:
+      return { showBreadCrumb: value };
+
+    case HandlerEnum.SHOW_BREADCRUMB_ICON:
+      return { showBreadCrumbIcon: value };
+      
+
   }
 }

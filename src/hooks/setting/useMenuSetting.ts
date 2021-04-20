@@ -31,6 +31,16 @@ const getShowHeaderTrigger = computed(() => {
 
   return unref(getTrigger) === TriggerEnum.HEADER;
 });
+
+const getIsHorizontal = computed(() => {
+  return unref(getMenuMode) === MenuModeEnum.HORIZONTAL;
+});
+
+const getIsMixSidebar = computed(() => {
+  return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
+});
+
+
 /**
  * @description 设置菜单配置
  * @param menuSetting
@@ -67,5 +77,7 @@ export function useMenuSetting() {
     getShowTopMenu,
     getShowHeaderTrigger,
     getIsSidebarType,
+    getIsHorizontal,
+    getIsMixSidebar,
   };
 }

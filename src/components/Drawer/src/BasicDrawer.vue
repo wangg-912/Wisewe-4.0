@@ -1,7 +1,14 @@
 <template>
-  <el-drawer :class="prefixCls" @close="onClose" v-bind="getBindValues" v-model="getBindValues.visible" :close-on-press-escape="false">
+  <el-drawer
+    :custom-class="`${prefixCls}`"
+    @close="onClose"
+    v-bind="getBindValues"
+    v-model="getBindValues.visible"
+    :modal="getBindValues.modal"
+    :close-on-press-escape="false"
+  >
     <template #title v-if="!$slots.title">
-      <div>{{ getMergeProps.title }}</div>
+      <div :class="`${prefixCls}-title`">{{ getMergeProps.title }}</div>
     </template>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <slot></slot>
@@ -112,3 +119,15 @@
     },
   });
 </script>
+<style lang="scss">
+  .#{$namespace}-basic-drawer {
+    &-title{
+      font-weight: 500;
+      font-size: $--font-size-large;
+      color: $--color-drak;
+    }
+    .el-drawer__header {
+      margin-bottom: 0 !important;
+    }
+  }
+</style>

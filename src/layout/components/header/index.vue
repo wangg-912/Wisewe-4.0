@@ -1,11 +1,11 @@
 <template>
   <el-header v-if="getShowHeader" :class="getHeaderClass">
     <div :class="`${prefixCls}-left`">
-      <AppLogo v-if="showHeadLogo" :class="[`${prefixCls}-logo`, `${prefixCls}--${theme}`]" />
+      <AppLogo v-if="showHeadLogo" :class="[`${prefixCls}-logo`, `${prefixCls}--${headerTheme}`]" />
       <!-- <LayoutTypePicker /> -->
-      <div v-if="getShowBread" :class="`${prefixCls}-left--bread`">
-        <LayoutTrigger :theme="theme" />
-        <BreadCrumb :theme="theme" />
+      <div :class="`${prefixCls}-left--bread`">
+        <LayoutTrigger :theme="headerTheme" />
+        <BreadCrumb v-if="getShowBread" :theme="headerTheme" />
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
@@ -27,7 +27,7 @@
         <el-menu-item index="4">订单管理</el-menu-item>
       </el-menu> -->
     </div>
-    <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${theme}`]">
+    <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
       <div :class="`${prefixCls}-right--item`">
         <i class="el-icon-search" size="18"></i>
       </div>
@@ -71,8 +71,7 @@
   import { SettingButtonPositionEnum } from '/@/enums/appEnum';
   import { AppLogo } from '/@/components/Applications';
   import BreadCrumb from './components/BreadCrumb.vue';
-  import LayoutTrigger from "./components/Trigger.vue"
-  /* import LayoutTypePicker from './components/LayoutTypePicker.vue'; */
+  import LayoutTrigger from "./components/Trigger.vue";
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
@@ -112,7 +111,7 @@
           },
         ];
       });
-      const theme = computed(() => {
+      const headerTheme = computed(() => {
         return unref(getHeaderTheme);
       })
       const getShowSettingButton = computed(() => {
@@ -130,7 +129,7 @@
       return {
         prefixCls,
         getHeaderClass,
-        theme,
+        headerTheme,
         showHeadLogo,
         getShowBread,
         getShowNotice,

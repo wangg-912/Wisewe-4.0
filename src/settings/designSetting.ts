@@ -31,7 +31,7 @@ export const HEADER_PRESET_BG_COLOR_LIST: string[] = [
 
 // 菜单预设颜色
 export const SIDE_BAR_BG_COLOR_LIST: string[] = [
-  '#001529',
+  /* '#001529',
   '#273352',
   '#ffffff',
   '#191b24',
@@ -40,5 +40,14 @@ export const SIDE_BAR_BG_COLOR_LIST: string[] = [
   '#001628',
   '#28333E',
   '#344058',
-  '#383f45',
+  '#383f45', */
+  '#001529',
+  '#ffffff',
+  '#0960bd',
+  '#0084f4',
+  '#009688',
+  '#536dfe',
+  '#ff5c93',
+  '#ee4f12',
+  '#0096c7',
 ];

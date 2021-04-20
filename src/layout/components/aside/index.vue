@@ -4,7 +4,7 @@
       :class="[`${prefixCls}-wrapper`, `${prefixCls}--${theme}`]"
       :width="`${menusWidth}px`"
     >
-      <AppLogo v-if="showLogo" :showLogoTitle="logoTitle" />
+      <AppLogo v-if="showLogo" :showLogoTitle="logoTitle" :theme="theme" />
       <el-scrollbar
         wrap-class="scrollbar-wrapper"
         :style="{ height: showLogo ? 'calc(100% - 50px)' : '100%' }"
@@ -105,7 +105,12 @@
         }
       }
       &--light{
-
+        background: var(--sider-dark-bg-color);
+        ::v-deep(.el-submenu__title) {
+          & i {
+          color: #303133 !important;
+        }
+        }
       }
       &--dark{
         background: var(--sider-dark-bg-color);

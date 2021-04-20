@@ -13,6 +13,7 @@
   }
   
   $--color-white:#ffffff !default;
+  $--color-drak:#333333!default;
   $--color-primary: #1890ff !default;
   $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
   $--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
