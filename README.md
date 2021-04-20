@@ -27,6 +27,8 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
 
 # 项目目录
+
+
 ```
 evolution-v4
 ├─ .editorconfig
@@ -52,6 +54,11 @@ evolution-v4
 │  │  └─ app.ts
 │  ├─ App.vue
 │  ├─ assets
+│  │  ├─ fonts
+│  │  │  ├─ iconfont.eot
+│  │  │  ├─ iconfont.ttf
+│  │  │  ├─ iconfont.woff
+│  │  │  └─ iconfont.woff2
 │  │  ├─ icons
 │  │  │  ├─ index.js
 │  │  │  └─ svg
@@ -75,8 +82,15 @@ evolution-v4
 │  │  ├─ Drawer
 │  │  │  ├─ index.ts
 │  │  │  └─ src
-│  │  │     └─ BasicDrawer.vue
+│  │  │     ├─ BasicDrawer.vue
+│  │  │     ├─ props.ts
+│  │  │     ├─ type.ts
+│  │  │     └─ useDrawer.ts
+│  │  ├─ FontIcon
+│  │  │  └─ index.vue
 │  │  ├─ home
+│  │  │  └─ index.vue
+│  │  ├─ LayoutTypePicker
 │  │  │  └─ index.vue
 │  │  ├─ Loading
 │  │  │  ├─ index.ts
@@ -120,10 +134,18 @@ evolution-v4
 │  │  │  │  └─ index.vue
 │  │  │  ├─ header
 │  │  │  │  ├─ components
-│  │  │  │  │  └─ LayoutTypePicker.vue
+│  │  │  │  │  ├─ BreadCrumb.vue
+│  │  │  │  │  └─ Trigger.vue
 │  │  │  │  ├─ enums.ts
+│  │  │  │  ├─ index.scss
 │  │  │  │  └─ index.vue
 │  │  │  ├─ setting
+│  │  │  │  ├─ components
+│  │  │  │  │  ├─ index.ts
+│  │  │  │  │  ├─ SwitchItem.vue
+│  │  │  │  │  └─ ThemePicker.vue
+│  │  │  │  ├─ enums.ts
+│  │  │  │  ├─ handler.ts
 │  │  │  │  ├─ index.vue
 │  │  │  │  └─ SettingDrawer.tsx
 │  │  │  └─ tags
@@ -158,6 +180,7 @@ evolution-v4
 │  │     └─ route.ts
 │  ├─ style
 │  │  ├─ common.scss
+│  │  ├─ icons.scss
 │  │  ├─ index.scss
 │  │  └─ variables
 │  │     ├─ color.scss
@@ -165,8 +188,12 @@ evolution-v4
 │  │     ├─ element-variables.scss
 │  │     ├─ screen.scss
 │  │     └─ variable.scss
+│  ├─ theme
+│  │  ├─ updateBackground.ts
+│  │  └─ util.ts
 │  ├─ type
-│  │  └─ config.ts
+│  │  ├─ config.ts
+│  │  └─ global.d.ts
 │  ├─ utils
 │  │  ├─ cache
 │  │  │  ├─ index.ts
@@ -181,9 +208,11 @@ evolution-v4
 │  │  │  └─ Skeleton.vue
 │  │  ├─ helper
 │  │  │  ├─ envHelper.ts
-│  │  │  └─ persistent.ts
+│  │  │  ├─ persistent.ts
+│  │  │  └─ vueHelper.ts
 │  │  ├─ log.ts
 │  │  ├─ pinyin.ts
+│  │  ├─ propTypes.ts
 │  │  ├─ request.ts
 │  │  └─ tools.ts
 │  └─ views

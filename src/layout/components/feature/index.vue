@@ -10,7 +10,6 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { SettingButtonPositionEnum } from '/@/enums/appEnum';
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
-  /* import LayoutTypePicker from '../header/components/LayoutTypePicker.vue'; */
   export default defineComponent({
     name: 'LayoutFeatures',
     components: {
@@ -21,7 +20,6 @@
       const { getShowHeader } = useHeaderSetting();
       const { prefixCls } = useDesign('setting-drawer-fearure');
       const getIsFixedSettingDrawer = computed(() => {
-        debugger;
         if (!unref(getShowSetting)) {
           return false;
         }
