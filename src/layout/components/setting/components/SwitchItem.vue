@@ -35,7 +35,6 @@
       });
 
       function handleChange(e: ChangeEvent) {
-        debugger;
         props.event && baseHandler(props.event, e);
       }
       return {

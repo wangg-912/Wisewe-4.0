@@ -10,7 +10,7 @@ const setting: ProjectConfig = {
   //是否显示配置按钮
   showSetting: true,
   //配置按钮显示位置
-  settingButtonPosition: SettingButtonPositionEnum.AUTO,
+  settingButtonPosition: SettingButtonPositionEnum.HEADER,
   //
   themeColor: '#0960bd',
   // 网站为灰色模式

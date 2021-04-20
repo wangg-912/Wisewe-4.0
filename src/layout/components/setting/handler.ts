@@ -4,6 +4,7 @@ import { appStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/@/type/config';
 
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+import { SettingButtonPositionEnum } from '/@/enums/appEnum';
 
 export function baseHandler(event: HandlerEnum, value: any) {
   const config = handler(event, value);
@@ -48,7 +49,12 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       return { showLogo: value };
 
     case HandlerEnum.HEADER_SHOW:
-      return { headerSetting: { show: value } };
+      return {
+        headerSetting: { show: value },
+        settingButtonPosition: value
+          ? SettingButtonPositionEnum.HEADER
+          : SettingButtonPositionEnum.FIXED,
+      };
 
     case HandlerEnum.SHOW_BREADCRUMB:
       return { showBreadCrumb: value };
