@@ -4,9 +4,9 @@ import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_L
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
-import {ThemePicker,SwitchItem} from './components'
+import { AppTheme, ThemePicker, SwitchItem} from './components'
 import { baseHandler } from './handler';
-import {HandlerEnum, menuTypeList } from "./enums"
+import { HandlerEnum, menuTypeList } from "./enums"
 
 import LayoutTypePicker from '/@/components/LayoutTypePicker/index.vue'; 
 
@@ -24,7 +24,6 @@ export default defineComponent({
       getFullContent,
       getColorWeak,
       getGrayMode,
-      getLockTime,
       getThemeColor,
     } = useRootSetting();
     const {
@@ -36,21 +35,11 @@ export default defineComponent({
 
     const {
       getIsHorizontal,
-      getShowMenu,
-      getMenuType,
-      getTrigger,
-      getCollapsedShowTitle,
-      getMenuFixed,
-      getCollapsed,
-      getCanDrag,
-      getTopMenuAlign,
-      getAccordion,
-      getMenuWidth,
       getMenuBgColor,
-      getIsTopMenu,
-      getSplit,
+      getMenuType,
+      getMenuFixed,
+      getTopMenuAlign,
       getIsMixSidebar,
-      getCloseMixSidebarOnChange,
       getMixSideTrigger,
       getMixSideFixed,
     } = useMenuSetting();
@@ -75,7 +64,7 @@ export default defineComponent({
     }
     function renderAppTheme() {
       return (
-        <ThemePicker
+        <AppTheme
           colorList={APP_PRESET_COLOR_LIST} 
           def={unref(getThemeColor)} 
           event={HandlerEnum.CHANGE_THEME_COLOR}

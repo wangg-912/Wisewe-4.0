@@ -1,4 +1,5 @@
 import type { ProjectConfig } from '/@/types/config'; //系统配置接口
+/* import { variable } from '/@/style/variables/color.scss' */
 import {
   ContentEnum,
   ThemeEnum,
@@ -12,7 +13,7 @@ const setting: ProjectConfig = {
   //配置按钮显示位置
   settingButtonPosition: SettingButtonPositionEnum.HEADER,
   //
-  themeColor: '#0960bd',
+  themeColor: '#409eff',
   // 网站为灰色模式
   grayMode: false,
   // 颜色弱点模式

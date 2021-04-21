@@ -52,7 +52,6 @@
       }
 
       function transformColor(color: string){
-        console.log(invertColor(color));
         return invertColor(color);
       }
 

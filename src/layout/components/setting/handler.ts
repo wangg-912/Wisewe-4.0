@@ -1,10 +1,12 @@
 import { HandlerEnum } from './enums';
-import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
+
 import { appStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/@/type/config';
 
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { SettingButtonPositionEnum } from '/@/enums/appEnum';
+import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
+import { updateTheme } from '/@/theme/updateTheme'
 
 export function baseHandler(event: HandlerEnum, value: any) {
   const config = handler(event, value);
@@ -32,8 +34,7 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       if (getThemeColor.value === value) {
         return {};
       }
-      /* debugger; */
-      /* changeTheme(value); */
+      updateTheme(value);
       return { themeColor: value };
     /* ==============菜单=============== */
     case HandlerEnum.MENU_THEME:

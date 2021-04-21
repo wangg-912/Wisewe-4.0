@@ -33,15 +33,16 @@
   .#{$namespace}-app-logo {
     display: flex;
     align-items: center;
-    padding-left: 7px;
     cursor: pointer;
     transition: all 0.2s ease;
+    justify-content: center;
     height: $headers-height;
     .titlt {
       padding-left: 8px;
       font-size: 16px;
       font-weight: 700;
       color: $--color-white;
+      width:160px;
     }
     &--light{
       &-titlt{

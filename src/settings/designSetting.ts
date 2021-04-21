@@ -4,7 +4,7 @@ export default {
 
 //应用主题预设颜色
 export const APP_PRESET_COLOR_LIST: string[] = [
-  '#0960bd',
+  '#409eff',
   '#0084f4',
   '#009688',
   '#536dfe',

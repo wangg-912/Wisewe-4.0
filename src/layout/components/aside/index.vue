@@ -13,10 +13,20 @@
           :collapse="isCollapse"
           :uniqueOpened="true"
           default-active="1-1"
-          :class="[`${prefixCls}-aside`, `${prefixCls}-aside--${theme}`]"
+          :class="[
+            `${prefixCls}-aside`,
+            `${prefixCls}-aside--${theme}`,
+            `${prefixCls}-aside-${isCollapse ? 'collapse' : 'expend'}`,
+          ]"
           :collapse-transition="false"
         >
-          <menu-items v-for="v in menuLists" :key="v.name" :menu="v" :index="v.path" :theme="theme" />
+          <menu-items
+            v-for="v in menuLists"
+            :key="v.name"
+            :menu="v"
+            :index="v.path"
+            :theme="theme"
+          />
         </el-menu>
       </el-scrollbar>
     </el-aside>
@@ -25,11 +35,10 @@
 <script lang="ts">
   import { defineComponent, computed, unref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { appStore } from '/@/store/modules/app';
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  
   import { AppLogo } from '/@/components/Applications';
   import MenuItems from './menus.vue';
 
@@ -37,12 +46,13 @@
     name: 'LayoutSider',
     components: { AppLogo, MenuItems },
     setup() {
+      /* const $routes = useRouter(); */
+      const { getShowLogo } = useRootSetting();
       const { getMenuWidth, getCollapsed, getShowLogoTitle, getMenuTheme } = useMenuSetting();
-      const $routes = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const menusWidth = computed(() => unref(getMenuWidth));
       const logoTitle = computed(() => unref(getShowLogoTitle));
-      const showLogo = computed(() => appStore.getProjectConfig.showLogo);
+      const showLogo = computed(() => unref(getShowLogo));
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
       const theme = computed(() => unref(getMenuTheme));
@@ -83,7 +93,6 @@
       .submenu__title span {
         background: transparent;
       }
-
       ::v-deep(.el-submenu .el-menu-item),
       ::v-deep(.el-menu-item),
       ::v-deep(.el-submenu__title) {
@@ -104,15 +113,15 @@
           @include set-menu-item(#0960bd, $--color-white);
         }
       }
-      &--light{
+      &--light {
         background: var(--sider-dark-bg-color);
         ::v-deep(.el-submenu__title) {
           & i {
-          color: #303133 !important;
-        }
+            color: #303133 !important;
+          }
         }
       }
-      &--dark{
+      &--dark {
         background: var(--sider-dark-bg-color);
       }
     }
