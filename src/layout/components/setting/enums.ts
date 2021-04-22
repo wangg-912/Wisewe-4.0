@@ -1,9 +1,8 @@
 import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum';
-import {
-  MenuModeEnum,
-  MenuTypeEnum
-} from '/@/enums/menuEnum';
-
+import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
+/**
+ * @description 布局类型枚举
+ */
 export const menuTypeList = [
   {
     title: '左栏菜单布局',
@@ -20,9 +19,12 @@ export const menuTypeList = [
     title: '顶栏菜单布局',
     mode: MenuModeEnum.HORIZONTAL,
     type: MenuTypeEnum.TOP_MENU,
-  }
+  },
 ];
 
+/**
+ * @description 事件枚举
+ */
 export enum HandlerEnum {
   CHANGE_LAYOUT,
   CHANGE_THEME_COLOR,

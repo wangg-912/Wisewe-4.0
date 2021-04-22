@@ -37,8 +37,8 @@ const SIDER_LIGHTEN_2_BG_COLOR = '--sider-dark-lighten-2-bg-color';
 }
 
 /**
- * Change the background color of the left menu
- * @param color  bg color
+ * @description 改变菜单颜色
+ * @param {String} color 背景色
  */
  export function updateSidebarBgColor(color: string) {
   if (!isHexColor(color)) return;

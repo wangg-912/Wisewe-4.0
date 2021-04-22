@@ -39,48 +39,72 @@
         changeTheme(unref(getThemeColor));
       }) */
       function handleChange(color: string) {
-        
         props.event && baseHandler(props.event, color);
       }
-      watch(()=>state.theme,(val,oldVal)=>{
-        changeTheme(val,oldVal);
-      })
-      function changeTheme(val: string, old: string) {
-        const oldVal = state.chalk ? val : old;
-        async function _theme() {
-          const themeCluster = getThemeCluster(val.replace('#', ''));
-          const originalCluster = getThemeCluster(oldVal.replace('#', ''));
-          /*  console.log(themeCluster, originalCluster); */
+      watch(
+        ()=>state.theme,
+        (val,oldVal)=>{
+          const theme = async(val, old) => {
+            /* debugger; */
+            const oldVal = state.chalk ? val : old
+            if (typeof val !== 'string') return
+            const themeCluster = getThemeCluster(val.replace('#', ''))
+            const originalCluster = getThemeCluster(oldVal.replace('#', ''))
 
-          const getHandler = (variable: string, id: string) => {
-            return () => {
-              const originalCluster = getThemeCluster(unref(getThemeColor).replace('#', ''));
-              const newStyle = updateStyle(state[variable], originalCluster, themeCluster);
+            const getHandler = (variable, id) => {
+              return () => {
+                const originalCluster = getThemeCluster(
+                  ORIGINAL_THEME.replace('#', '')
+                )
+                const newStyle = updateStyle(
+                  state[variable],
+                  originalCluster,
+                  themeCluster
+                )
 
-              let styleTag = document.getElementById(id);
-              if (!styleTag) {
-                styleTag = document.createElement('style');
-                styleTag.setAttribute('id', id);
-                document.head.appendChild(styleTag);
+                let styleTag = document.getElementById(id)
+                if (!styleTag) {
+                  styleTag = document.createElement('style')
+                  styleTag.setAttribute('id', id)
+                  document.head.appendChild(styleTag)
+                }
+                styleTag.innerText = newStyle
               }
-              styleTag.innerText = newStyle;
-            };
-          };
+            }
 
-          if (!state.chalk) {
-            const url = `https://unpkg.zhimg.com/element-plus@${version}/lib/theme-chalk/index.css`;
-            await getCSSString(url, 'chalk');
-          }
-          const chalkHandler = getHandler('chalk', 'chalk-style');
-          chalkHandler();
+            if (!state.chalk) {
+              const url = `https://unpkg.zhimg.com/element-plus@${version}/lib/theme-chalk/index.css`
+              await getCSSString(url, 'chalk')
+            }
 
-          ElMessage.success({
+            const chalkHandler = getHandler('chalk', 'chalk-style')
+
+            chalkHandler()
+
+            const styles = [].slice
+              .call(document.querySelectorAll('style'))
+              .filter((style) => {
+                const text = style.innerText
+                return (
+                  new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+                )
+              })
+              styles.forEach((style) => {
+              const { innerText } = style
+              if (typeof innerText !== 'string') return
+              style.innerText = updateStyle(
+                innerText,
+                originalCluster,
+                themeCluster
+              )
+            })
+            ElMessage.success({
             message: ' 系统主题切换成功！',
             type: 'success',
           });
-        }
-        _theme();
-      }
+          }
+          theme(val,oldVal)
+        })
 
       function updateStyle(style: any, oldCluster: any[], newCluster: { [x: string]: any }) {
         let newStyle = style;
@@ -159,7 +183,7 @@
   });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-app-theme{
+  .#{$namespace}-app-theme {
     display: flex;
     justify-content: center;
   }

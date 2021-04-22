@@ -60,6 +60,10 @@ export default defineComponent({
         </>
       )
     }
+    /**
+     * @description 渲染应用主题
+     * @returns {Element} VNode AppTheme 
+     */
     function renderAppTheme() {
       return (
         <AppTheme
@@ -69,6 +73,10 @@ export default defineComponent({
         />
       );
     }
+    /**
+     * @description 渲染顶栏头部主题
+     * @returns {Element} VNode ThemePicker 
+     */
     function renderHeaderTheme() {
       return (
         <ThemePicker
@@ -78,7 +86,10 @@ export default defineComponent({
         />
       );
     }
-
+    /**
+     * @description 渲染左栏菜单主题
+     * @returns {Element} VNode ThemePicker 
+     */
     function renderSiderTheme() {
       return (
         <ThemePicker
@@ -88,7 +99,10 @@ export default defineComponent({
         />
       );
     }
-
+    /**
+     * @description 渲染其他配置
+     * @returns {Element} VNode SwitchItem... 
+     */
     function renderOtherSetting(){
       return(
         <>

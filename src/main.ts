@@ -6,7 +6,7 @@ import { setupRouter } from '/@/router';
 import App from './App.vue';
 import { isDevMode } from '/@/utils/env';
 import 'nprogress/nprogress.css';
-
+import '/@/style/variables/element-variables.scss';
 import '/@/style/index.scss';
 
 const app = createApp(App);

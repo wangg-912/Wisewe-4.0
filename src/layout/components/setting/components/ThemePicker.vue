@@ -46,11 +46,18 @@
     setup(props) {
       /* debugger; */
       const { prefixCls } = useDesign('setting-theme-picker');
-
+      /**
+       * @description 主题切换事件入口
+       * @param {String} color 颜色值 十六进制
+       */
       function handleClick(color: string) {
         props.event && baseHandler(props.event, color);
       }
-
+      /**
+       * @description 对冲颜色转化器
+       * @param {String} color 颜色值 十六进制
+       * @returns {String} 对冲色
+       */
       function transformColor(color: string){
         return invertColor(color);
       }

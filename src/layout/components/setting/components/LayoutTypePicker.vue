@@ -47,8 +47,6 @@
         layoutTypeList = [...menuTypeList];
       });
 
-      
-
       return {
         prefixCls,
         layoutTypeList,
@@ -126,8 +124,6 @@
           background-color: #273352;
         }
       }
-
-      
 
       // &::after {
       //   position: absolute;

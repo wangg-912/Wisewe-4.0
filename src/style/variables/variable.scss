@@ -34,6 +34,7 @@ $--color-warning: #e6a23c !default;
 $--color-danger: #f56c6c !default;
 $--color-info: #909399 !default;
 
+
 /* ================Header================ */
 
 $header-dark-bg-color: var(--header-bg-color);
@@ -55,10 +56,6 @@ $trigger-light-hover-bg-color: rgba(255, 255, 255, 0.7);
 $border-color-dark:#b6b7b9;
 
 
-
-/* Typography
--------------------------- */
-$--font-path: "~element-plus/lib/theme-chalk/fonts";
 $--font-display: "auto";
 /// fontSize|1|Font Size|0
 $--font-size-extra-large: 20px;
@@ -81,6 +78,9 @@ $--font-line-height-primary: 24px;
 /// fontLineHeight|1|Line Height|2
 $--font-line-height-secondary: 16px;
 $--font-color-disabled-base: #bbb;
+
+
+
 
 
 

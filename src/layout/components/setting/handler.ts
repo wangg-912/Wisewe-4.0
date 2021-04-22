@@ -8,12 +8,18 @@ import { SettingButtonPositionEnum } from '/@/enums/appEnum';
 import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
 import { updateTheme } from '/@/theme/updateTheme'
 import { updateGrayMode } from '/@/theme/updateGrayMode'
-
+/**
+ * @description 配置类基础事件处理器
+ * @param {HandlerEnum} event 事件枚举
+ * @param {Object|String} value 值
+ */
 export function baseHandler(event: HandlerEnum, value: any) {
   const config = handler(event, value);
   appStore.COMMITPROJECTCONFIGSTATE(config);
 }
-
+/**
+ * @description 配置类事件遍历机制
+ */
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {
   const { getThemeColor } = useRootSetting();
   switch (event) {
@@ -64,7 +70,6 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
 
     case HandlerEnum.SHOW_BREADCRUMB_ICON:
       return { showBreadCrumbIcon: value };
-    
     case HandlerEnum.GRAY_MODE:
       updateGrayMode(value);
       return { grayMode: value };

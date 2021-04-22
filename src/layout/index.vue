@@ -57,7 +57,7 @@
       const { prefixCls } = useDesign('default-layout');
       const { getMenuType } = useMenuSetting();
       const siderType = computed(() => unref(getMenuType));
-      debugger;
+      /* debugger; */
       generatorDynamicRouter();
       /* getMenusDate().then(res=>{  
         const {success, content} = res.data; 

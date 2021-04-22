@@ -1,9 +1,18 @@
 @charset "utf-8";
-@import 'element-plus/lib/theme-chalk/index.css';
+
+
+
+
+
 :export {
   theme: $--color-primary;
 }
 
+/* Typography
+-------------------------- */
+$--font-path: "~element-plus/lib/theme-chalk/fonts";
+
+@import "element-plus/lib/theme-chalk/index.css";
 
 
 
