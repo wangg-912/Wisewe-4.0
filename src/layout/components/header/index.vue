@@ -1,31 +1,24 @@
 <template>
   <el-header v-if="getShowHeader" :class="getHeaderClass">
     <div :class="`${prefixCls}-left`">
-      <AppLogo v-if="showHeadLogo" :class="[`${prefixCls}-logo`, `${prefixCls}--${headerTheme}`]" />
+      <AppLogo
+        v-if="showHeadLogo"
+        :class="[`${prefixCls}-logo`, `${prefixCls}--${headerTheme}`]"
+        :theme="headerTheme"
+        :siderType="siderType"
+      />
       <!-- <LayoutTypePicker /> -->
-      <div :class="`${prefixCls}-left--bread`">
+      <div :class="`${prefixCls}-left--bread`" v-if="siderType !== `top-menu`">
         <LayoutTrigger :theme="headerTheme" />
         <BreadCrumb v-if="getShowBread" :theme="headerTheme" />
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
-      <!-- <el-menu default-active="1" :class="`${prefixCls}-center--menus`" mode="horizontal">
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-submenu index="2">
-          <template #title>我的工作台</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-          <el-submenu index="2-4">
-            <template #title>选项4</template>
-            <el-menu-item index="2-4-1">选项1</el-menu-item>
-            <el-menu-item index="2-4-2">选项2</el-menu-item>
-            <el-menu-item index="2-4-3">选项3</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3">消息中心</el-menu-item>
-        <el-menu-item index="4">订单管理</el-menu-item>
-      </el-menu> -->
+      <LayoutSider
+        v-if="`${siderType}` == 'top-menu'"
+        :navMode="siderType == 'top-menu' ? 'horizontal' : 'vertical'"
+        :siderType="siderType"
+      />
     </div>
     <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
       <div :class="`${prefixCls}-right--item`">
@@ -37,7 +30,7 @@
         </el-badge>
       </div>
       <div v-if="getShowFullScreen" :class="`${prefixCls}-right--item`">
-        <i class="el-icon-full-screen" size="18"></i>
+        <Screenfull />
       </div>
       <div :class="`${prefixCls}-right--item`">
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
@@ -71,23 +64,29 @@
   import { SettingButtonPositionEnum } from '/@/enums/appEnum';
   import { AppLogo } from '/@/components/Applications';
   import BreadCrumb from './components/BreadCrumb.vue';
-  import LayoutTrigger from "./components/Trigger.vue";
+  import LayoutTrigger from './components/Trigger.vue';
+  import Screenfull from './components/Screenfull.vue';
   export default defineComponent({
     name: 'LayoutHeader',
-    components: {
-      AppLogo,
-      LayoutTrigger,
-      BreadCrumb,
-      SettingDrawer: createAsyncComponent(() => import('/@/layout/components/setting/index.vue'), {
-        loading: true,
-      }),
-      /* LayoutTypePicker, */
-    },
     props: {
+      siderType: {
+        type: String as PropType<string>,
+        dafault: '',
+      },
       fixed: {
         type: Boolean as PropType<boolean>,
         default: true,
       },
+    },
+    components: {
+      AppLogo,
+      LayoutTrigger,
+      BreadCrumb,
+      Screenfull,
+      SettingDrawer: createAsyncComponent(() => import('/@/layout/components/setting/index.vue'), {
+        loading: true,
+      }),
+      LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
     },
     setup(props) {
       const { getShowSetting, getSettingPosition } = useRootSetting();
@@ -111,9 +110,7 @@
           },
         ];
       });
-      const headerTheme = computed(() => {
-        return unref(getHeaderTheme);
-      })
+      const headerTheme = computed(() => unref(getHeaderTheme));
       const getShowSettingButton = computed(() => {
         if (!unref(getShowSetting)) {
           return false;

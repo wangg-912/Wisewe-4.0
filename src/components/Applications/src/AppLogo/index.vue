@@ -1,5 +1,5 @@
 <template>
-  <div :class="[`${prefixCls}`, `${prefixCls}--${theme}`]">
+  <div :class="[`${prefixCls}`, `${prefixCls}--${theme}`,`${prefixCls}--${siderType}`]">
     <el-image style="width: 32px; height: 32px" src="/src/assets/images/logo/logo.png" fit="contain" />
     <div v-if="showLogoTitle" class="titlt" :class="[`${prefixCls}--${theme}-titlt`]">{{ title }}</div>
   </div>
@@ -17,6 +17,10 @@
         type: Boolean as PropType<boolean>,
         default: true,
       },
+      siderType: {
+        type: String as PropType<boolean>,
+        default: 'sidebar',
+      }
     },
     setup() {
       const { prefixCls } = useDesign('app-logo');
@@ -53,6 +57,12 @@
       &-title{
         color: $--color-white!important;
       }
+    }
+    &--mix{
+      width: 240px;
+    }
+    &--mix,&--top-menu{
+      padding-left: 8px;
     }
   }
 </style>

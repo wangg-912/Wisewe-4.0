@@ -1,8 +1,7 @@
 <template>
   <!-- 默认排版 -->
-  <el-container :class="[`${prefixCls}--sidebar`]">
+  <el-container v-if="siderType=='sidebar'" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
     <LayoutFeatures />
-    <!-- <el-aside width="200px">Aside</el-aside> -->
     <LayoutSider />
     <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
       <LayoutHeader fixed />
@@ -11,14 +10,38 @@
       <LayoutFooter />
     </el-container>
   </el-container>
+  <!-- Mix排版 -->
+  <el-container v-if="siderType=='mix'" direction="vertical" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
+    <LayoutFeatures />
+    <LayoutHeader fixed :siderType="siderType" />
+    <el-container>
+      <LayoutSider />
+      <el-container direction="vertical">
+        <LayoutTags />
+        <LayoutContent />
+        <LayoutFooter />
+      </el-container>
+    </el-container>
+  </el-container>
+  <!-- TopMenu排版 -->
+  <el-container v-if="siderType=='top-menu'" direction="vertical" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
+    <LayoutFeatures />
+    <LayoutHeader fixed :siderType="siderType" />
+    <el-container direction="vertical">
+      <LayoutTags />
+      <LayoutContent />
+    </el-container>
+    <LayoutFooter />
+  </el-container>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { defineComponent, computed, unref } from 'vue';
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
-  import { getMenusDate } from '/@/api/app'
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { generatorDynamicRouter } from '/@/router/asyncRouter'
+  import { getMenusDate } from '/@/api/app'
   /* import router from '/@/router'; */
   export default defineComponent({
     name: 'Layout',
@@ -32,6 +55,9 @@
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');
+      const { getMenuType } = useMenuSetting();
+      const siderType = computed(() => unref(getMenuType));
+      debugger;
       generatorDynamicRouter();
       /* getMenusDate().then(res=>{  
         const {success, content} = res.data; 
@@ -42,6 +68,7 @@
           }).then(err=>{}) */
       return {
         prefixCls,
+        siderType,
       };
     },
   });

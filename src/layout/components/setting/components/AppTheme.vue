@@ -1,9 +1,12 @@
 <template>
-  <el-color-picker v-model="theme" :predefine="colorList" @change="handleChange" />
+  <div :class="`${prefixCls}`">
+    <el-color-picker v-model="theme" :predefine="colorList" @change="handleChange" />
+  </div>
 </template>
 <script lang="ts">
   import { defineComponent, PropType, computed, reactive, toRefs, unref, watch } from 'vue';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+  import { useDesign } from '/@/hooks/web/useDesign';
   import { ElMessage } from 'element-plus';
   import * as elePackage from 'element-plus/package.json';
   import { baseHandler } from '../handler';
@@ -21,6 +24,7 @@
       },
     },
     setup(props) {
+      const { prefixCls } = useDesign('app-theme');
       const { getThemeColor } = useRootSetting();
       const { version } = elePackage;
       const ORIGINAL_THEME = unref(getThemeColor);
@@ -147,9 +151,16 @@
       }
 
       return {
+        prefixCls,
         ...toRefs(state),
         handleChange,
       };
     },
   });
 </script>
+<style lang="scss" scoped>
+  .#{$namespace}-app-theme{
+    display: flex;
+    justify-content: center;
+  }
+</style>

@@ -1,11 +1,10 @@
 <template>
   <span v-if="type" :calss="`${prefixCls}`">
-    <i :class="[`${prefixCls}-icon`, type]" :style="{fontSize:`${size}px`,color:`${color}`}"></i>
+    <i :class="[`${prefixCls}-icon`, type]" :style="{fontSize:`${size}px`}"></i>
   </span>
 </template>
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
-  
   import { useDesign } from '/@/hooks/web/useDesign';
   export default defineComponent({
     name: 'FontIcon',
@@ -43,6 +42,7 @@
     justify-content: center;
     &-icon{
       padding:4px;
+      color:inherit!important;
     }
   }
 </style>

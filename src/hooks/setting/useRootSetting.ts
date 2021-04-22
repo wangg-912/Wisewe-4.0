@@ -15,6 +15,7 @@ const getPageLoading = computed(() => appStore.getPageLoading);
 const getOpenKeepAlive = computed(() => unref(getRootSetting).openKeepAlive);
 const getCanEmbedIFramePage = computed(() => unref(getRootSetting).canEmbedIFramePage);
 const getThemeColor = computed(() => unref(getRootSetting).themeColor);
+const getGrayMode = computed(() => unref(getRootSetting).grayMode);
 
 export function useRootSetting() {
   return {
@@ -28,5 +29,6 @@ export function useRootSetting() {
     getCanEmbedIFramePage,
     getShowBreadCrumbIcon,
     getThemeColor,
+    getGrayMode,
   }
 }

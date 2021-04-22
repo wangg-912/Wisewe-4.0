@@ -3,6 +3,7 @@
     <template v-for="item in layoutTypeList || []" :key="item.title">
       <el-tooltip class="item" effect="dark" :content="item.title" placement="bottom">
         <div
+          @click="handler(item)"
           :class="[
             `${prefixCls}__item`,
             `${prefixCls}__item--${item.type}`,
@@ -37,15 +38,20 @@
         default: '',
       },
     },
-    setup() {
-      let layoutTypeList:[]=ref([]);
+    setup(props) {
+      let layoutTypeList: [] = ref([]);
+
       const { prefixCls } = useDesign('setting-layout-type-picker');
+
       watchEffect(() => {
         layoutTypeList = [...menuTypeList];
       });
+
+      
+
       return {
         prefixCls,
-        layoutTypeList
+        layoutTypeList,
       };
     },
   });
@@ -121,33 +127,7 @@
         }
       }
 
-      &--mix-sidebar {
-        &::before {
-          top: 0;
-          left: 0;
-          z-index: 1;
-          width: 25%;
-          height: 100%;
-          background-color: #273352;
-          border-radius: 4px 0 0 4px;
-        }
-
-        &::after {
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 25%;
-          background-color: #fff;
-        }
-
-        .mix-sidebar {
-          position: absolute;
-          left: 25%;
-          width: 15%;
-          height: 100%;
-          background-color: #fff;
-        }
-      }
+      
 
       // &::after {
       //   position: absolute;
@@ -163,7 +143,7 @@
       &:hover,
       &--active {
         width: 52px;
-      height: 44px;
+        height: 44px;
         border: 2px solid #409eff;
 
         &::before,

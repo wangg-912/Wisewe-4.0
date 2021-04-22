@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls">
     <el-aside
-      :class="[`${prefixCls}-wrapper`, `${prefixCls}--${theme}`]"
+      :class="[`${prefixCls}-wrapper`, `${prefixCls}--${theme}`, `${prefixCls}--${siderType}`]"
       :width="`${menusWidth}px`"
     >
       <AppLogo v-if="showLogo" :showLogoTitle="logoTitle" :theme="theme" />
@@ -10,6 +10,7 @@
         :style="{ height: showLogo ? 'calc(100% - 50px)' : '100%' }"
       >
         <el-menu
+          :mode="navMode"
           :collapse="isCollapse"
           :uniqueOpened="true"
           default-active="1-1"
@@ -17,6 +18,7 @@
             `${prefixCls}-aside`,
             `${prefixCls}-aside--${theme}`,
             `${prefixCls}-aside-${isCollapse ? 'collapse' : 'expend'}`,
+            `${prefixCls}-aside--${siderType}`,
           ]"
           :collapse-transition="false"
         >
@@ -26,6 +28,7 @@
             :menu="v"
             :index="v.path"
             :theme="theme"
+            :siderType="siderType"
           />
         </el-menu>
       </el-scrollbar>
@@ -33,7 +36,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+  import { defineComponent, PropType, computed, unref } from 'vue';
   import { useRouter } from 'vue-router';
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -45,14 +48,38 @@
   export default defineComponent({
     name: 'LayoutSider',
     components: { AppLogo, MenuItems },
-    setup() {
+    props: {
+      navMode: {
+        type: String as PropType<string>,
+        default: 'vertical',
+      },
+      siderType:{
+        type: String as PropType<string>,
+        default: 'sidebar',
+      }
+    },
+    setup(props) {
       /* const $routes = useRouter(); */
       const { getShowLogo } = useRootSetting();
-      const { getMenuWidth, getCollapsed, getShowLogoTitle, getMenuTheme } = useMenuSetting();
+      const {
+        getMenuWidth,
+        getCollapsed,
+        getShowLogoTitle,
+        getMenuTheme,
+        getMenuType,
+      } = useMenuSetting();
       const isCollapse = computed(() => unref(getCollapsed));
-      const menusWidth = computed(() => unref(getMenuWidth));
+      const menusWidth = computed(() => {
+        if (props.siderType == 'top-menu') {
+          return 'auto';
+        } else {
+          return unref(getMenuWidth);
+        }
+      });
       const logoTitle = computed(() => unref(getShowLogoTitle));
-      const showLogo = computed(() => unref(getShowLogo));
+      const showLogo = computed(() => {
+        return unref(getShowLogo) && unref(getMenuType) === 'sidebar';
+      });
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
       const theme = computed(() => unref(getMenuTheme));
@@ -69,6 +96,7 @@
         showLogo,
         prefixCls,
         theme,
+        getMenuType,
         menuLists,
       };
     },
@@ -98,9 +126,6 @@
       ::v-deep(.el-submenu__title) {
         height: 46px;
         line-height: 46px;
-        & i {
-          color: $--color-white !important;
-        }
         &:not(.is-active):hover {
           @include set-menu-item(rgb(217, 236, 255), $--color-primary);
           & i {
@@ -123,6 +148,10 @@
       }
       &--dark {
         background: var(--sider-dark-bg-color);
+      }
+      &--top-menu{
+        background: #ffffff;
+        border-bottom: 0;
       }
     }
   }

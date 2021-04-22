@@ -1,10 +1,7 @@
 import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum';
 import {
   MenuModeEnum,
-  MenuTypeEnum,
-  TopMenuAlignEnum,
-  TriggerEnum,
-  MixSidebarTriggerEnum,
+  MenuTypeEnum
 } from '/@/enums/menuEnum';
 
 export const menuTypeList = [
@@ -23,12 +20,7 @@ export const menuTypeList = [
     title: '顶栏菜单布局',
     mode: MenuModeEnum.HORIZONTAL,
     type: MenuTypeEnum.TOP_MENU,
-  },
-  {
-    title: '左栏菜单混合布局',
-    mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.MIX_SIDEBAR,
-  },
+  }
 ];
 
 export enum HandlerEnum {

@@ -1,6 +1,6 @@
 <template>
   <el-menu-item v-if="iName" :index="iPath">
-    <font-icon v-if="iIcon" :type="iIcon" style="padding-right: 8px" :color="color" />
+    <font-icon v-if="iIcon" :type="iIcon" style="padding-right: 2px" :color="color" />
     <template #title>
       <span>{{ iTitle }}</span>
     </template>

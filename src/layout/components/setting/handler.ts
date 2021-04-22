@@ -7,6 +7,7 @@ import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { SettingButtonPositionEnum } from '/@/enums/appEnum';
 import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
 import { updateTheme } from '/@/theme/updateTheme'
+import { updateGrayMode } from '/@/theme/updateGrayMode'
 
 export function baseHandler(event: HandlerEnum, value: any) {
   const config = handler(event, value);
@@ -18,10 +19,11 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
   switch (event) {
     /* 更换布局结构 */
     case HandlerEnum.CHANGE_LAYOUT:
-      const { mode, type, split } = value;
+      const { bgColor, mode, type, split } = value;
       const splitOpt = split === undefined ? { split } : {};
       return {
         menuSetting: {
+          bgColor,
           mode,
           type,
           collapsed: false,
@@ -62,7 +64,10 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
 
     case HandlerEnum.SHOW_BREADCRUMB_ICON:
       return { showBreadCrumbIcon: value };
-
+    
+    case HandlerEnum.GRAY_MODE:
+      updateGrayMode(value);
+      return { grayMode: value };
     default:
       return {};
   }

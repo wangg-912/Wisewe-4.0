@@ -17,9 +17,4 @@ export const menuTypeList = [
     mode: MenuModeEnum.HORIZONTAL,
     type: MenuTypeEnum.TOP_MENU,
   },
-  {
-    title: `左侧菜单混合模式`,
-    mode: MenuModeEnum.INLINE,
-    type: MenuTypeEnum.MIX_SIDEBAR,
-  },
 ];

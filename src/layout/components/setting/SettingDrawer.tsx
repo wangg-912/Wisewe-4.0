@@ -4,17 +4,12 @@ import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_L
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
-import { AppTheme, ThemePicker, SwitchItem} from './components'
+import { LoyoutTypePicker, AppTheme, ThemePicker, SwitchItem} from './components'
 import { baseHandler } from './handler';
-import { HandlerEnum, menuTypeList } from "./enums"
-
-import LayoutTypePicker from '/@/components/LayoutTypePicker/index.vue'; 
+import { HandlerEnum, menuTypeList } from "./enums" 
 
 export default defineComponent({
   name: 'SettingDrawer',
-  components:{
-    LayoutTypePicker,
-  },
   setup(_,{ attrs }){
     const {
       getContentMode,
@@ -49,17 +44,20 @@ export default defineComponent({
      */
     function renderLayoutPicker(){
       return (
-        <LayoutTypePicker
+        <>
+        <LoyoutTypePicker
           menuTypeList={menuTypeList}
           handler={(item: typeof menuTypeList[0]) => {
             baseHandler(HandlerEnum.CHANGE_LAYOUT, {
+              bgColor: unref(getMenuType) == 'top-menu'?'#ffffff':unref(getMenuType),
               mode: item.mode,
               type: item.type,
               split: unref(getIsHorizontal) ? false : undefined,
             });
           }}
           def={unref(getMenuType)}
-        ></LayoutTypePicker>
+        />
+        </>
       )
     }
     function renderAppTheme() {
@@ -120,7 +118,12 @@ export default defineComponent({
             def={unref(getShowBreadCrumbIcon)}
             disabled={!unref(getShowHeader)}
           />
-        
+
+          <SwitchItem
+            title="灰色模式"
+            event={HandlerEnum.GRAY_MODE}
+            def={unref(getGrayMode)}
+          />
         </>
       )
     }
