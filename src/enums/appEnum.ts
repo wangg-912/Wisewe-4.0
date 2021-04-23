@@ -33,3 +33,8 @@ export enum SettingButtonPositionEnum {
   HEADER = 'header',
   FIXED = 'fixed',
 }
+// 页面配置
+export enum PageEnum {
+  BASE_HOME = '/home', // 默认页面path
+  ERROR_PAGE = '/exception', //错误页面path
+}

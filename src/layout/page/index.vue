@@ -2,7 +2,7 @@
   <div :class="prefixCls">
     <RouterView>
       <template #default="{ Component, route }">
-        <transition>
+        <transition >
           <keep-alive v-if="openCache" :include="getCaches">
             <component :is="Component" v-bind="getKey(Component, route)" />
           </keep-alive>
@@ -19,6 +19,7 @@
   import { useDesign } from '/@/hooks/web/useDesign'
   import FramePanel from '/@/layout/iframe/index.vue';
   import { getKey } from './useCache';
+  import { getTransitionName } from './transition';
   export default defineComponent({
     name: 'PageLayout',
     components: { FramePanel },
@@ -30,6 +31,7 @@
         getKey,
         getOpenKeepAlive,
         getCanEmbedIFramePage,
+        getTransitionName,
       }
     }
   })

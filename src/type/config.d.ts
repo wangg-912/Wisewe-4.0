@@ -1,6 +1,6 @@
 import { RouterTransitionEnum, ThemeEnum } from '/@/enums/appEnum';
 /**
- *
+ *@description 菜单栏接口配置
  */
 export interface MenuSetting {
   bgColor: string;
@@ -15,21 +15,24 @@ export interface MenuSetting {
   trigger: string;
 }
 /**
- *
+ * @description TAG标签栏接口配置
  */
-export interface MultiTabsSetting {}
+export interface TagsSetting {
+  show: boolean;
+  showContextmenu: boolean;
+  showQuick: boolean;
+}
+/**
+ * @description 顶栏配置
+ */
 export interface HeaderSetting {
   bgColor: string;
   fixed: boolean;
   show: boolean;
   theme: ThemeEnum;
-  // 显示全屏按钮
   showFullScreen: boolean;
-  // 开启全屏功能
   useLockPage: boolean;
-  // 显示消息中心按钮
   showNotice: boolean;
-
   showSearch: boolean;
 }
 
@@ -37,49 +40,29 @@ export interface HeaderSetting {
  * @description 动画接口
  */
 export interface TransitionSetting {
-  // 是否打开页面切换动画
-  enable: boolean;
-  // 路由切换动画
-  basicTransition: RouterTransitionEnum;
-  // 是否打开页面切换加载
-  openPageLoading: boolean;
-  // 是否打开顶部进度条
-  openNProgress: boolean;
+  enable: boolean; // 是否打开页面切换动画
+  basicTransition: RouterTransitionEnum; // 路由切换动画
+  openPageLoading: boolean; // 是否打开页面切换加载
+  openNProgress: boolean; // 是否打开顶部进度条
 }
 
 /**
  * @description 项目配置接口
  */
 export interface ProjectConfig {
-  // 是否显示配置按钮
-  showSettingButton: boolean;
-  // 网站灰色模式，用于可能悼念的日期开启
-  grayMode: boolean;
-  // 是否开启色弱模式
-  colorWeak: boolean;
-  // 主题色
-  themeColor: string;
-  /*  themeMode: ThemeMode; */
-  // 全屏显示主界面,不显示菜单,及顶部
+  showSettingButton: boolean; // 是否显示配置按钮
+  grayMode: boolean; // 网站灰色模式，用于可能悼念的日期开启
+  colorWeak: boolean; // 是否开启色弱模式
+  themeColor: string; // 主题色
   fullContent: boolean;
-  // 是否显示logo
   showLogo: boolean;
   showFooter: boolean;
   headerSetting: HeaderSetting;
-  // 菜单类型
-  // menuType: MenuTypeEnum;
   menuSetting: MenuSetting;
-  // pageLayout是否开启keep-alive
+  tagsSetting: TagsSetting;
   openKeepAlive: boolean;
-  // 显示面包屑
   showBreadCrumb: boolean;
-  // 显示面包屑图标
   showBreadCrumbIcon: boolean;
-  // 使用error-handler-plugin
-  useErrorHandle: boolean;
-  // 是否开启回到顶部
-  useOpenBackTop: boolean;
-  // 是否可以嵌入iframe页面
   canEmbedIFramePage: boolean;
   // 切换界面的时候是否删除未关闭的message及notify
   closeMessageOnSwitch: boolean;

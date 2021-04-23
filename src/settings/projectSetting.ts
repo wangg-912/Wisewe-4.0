@@ -63,6 +63,15 @@ const setting: ProjectConfig = {
     // Fold trigger position
     trigger: TriggerEnum.HEADER,
   },
+  // 标签配置
+  tagsSetting: {
+    // 是否显示标签
+    show: true,
+    // 是否显示右键功能
+    showContextmenu: true,
+    // 是否显示快捷功能
+    showQuick: true,
+  },
   // 是否启用KeepAlive缓存最好在开发过程中关闭，否则每次都需要清除缓存
   openKeepAlive: true,
   // 是否显示面包屑
