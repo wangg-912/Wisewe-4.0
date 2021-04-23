@@ -25,7 +25,7 @@ const config: UserConfig = {
     preprocessorOptions: {
       scss: {
         additionalData: `@import "src/style/variables/variable.scss";
-        @import "src/style/variables/easing.scss";
+        @import "src/style/variables/element-variables.scss";
         @import "src/style/variables/screen.scss";`,
       },
     },

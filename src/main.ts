@@ -1,17 +1,17 @@
+import 'nprogress/nprogress.css';
+import 'element-plus/lib/theme-chalk/index.css';
 import { createApp } from 'vue';
-
 import ElementPlus from 'element-plus';
 import { setupStore } from '/@/store';
 import { setupRouter } from '/@/router';
 import App from './App.vue';
 import { isDevMode } from '/@/utils/env';
-import 'nprogress/nprogress.css';
-import '/@/style/variables/element-variables.scss';
+import 'dayjs/locale/zh-cn'
+import locale from 'element-plus/lib/locale/lang/zh-cn'
 import '/@/style/index.scss';
-
 const app = createApp(App);
 
-app.use(ElementPlus, { size: 'small', zIndex: 3000 });
+app.use(ElementPlus, { locale, size: 'small', zIndex: 3000 });
 
 setupStore(app);
 setupRouter(app);

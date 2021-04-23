@@ -29,16 +29,15 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 # 项目目录
 
 
+
+
 ```
 evolution-v4
 ├─ .editorconfig
 ├─ .env
 ├─ .eslintignore
 ├─ .eslintrc.js
-├─ electrons
-│  ├─ index.html
-│  ├─ main.js
-│  └─ main.ts
+├─ babel.config.js
 ├─ favicon.ico
 ├─ index.html
 ├─ LICENSE
@@ -90,8 +89,6 @@ evolution-v4
 │  │  │  └─ index.vue
 │  │  ├─ home
 │  │  │  └─ index.vue
-│  │  ├─ LayoutTypePicker
-│  │  │  └─ index.vue
 │  │  ├─ Loading
 │  │  │  ├─ index.ts
 │  │  │  └─ src
@@ -135,13 +132,16 @@ evolution-v4
 │  │  │  ├─ header
 │  │  │  │  ├─ components
 │  │  │  │  │  ├─ BreadCrumb.vue
+│  │  │  │  │  ├─ Screenfull.vue
 │  │  │  │  │  └─ Trigger.vue
 │  │  │  │  ├─ enums.ts
 │  │  │  │  ├─ index.scss
 │  │  │  │  └─ index.vue
 │  │  │  ├─ setting
 │  │  │  │  ├─ components
+│  │  │  │  │  ├─ AppTheme.vue
 │  │  │  │  │  ├─ index.ts
+│  │  │  │  │  ├─ LayoutTypePicker.vue
 │  │  │  │  │  ├─ SwitchItem.vue
 │  │  │  │  │  └─ ThemePicker.vue
 │  │  │  │  ├─ enums.ts
@@ -172,7 +172,6 @@ evolution-v4
 │  │  ├─ designSetting.ts
 │  │  ├─ encryptionSetting.ts
 │  │  └─ projectSetting.ts
-│  ├─ shims-vue.d.ts
 │  ├─ store
 │  │  ├─ index.ts
 │  │  └─ modules
@@ -183,16 +182,16 @@ evolution-v4
 │  │  ├─ icons.scss
 │  │  ├─ index.scss
 │  │  └─ variables
-│  │     ├─ color.scss
-│  │     ├─ easing.scss
 │  │     ├─ element-variables.scss
 │  │     ├─ screen.scss
 │  │     └─ variable.scss
 │  ├─ theme
 │  │  ├─ updateBackground.ts
+│  │  ├─ updateGrayMode.ts
+│  │  ├─ updateTheme.ts
 │  │  └─ util.ts
 │  ├─ type
-│  │  ├─ config.ts
+│  │  ├─ config.d.ts
 │  │  └─ global.d.ts
 │  ├─ utils
 │  │  ├─ cache

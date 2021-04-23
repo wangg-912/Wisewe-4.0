@@ -42,69 +42,56 @@
         props.event && baseHandler(props.event, color);
       }
       watch(
-        ()=>state.theme,
-        (val,oldVal)=>{
-          const theme = async(val, old) => {
+        () => state.theme,
+        (val, oldVal) => {
+          const theme = async (val, old) => {
             /* debugger; */
-            const oldVal = state.chalk ? val : old
-            if (typeof val !== 'string') return
-            const themeCluster = getThemeCluster(val.replace('#', ''))
-            const originalCluster = getThemeCluster(oldVal.replace('#', ''))
+            const oldVal = state.chalk ? val : old;
+            if (typeof val !== 'string') return;
+            const themeCluster = getThemeCluster(val.replace('#', ''));
+            const originalCluster = getThemeCluster(oldVal.replace('#', ''));
 
             const getHandler = (variable, id) => {
               return () => {
-                const originalCluster = getThemeCluster(
-                  ORIGINAL_THEME.replace('#', '')
-                )
-                const newStyle = updateStyle(
-                  state[variable],
-                  originalCluster,
-                  themeCluster
-                )
+                const originalCluster = getThemeCluster(ORIGINAL_THEME.replace('#', ''));
+                const newStyle = updateStyle(state[variable], originalCluster, themeCluster);
 
-                let styleTag = document.getElementById(id)
+                let styleTag = document.getElementById(id);
                 if (!styleTag) {
-                  styleTag = document.createElement('style')
-                  styleTag.setAttribute('id', id)
-                  document.head.appendChild(styleTag)
+                  styleTag = document.createElement('style');
+                  styleTag.setAttribute('id', id);
+                  document.head.appendChild(styleTag);
                 }
-                styleTag.innerText = newStyle
-              }
-            }
+                styleTag.innerText = newStyle;
+              };
+            };
 
             if (!state.chalk) {
-              const url = `https://unpkg.zhimg.com/element-plus@${version}/lib/theme-chalk/index.css`
-              await getCSSString(url, 'chalk')
+              const url = `https://unpkg.zhimg.com/element-plus@${version}/lib/theme-chalk/index.css`;
+              await getCSSString(url, 'chalk');
             }
 
-            const chalkHandler = getHandler('chalk', 'chalk-style')
+            const chalkHandler = getHandler('chalk', 'chalk-style');
 
-            chalkHandler()
+            chalkHandler();
 
-            const styles = [].slice
-              .call(document.querySelectorAll('style'))
-              .filter((style) => {
-                const text = style.innerText
-                return (
-                  new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
-                )
-              })
-              styles.forEach((style) => {
-              const { innerText } = style
-              if (typeof innerText !== 'string') return
-              style.innerText = updateStyle(
-                innerText,
-                originalCluster,
-                themeCluster
-              )
-            })
+            const styles = [].slice.call(document.querySelectorAll('style')).filter((style) => {
+              const text = style.innerText;
+              return new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text);
+            });
+            styles.forEach((style) => {
+              const { innerText } = style;
+              if (typeof innerText !== 'string') return;
+              style.innerText = updateStyle(innerText, originalCluster, themeCluster);
+            });
             ElMessage.success({
-            message: ' 系统主题切换成功！',
-            type: 'success',
-          });
-          }
-          theme(val,oldVal)
-        })
+              message: ' 系统主题切换成功！',
+              type: 'success',
+            });
+          };
+          theme(val, oldVal);
+        }
+      );
 
       function updateStyle(style: any, oldCluster: any[], newCluster: { [x: string]: any }) {
         let newStyle = style;
