@@ -21,20 +21,19 @@ function isGotoPage() {
   go(unref(router.currentRoute).path, true);
 }
 
-
 @Module({ namespaced: true, name: NAME, dynamic: true, store })
 class Tag extends VuexModule {
   cachedMapState = new Map<string, string[]>();
   // tab list
-  tabsState: RouteLocationNormalized[] = [];
+  tagsState: RouteLocationNormalized[] = [];
 
-  get getTabsState() {
-    return this.tabsState;
+  get getTagsState() {
+    return this.tagsState;
   }
 
   get getCurrentTab(): RouteLocationNormalized {
     const route = unref(router.currentRoute);
-    return this.tabsState.find((item) => item.path === route.path)!;
+    return this.tagsState.find((item) => item.path === route.path)!;
   }
 
   get getCachedMapState(): Map<string, string[]> {
@@ -49,13 +48,13 @@ class Tag extends VuexModule {
   @Mutation
   GOTOPAGE() {
     const go = useGo();
-    const len = this.tabsState.length;
+    const len = this.tagsState.length;
     const { path } = unref(router.currentRoute);
 
     let toPath: PageEnum | string = PageEnum.BASE_HOME;
 
     if (len > 0) {
-      const page = this.tabsState[len - 1];
+      const page = this.tagsState[len - 1];
       const p = page.fullPath || page.path;
       if (p) {
         toPath = p;
@@ -64,13 +63,22 @@ class Tag extends VuexModule {
     // Jump to the current page and report an error
     path !== toPath && go(toPath as PageEnum, true);
   }
+  @Mutation
+  private DELTAGVIEW(view: RouteLocationNormalized): void {
+    for (const [i, v] of this.tagsState.entries()) {
+      if (v.path === view.path) {
+        this.tagsState.splice(i, 1);
+        break;
+      }
+    }
+  }
 
   @Mutation
   COMMITCACHEMAPSTATE(): void {
     const cacheMap = new Map<string, string[]>();
 
     const pageCacheSet = new Set<string>();
-    this.tabsState.forEach((tab) => {
+    this.tagsState.forEach((tab) => {
       const item = getRoute(tab);
       const needCache = !item.meta?.ignoreKeepAlive;
       if (!needCache) return;
@@ -109,5 +117,45 @@ class Tag extends VuexModule {
     this.cachedMapState = cacheMap;
   }
 
+  @Mutation
+  COMMITTAGROUTESSTATE(route: RouteLocationNormalized): void {
+    const { path, fullPath, params, query } = route;
+    let updateIndex = -1;
+    // 已经存在的页面，不重复添加tab
+    const hasTab = this.tagsState.some((tab, index) => {
+      updateIndex = index;
+      return (tab.fullPath || tab.path) === (fullPath || path);
+    });
+    if (hasTab) {
+      const curTab = toRaw(this.tagsState)[updateIndex];
+      if (!curTab) return;
+      curTab.params = params || curTab.params;
+      curTab.query = query || curTab.query;
+      curTab.fullPath = fullPath || curTab.fullPath;
+      this.tagsState.splice(updateIndex, 1, curTab);
+      return;
+    }
+    this.tagsState = cloneDeep([...this.tagsState, route]);
+  }
+  @Action
+  addTagAction(route: RouteLocationNormalized) {
+    const { path, name } = route;
+    // 404  The page does not need to add a tab
+    if (
+      path === PageEnum.ERROR_PAGE ||
+      !name ||
+      [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(name as string)
+    ) {
+      return;
+    }
+    this.COMMITTAGROUTESSTATE(getRoute(route));
 
+    this.COMMITCACHEMAPSTATE();
+  }
+  @Action
+  deleteTag(tag: RouteLocationNormalized) {
+    this.DELTAGVIEW(tag);
+  }
 }
+
+export const tagStore = getModule<Tag>(Tag);

@@ -2,7 +2,17 @@
   <div :class="prefixCls">
     <RouterView>
       <template #default="{ Component, route }">
-        <transition >
+        <transition
+          :name="
+            getTransitionName({
+              route,
+              openCache,
+              enableTransition: getEnableTransition,
+              cacheTabs: getCaches,
+              def: getBasicTransition,
+            })
+          "
+        >
           <keep-alive v-if="openCache" :include="getCaches">
             <component :is="Component" v-bind="getKey(Component, route)" />
           </keep-alive>
@@ -14,11 +24,13 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue'
+  import { defineComponent, computed, unref } from 'vue';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-  import { useDesign } from '/@/hooks/web/useDesign'
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useTagSetting } from '/@/hooks/setting/useTagSetting';
+  import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
   import FramePanel from '/@/layout/iframe/index.vue';
-  import { getKey } from './useCache';
+  import { useCache, getKey } from './useCache';
   import { getTransitionName } from './transition';
   export default defineComponent({
     name: 'PageLayout',
@@ -26,18 +38,26 @@
     setup() {
       const { prefixCls } = useDesign('layout-wrapper');
       const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
+      const { getTagsShow } = useTagSetting();
+      const { getCaches } = useCache(false);
+      const { getBasicTransition, getEnableTransition } = useTransitionSetting();
+      const openCache = computed(() => unref(getOpenKeepAlive) && unref(getTagsShow));
       return {
         prefixCls,
         getKey,
         getOpenKeepAlive,
         getCanEmbedIFramePage,
         getTransitionName,
-      }
-    }
-  })
+        openCache,
+        getEnableTransition,
+        getBasicTransition,
+        getCaches,
+      };
+    },
+  });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-layout-wrapper{
+  .#{$namespace}-layout-wrapper {
     width: 100%;
     height: 100%;
   }

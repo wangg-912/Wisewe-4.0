@@ -29,7 +29,6 @@
 </template>
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue';
-
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useTagSetting } from '/@/hooks/setting/useTagSetting';
   import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
@@ -41,10 +40,10 @@
     setup() {
       const { getCaches } = useCache(false);
       const { getOpenKeepAlive } = useRootSetting();
-      const { getShowMultipleTab } = useTagSetting();
+      const { getTagsShow } = useTagSetting();
       const { getBasicTransition, getEnableTransition } = useTransitionSetting();
 
-      const openCache = computed(() => unref(getOpenKeepAlive) && unref(getShowMultipleTab));
+      const openCache = computed(() => unref(getOpenKeepAlive) && unref(getTagsShow));
 
       return {
         getCaches,

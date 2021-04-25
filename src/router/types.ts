@@ -10,11 +10,14 @@ export type Component<T extends any = any> =
 export interface IMenuMeta {
   icon: string;
   title: string;
+  affix?: boolean;
   frameSrc?: string;
   frameOpenType?: string;
   activeMenu?: string;
   noCache?: boolean;
   hidden?: boolean;
+  hideTag?: boolean;
+  hideMenu?: boolean;
 }
 export interface IMenubarList {
   id?: number | string;

@@ -21,6 +21,7 @@
             `${prefixCls}-aside--${siderType}`,
           ]"
           :collapse-transition="false"
+          @select="menuHandle"
         >
           <menu-items
             v-for="v in menuLists"
@@ -42,6 +43,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { useGo } from '/@/hooks/web/usePage' 
   import { AppLogo } from '/@/components/Applications';
   import MenuItems from './menus.vue';
 
@@ -60,6 +62,7 @@
     },
     setup(props) {
       /* const $routes = useRouter(); */
+      const go = useGo();
       const { getShowLogo } = useRootSetting();
       const {
         getMenuWidth,
@@ -68,6 +71,7 @@
         getMenuTheme,
         getMenuType,
       } = useMenuSetting();
+      const { currentRoute, push } = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const menusWidth = computed(() => {
         if (props.siderType == 'top-menu') {
@@ -88,6 +92,12 @@
           console.log($routes, '3');
         }, 1000);
       }); */
+      function menuHandle(path: string) {
+        debugger;
+        if (currentRoute.value.fullPath === path) return;
+        /* go(path); */
+        push(path);
+      }
 
       return {
         isCollapse,
@@ -98,6 +108,7 @@
         theme,
         getMenuType,
         menuLists,
+        menuHandle,
       };
     },
   });
