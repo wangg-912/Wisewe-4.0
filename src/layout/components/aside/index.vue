@@ -93,9 +93,7 @@
         }, 1000);
       }); */
       function menuHandle(path: string) {
-        debugger;
         if (currentRoute.value.fullPath === path) return;
-        /* go(path); */
         push(path);
       }
 

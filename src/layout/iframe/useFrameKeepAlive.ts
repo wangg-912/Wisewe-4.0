@@ -48,18 +48,15 @@ export function useFrameKeepAlive(){
   }
 
   function showIframe(item: AppRouteRecordRaw) {
-    debugger;
     return item.name === unref(currentRoute).name;
   }
 
   function hasRenderFrame(name: string) {
-    debugger;
     if (!unref(getTagsShow)) {
       return router.currentRoute.value.name === name;
     }
     return unref(getOpenTabList).includes(name);
   }
-
 
   return { hasRenderFrame, getFramePages, showIframe, getAllFramePages };
 }

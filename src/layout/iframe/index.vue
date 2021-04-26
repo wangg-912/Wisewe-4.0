@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFrame" style="width: 100%; height: 100%">
+  <div v-if="showFrame">
     <template v-for="frame in getFramePages" :key="frame.path">
       <FrameView
         v-if="frame.meta.frameSrc && hasRenderFrame(frame.name)"
@@ -19,7 +19,7 @@
     setup() {
       const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
       const showFrame = computed(() => unref(getFramePages).length > 0);
-      /* console.log(getFramePages) */
+      console.log(getFramePages)
       return {
         getFramePages,
         hasRenderFrame,

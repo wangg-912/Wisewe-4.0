@@ -4,6 +4,7 @@ import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-dec
 import { PageEnum } from '/@/enums/appEnum';
 import store from '/@/store';
 import router from '/@/router';
+
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper';
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/constant';
 import { getRoute } from '/@/router/helper/routeHelper';
@@ -31,7 +32,7 @@ class Tag extends VuexModule {
     return this.tagsState;
   }
 
-  get getCurrentTab(): RouteLocationNormalized {
+  get getCurrentTag(): RouteLocationNormalized {
     const route = unref(router.currentRoute);
     return this.tagsState.find((item) => item.path === route.path)!;
   }
@@ -39,12 +40,16 @@ class Tag extends VuexModule {
   get getCachedMapState(): Map<string, string[]> {
     return this.cachedMapState;
   }
-
+  /**
+   * @description commitClearCache
+   */
   @Mutation
   COMMITCLEARCACHE(): void {
     this.cachedMapState = new Map();
   }
-
+  /**
+   * @description gotoPage
+   */
   @Mutation
   GOTOPAGE() {
     const go = useGo();
@@ -63,6 +68,10 @@ class Tag extends VuexModule {
     // Jump to the current page and report an error
     path !== toPath && go(toPath as PageEnum, true);
   }
+  /**
+   * @description 删除Tag标签
+   * @param view 
+   */
   @Mutation
   private DELTAGVIEW(view: RouteLocationNormalized): void {
     for (const [i, v] of this.tagsState.entries()) {
@@ -72,17 +81,18 @@ class Tag extends VuexModule {
       }
     }
   }
-
+  /**
+   * @description commitCacheState
+   */
   @Mutation
   COMMITCACHEMAPSTATE(): void {
     const cacheMap = new Map<string, string[]>();
-
     const pageCacheSet = new Set<string>();
     this.tagsState.forEach((tab) => {
       const item = getRoute(tab);
-      const needCache = !item.meta?.ignoreKeepAlive;
+      /* const needCache = !item.meta?.ignoreKeepAlive; */
+      const needCache = false;
       if (!needCache) return;
-
       if (item.meta?.affix) {
         const name = item.name as string;
         pageCacheSet.add(name);
@@ -90,15 +100,10 @@ class Tag extends VuexModule {
         const matched = item?.matched;
         if (!matched) return;
         const len = matched.length;
-
         if (len < 2) return;
-
         for (let i = 0; i < matched.length; i++) {
           const key = matched[i].name as string;
-
-          if (i < 2) {
-            pageCacheSet.add(key);
-          }
+          (i < 2) && pageCacheSet.add(key);
           if (i < len - 1) {
             const { meta, name } = matched[i + 1];
             if (meta && (meta.affix || needCache)) {
@@ -112,11 +117,10 @@ class Tag extends VuexModule {
         }
       }
     });
-
     cacheMap.set(PAGE_LAYOUT_KEY, Array.from(pageCacheSet));
     this.cachedMapState = cacheMap;
   }
-
+  
   @Mutation
   COMMITTAGROUTESSTATE(route: RouteLocationNormalized): void {
     const { path, fullPath, params, query } = route;
@@ -137,6 +141,50 @@ class Tag extends VuexModule {
     }
     this.tagsState = cloneDeep([...this.tagsState, route]);
   }
+  @Mutation
+  DELETECACHEDTAG(): void {
+    const route = router.currentRoute.value;
+    for (const [key, value] of this.cachedMapState) {
+      const index = value.findIndex((item: string) => item === (route.name as string));
+      if (index === -1) {
+        continue;
+      }
+      if (value.length === 1) {
+        this.tagsState.delete(key);
+        continue;
+      }
+      value.splice(index, 1);
+      this.tagsState.set(key, value);
+    }
+  }
+  /**
+   * @description 删除其他标签
+   * @param tag 
+   */
+  @Mutation
+  DELETEOTHERTAGS(tag: RouteLocationNormalized) {
+    this.tagsState = this.tagsState.filter((t) => t.meta.affix || t.path == tag.path);
+  }
+  @Mutation
+  DELETEALLTAGS() {
+    this.tagsState = this.tagsState.filter((t) => t.meta.affix);
+  }
+  @Mutation
+  private UPDATEVISITEDTAG(tag: RouteLocationNormalized): void {
+    for (let v of this.tagsState) {
+      if (v.path === tag.path) {
+        v = Object.assign(v, tag);
+        break;
+      }
+    }
+  }
+
+
+  /**
+   * @description 新增标签动作
+   * @param {RouteLocationNormalized} route
+   * @returns
+   */
   @Action
   addTagAction(route: RouteLocationNormalized) {
     const { path, name } = route;
@@ -149,12 +197,57 @@ class Tag extends VuexModule {
       return;
     }
     this.COMMITTAGROUTESSTATE(getRoute(route));
-
     this.COMMITCACHEMAPSTATE();
   }
+  /**
+   * @description 删除指定标签
+   * @param tag
+   */
   @Action
-  deleteTag(tag: RouteLocationNormalized) {
-    this.DELTAGVIEW(tag);
+  deleteTag(tag: RouteLocationNormalized): Promise<unknown> {
+    return new Promise((resolve) => {
+      this.DELTAGVIEW(tag);
+      this.COMMITCACHEMAPSTATE();
+      resolve({
+        cachedMapState: [...this.cachedMapState],
+        tagsState: [...this.tagsState],
+      });
+    });
+  }
+  /**
+   * @description 删除缓存标签
+   * @returns
+   */
+  @Action
+  deleteCacheTag(): Promise<unknown> {
+    return new Promise((resolve) => {
+      this.DELETECACHEDTAG();
+      resolve([...this.tagsState]);
+    });
+  }
+  /**
+   * @description 删除其他标签
+   * @param tag 
+   * @returns 
+   */
+  @Action
+  deleteOtherTags(tag: RouteLocationNormalized): Promise<unknown> {
+    return new Promise((resolve) => {
+      this.DELETEOTHERTAGS(tag);
+      resolve([...this.tagsState]);
+    });
+  }
+  @Action
+  deleteAllTags(): Promise<unknown> {
+    return new Promise((resolve) => {
+      this.DELETEALLTAGS();
+      resolve([...this.tagsState]);
+    })
+  }
+
+  @Action
+  updateVisitedTags(tag: RouteLocationNormalized): void {
+    this.UPDATEVISITEDTAG(tag);
   }
 }
 

@@ -1,10 +1,7 @@
-import { toRaw, ref, nextTick } from 'vue';
+import { toRaw, ref } from 'vue';
 import { RouteLocationNormalized } from 'vue-router';
-import { useProjectSetting } from '/@/hooks/setting';
-import { useDesign } from '/@/hooks/web/useDesign';
 import router from '/@/router';
 import { tagStore } from '/@/store/modules/tag';
-import { isNullAndUnDef } from '/@/utils/tools';
 
 export function initAffixTags(){
   const affixList = ref<RouteLocationNormalized[]>([]);
@@ -20,10 +17,10 @@ export function initAffixTags(){
   /**
    * @description: 设置固定标签
    */
-   function addAffixTabs(): void {
-    const affixTabs = filterAffixTags((router.getRoutes() as unknown) as RouteLocationNormalized[]);
-    affixList.value = affixTabs;
-    for (const tag of affixTabs) {
+   function addAffixTags(): void {
+    const affixTags = filterAffixTags((router.getRoutes() as unknown) as RouteLocationNormalized[]);
+    affixList.value = affixTags;
+    for (const tag of affixTags) {
       tagStore.addTagAction(({
         meta: tag.meta,
         name: tag.name,
@@ -34,7 +31,7 @@ export function initAffixTags(){
 
   let isAddAffix = false;
   if (!isAddAffix) {
-    addAffixTabs();
+    addAffixTags();
     isAddAffix = true;
   }
   return affixList.value.map((item) => item.meta?.title).filter(Boolean);

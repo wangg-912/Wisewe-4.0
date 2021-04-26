@@ -1,6 +1,6 @@
 <template>
   <AppProvider>
-    <router-view />
+    <RouterView />
   </AppProvider>
 </template>
 
