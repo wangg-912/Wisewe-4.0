@@ -163,7 +163,7 @@
         background: var(--sider-dark-bg-color);
       }
       &--top-menu {
-        background: #ffffff;
+        background: var(--header-bg-color);
         border-bottom: 0;
       }
     }

@@ -20,6 +20,7 @@ export default defineComponent({
       getColorWeak,
       getGrayMode,
       getThemeColor,
+      getShowFooter,
     } = useRootSetting();
     const {
       getShowHeader,
@@ -143,6 +144,12 @@ export default defineComponent({
            title="色弱模式"
             event={HandlerEnum.COLOR_WEAK}
             def={unref(getColorWeak)}
+          />
+
+          <SwitchItem
+           title="显示底部版权"
+            event={HandlerEnum.SHOW_FOOTER}
+            def={unref(getShowFooter)}
           />
 
         </>

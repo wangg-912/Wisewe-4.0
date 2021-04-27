@@ -22,9 +22,9 @@ export function initAppConfigStore(){
       headerSetting: { bgColor: headerBgColor } = {},
       menuSetting: { bgColor } = {},
     } = projCfg;
-   /*  if (themeColor && themeColor !== primaryColor) {
-      changeTheme(themeColor);
-    } */
+    if (themeColor && themeColor !== '#409eff') {
+      //changeTheme(themeColor);
+    }
     headerBgColor && updateHeaderBgColor(headerBgColor);
     bgColor && updateSidebarBgColor(bgColor);
     grayMode && updateGrayMode(grayMode);

@@ -115,10 +115,9 @@
     }
     &--top-menu {
       border-bottom: none !important;
-      
       &-item,
       ::v-deep(.el-submenu__title) {
-        background-color: #ffffff;
+        background-color: var(--header-bg-color);
         color: $--color-drak !important;
         padding: 0 12px !important;
         & i {
