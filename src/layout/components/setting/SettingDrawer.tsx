@@ -138,6 +138,13 @@ export default defineComponent({
             event={HandlerEnum.GRAY_MODE}
             def={unref(getGrayMode)}
           />
+
+          <SwitchItem
+           title="色弱模式"
+            event={HandlerEnum.COLOR_WEAK}
+            def={unref(getColorWeak)}
+          />
+
         </>
       )
     }

@@ -40,6 +40,7 @@ const setting: ProjectConfig = {
     showNotice: true,
     // 显示菜单搜索
     showSearch: true,
+    showfooter: false,
   },
   // 菜单配置
   menuSetting: {
@@ -80,6 +81,7 @@ const setting: ProjectConfig = {
   showBreadCrumbIcon: false,
   // 是否可以嵌入iframe页面
   canEmbedIFramePage: true,
+  mobileTrigger: false,
 };
 
 export default setting;

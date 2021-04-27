@@ -1,6 +1,6 @@
 <template>
   <el-main :class="[prefixCls, getLayoutContentMode]">
-    <transition name="fade">
+    <transition>
       <!-- <router-view /> -->
       <Loading
         v-if="getOpenPageLoading"

@@ -4,10 +4,10 @@
       :class="[`${prefixCls}-wrapper`, `${prefixCls}--${theme}`, `${prefixCls}--${siderType}`]"
       :width="`${menusWidth}px`"
     >
-      <AppLogo v-if="showLogo" :showLogoTitle="logoTitle" :theme="theme" />
+      <AppLogo v-if="showLogo && !getIsMobile" :showLogoTitle="logoTitle" :theme="theme" />
       <el-scrollbar
         wrap-class="scrollbar-wrapper"
-        :style="{ height: showLogo ? 'calc(100% - 50px)' : '100%' }"
+        :style="{ height: getIsMobile ? '100%' : showLogo ? 'calc(100% - 50px)' : '100%' }"
       >
         <el-menu
           :mode="navMode"
@@ -37,13 +37,14 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, computed, unref } from 'vue';
+  import { defineComponent, PropType, computed, unref, reactive, toRefs } from 'vue';
   import { useRouter } from 'vue-router';
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  import { useGo } from '/@/hooks/web/usePage' 
+  import { useAppInject } from '/@/hooks/web/useAppInject';
+  import { useGo } from '/@/hooks/web/usePage';
   import { AppLogo } from '/@/components/Applications';
   import MenuItems from './menus.vue';
 
@@ -55,10 +56,10 @@
         type: String as PropType<string>,
         default: 'vertical',
       },
-      siderType:{
+      siderType: {
         type: String as PropType<string>,
         default: 'sidebar',
-      }
+      },
     },
     setup(props) {
       /* const $routes = useRouter(); */
@@ -71,6 +72,7 @@
         getMenuTheme,
         getMenuType,
       } = useMenuSetting();
+      const { getIsMobile } = useAppInject();
       const { currentRoute, push } = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const menusWidth = computed(() => {
@@ -87,6 +89,7 @@
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
       const theme = computed(() => unref(getMenuTheme));
+
       /*  onMounted(() => {
         setTimeout(() => {
           console.log($routes, '3');
@@ -99,6 +102,7 @@
 
       return {
         isCollapse,
+        getIsMobile,
         logoTitle,
         menusWidth,
         showLogo,
@@ -158,10 +162,20 @@
       &--dark {
         background: var(--sider-dark-bg-color);
       }
-      &--top-menu{
+      &--top-menu {
         background: #ffffff;
         border-bottom: 0;
       }
+    }
+  }
+</style>
+<style lang="scss">
+  .mobile-menu-drawer {
+    .el-drawer__header {
+      display: none !important;
+      width: 0;
+      height: 0;
+      padding: 0;
     }
   }
 </style>

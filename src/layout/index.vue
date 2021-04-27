@@ -2,7 +2,7 @@
   <!-- 默认排版 -->
   <el-container v-if="siderType=='sidebar'" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
     <LayoutFeatures />
-    <LayoutSider />
+    <Sider v-if="getShowMenu || getIsMobile" />
     <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
       <LayoutHeader fixed />
       <LayoutTags />
@@ -15,8 +15,8 @@
     <LayoutFeatures />
     <LayoutHeader fixed :siderType="siderType" />
     <el-container>
-      <LayoutSider />
-      <el-container direction="vertical">
+      <Sider />
+      <el-container direction="vertical" style="border-left: 1px solid #eeeeee">
         <LayoutTags />
         <LayoutContent />
         <LayoutFooter />
@@ -41,6 +41,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { generatorDynamicRouter } from '/@/router/asyncRouter'
+  import { useAppInject } from '/@/hooks/web/useAppInject';
   import { getMenusDate } from '/@/api/app'
   /* import router from '/@/router'; */
   export default defineComponent({
@@ -48,14 +49,15 @@
     components: {
       LayoutFeatures: createAsyncComponent(() => import('/@/layout/components/feature/index.vue')),
       LayoutHeader: createAsyncComponent(() => import('/@/layout/components/header/index.vue')),
-      LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
+      Sider: createAsyncComponent(() => import('/@/layout/components/aside/sider.vue')),
       LayoutTags: createAsyncComponent(() => import('/@/layout/components/tags/index.vue')),
       LayoutContent: createAsyncComponent(() => import('/@/layout/components/content/index.vue')),
       LayoutFooter: createAsyncComponent(() => import('/@/layout/components/footer/index.vue')),
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');
-      const { getMenuType } = useMenuSetting();
+      const { getShowMenu, getMenuType } = useMenuSetting();
+      const { getIsMobile } = useAppInject();
       const siderType = computed(() => unref(getMenuType));
       /* debugger; */
       generatorDynamicRouter();
@@ -68,7 +70,9 @@
           }).then(err=>{}) */
       return {
         prefixCls,
+        getShowMenu,
         siderType,
+        getIsMobile,
       };
     },
   });

@@ -72,9 +72,9 @@
       const selectedTag = ref<any>({});
       const tagRefs = ref<any[]>([])
 
-    function setTagRef(el: any): void {
-      tagRefs.value.push(el)
-    }
+      function setTagRef(el: any): void {
+        tagRefs.value.push(el)
+      }
       /* console.log(router,route) */
       const { prefixCls } = useDesign('layout-tags');
       const state = reactive({
@@ -122,7 +122,7 @@
       function setScorll(){
         const { scrollContainer } = scrollPane.value;
         const { wrap } = scrollContainer;
-        debugger;
+        /* debugger; */
         state.showScroll = wrap.scrollWidth > wrap.clientWidth;
       }
       /**
@@ -134,7 +134,7 @@
         const tags = unref(tagRefs);
         nextTick(() => {
           for (const tag of tags) {
-            debugger;
+          /*   debugger; */
             if (tag && tag.to.path === currentRoute.value.path) {
               (unref(scrollPane) as any).moveToTarget(tag);
               // when query is different then update

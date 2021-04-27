@@ -16,6 +16,15 @@ const getOpenKeepAlive = computed(() => unref(getRootSetting).openKeepAlive);
 const getCanEmbedIFramePage = computed(() => unref(getRootSetting).canEmbedIFramePage);
 const getThemeColor = computed(() => unref(getRootSetting).themeColor);
 const getGrayMode = computed(() => unref(getRootSetting).grayMode);
+const getColorWeak = computed(() => unref(getRootSetting).colorWeak);
+const getShowFooter = computed(() => unref(getRootSetting).showfooter);
+const getMobileTriggrState = computed(() => unref(getRootSetting).mobileTrigger);
+
+function toggleMobileTriggerState(value: boolean) {
+  appStore.COMMITPROJECTCONFIGSTATE({
+    mobileTrigger: value,
+   });
+}
 
 export function useRootSetting() {
   return {
@@ -30,5 +39,9 @@ export function useRootSetting() {
     getShowBreadCrumbIcon,
     getThemeColor,
     getGrayMode,
+    getColorWeak,
+    getShowFooter,
+    getMobileTriggrState,
+    toggleMobileTriggerState,
   }
 }

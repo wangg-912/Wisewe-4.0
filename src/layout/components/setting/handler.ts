@@ -8,6 +8,7 @@ import { SettingButtonPositionEnum } from '/@/enums/appEnum';
 import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
 import { updateTheme } from '/@/theme/updateTheme'
 import { updateGrayMode } from '/@/theme/updateGrayMode'
+import { updateColorWeak } from '/@/theme/updateColorWeak'
 /**
  * @description 配置类基础事件处理器
  * @param {HandlerEnum} event 事件枚举
@@ -73,6 +74,9 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.GRAY_MODE:
       updateGrayMode(value);
       return { grayMode: value };
+    case HandlerEnum.COLOR_WEAK:
+      updateColorWeak(value);
+      return { colorWeak: value };
     default:
       return {};
   }

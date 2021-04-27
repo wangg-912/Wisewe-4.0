@@ -1,7 +1,15 @@
 <template>
-  <div :class="[`${prefixCls}`, `${prefixCls}--${theme}`,`${prefixCls}--${siderType}`]">
-    <el-image style="width: 32px; height: 32px" src="/src/assets/images/logo/logo.png" fit="contain" />
-    <div v-if="showLogoTitle" class="titlt" :class="[`${prefixCls}--${theme}-titlt`]">{{ title }}</div>
+  <div
+    :class="[`${prefixCls}`, `${prefixCls}--${theme}`, `${prefixCls}--${siderType}`, `${isMobile}`]"
+  >
+    <el-image
+      style="width: 32px; height: 32px"
+      src="/src/assets/images/logo/logo.png"
+      fit="contain"
+    />
+    <div v-if="showLogoTitle" class="titlt" :class="[`${prefixCls}--${theme}-titlt`]">{{
+      title
+    }}</div>
   </div>
 </template>
 <script lang="ts">
@@ -18,9 +26,13 @@
         default: true,
       },
       siderType: {
-        type: String as PropType<boolean>,
+        type: String as PropType<string>,
         default: 'sidebar',
-      }
+      },
+      isMobile: {
+        type: String as PropType<string>,
+        default: '',
+      },
     },
     setup() {
       const { prefixCls } = useDesign('app-logo');
@@ -46,23 +58,29 @@
       font-size: 16px;
       font-weight: 700;
       color: $--color-white;
-      width:160px;
+      width: 160px;
     }
-    &--light{
-      &-titlt{
-        color: $--color-drak!important;
+    &--light {
+      &-titlt {
+        color: $--color-drak !important;
       }
     }
-    &--dark{
-      &-title{
-        color: $--color-white!important;
+    &--dark {
+      &-title {
+        color: $--color-white !important;
       }
     }
-    &--mix{
+    &--mix {
       width: 240px;
     }
-    &--mix,&--top-menu{
+    &--mix,
+    &--top-menu {
       padding-left: 8px;
+    }
+    &.mobile{
+      height: 32px;
+      padding-left: 8px;
+      border: 0;
     }
   }
 </style>

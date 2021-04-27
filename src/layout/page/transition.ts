@@ -11,7 +11,7 @@ export function getTransitionName({
   openCache,
   cacheTabs,
   enableTransition,
-  def,
+  def = 'el-fade-in-linear',
 }: Pick<DefaultContext, 'route'> & {
   enableTransition: boolean;
   openCache: boolean;
@@ -19,11 +19,13 @@ export function getTransitionName({
   cacheTabs: string[];
 }) {
   const isInCache = cacheTabs.includes(route.name as string);
-  const transitionName = 'fade-slide';
+  const transitionName = 'el-fade-in-linear';
+  /* debugger; */
   let name: string | null = transitionName;
 
   if (openCache) {
     name = isInCache && route.meta.loaded && enableTransition ? transitionName : null;
   }
+  
   return name || route.meta.transitionName || def;
 }

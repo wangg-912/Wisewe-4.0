@@ -2,15 +2,20 @@
   <el-header v-if="getShowHeader" :class="getHeaderClass">
     <div :class="`${prefixCls}-left`">
       <AppLogo
-        v-if="showHeadLogo"
+        v-if="showHeadLogo || getIsMobile"
         :class="[`${prefixCls}-logo`, `${prefixCls}--${headerTheme}`]"
         :theme="headerTheme"
         :siderType="siderType"
+        :showLogoTitle="!getIsMobile"
+        :isMobile="getIsMobile ? 'mobile' : ''"
       />
-      <!-- <LayoutTypePicker /> -->
-      <div :class="`${prefixCls}-left--bread`" v-if="siderType !== `top-menu`">
+      <div :class="`${prefixCls}-left--bread`" v-if="siderType !== `top-menu` && !getIsMobile">
         <LayoutTrigger :theme="headerTheme" />
         <BreadCrumb v-if="getShowBread" :theme="headerTheme" />
+      </div>
+      <!-- mobile模式专用 -->
+      <div v-if="getIsMobile" style="padding: 0 8px">
+        <i class="el-icon-s-fold" style="font-size: 16px" @click="tgMobileTrigger"></i>
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
@@ -21,7 +26,7 @@
       />
     </div>
     <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
-      <div :class="`${prefixCls}-right--item`">
+      <div :class="`${prefixCls}-right--item`" v-if="!getIsMobile">
         <i class="el-icon-search" size="18"></i>
       </div>
       <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
@@ -29,7 +34,7 @@
           <i class="el-icon-bell" size="18"></i>
         </el-badge>
       </div>
-      <div v-if="getShowFullScreen" :class="`${prefixCls}-right--item`">
+      <div v-if="getShowFullScreen && !getIsMobile" :class="`${prefixCls}-right--item`">
         <Screenfull />
       </div>
       <div :class="`${prefixCls}-right--item`">
@@ -50,7 +55,10 @@
           </template>
         </el-dropdown>
       </div>
-      <SettingDrawer v-if="getShowSettingButton" :class="`${prefixCls}-right--item`" />
+      <SettingDrawer
+        v-if="getShowSettingButton && !getIsMobile"
+        :class="`${prefixCls}-right--item`"
+      />
     </div>
   </el-header>
 </template>
@@ -66,6 +74,7 @@
   import BreadCrumb from './components/BreadCrumb.vue';
   import LayoutTrigger from './components/Trigger.vue';
   import Screenfull from './components/Screenfull.vue';
+  import { useAppInject } from '/@/hooks/web/useAppInject';
   export default defineComponent({
     name: 'LayoutHeader',
     props: {
@@ -89,7 +98,12 @@
       LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
     },
     setup(props) {
-      const { getShowSetting, getSettingPosition } = useRootSetting();
+      const {
+        getShowSetting,
+        getSettingPosition,
+        getMobileTriggrState,
+        toggleMobileTriggerState,
+      } = useRootSetting();
       const { prefixCls } = useDesign('layout-header');
       const {
         getHeaderTheme,
@@ -100,6 +114,7 @@
         getShowHeader,
       } = useHeaderSetting();
       const showHeadLogo = computed(() => unref(getShowHeaderLogo));
+      const { getIsMobile } = useAppInject();
       const getHeaderClass = computed(() => {
         const theme = unref(getHeaderTheme);
         return [
@@ -123,6 +138,10 @@
         return settingButtonPosition === SettingButtonPositionEnum.HEADER;
       });
 
+      function tgMobileTrigger() {
+        toggleMobileTriggerState(!getMobileTriggrState.value);
+      }
+
       return {
         prefixCls,
         getHeaderClass,
@@ -133,6 +152,9 @@
         getShowFullScreen,
         getShowHeader,
         getShowSettingButton,
+        getIsMobile,
+        getMobileTriggrState,
+        tgMobileTrigger,
       };
     },
   });

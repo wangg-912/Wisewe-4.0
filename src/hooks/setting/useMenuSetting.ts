@@ -64,6 +64,7 @@ export function useMenuSetting() {
   return {
     setMenuSetting,
     toggleCollapsed,
+    getShowMenu,
     getMenuBgColor,
     getMenuFixed,
     getCollapsed,

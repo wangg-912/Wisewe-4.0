@@ -17,15 +17,13 @@ class App extends VuexModule {
   // 项目配置
   private projectConfigState: ProjectConfig | null;
 
-
-
   get getCount() {
     return this.count;
   }
   get getStatus() {
     return this.status;
   }
-  
+    
   /**
    * @description 获取页面加载状态
    */
