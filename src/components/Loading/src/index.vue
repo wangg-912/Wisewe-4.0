@@ -1,15 +1,24 @@
 <template>
-  <section class="full-loading" :class="{ absolute }" v-if="loading" :style="getStyle" :lock="lock" :text="text" :customClass="customClass" :spinner="spinner">
+  <section
+    class="full-loading"
+    :class="{ absolute }"
+    v-if="loading"
+    :style="getStyle"
+    :lock="lock"
+    :text="text"
+    :customClass="customClass"
+    :spinner="spinner"
+  >
     <div class="el-loading-spinner">
       <svg class="circular" viewBox="25 25 50 50">
-        <circle class="path" cx="50" cy="50" r="20" fill="none"></circle>
-      </svg><!---->
+        <circle class="path" cx="50" cy="50" r="20" fill="none" />
+      </svg>
     </div>
   </section>
 </template>
 <script lang="ts">
   import { defineComponent, computed, CSSProperties, PropType } from 'vue';
-  import { ThemeEnum } from '/@/enums/appEnum'
+  import { ThemeEnum } from '/@/enums/appEnum';
   export default defineComponent({
     name: 'Loading',
     props: {
