@@ -6,13 +6,13 @@ import {
   RouterTransitionEnum,
   SettingButtonPositionEnum,
 } from '/@/enums/appEnum'; // app 枚举
-import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '/@/enums/menuEnum';
+import { MenuTypeEnum, MenuModeEnum, TriggerEnum } from '/@/enums/menuEnum';
 const setting: ProjectConfig = {
   //是否显示配置按钮
   showSetting: true,
   //配置按钮显示位置
   settingButtonPosition: SettingButtonPositionEnum.HEADER,
-  //
+  //应用主题颜色
   themeColor: '#409eff',
   // 网站为灰色模式
   grayMode: false,
@@ -24,6 +24,8 @@ const setting: ProjectConfig = {
   contentMode: ContentEnum.FULL,
   // 是否显示标签栏
   showLogo: true,
+  // 手机模式菜单控制器
+  mobileTrigger: false,
   // 头部配置
   headerSetting: {
     // 头部背景颜色
@@ -40,10 +42,12 @@ const setting: ProjectConfig = {
     showNotice: true,
     // 显示菜单搜索
     showSearch: true,
+    // 显示底部版权
     showfooter: false,
   },
   // 菜单配置
   menuSetting: {
+    show: true,
     // 侧边栏菜单背景颜色
     bgColor: '#001529',
     // 是否固定左侧菜单
@@ -73,6 +77,17 @@ const setting: ProjectConfig = {
     // 是否显示快捷功能
     showQuick: true,
   },
+  // 动画配置
+  transitionSetting: {
+    // 开启动画
+    enable: true,
+    // 基础动画
+    basicTransition: RouterTransitionEnum.FADE,
+    // 开启页面加载模式
+    openPageLoading: false,
+    // 开启顶部进度
+    openNProgress: true,
+  },
   // 是否启用KeepAlive缓存最好在开发过程中关闭，否则每次都需要清除缓存
   openKeepAlive: true,
   // 是否显示面包屑
@@ -81,7 +96,6 @@ const setting: ProjectConfig = {
   showBreadCrumbIcon: false,
   // 是否可以嵌入iframe页面
   canEmbedIFramePage: true,
-  mobileTrigger: false,
 };
 
 export default setting;

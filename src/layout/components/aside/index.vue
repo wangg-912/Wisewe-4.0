@@ -13,7 +13,7 @@
           :mode="navMode"
           :collapse="isCollapse"
           :uniqueOpened="true"
-          default-active="1-1"
+          :default-openeds="['/DangWuXiTong']"
           :class="[
             `${prefixCls}-aside`,
             `${prefixCls}-aside--${theme}`,

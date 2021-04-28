@@ -70,7 +70,7 @@ class Tag extends VuexModule {
   }
   /**
    * @description 删除Tag标签
-   * @param view 
+   * @param view
    */
   @Mutation
   private DELTAGVIEW(view: RouteLocationNormalized): void {
@@ -120,7 +120,6 @@ class Tag extends VuexModule {
     cacheMap.set(PAGE_LAYOUT_KEY, Array.from(pageCacheSet));
     this.cachedMapState = cacheMap;
   }
-  
   @Mutation
   COMMITTAGROUTESSTATE(route: RouteLocationNormalized): void {
     const { path, fullPath, params, query } = route;
@@ -159,7 +158,7 @@ class Tag extends VuexModule {
   }
   /**
    * @description 删除其他标签
-   * @param tag 
+   * @param tag
    */
   @Mutation
   DELETEOTHERTAGS(tag: RouteLocationNormalized) {
@@ -178,8 +177,6 @@ class Tag extends VuexModule {
       }
     }
   }
-
-
   /**
    * @description 新增标签动作
    * @param {RouteLocationNormalized} route

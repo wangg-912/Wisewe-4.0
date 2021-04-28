@@ -45,11 +45,3 @@ export function isProdMode(): boolean {
   return import.meta.env.PROD;
 }
 
-/**
- * @description: Whether to open mock
- * @returns:
- * @example:
- */
-export function isUseMock(): boolean {
-  return import.meta.env.VITE_USE_MOCK === 'true';
-}

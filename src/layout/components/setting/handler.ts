@@ -9,6 +9,7 @@ import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackgr
 import { updateTheme } from '/@/theme/updateTheme'
 import { updateGrayMode } from '/@/theme/updateGrayMode'
 import { updateColorWeak } from '/@/theme/updateColorWeak'
+import { useTagSetting } from '/@/hooks/setting/useTagSetting'
 /**
  * @description 配置类基础事件处理器
  * @param {HandlerEnum} event 事件枚举
@@ -23,6 +24,8 @@ export function baseHandler(event: HandlerEnum, value: any) {
  */
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {
   const { getThemeColor } = useRootSetting();
+  const { setMenuSetting } = useTagSetting();
+  debugger;
   switch (event) {
     /* 更换布局结构 */
     case HandlerEnum.CHANGE_LAYOUT:
@@ -79,7 +82,15 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       return { colorWeak: value };
     case HandlerEnum.SHOW_FOOTER:
       return { showfooter: value };
-
+    case HandlerEnum.TABS_SHOW:
+      setMenuSetting({ tagsSetting: { show: value } });
+      return { tagsSetting: { show: value } };
+    case HandlerEnum.TABS_SHOW_CONTEXTMENU:
+      setMenuSetting({ tagsSetting: { showContextmenu: value } });
+      return { tagsSetting: { showContextmenu: value } };
+    case HandlerEnum.TABS_SHOW_QUICK:
+      setMenuSetting({ tagsSetting: { showQuick: value } });
+      return { tagsSetting: { showQuick: value } };
     default:
       return {};
   }

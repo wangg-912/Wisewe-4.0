@@ -5,7 +5,7 @@
     <Sider v-if="getShowMenu || getIsMobile" />
     <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
       <LayoutHeader fixed />
-      <LayoutTags />
+      <LayoutTags v-if="getTagsShow" />
       <LayoutContent />
       <LayoutFooter />
     </el-container>
@@ -17,7 +17,7 @@
     <el-container>
       <Sider />
       <el-container direction="vertical" style="border-left: 1px solid #eeeeee">
-        <LayoutTags />
+        <LayoutTags v-if="getTagsShow" />
         <LayoutContent />
         <LayoutFooter />
       </el-container>
@@ -28,7 +28,7 @@
     <LayoutFeatures />
     <LayoutHeader fixed :siderType="siderType" />
     <el-container direction="vertical">
-      <LayoutTags />
+      <LayoutTags v-if="getTagsShow" />
       <LayoutContent />
     </el-container>
     <LayoutFooter />
@@ -40,6 +40,7 @@
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { useTagSetting } from '/@/hooks/setting/useTagSetting';
   import { generatorDynamicRouter } from '/@/router/asyncRouter'
   import { useAppInject } from '/@/hooks/web/useAppInject';
   import { getMenusDate } from '/@/api/app'
@@ -58,6 +59,7 @@
       const { prefixCls } = useDesign('default-layout');
       const { getShowMenu, getMenuType } = useMenuSetting();
       const { getIsMobile } = useAppInject();
+      const { getTagsShow } = useTagSetting();
       const siderType = computed(() => unref(getMenuType));
       /* debugger; */
       generatorDynamicRouter();
@@ -73,6 +75,7 @@
         getShowMenu,
         siderType,
         getIsMobile,
+        getTagsShow,
       };
     },
   });

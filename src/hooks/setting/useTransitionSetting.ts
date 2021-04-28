@@ -14,7 +14,7 @@ const getOpenPageLoading = computed((): boolean => {
 const getBasicTransition = computed(() => unref(getTransitionSetting)?.basicTransition);
 
 function setTransitionSetting(transitionSetting: Partial<TransitionSetting>) {
-  appStore.commitProjectConfigState({ transitionSetting });
+  appStore.COMMITPROJECTCONFIGSTATE({ transitionSetting });
 }
 
 export function useTransitionSetting() {

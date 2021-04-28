@@ -4,7 +4,7 @@
       <div :class="`${prefixCls}-wrapper-prev`" v-if="showScroll" @click="move(-200)">
         <i class="el-icon-arrow-left"></i>
       </div>
-      <scroll-pane ref="scrollPane" class="tags-view-wrapper" :class="`${prefixCls}-wrapper-scroll`">
+      <scroll-pane ref="scrollPane" :class="`${prefixCls}-wrapper-scroll`">
         <div class="scroll-container">
           <router-link
             class="tag-item"
@@ -16,14 +16,24 @@
             @contextmenu.prevent="openMenu(tag, $event)"
           >
             {{ tag.meta.title }}
-            <i v-if="!(tag && tag.meta && tag.meta.affix)" class="el-icon-close icon-close" @click.prevent.stop="closeTag(tag)" />
+            <i
+              v-if="!(tag && tag.meta && tag.meta.affix)"
+              class="el-icon-close icon-close"
+              @click.prevent.stop="closeTag(tag)"
+            ></i>
           </router-link>
         </div>
       </scroll-pane>
       <div :class="`${prefixCls}-wrapper-next`" v-if="showScroll" @click="move(200)">
         <i class="el-icon-arrow-right"></i>
       </div>
-      <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
+      <QuickPicker v-if="getShowQuick"  @move="moveToCurrentTag"/>
+      <ul
+        v-if="getShowContextmenu"
+        v-show="visible"
+        :style="{ left: left + 'px', top: top + 'px' }"
+        class="contextmenu"
+      >
         <li @click="refreshTag(selectedTag)">
           <i class="el-icon-refresh-right"></i>&nbsp;&nbsp;刷新
           <el-divider class="line" />
@@ -36,7 +46,7 @@
           <i class="el-icon-circle-close"></i>&nbsp;&nbsp;关闭其他
           <el-divider class="line" />
         </li>
-        <li @click="closeAllTags"><i class="el-icon-close"></i>&nbsp;&nbsp;关闭全部</li>
+        <li @click="closeAllTags"><i class="el-icon-error"></i>&nbsp;&nbsp;关闭全部</li>
       </ul>
     </div>
   </div>
@@ -53,15 +63,17 @@
     toRefs,
     nextTick,
   } from 'vue';
-  import ScrollPane from './ScrollPane.vue'
+  import ScrollPane from './ScrollPane.vue';
   import { RouteLocationNormalized } from 'vue-router';
   import { useRouter } from 'vue-router';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useTagSetting } from '/@/hooks/setting/useTagSetting';
   import { tagStore } from '/@/store/modules/tag';
   import { initAffixTags } from './useTag';
+  import QuickPicker from './components/QuickPicker.vue';
   export default defineComponent({
     name: 'LayoutTags',
-    components: { ScrollPane },
+    components: { ScrollPane, QuickPicker },
     setup() {
       const { currentRoute, push, replace } = useRouter();
       const wrapper = ref<HTMLElement | null>(null);
@@ -70,16 +82,17 @@
       const top = ref<number>(0);
       const left = ref<number>(0);
       const selectedTag = ref<any>({});
-      const tagRefs = ref<any[]>([])
+      const tagRefs = ref<any[]>([]);
 
       function setTagRef(el: any): void {
-        tagRefs.value.push(el)
+        tagRefs.value.push(el);
       }
       /* console.log(router,route) */
       const { prefixCls } = useDesign('layout-tags');
+      const { getShowContextmenu, getShowQuick } = useTagSetting();
       const state = reactive({
         showScroll: false,
-      })
+      });
       initAffixTags();
       /**
        * @description 获取tag标签
@@ -94,7 +107,7 @@
        * @description 点击左右滑动
        */
       function move(to: number) {
-        (unref(scrollPane) as any).moveTo(to)
+        (unref(scrollPane) as any).moveTo(to);
       }
       /**
        * @description 判断是否激活
@@ -105,7 +118,7 @@
       /**
        * @description 点击每个标签
        */
-       function tagClickHandler(tag) {
+      function tagClickHandler(tag) {
         /* console.log(tag.path); */
         const { path } = tag;
         push({ path: path }).catch((err) => {
@@ -119,22 +132,21 @@
       /**
        * @description 设置滚动条点击按钮
        */
-      function setScorll(){
+      function setScorll() {
         const { scrollContainer } = scrollPane.value;
         const { wrap } = scrollContainer;
-        /* debugger; */
         state.showScroll = wrap.scrollWidth > wrap.clientWidth;
       }
       /**
        * @description 跟随滚动条视图
        */
       function moveToCurrentTag() {
-        // TODO 要手动清除tagRefs，不然会一直重复，后续看看有没有什么解决办法
+        debugger;
         tagRefs.value = [];
         const tags = unref(tagRefs);
         nextTick(() => {
           for (const tag of tags) {
-          /*   debugger; */
+            /*   debugger; */
             if (tag && tag.to.path === currentRoute.value.path) {
               (unref(scrollPane) as any).moveToTarget(tag);
               // when query is different then update
@@ -149,10 +161,9 @@
       /**
        * @description 添加Tag标签
        */
-      function addTags(): void | boolean {
+      function addTags() {
         const { name, meta, path } = currentRoute.value;
         if (name) {
-          /* tagStore.addTagAction(currentRoute.value); */
           tagStore.addTagAction(({
             meta: meta,
             name: meta,
@@ -165,6 +176,7 @@
        * @description 右键菜单功能
        */
       function openMenu(tag: RouteLocationNormalized, e: any) {
+        if (!getShowContextmenu) return;
         const { path } = tag;
         if (path == '/home') {
           return false;
@@ -277,8 +289,10 @@
         refreshTag,
         closeOtherTags,
         closeAllTags,
+        getShowContextmenu,
+        getShowQuick,
       };
-    }
+    },
   });
 </script>
 <style lang="scss" scoped>
@@ -309,9 +323,11 @@
       }
       &-prev {
         left: 0;
+        border-right: 1px solid #eee;
       }
       &-next {
         right: 0;
+        border-left: 1px solid #eee;
       }
       &-scroll {
         height: 30px;
@@ -341,9 +357,9 @@
               margin-right: 8px;
             }
             &.selected {
-              background-color: $--color-primary!important;
+              background-color: $--color-primary !important;
               color: #fff;
-              border-color: $--color-primary!important;
+              border-color: $--color-primary !important;
               &::before {
                 content: '';
                 background: #fff;
@@ -361,7 +377,7 @@
               border-radius: 50%;
               text-align: center;
               line-height: 14px;
-              transition: all .3s cubic-bezier(.645, .045, .355, 1);
+              transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
               transform-origin: 100% 50%;
               &:before {
                 display: inline-block;

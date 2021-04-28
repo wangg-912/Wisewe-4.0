@@ -1,6 +1,5 @@
 <template>
-  <section class="full-loading" :class="{ absolute }" v-loading="loading" :style="getStyle" :lock="lock" :text="text" :customClass="customClass" :spinner="spinner">
-    <!-- <div v-bind="$attrs"></div> -->
+  <section class="full-loading" :class="{ absolute }" v-if="loading" :style="getStyle" :lock="lock" :text="text" :customClass="customClass" :spinner="spinner">
     <div class="el-loading-spinner">
       <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none"></circle>

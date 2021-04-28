@@ -70,7 +70,7 @@ export function listToTree(data: Array<IMenubarList>, fullPath = '/'): Array<IMe
   });
   return d;
 }
-const asyncRouter: Array<IMenubarList> = [{ path: '/:pathMatch(.*)*', redirect: '/' }];
+const asyncRouter: Array<IMenubarList> = [];
 
 export const generatorDynamicRouter = (data: Array<IMenubarList>): void => {
   /* const routerList: Array<IMenubarList> = listToTree(data); */
@@ -93,13 +93,13 @@ export const generatorDynamicRouter = (data: Array<IMenubarList>): void => {
           name: 'DangZuZhiGuanLi',
           fullPath: '/DangWuXiTong/DangZuZhiGuanLi',
           path: '/DangZuZhiGuanLi',
+          component: components['PagePanel'],
           meta: {
             icon: 'iconfont icon-yewutubiaoyanbaofuwu',
             title: '党组织管理',
             noCache: false,
             hidden: false,
           },
-          component: components['PagePanel'],
           children: [
             {
               id: '107455581622632448',
@@ -324,6 +324,4 @@ export const generatorDynamicRouter = (data: Array<IMenubarList>): void => {
     router.addRoute('Layout', item as RouteRecordRaw);
   });
   routeStore.setRoutes(finallyRoutes);
-  /* console.log(JSON.stringify(finallyRoutes)); */
-  /* router.addRoutes(finallyRoutes); */
 };

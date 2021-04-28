@@ -34,6 +34,7 @@
     setup() {
       const { getMobileTriggrState, toggleMobileTriggerState } = useRootSetting();
       const { getIsMobile } = useAppInject();
+      /* debugger; */
       function handleClose(){
         toggleMobileTriggerState(!getMobileTriggrState.value);
       }
@@ -55,7 +56,8 @@
       padding: 0;
     }
     .mobile-menu-content{
-      height: inherit;
+      height: 100%;
+      overflow: hidden;
     }
   }
 </style>

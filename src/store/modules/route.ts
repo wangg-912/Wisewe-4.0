@@ -8,8 +8,6 @@ const NAME = 'route';
 class App extends VuexModule {
   //路由
   private routes: IMenubarList = [];
-
-
   get getRoutes() {
     return this.routes;
   }
@@ -20,10 +18,12 @@ class App extends VuexModule {
   }
 
   @Action
-  public async setRoutes(routes: Array<IMenubarList>): void {
-    /* debugger; */
-    this.SETROUTES(routes);
+  public async setRoutes(routes: Array<IMenubarList>): Promise<unknown> {
+    return new Promise((resolve) => {
+      this.SETROUTES(routes);
+      resolve({});
+    });
   }
 }
 
-export const routeStore = getModule<App>(App)
+export const routeStore = getModule<App>(App);

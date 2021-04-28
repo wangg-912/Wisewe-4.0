@@ -4,6 +4,7 @@ import { APP_PRESET_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_L
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+import { useTagSetting } from '/@/hooks/setting/useTagSetting';
 import { LoyoutTypePicker, AppTheme, ThemePicker, SwitchItem} from './components'
 import { baseHandler } from './handler';
 import { HandlerEnum, menuTypeList } from "./enums" 
@@ -39,6 +40,11 @@ export default defineComponent({
       getMixSideTrigger,
       getMixSideFixed,
     } = useMenuSetting();
+    const {
+      getTagsShow,
+      getShowContextmenu,
+      getShowQuick,
+    } = useTagSetting();
     /**
      * @description 渲染系统主题
      * @returns {Element} ThemePicker
@@ -100,6 +106,27 @@ export default defineComponent({
         />
       );
     }
+    function renderTagSetting(){
+      return(
+        <>
+          <SwitchItem
+            title="显示标签栏"
+            event={HandlerEnum.TABS_SHOW}
+            def={unref(getTagsShow)}
+          />
+          <SwitchItem
+            title="显示标签右键"
+            event={HandlerEnum.TABS_SHOW_CONTEXTMENU}
+            def={unref(getShowContextmenu)}
+          />
+          <SwitchItem
+            title="显示快速功能"
+            event={HandlerEnum.TABS_SHOW_QUICK}
+            def={unref(getShowQuick)}
+          />
+        </>
+      )
+    }
     /**
      * @description 渲染其他配置
      * @returns {Element} VNode SwitchItem... 
@@ -108,7 +135,7 @@ export default defineComponent({
       return(
         <>
         <SwitchItem
-            title="显示标签栏"
+            title="显示LOGO"
             event={HandlerEnum.SHOW_LOGO}
             def={unref(getShowLogo)}
             disabled={unref(getIsMixSidebar)}
@@ -170,6 +197,8 @@ export default defineComponent({
         { renderHeaderTheme() }
         <el-divider >菜单主题</el-divider>
         {renderSiderTheme()}
+        <el-divider>标签配置</el-divider>
+        {renderTagSetting()}
         <el-divider >其他配置</el-divider>
         {renderOtherSetting()}
 

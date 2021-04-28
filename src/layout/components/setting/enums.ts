@@ -48,8 +48,7 @@ export enum HandlerEnum {
   SHOW_FOOTER,
 
   /* tags */
-  TABS_SHOW_QUICK,
-  TABS_SHOW_REDO,
   TABS_SHOW,
-  TABS_SHOW_FOLD,
+  TABS_SHOW_CONTEXTMENU,
+  TABS_SHOW_QUICK,
 }

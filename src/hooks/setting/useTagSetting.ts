@@ -15,8 +15,6 @@ function setMenuSetting(tagsSetting: Partial<TagsSetting>): void {
   appStore.COMMITPROJECTCONFIGSTATE({ tagsSetting });
 }
 
-
-
 export function useTagSetting() {
   return {
     setMenuSetting,
