@@ -51,4 +51,7 @@ export enum HandlerEnum {
   TABS_SHOW,
   TABS_SHOW_CONTEXTMENU,
   TABS_SHOW_QUICK,
+  /* transition */
+  OPEN_NPROGRESS,
+  OPEN_PAGE_LOADING,
 }

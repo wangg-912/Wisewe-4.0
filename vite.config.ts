@@ -3,6 +3,8 @@ import { UserConfig } from 'vite';
 import dotenv from 'dotenv';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import html from 'vite-plugin-html';
+
 dotenv.config({ path: join(__dirname, '.env') });
 
 const alias = parseAlias({
@@ -56,7 +58,17 @@ const config: UserConfig = {
     include: ['axios', 'nprogress'],
     exclude: ['electron-is-dev'],
   },
-  plugins: [vue(), vueJsx()],
+  plugins: [
+    vue(), 
+    vueJsx(), 
+    html({
+      inject:{
+        injectData:{
+          title: `${process.env.VITE_GLOB_APP_TITLE}`,
+        }
+      }
+    })
+  ],
 }
 // https://vitejs.dev/config/
 export default config;

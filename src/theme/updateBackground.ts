@@ -40,7 +40,7 @@ const SIDER_LIGHTEN_2_BG_COLOR = '--sider-dark-lighten-2-bg-color';
  * @description 改变菜单颜色
  * @param {String} color 背景色
  */
- export function updateSidebarBgColor(color: string) {
+export function updateSidebarBgColor(color: string) {
   if (!isHexColor(color)) return;
 
   setCssVar(SIDER_DARK_BG_COLOR, color);

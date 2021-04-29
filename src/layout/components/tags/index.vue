@@ -141,7 +141,6 @@
        * @description 跟随滚动条视图
        */
       function moveToCurrentTag() {
-        debugger;
         tagRefs.value = [];
         const tags = unref(tagRefs);
         nextTick(() => {

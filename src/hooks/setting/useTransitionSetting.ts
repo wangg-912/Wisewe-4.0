@@ -20,7 +20,6 @@ function setTransitionSetting(transitionSetting: Partial<TransitionSetting>) {
 export function useTransitionSetting() {
   return {
     setTransitionSetting,
-
     getTransitionSetting,
     getEnableTransition,
     getOpenNProgress,

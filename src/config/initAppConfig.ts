@@ -34,4 +34,3 @@ export function initAppConfigStore(){
   }
   appStore.COMMITPROJECTCONFIGSTATE(projCfg);
 }
-

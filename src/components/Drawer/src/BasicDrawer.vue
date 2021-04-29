@@ -135,5 +135,8 @@
       height: calc(100% - 50px);
       padding-bottom:18px;
     }
+    .el-divider--horizontal{
+      margin:20px 0;
+    }
   }
 </style>

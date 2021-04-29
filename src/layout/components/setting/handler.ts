@@ -1,8 +1,6 @@
 import { HandlerEnum } from './enums';
-
 import { appStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/@/type/config';
-
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { SettingButtonPositionEnum } from '/@/enums/appEnum';
 import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
@@ -10,6 +8,7 @@ import { updateTheme } from '/@/theme/updateTheme'
 import { updateGrayMode } from '/@/theme/updateGrayMode'
 import { updateColorWeak } from '/@/theme/updateColorWeak'
 import { useTagSetting } from '/@/hooks/setting/useTagSetting'
+import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
 /**
  * @description 配置类基础事件处理器
  * @param {HandlerEnum} event 事件枚举
@@ -25,7 +24,7 @@ export function baseHandler(event: HandlerEnum, value: any) {
 export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConfig> {
   const { getThemeColor } = useRootSetting();
   const { setMenuSetting } = useTagSetting();
-  debugger;
+  const { setTransitionSetting } = useTransitionSetting();
   switch (event) {
     /* 更换布局结构 */
     case HandlerEnum.CHANGE_LAYOUT:
@@ -91,6 +90,12 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.TABS_SHOW_QUICK:
       setMenuSetting({ tagsSetting: { showQuick: value } });
       return { tagsSetting: { showQuick: value } };
+    case HandlerEnum.OPEN_NPROGRESS:
+      setTransitionSetting({ transitionSetting: { openNProgress: value } });
+      return { transitionSetting: { openNProgress: value } };
+    case HandlerEnum.OPEN_PAGE_LOADING:
+      setTransitionSetting({ transitionSetting: { openPageLoading: value } });
+      return { transitionSetting: { openPageLoading: value } };
     default:
       return {};
   }

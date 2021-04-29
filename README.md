@@ -28,9 +28,6 @@ Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
 # 项目目录
 
-
-
-
 ```
 evolution-v4
 ├─ .editorconfig
@@ -104,25 +101,36 @@ evolution-v4
 │  ├─ enums
 │  │  ├─ appEnum.ts
 │  │  ├─ cacheEnum.ts
-│  │  └─ menuEnum.ts
+│  │  ├─ menuEnum.ts
+│  │  └─ windowEnum.ts
 │  ├─ hooks
 │  │  ├─ core
 │  │  │  ├─ useAttrs.ts
-│  │  │  └─ useContext.ts
+│  │  │  ├─ useContext.ts
+│  │  │  ├─ useDebounce.ts
+│  │  │  └─ useThrottle.ts
+│  │  ├─ event
+│  │  │  └─ useEventListener.ts
 │  │  ├─ setting
 │  │  │  ├─ index.ts
 │  │  │  ├─ useHeaderSetting.ts
 │  │  │  ├─ useMenuSetting.ts
 │  │  │  ├─ useRootSetting.ts
+│  │  │  ├─ useTagSetting.ts
 │  │  │  └─ useTransitionSetting.ts
 │  │  └─ web
-│  │     └─ useDesign.ts
+│  │     ├─ useAppInject.ts
+│  │     ├─ useDesign.ts
+│  │     ├─ usePage.ts
+│  │     ├─ useScrollTo.ts
+│  │     └─ useWindow.ts
 │  ├─ layout
 │  │  ├─ components
 │  │  │  ├─ aside
 │  │  │  │  ├─ index.vue
 │  │  │  │  ├─ item.vue
-│  │  │  │  └─ menus.vue
+│  │  │  │  ├─ menus.vue
+│  │  │  │  └─ sider.vue
 │  │  │  ├─ content
 │  │  │  │  └─ index.vue
 │  │  │  ├─ feature
@@ -149,22 +157,32 @@ evolution-v4
 │  │  │  │  ├─ index.vue
 │  │  │  │  └─ SettingDrawer.tsx
 │  │  │  └─ tags
-│  │  │     └─ index.vue
+│  │  │     ├─ components
+│  │  │     │  └─ QuickPicker.vue
+│  │  │     ├─ index.vue
+│  │  │     ├─ ScrollPane.vue
+│  │  │     └─ useTag.ts
 │  │  ├─ iframe
 │  │  │  ├─ iframeView.vue
-│  │  │  └─ index.vue
+│  │  │  ├─ index.vue
+│  │  │  └─ useFrameKeepAlive.ts
 │  │  ├─ index.vue
 │  │  └─ page
 │  │     ├─ index.vue
 │  │     ├─ pagePanel.vue
+│  │     ├─ transition.ts
 │  │     └─ useCache.ts
 │  ├─ main.ts
 │  ├─ router
 │  │  ├─ asyncRouter.ts
-│  │  ├─ data.json
+│  │  ├─ constant.ts
 │  │  ├─ guard
 │  │  │  ├─ createPageLoadingGuard.ts
-│  │  │  └─ index.ts
+│  │  │  ├─ index.ts
+│  │  │  ├─ permissionGuard.ts
+│  │  │  └─ progressGuard.ts
+│  │  ├─ helper
+│  │  │  └─ routeHelper.ts
 │  │  ├─ index.ts
 │  │  ├─ scrollBehavior.ts
 │  │  └─ types.ts
@@ -176,7 +194,8 @@ evolution-v4
 │  │  ├─ index.ts
 │  │  └─ modules
 │  │     ├─ app.ts
-│  │     └─ route.ts
+│  │     ├─ route.ts
+│  │     └─ tag.ts
 │  ├─ style
 │  │  ├─ common.scss
 │  │  ├─ icons.scss
@@ -187,6 +206,7 @@ evolution-v4
 │  │     └─ variable.scss
 │  ├─ theme
 │  │  ├─ updateBackground.ts
+│  │  ├─ updateColorWeak.ts
 │  │  ├─ updateGrayMode.ts
 │  │  ├─ updateTheme.ts
 │  │  └─ util.ts
@@ -194,6 +214,7 @@ evolution-v4
 │  │  ├─ config.d.ts
 │  │  └─ global.d.ts
 │  ├─ utils
+│  │  ├─ animation.ts
 │  │  ├─ cache
 │  │  │  ├─ index.ts
 │  │  │  └─ storageCache.ts
@@ -208,15 +229,18 @@ evolution-v4
 │  │  ├─ helper
 │  │  │  ├─ envHelper.ts
 │  │  │  ├─ persistent.ts
-│  │  │  └─ vueHelper.ts
+│  │  │  ├─ vueHelper.ts
+│  │  │  └─ vuexHelper.ts
 │  │  ├─ log.ts
 │  │  ├─ pinyin.ts
 │  │  ├─ propTypes.ts
 │  │  ├─ request.ts
 │  │  └─ tools.ts
 │  └─ views
-│     └─ error
-│        └─ 404.vue
+│     ├─ error
+│     │  └─ 404.vue
+│     └─ system
+│        └─ redirect.vue
 ├─ stylelint.config.js
 ├─ tsconfig.json
 ├─ vite.config.ts

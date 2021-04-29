@@ -5,6 +5,7 @@ import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
 import { useTagSetting } from '/@/hooks/setting/useTagSetting';
+import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
 import { LoyoutTypePicker, AppTheme, ThemePicker, SwitchItem} from './components'
 import { baseHandler } from './handler';
 import { HandlerEnum, menuTypeList } from "./enums" 
@@ -45,6 +46,10 @@ export default defineComponent({
       getShowContextmenu,
       getShowQuick,
     } = useTagSetting();
+    const{
+      getOpenNProgress,
+      getOpenPageLoading
+    } = useTransitionSetting();
     /**
      * @description 渲染系统主题
      * @returns {Element} ThemePicker
@@ -127,6 +132,22 @@ export default defineComponent({
         </>
       )
     }
+    function renderLoadSetting(){
+      return(
+        <>
+          <SwitchItem
+            title="进度条模式"
+            event={HandlerEnum.OPEN_NPROGRESS}
+            def={unref(getOpenNProgress)}
+          />
+          <SwitchItem
+            title="页面遮罩模式"
+            event={HandlerEnum.OPEN_PAGE_LOADING}
+            def={unref(getOpenPageLoading)}
+          />
+        </>
+      )
+    }
     /**
      * @description 渲染其他配置
      * @returns {Element} VNode SwitchItem... 
@@ -199,6 +220,8 @@ export default defineComponent({
         {renderSiderTheme()}
         <el-divider>标签配置</el-divider>
         {renderTagSetting()}
+        <el-divider>加载模式配置</el-divider>
+        {renderLoadSetting()}
         <el-divider >其他配置</el-divider>
         {renderOtherSetting()}
 
