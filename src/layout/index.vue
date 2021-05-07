@@ -85,7 +85,6 @@
       });
 
       getIndexStyle().then((data) => {
-        debugger;
         originalStyle.value = getStyleTemplate(data);
       });
 
