@@ -61,3 +61,4 @@ declare type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElR
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
 
 type IsSame<A, B> = A | B extends A & B ? true : false;
+

@@ -11,7 +11,7 @@
   export default defineComponent({
     name: 'App',
     components: { AppProvider },
-    setup(){
+    setup() {
       initAppConfigStore();
     }
   });

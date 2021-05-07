@@ -36,13 +36,16 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+  import { defineComponent, computed, unref, ref, reactive, onMounted } from 'vue';
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { useTagSetting } from '/@/hooks/setting/useTagSetting';
   import { generatorDynamicRouter } from '/@/router/asyncRouter'
   import { useAppInject } from '/@/hooks/web/useAppInject';
+  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+  import { useFiles } from '/@/hooks/theme/useFiles';
+  import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
   import { getMenusDate } from '/@/api/app'
   /* import router from '/@/router'; */
   export default defineComponent({
@@ -56,13 +59,53 @@
       LayoutFooter: createAsyncComponent(() => import('/@/layout/components/footer/index.vue')),
     },
     setup() {
+      const fonts = ref(null);
+      const styleFiles = ref(null);
+      const originalStyle = ref('');
+      const { getThemeColor } = useRootSetting();
       const { prefixCls } = useDesign('default-layout');
       const { getShowMenu, getMenuType } = useMenuSetting();
       const { getIsMobile } = useAppInject();
       const { getTagsShow } = useTagSetting();
+      const { getFontFiles, getIndexStyle, getSeparatedStyles } = useFiles();
+      const fontFiles = ['element-icons.ttf', 'element-icons.woff'];
       const siderType = computed(() => unref(getMenuType));
-      /* debugger; */
+      const colors = reactive({
+        primary: '#409eff',
+      });
       generatorDynamicRouter();
+      const originalStylesheetCount = computed(() => {
+        return document.styleSheets.length || -1;
+      });
+      /**
+       * ==============初始化主题使用================== *
+       */
+      getFontFiles(fontFiles).then((data) => {
+        fonts.value = data;
+      });
+
+      getIndexStyle().then((data) => {
+        debugger;
+        originalStyle.value = getStyleTemplate(data);
+      });
+
+      getSeparatedStyles().then((data) => {
+        styleFiles.value = data.map((file) => {
+          return {
+            name: file.url,
+            data: getStyleTemplate(file.data),
+          };
+        });
+        setTheme();
+      });
+      function setTheme(){
+        colors.primary = getThemeColor.value;
+        Object.assign(colors, generateColors(getThemeColor.value));
+        writeNewStyle(originalStylesheetCount.value, originalStyle.value, colors);
+      }
+      /**
+       * ==============初始化主题完毕================== *
+       */
       /* getMenusDate().then(res=>{  
         const {success, content} = res.data; 
         if(success){

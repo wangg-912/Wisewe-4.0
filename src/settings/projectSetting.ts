@@ -26,6 +26,8 @@ const setting: ProjectConfig = {
   showLogo: true,
   // 手机模式菜单控制器
   mobileTrigger: false,
+  // 显示底部版权
+  showfooter: false,
   // 头部配置
   headerSetting: {
     // 头部背景颜色
@@ -42,8 +44,7 @@ const setting: ProjectConfig = {
     showNotice: true,
     // 显示菜单搜索
     showSearch: true,
-    // 显示底部版权
-    showfooter: false,
+    
   },
   // 菜单配置
   menuSetting: {
