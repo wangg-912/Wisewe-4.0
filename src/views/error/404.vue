@@ -1,6 +1,6 @@
 <template>
   <div class="page404-container">
-    <div class="page-http404">
+    <div class="page-http404" :class="[`${prefixCls}`, getIsMobile ? `${prefixCls}-mobile` : ``]">
       <div class="pic-404">
         <img class="pic-404__parent" src="./../../assets/images/404/404.png" alt="404" />
         <img class="pic-404__child left" src="./../../assets/images/404/404_cloud.png" alt="404" />
@@ -18,10 +18,17 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useAppInject } from '/@/hooks/web/useAppInject';
   export default defineComponent({
     name: 'Error',
     setup() {
-      return {};
+      const { prefixCls } = useDesign('error');
+      const { getIsMobile } = useAppInject();
+      return {
+        prefixCls,
+        getIsMobile,
+      };
     },
   });
 </script>
@@ -217,6 +224,17 @@
           transform: translateY(0);
           opacity: 1;
         }
+      }
+    }
+  }
+  .#{$namespace}-error{
+    &-mobile{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      .pic-404{
+        width: 100%;
       }
     }
   }
