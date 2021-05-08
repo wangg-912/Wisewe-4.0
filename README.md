@@ -4,6 +4,7 @@
 
 <h1>Wisewe-V4</h1>
 </div>
+
 # 简介
 
 本项目属于中教智汇信息技术有限公司，是公司第四代前端基础框架，基础版本为V4.0.0。是一套开箱即用的中台解决方案。
@@ -18,10 +19,23 @@
 - 路由：使用V4.x新一代路由机制(Vue-Router/@next)
 - 状态管理机制：使用V4.x新一代状态管理机制(Vuex/@next)
 
+# 文档
+  [文档地址](https://gitee.com/bensen_admin/evolution-v4/wikis/Wisewe-V4%20?sort_id=3989190)
 # 准备
+  - [node](http://nodejs.org/) and [git](https://git-scm.com/) - Project development environment
+- [Vite](https://vitejs.dev/) - Familiar with vite features
+- [Vue3](https://v3.vuejs.org/) - Familiar with Vue basic syntax
+- [TypeScript](https://www.typescriptlang.org/) - Familiar with the basic syntax of `TypeScript`
+- [Es6+](http://es6.ruanyifeng.com/) - Familiar with es6 basic syntax
+- [Vue-Router-Next](https://next.router.vuejs.org/) - Familiar with the basic use of vue-router
+- [Element-Plus](https://github.com/element-plus/element-plus) - ui basic use
+- [Vuex-Next](https://github.com/vuejs/vuex) - state management pattern + library for Vue.js
 
-
-
+# 安装使用
+- 获取项目代码
+```
+https://gitee.com/bensen_admin/evolution-v4
+```
 ## Type Support For `.vue` Imports in TS
 
 Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
