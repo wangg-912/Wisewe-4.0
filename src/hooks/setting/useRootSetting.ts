@@ -2,8 +2,7 @@ import { computed, unref } from 'vue';
 import type { ProjectConfig } from '/@/type/config';
 import { appStore } from '/@/store/modules/app';
 import { ContentEnum } from '/@/enums/appEnum';
-type RootSetting = Omit<ProjectConfig, 'headerSetting' | 'menuSetting' | 'multiTabsSetting'>;
-
+type RootSetting = Omit<ProjectConfig, 'headerSetting' | 'menuSetting' | 'tagsSetting'>;
 const getRootSetting = computed((): RootSetting => appStore.getProjectConfig);
 const getFullContent = computed(() => unref(getRootSetting).fullContent);
 const getShowLogo = computed(() => unref(getRootSetting).showLogo);
@@ -19,7 +18,6 @@ const getGrayMode = computed(() => unref(getRootSetting).grayMode);
 const getColorWeak = computed(() => unref(getRootSetting).colorWeak);
 const getShowFooter = computed(() => unref(getRootSetting).showfooter);
 const getMobileTriggrState = computed(() => unref(getRootSetting).mobileTrigger);
-
 function toggleMobileTriggerState(value: boolean) {
   appStore.COMMITPROJECTCONFIGSTATE({
     mobileTrigger: value,

@@ -44,7 +44,6 @@ const setting: ProjectConfig = {
     showNotice: true,
     // 显示菜单搜索
     showSearch: true,
-    
   },
   // 菜单配置
   menuSetting: {

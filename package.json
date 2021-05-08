@@ -1,5 +1,5 @@
 {
-  "name": "evolution-v4",
+  "name": "Wisewe-V4",
   "version": "1.0.0",
   "scripts": {
     "bootstrap": "yarn install",
@@ -14,12 +14,6 @@
     "lint:eslint": "eslint \"src/**/*.{ts,tsx,js,json,vue}\" --fix",
     "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" \"!dist/**/*\""
-  },
-  "build": {
-    "files": [
-      "!node_modules",
-      "dist/assets/**"
-    ]
   },
   "dependencies": {
     "@types/nprogress": "^0.2.0",
@@ -62,7 +56,11 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
     "typescript": "^4.1.3",
-    "vite": "^2.0.1"
+    "vite":"^2.2.4",
+    "vite-plugin-imagemin": "^0.3.0"
+  },
+  "resolutions": {
+    "bin-wrapper": "npm:bin-wrapper-china"
   },
   "license": "MIT",
   "husky": {

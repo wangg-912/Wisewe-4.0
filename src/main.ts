@@ -1,9 +1,10 @@
-import 'nprogress/nprogress.css';
-import 'element-plus/lib/theme-chalk/index.css';
+/* import 'windi.css'; */
 import { createApp } from 'vue';
 import ElementPlus from 'element-plus';
 import { setupStore } from '/@/store';
 import { setupRouter } from '/@/router';
+import 'nprogress/nprogress.css';
+import 'element-plus/lib/theme-chalk/index.css';
 import App from './App.vue';
 import { isDevMode } from '/@/utils/env';
 import 'dayjs/locale/zh-cn'

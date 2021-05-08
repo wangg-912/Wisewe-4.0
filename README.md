@@ -1,14 +1,26 @@
-# Vue 3 + Typescript + Vite
+<div align="center"> <a href="https://gitee.com/bensen_admin/evolution-v4"> <img alt="中教智汇管理系统" width="200" height="200" src="https://img.shields.io/badge/Wisewe-V4-blue"> </a> <br> <br>
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+[![license](https://img.shields.io/badge/Wisewe-V4-blue)](LICENSE)
 
-## Recommended IDE Setup
+<h1>Wisewe-V4</h1>
+</div>
+# 简介
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+本项目属于中教智汇信息技术有限公司，是公司第四代前端基础框架，基础版本为V4.0.0。是一套开箱即用的中台解决方案。
+本框架使用Vue3作为底层技术栈;借助于Vite2作为脚手架；主要开发语言使用TypeScript 4 | Javascript，遵循语法ES2015以上;基础UI框架使用Element-Plus，遵循Element+交互标准;客户端与服务器通讯是用Axios。
 
-### If Using `<script setup>`
+# 特性
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+- 最新技术栈：使用Vue3+Vite2等前端前沿技术
+- Typescript：更严谨的应用程序级Javascript的超集语言
+- 主题: 灵活自定义可配置的主题方案
+- 组件：二次封装多个常用的组件
+- 路由：使用V4.x新一代路由机制(Vue-Router/@next)
+- 状态管理机制：使用V4.x新一代状态管理机制(Vuex/@next)
+
+# 准备
+
+
 
 ## Type Support For `.vue` Imports in TS
 

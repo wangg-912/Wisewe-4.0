@@ -2,11 +2,7 @@
   <div
     :class="[`${prefixCls}`, `${prefixCls}--${theme}`, `${prefixCls}--${siderType}`, `${isMobile}`]"
   >
-    <el-image
-      style="width: 32px; height: 32px"
-      src="/src/assets/images/logo/logo.png"
-      fit="contain"
-    />
+    <img style="width: 32px; height: 32px" src="./../../../../assets/images/logo/logo.png" fit="contain" />
     <div v-if="showLogoTitle" class="titlt" :class="[`${prefixCls}--${theme}-titlt`]">{{
       title
     }}</div>
@@ -16,7 +12,7 @@
   import { defineComponent, PropType } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useGlobSetting } from '/@/hooks/setting';
-  import { propTypes } from '/@/utils/propTypes';
+  import { propTypes } from '/@/utils/propTypes'; 
   export default defineComponent({
     name: 'AppLogo',
     props: {
