@@ -5,12 +5,12 @@
 <h1>Wisewe-V4</h1>
 </div>
 
-# 简介
+## 简介
 
 本项目属于中教智汇信息技术有限公司，是公司第四代前端基础框架，基础版本为V4.0.0。是一套开箱即用的中台解决方案。
 本框架使用Vue3作为底层技术栈;借助于Vite2作为脚手架；主要开发语言使用TypeScript 4 | Javascript，遵循语法ES2015以上;基础UI框架使用Element-Plus，遵循Element+交互标准;客户端与服务器通讯是用Axios。
 
-# 特性
+## 特性
 
 - 最新技术栈：使用Vue3+Vite2等前端前沿技术
 - Typescript：更严谨的应用程序级Javascript的超集语言
@@ -19,9 +19,9 @@
 - 路由：使用V4.x新一代路由机制(Vue-Router/@next)
 - 状态管理机制：使用V4.x新一代状态管理机制(Vuex/@next)
 
-# 文档
+## 文档
   [文档地址](https://gitee.com/bensen_admin/evolution-v4/wikis/Wisewe-V4%20?sort_id=3989190)
-# 准备
+## 准备
   - [node](http://nodejs.org/) and [git](https://git-scm.com/) - 项目开发环境
   - [Vite](https://vitejs.dev/) - 下一代前端开发与构建工具
   - [Vue3](https://v3.vuejs.org/) - 新一代Vue技术栈
@@ -31,7 +31,7 @@
   - [Element-Plus](https://github.com/element-plus/element-plus) - UI框架
   - [Vuex-Next](https://github.com/vuejs/vuex) - 下一代服务于Vue3的状态管理机制
 
-# 安装使用
+## 安装使用
   - 获取项目代码
   ```
   https://gitee.com/bensen_admin/evolution-v4
@@ -67,7 +67,7 @@
   yarn lint:eslint
   ```
   
-# 浏览器支持
+## 浏览器支持
 
 本地开发推荐使用`Chrome 80+` 浏览器
 
@@ -77,7 +77,7 @@
 | :-: | :-: | :-: | :-: | :-: |
 | not support | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-# 相关仓库
+## 相关仓库
 
 如果这些插件对你有帮助，可以给一个 star 支持下
 
@@ -86,10 +86,10 @@
 - [vite-plugin-imagemin](https://github.com/anncwb/vite-plugin-imagemin) - 用于打包压缩图片资源
 - [vite-plugin-compression](https://github.com/anncwb/vite-plugin-compression) - 用于打包输出.gz|.brotil 文件
 - [vite-plugin-svg-icons](https://github.com/anncwb/vite-plugin-svg-icons) - 用于快速生成 svg 雪碧图
-# License
+## License
 
 [MIT © Wisewe-V4](./LICENSE)
-# 项目目录
+## 项目目录
 ```
 evolution-v4
 ├─ .editorconfig
