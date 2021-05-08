@@ -1,7 +1,8 @@
 <template>
-  <DrawerWraper 
-    v-if="getIsFixedSettingDrawer" 
-    :class="[`${prefixCls}`, `${prefixCls}--${settingPosition}`]" />
+  <DrawerWraper
+    v-if="getIsFixedSettingDrawer"
+    :class="[`${prefixCls}`, `${prefixCls}--${settingPosition}`]"
+  />
 </template>
 <script lang="ts">
   import { defineComponent, computed, unref, reactive, toRefs } from 'vue';

@@ -18,7 +18,7 @@
   import { propTypes } from '/@/utils/propTypes';
   export default defineComponent({
     name: 'BreadCrumb',
-    props:{
+    props: {
       theme: propTypes.oneOf(['dark', 'light']),
     },
     setup() {
@@ -47,16 +47,16 @@
       ::v-deep(.el-breadcrumb__inner.is-link) {
         color: $breadcrumb-item-normal-color;
       }
-      ::v-deep(.el-breadcrumb__inner.is-link:hover){
+      ::v-deep(.el-breadcrumb__inner.is-link:hover) {
         color: rgb(9, 96, 189);
       }
     }
-    &--dark{
+    &--dark {
       ::v-deep(.el-breadcrumb__inner),
       ::v-deep(.el-breadcrumb__inner.is-link) {
         color: rgba(255, 255, 255, 0.6);
       }
-      ::v-deep(.el-breadcrumb__inner.is-link:hover){
+      ::v-deep(.el-breadcrumb__inner.is-link:hover) {
         color: rgba(255, 255, 255, 0.8);
       }
     }

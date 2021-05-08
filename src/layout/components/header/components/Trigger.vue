@@ -50,15 +50,15 @@
     &--dark {
       .el-icon-s-fold {
         color: $trigger-light-bg-color;
-        &:hover{
+        &:hover {
           color: $trigger-light-hover-bg-color;
         }
       }
     }
-    &--light{
+    &--light {
       .el-icon-s-fold {
         color: $trigger-dark-bg-color;
-        &:hover{
+        &:hover {
           color: $trigger-dark-hover-bg-color;
         }
       }

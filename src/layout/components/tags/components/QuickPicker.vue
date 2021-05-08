@@ -106,7 +106,7 @@
       margin-left: 0;
       cursor: pointer;
     }
-    &--item{
+    &--item {
       font-size: 12px;
     }
   }

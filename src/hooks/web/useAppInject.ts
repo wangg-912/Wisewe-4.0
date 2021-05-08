@@ -7,4 +7,3 @@ export function useAppInject() {
     getIsMobile: computed(() => unref(values.isMobile)),
   };
 }
-

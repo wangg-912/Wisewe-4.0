@@ -1,7 +1,7 @@
 // 参考 https://github.com/vuejs/vue-router-next/blob/master/playground/scrollWaiter.ts
 import type { RouteLocationNormalized } from 'vue-router';
 /**
-  *处理路由导航上的滚动行为
+ *处理路由导航上的滚动行为
  *
  *@param {object}路由下一页的对象
  *@param {object}来自上一页的Route对象
@@ -11,10 +11,10 @@ import type { RouteLocationNormalized } from 'vue-router';
 // @ts-ignore
 export async function scrollBehavior(to, from, savedPosition) {
   //等待scrollWaiter.wait（）;
-  //使用预定义的滚动行为（如果已定义），默认为无滚动行为 
+  //使用预定义的滚动行为（如果已定义），默认为无滚动行为
   const behavior = 'smooth';
   //返回`savedPosition`（如果可用）将导致类似本机的结果
-  //使用后退/前进按钮浏览时的行为 
+  //使用后退/前进按钮浏览时的行为
   if (savedPosition) {
     return { ...savedPosition, behavior };
   }
@@ -24,7 +24,7 @@ export async function scrollBehavior(to, from, savedPosition) {
     return { el: decodeURI(to.hash), behavior };
   }
 
-  //检查是否有匹配的路由配置包含阻止滚动到顶部的元数据 
+  //检查是否有匹配的路由配置包含阻止滚动到顶部的元数据
   if (to.matched.some((m: RouteLocationNormalized) => m.meta.scrollToTop === false)) {
     //保持滚动不变
     return false;

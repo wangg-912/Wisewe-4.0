@@ -5,8 +5,8 @@ const elementPlusUrl = `//unpkg.zhimg.com/element-plus@${version}`;
 export const useFiles = () => {
   /**
    * @description 同步获取字体
-   * @param fontFiles 
-   * @returns 
+   * @param fontFiles
+   * @returns
    */
   const getFontFiles = async (fontFiles: any) => {
     const fonts = await Promise.all(
@@ -21,7 +21,7 @@ export const useFiles = () => {
    * @returns 剔除font的样式
    */
   const getIndexStyle = async () => {
-    let { data } = await useFetch(`${elementPlusUrl}/lib/theme-chalk/index.css`);
+    const { data } = await useFetch(`${elementPlusUrl}/lib/theme-chalk/index.css`);
     return data.replace(/@font-face{[^}]+}/, '');
   };
   /**

@@ -3,11 +3,12 @@ import { RouteLocationNormalized } from 'vue-router';
 import router from '/@/router';
 import { tagStore } from '/@/store/modules/tag';
 
-export function initAffixTags(){
+export function initAffixTags() {
   const affixList = ref<RouteLocationNormalized[]>([]);
   function filterAffixTags(routes: RouteLocationNormalized[]) {
     const tags: RouteLocationNormalized[] = [];
-    routes && routes.forEach((route) => {
+    routes &&
+      routes.forEach((route) => {
         if (route.meta && route.meta.affix) {
           tags.push(toRaw(route));
         }
@@ -17,7 +18,7 @@ export function initAffixTags(){
   /**
    * @description: 设置固定标签
    */
-   function addAffixTags(): void {
+  function addAffixTags(): void {
     const affixTags = filterAffixTags((router.getRoutes() as unknown) as RouteLocationNormalized[]);
     affixList.value = affixTags;
     for (const tag of affixTags) {

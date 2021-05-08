@@ -27,7 +27,7 @@
       <div :class="`${prefixCls}-wrapper-next`" v-if="showScroll" @click="move(200)">
         <i class="el-icon-arrow-right"></i>
       </div>
-      <QuickPicker v-if="getShowQuick"  @move="moveToCurrentTag"/>
+      <QuickPicker v-if="getShowQuick" @move="moveToCurrentTag" />
       <ul
         v-if="getShowContextmenu"
         v-show="visible"

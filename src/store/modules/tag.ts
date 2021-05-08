@@ -103,7 +103,7 @@ class Tag extends VuexModule {
         if (len < 2) return;
         for (let i = 0; i < matched.length; i++) {
           const key = matched[i].name as string;
-          (i < 2) && pageCacheSet.add(key);
+          i < 2 && pageCacheSet.add(key);
           if (i < len - 1) {
             const { meta, name } = matched[i + 1];
             if (meta && (meta.affix || needCache)) {
@@ -224,8 +224,8 @@ class Tag extends VuexModule {
   }
   /**
    * @description 删除其他标签
-   * @param tag 
-   * @returns 
+   * @param tag
+   * @returns
    */
   @Action
   deleteOtherTags(tag: RouteLocationNormalized): Promise<unknown> {
@@ -239,7 +239,7 @@ class Tag extends VuexModule {
     return new Promise((resolve) => {
       this.DELETEALLTAGS();
       resolve([...this.tagsState]);
-    })
+    });
   }
 
   @Action

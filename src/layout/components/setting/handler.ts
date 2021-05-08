@@ -3,11 +3,11 @@ import { appStore } from '/@/store/modules/app';
 import { ProjectConfig } from '/@/type/config';
 import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 import { SettingButtonPositionEnum } from '/@/enums/appEnum';
-import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground'
-import { updateTheme } from '/@/theme/updateTheme'
-import { updateGrayMode } from '/@/theme/updateGrayMode'
-import { updateColorWeak } from '/@/theme/updateColorWeak'
-import { useTagSetting } from '/@/hooks/setting/useTagSetting'
+import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground';
+import { updateTheme } from '/@/theme/updateTheme';
+import { updateGrayMode } from '/@/theme/updateGrayMode';
+import { updateColorWeak } from '/@/theme/updateColorWeak';
+import { useTagSetting } from '/@/hooks/setting/useTagSetting';
 import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
 /**
  * @description 配置类基础事件处理器

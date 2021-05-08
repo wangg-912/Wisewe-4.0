@@ -110,8 +110,8 @@
 </style>
 <style lang="scss">
   .scroll-container {
-    .el-scrollbar__bar.is-horizontal{
-      height: 0!important;
+    .el-scrollbar__bar.is-horizontal {
+      height: 0 !important;
     }
   }
 </style>

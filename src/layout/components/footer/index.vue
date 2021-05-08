@@ -1,5 +1,5 @@
 <template>
-  <el-footer v-if="getShowFooter" :class="prefixCls" >
+  <el-footer v-if="getShowFooter" :class="prefixCls">
     版权所有@2019-2021 成都中教智汇信息技术有限公司.保留一切权利. &copy;
     <a href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备19032456号-2</a>
   </el-footer>

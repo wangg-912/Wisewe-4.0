@@ -4,8 +4,6 @@ import { isString } from '/@/utils/tools';
 import router from '/@/router';
 import { PageEnum } from '/@/enums/appEnum';
 
-
-
 export type RouteLocationRawEx = Omit<RouteLocationRaw, 'path'> & { path: PageEnum };
 
 /**

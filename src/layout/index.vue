@@ -1,6 +1,9 @@
 <template>
   <!-- 默认排版 -->
-  <el-container v-if="siderType=='sidebar'" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
+  <el-container
+    v-if="siderType == 'sidebar'"
+    :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]"
+  >
     <LayoutFeatures />
     <Sider v-if="getShowMenu || getIsMobile" />
     <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
@@ -11,7 +14,11 @@
     </el-container>
   </el-container>
   <!-- Mix排版 -->
-  <el-container v-if="siderType=='mix'" direction="vertical" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
+  <el-container
+    v-if="siderType == 'mix'"
+    direction="vertical"
+    :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]"
+  >
     <LayoutFeatures />
     <LayoutHeader fixed :siderType="siderType" />
     <el-container>
@@ -24,7 +31,11 @@
     </el-container>
   </el-container>
   <!-- TopMenu排版 -->
-  <el-container v-if="siderType=='top-menu'" direction="vertical" :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]">
+  <el-container
+    v-if="siderType == 'top-menu'"
+    direction="vertical"
+    :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]"
+  >
     <LayoutFeatures />
     <LayoutHeader fixed :siderType="siderType" />
     <el-container direction="vertical">
@@ -41,12 +52,12 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { useTagSetting } from '/@/hooks/setting/useTagSetting';
-  import { generatorDynamicRouter } from '/@/router/asyncRouter'
+  import { generatorDynamicRouter } from '/@/router/asyncRouter';
   import { useAppInject } from '/@/hooks/web/useAppInject';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useFiles } from '/@/hooks/theme/useFiles';
   import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
-  import { getMenusDate } from '/@/api/app'
+  import { getMenusDate } from '/@/api/app';
   /* import router from '/@/router'; */
   export default defineComponent({
     name: 'Layout',
@@ -97,7 +108,7 @@
         });
         setTheme();
       });
-      function setTheme(){
+      function setTheme() {
         colors.primary = getThemeColor.value;
         Object.assign(colors, generateColors(getThemeColor.value));
         writeNewStyle(originalStylesheetCount.value, originalStyle.value, colors);

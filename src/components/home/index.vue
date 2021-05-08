@@ -5,12 +5,12 @@
     <font-icon type="" size="12" color="red" />
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="审批人">
-        <el-input v-model="formInline.user" placeholder="审批人"></el-input>
+        <el-input v-model="formInline.user" placeholder="审批人" />
       </el-form-item>
       <el-form-item label="活动区域">
         <el-select v-model="formInline.region" placeholder="活动区域">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+          <el-option label="区域一" value="shanghai" />
+          <el-option label="区域二" value="beijing" />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -23,25 +23,23 @@
 <script lang="ts">
   import { defineComponent, onMounted, reactive, toRefs } from 'vue';
   import { login, testpostform } from '/@/api/app';
-  import SvgIcon from '/@/components/SvgIcon/index.vue'
-  import FontIcon from '/@/components/FontIcon/index.vue'
+  import SvgIcon from '/@/components/SvgIcon/index.vue';
+  import FontIcon from '/@/components/FontIcon/index.vue';
 
   export default defineComponent({
     name: 'HelloWorld',
-    props: {},
-    components:{
+    components: {
       SvgIcon,
       FontIcon,
     },
+    props: {},
     setup() {
-     
       const state = reactive({
         formInline: {
           user: '',
-          region: ''
-        }
-      })
-      
+          region: '',
+        },
+      });
 
       onMounted(() => {});
 
@@ -49,7 +47,7 @@
         console.log('submit!');
       }
 
-      return { ...toRefs(state), onSubmit};
+      return { ...toRefs(state), onSubmit };
     },
     data() {
       return {

@@ -40,7 +40,6 @@ const getIsMixSidebar = computed(() => {
   return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
 });
 
-
 /**
  * @description 设置菜单配置
  * @param menuSetting

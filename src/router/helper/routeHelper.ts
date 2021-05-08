@@ -8,7 +8,7 @@ export type LayoutMapKey = 'LAYOUT';
 
 const LayoutMap = new Map<LayoutMapKey, () => Promise<typeof import('*.vue')>>();*/
 
-//const dynamicViewsModules = import.meta.glob('../../views/**/*.{vue,tsx}'); 
+//const dynamicViewsModules = import.meta.glob('../../views/**/*.{vue,tsx}');
 
 // Return to the new routing structure, not affected by the original example
 export function getRoute(route: RouteLocationNormalized): RouteLocationNormalized {

@@ -12,7 +12,7 @@ export function login(param: object): Promise<AxiosResponse> {
 export function getMenusDate(): Promise<AxiosResponse> {
   return request({
     url: '/api/platform/permission/menu/tree',
-    method: 'get'
+    method: 'get',
   });
 }
 

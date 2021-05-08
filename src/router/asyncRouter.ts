@@ -42,7 +42,7 @@ export function listToTree(data: Array<IMenubarList>, fullPath = '/'): Array<IMe
   data.forEach((val) => {
     const { id, text, iconCls, children, attributes } = val;
     /* console.log(transPinYin(text)) */
-    let obj = {
+    const obj = {
       id,
       name: transPinYin(text),
       fullPath: `${fullPath}${transPinYin(text)}`,
@@ -54,7 +54,7 @@ export function listToTree(data: Array<IMenubarList>, fullPath = '/'): Array<IMe
         hidden: false,
       },
     };
-    let isFrame = attributes && attributes.url && attributes.url.indexOf('html') > -1;
+    const isFrame = attributes && attributes.url && attributes.url.indexOf('html') > -1;
     if (isFrame) {
       obj.meta.frameSrc = attributes.url;
       obj.component = components['PagePanel'];

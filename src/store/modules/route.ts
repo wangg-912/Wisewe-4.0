@@ -1,7 +1,6 @@
-
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import store from '/@/store';
-import { IMenubarList } from '/@/router/types'
+import { IMenubarList } from '/@/router/types';
 const NAME = 'route';
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })

@@ -1,10 +1,10 @@
 <template>
-  <el-empty description="组件加载失败" image-size='60'></el-empty>
+  <el-empty description="组件加载失败" image-size="60" />
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
+  import { defineComponent } from 'vue';
 
-export default defineComponent({
-    name:"Empty"
-})
+  export default defineComponent({
+    name: 'Empty',
+  });
 </script>

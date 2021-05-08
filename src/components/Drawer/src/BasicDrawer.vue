@@ -10,11 +10,10 @@
     <template #title v-if="!$slots.title">
       <div :class="`${prefixCls}-title`">{{ getMergeProps.title }}</div>
     </template>
-    
+
     <el-scrollbar>
       <slot></slot>
     </el-scrollbar>
-    
   </el-drawer>
 </template>
 <script lang="ts">
@@ -123,7 +122,7 @@
 </script>
 <style lang="scss">
   .#{$namespace}-basic-drawer {
-    &-title{
+    &-title {
       font-weight: 500;
       font-size: $--font-size-large;
       color: $--color-drak;
@@ -131,12 +130,12 @@
     .el-drawer__header {
       margin-bottom: 0 !important;
     }
-    .el-drawer__body{
+    .el-drawer__body {
       height: calc(100% - 50px);
-      padding-bottom:18px;
+      padding-bottom: 18px;
     }
-    .el-divider--horizontal{
-      margin:20px 0;
+    .el-divider--horizontal {
+      margin: 20px 0;
     }
   }
 </style>

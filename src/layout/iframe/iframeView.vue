@@ -18,19 +18,19 @@
       const { prefixCls } = useDesign('iframe-page');
       return {
         prefixCls,
-      }
-    }
+      };
+    },
   });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-iframe-page{
+  .#{$namespace}-iframe-page {
     height: inherit;
-    &--main{
+    &--main {
       border: 0;
       width: 100%;
       height: 100%;
       overflow: auto;
-      &>body{
+      & > body {
         margin: 0;
         padding: 0;
       }

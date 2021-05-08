@@ -13,6 +13,6 @@
     components: { AppProvider },
     setup() {
       initAppConfigStore();
-    }
+    },
   });
 </script>

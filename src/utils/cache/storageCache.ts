@@ -103,4 +103,4 @@ export const createStorage = ({
     }
   };
   return new WebStorage();
-}
+};

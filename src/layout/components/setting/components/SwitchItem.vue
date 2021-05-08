@@ -51,9 +51,9 @@
     justify-content: space-between;
     margin: 16px 0;
     padding: 0 12px;
-    &-label{
+    &-label {
       font-size: $--font-size-base;
-      color:$--color-drak;
+      color: $--color-drak;
     }
   }
 </style>

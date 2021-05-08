@@ -28,13 +28,13 @@ export const allowRouter: Array<IMenubarList> = [
     children: [
       {
         path: '/redirect/:path*',
-        component:components['Redirect'],
-        meta: {}
-      }
+        component: components['Redirect'],
+        meta: {},
+      },
     ],
     meta: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     path: '/exception',
@@ -43,8 +43,9 @@ export const allowRouter: Array<IMenubarList> = [
     meta: {
       hidden: true,
       title: '404',
-      hideTag:true, hideMenu:true
-    }
+      hideTag: true,
+      hideMenu: true,
+    },
   },
   {
     name: 'root',

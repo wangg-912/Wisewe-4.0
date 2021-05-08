@@ -16,7 +16,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { useDesign } from '/@/hooks/web/useDesign'
+  import { useDesign } from '/@/hooks/web/useDesign';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
   import { Loading } from '/@/components/Loading';
@@ -34,15 +34,13 @@
         getOpenPageLoading,
         getLayoutContentMode,
         getPageLoading,
-      }
-    }
+      };
+    },
   });
 </script>
 <style lang="scss" scoped>
-
-  .#{$namespace}-layout-container{
+  .#{$namespace}-layout-container {
     flex-direction: row;
     padding: 8px !important;
   }
-
 </style>

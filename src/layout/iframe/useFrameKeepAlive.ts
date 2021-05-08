@@ -7,7 +7,7 @@ import { useTagSetting } from '/@/hooks/setting/useTagSetting';
 
 import router from '/@/router';
 
-export function useFrameKeepAlive(){
+export function useFrameKeepAlive() {
   const { currentRoute } = router;
   const { getTagsShow } = useTagSetting();
 
@@ -28,8 +28,8 @@ export function useFrameKeepAlive(){
 
   /**
    * @description 获取全部Frame页面
-   * @param routes 
-   * @returns 
+   * @param routes
+   * @returns
    */
   function getAllFramePages(routes: AppRouteRecordRaw[]): AppRouteRecordRaw[] {
     let res: AppRouteRecordRaw[] = [];

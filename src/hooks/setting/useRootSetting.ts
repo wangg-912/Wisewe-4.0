@@ -21,7 +21,7 @@ const getMobileTriggrState = computed(() => unref(getRootSetting).mobileTrigger)
 function toggleMobileTriggerState(value: boolean) {
   appStore.COMMITPROJECTCONFIGSTATE({
     mobileTrigger: value,
-   });
+  });
 }
 
 export function useRootSetting() {
@@ -41,5 +41,5 @@ export function useRootSetting() {
     getShowFooter,
     getMobileTriggrState,
     toggleMobileTriggerState,
-  }
+  };
 }

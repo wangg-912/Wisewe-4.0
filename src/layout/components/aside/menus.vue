@@ -13,8 +13,13 @@
         v-if="menu.meta.icon"
         :type="menu.meta.icon"
         style="padding-right: 2px"
-        :class="[`${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`, `${prefixCls}--${siderType}-icon`]"
-        :color="`${siderType}` !== 'top-menu'?`${collapse}` == 'collapse' ? '#ffffff' : '':'#333333'"
+        :class="[
+          `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
+          `${prefixCls}--${siderType}-icon`,
+        ]"
+        :color="
+          `${siderType}` !== 'top-menu' ? (`${collapse}` == 'collapse' ? '#ffffff' : '') : '#333333'
+        "
       />
       <span v-if="menu.meta && menu.meta.title" :class="`${prefixCls}--${theme}_sub-title`">{{
         menu.meta.title
@@ -35,7 +40,11 @@
     v-else
     :index="menu.path"
     :item="menu"
-    :class="[`${prefixCls}--${theme}-item`,`${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`, `${prefixCls}--${siderType}-icon`]"
+    :class="[
+      `${prefixCls}--${theme}-item`,
+      `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
+      `${prefixCls}--${siderType}-icon`,
+    ]"
     :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
   />
 </template>
@@ -91,7 +100,7 @@
       &-collapse {
         ::v-deep(.el-submenu__title) {
           padding: 0 16px !important;
-          i{
+          i {
             color: $--color-white !important;
           }
         }
@@ -99,16 +108,16 @@
       &-item,
       ::v-deep(.el-submenu__title) {
         background-color: var(--sider-dark-bg-color);
-        color: $--color-white!important;
+        color: $--color-white !important;
         & i {
           color: $--color-white !important;
         }
       }
-      &-icon i{
+      &-icon i {
         color: $--color-white !important;
       }
       &-collapse-icon {
-        width: auto!important;
+        width: auto !important;
         height: 46px !important;
         visibility: visible !important;
       }
@@ -123,21 +132,20 @@
         & i {
           color: #333 !important;
         }
-        &:hover{
+        &:hover {
           background-color: rgb(217, 236, 255) !important;
           color: $--color-primary !important;
-          i{
+          i {
             color: $--color-primary !important;
           }
         }
       }
-      &-icon{
-        
+      &-icon {
         color: #333 !important;
-        &:hover{
+        &:hover {
           color: $--color-primary !important;
           background-color: rgb(217, 236, 255) !important;
-          i{
+          i {
             color: $--color-primary !important;
           }
         }

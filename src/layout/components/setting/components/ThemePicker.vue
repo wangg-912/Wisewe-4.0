@@ -14,12 +14,12 @@
         <i
           v-if="def === color"
           class="el-icon-check"
-          style="fontSize: 14px"
+          style="fontsize: 14px"
           :style="{ color: transformColor(color) }"
         ></i>
       </span>
     </span>
-   <!--  <el-color-picker v-model="def" /> -->
+    <!--  <el-color-picker v-model="def" /> -->
   </div>
 </template>
 <script lang="ts">
@@ -27,7 +27,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { baseHandler } from '../handler';
   import { HandlerEnum } from '../enums';
-  import { invertColor } from '/@/utils/color'
+  import { invertColor } from '/@/utils/color';
   export default defineComponent({
     name: 'ThemePicker',
     props: {
@@ -58,7 +58,7 @@
        * @param {String} color 颜色值 十六进制
        * @returns {String} 对冲色
        */
-      function transformColor(color: string){
+      function transformColor(color: string) {
         return invertColor(color);
       }
 

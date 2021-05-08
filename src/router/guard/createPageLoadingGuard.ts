@@ -23,6 +23,5 @@ export function createPageLoadingGuard(router: Router) {
       }, 850);
     }
     return true;
-  })
-
+  });
 }

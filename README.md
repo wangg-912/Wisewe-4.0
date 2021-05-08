@@ -22,36 +22,73 @@
 # 文档
   [文档地址](https://gitee.com/bensen_admin/evolution-v4/wikis/Wisewe-V4%20?sort_id=3989190)
 # 准备
-  - [node](http://nodejs.org/) and [git](https://git-scm.com/) - Project development environment
-- [Vite](https://vitejs.dev/) - Familiar with vite features
-- [Vue3](https://v3.vuejs.org/) - Familiar with Vue basic syntax
-- [TypeScript](https://www.typescriptlang.org/) - Familiar with the basic syntax of `TypeScript`
-- [Es6+](http://es6.ruanyifeng.com/) - Familiar with es6 basic syntax
-- [Vue-Router-Next](https://next.router.vuejs.org/) - Familiar with the basic use of vue-router
-- [Element-Plus](https://github.com/element-plus/element-plus) - ui basic use
-- [Vuex-Next](https://github.com/vuejs/vuex) - state management pattern + library for Vue.js
+  - [node](http://nodejs.org/) and [git](https://git-scm.com/) - 项目开发环境
+  - [Vite](https://vitejs.dev/) - 下一代前端开发与构建工具
+  - [Vue3](https://v3.vuejs.org/) - 新一代Vue技术栈
+  - [TypeScript](https://www.typescriptlang.org/) - TypeScript的基本语法
+  - [Es6+](http://es6.ruanyifeng.com/) - ES6语法标准
+  - [Vue-Router-Next](https://next.router.vuejs.org/) - 下一代服务于Vue3的路由机制
+  - [Element-Plus](https://github.com/element-plus/element-plus) - UI框架
+  - [Vuex-Next](https://github.com/vuejs/vuex) - 下一代服务于Vue3的状态管理机制
 
 # 安装使用
-- 获取项目代码
-```
-https://gitee.com/bensen_admin/evolution-v4
-```
-## Type Support For `.vue` Imports in TS
+  - 获取项目代码
+  ```
+  https://gitee.com/bensen_admin/evolution-v4
+  ```
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+  - 安装依赖
+  ```
+  cd evolution-v4
+  yarn install
+  or
+  yarn bootstrap
+  or
+  npm i
+  ```
 
-### If Using Volar
+  - 运行
+  ```
+  yarn dev
+  ```
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+  - 编译
+  ```
+  yarn build
+  ```
 
-### If Using Vetur
+  - 编译并预览
+  ```
+  yarn preview
+  ```
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette 5. Search and run "Select TypeScript version" -> "Use workspace version"
+  - 语法格式校验
+  ```
+  yarn lint:eslint
+  ```
+  
+# 浏览器支持
 
+本地开发推荐使用`Chrome 80+` 浏览器
 
+支持现代浏览器, 不支持 IE
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| :-: | :-: | :-: | :-: | :-: |
+| not support | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
+
+# 相关仓库
+
+如果这些插件对你有帮助，可以给一个 star 支持下
+
+- [vite-plugin-html](https://github.com/anncwb/vite-plugin-html) - 用于 html 模版转换及压缩
+- [vite-plugin-style-import](https://github.com/anncwb/vite-plugin-style-import) - 用于组件库样式按需引入
+- [vite-plugin-imagemin](https://github.com/anncwb/vite-plugin-imagemin) - 用于打包压缩图片资源
+- [vite-plugin-compression](https://github.com/anncwb/vite-plugin-compression) - 用于打包输出.gz|.brotil 文件
+- [vite-plugin-svg-icons](https://github.com/anncwb/vite-plugin-svg-icons) - 用于快速生成 svg 雪碧图
+# License
+
+[MIT © Wisewe-V4](./LICENSE)
 # 项目目录
 
 ```

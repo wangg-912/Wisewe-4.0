@@ -20,6 +20,5 @@ export function createPermissionGuard(router: Router) {
     const redirect = decodeURIComponent(redirectPath);
     const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect }; */
     next();
-  })
+  });
 }
-

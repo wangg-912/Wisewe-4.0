@@ -6,7 +6,7 @@ import { formula } from '/@/utils/constant';
  * @returns { Object }
  */
 export const generateColors = (primary: string) => {
-  let colors = {};
+  const colors = {};
   Object.keys(formula).forEach((key) => {
     const value = formula[key].replace(/primary/g, primary);
     colors[key] = color.convert(value);

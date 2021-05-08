@@ -1,6 +1,6 @@
 <template>
   <span v-if="type" :calss="`${prefixCls}`">
-    <i :class="[`${prefixCls}-icon`, type]" :style="{fontSize:`${size}px`}"></i>
+    <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px` }"></i>
   </span>
 </template>
 <script lang="ts">
@@ -30,7 +30,7 @@
         type,
         color,
         size,
-      }
+      };
     },
   });
 </script>
@@ -40,9 +40,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    &-icon{
-      padding:4px;
-      color:inherit!important;
+    &-icon {
+      padding: 4px;
+      color: inherit !important;
     }
   }
 </style>

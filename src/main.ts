@@ -7,8 +7,8 @@ import 'nprogress/nprogress.css';
 import 'element-plus/lib/theme-chalk/index.css';
 import App from './App.vue';
 import { isDevMode } from '/@/utils/env';
-import 'dayjs/locale/zh-cn'
-import locale from 'element-plus/lib/locale/lang/zh-cn'
+import 'dayjs/locale/zh-cn';
+import locale from 'element-plus/lib/locale/lang/zh-cn';
 import '/@/style/index.scss';
 const app = createApp(App);
 
@@ -19,7 +19,6 @@ setupRouter(app);
 
 /* router.isReady().then(() => { */
 app.mount('#app');
-
 
 // The development environment takes effect
 if (isDevMode()) {

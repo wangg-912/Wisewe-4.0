@@ -3,7 +3,7 @@
   import { defineComponent, toRefs, ref } from 'vue';
   import { createAppProviderContext } from './../useAppContext';
   import designSetting from '/@/settings/designSetting';
-  import { createWindowListen } from '/@/hooks/web/useWindow'
+  import { createWindowListen } from '/@/hooks/web/useWindow';
   export default defineComponent({
     name: 'AppProvider',
     inheritAttrs: false,
@@ -15,7 +15,7 @@
     },
     setup(props, { slots }) {
       const isMobileRef = ref(false);
-      createWindowListen(({ screenMap, sizeEnum, width}) => {
+      createWindowListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.XS);
         if (lgWidth) {
           isMobileRef.value = width.value - 1 < lgWidth;

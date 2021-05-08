@@ -17,7 +17,7 @@ export interface CreateCallbackParams {
   sizeEnum: typeof sizeEnum;
 }
 
-export function useWindow(){
+export function useWindow() {
   return {
     screenRef: computed(() => unref(globalScreenRef)),
     widthRef: globalWidthRef,
@@ -30,7 +30,7 @@ export function createWindowListen(fn?: (opt: CreateCallbackParams) => void) {
   const screenRef = ref<sizeEnum>(sizeEnum.LG);
   const realWidthRef = ref(window.innerWidth);
 
-  function getWindowWidth(){
+  function getWindowWidth() {
     const width = document.body.clientWidth;
     const xs = screenMap.get(sizeEnum.XS)!;
     const sm = screenMap.get(sizeEnum.SM)!;
@@ -84,5 +84,4 @@ export function createWindowListen(fn?: (opt: CreateCallbackParams) => void) {
     widthRef: globalWidthRef,
     realWidthRef: globalRealWidthRef,
   };
-
 }

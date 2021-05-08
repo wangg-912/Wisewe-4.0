@@ -94,11 +94,11 @@ export function useDrawer(): UseDrawerReturnType {
   return [register, methods];
 }
 //TODO
-export const useDrawerInner =  (callbackFn?: Fn): UseDrawerInnerReturnType => {
+export const useDrawerInner = (callbackFn?: Fn): UseDrawerInnerReturnType => {
   const drawerInstanceRef = ref<Nullable<DrawerInstance>>(null);
   const currentInstance = getCurrentInstance();
   const uidRef = ref<string>('');
-  
+
   if (!currentInstance) {
     error('useDrawerInner instance is undefined!');
   }
@@ -145,6 +145,6 @@ export const useDrawerInner =  (callbackFn?: Fn): UseDrawerInnerReturnType => {
       setDrawerProps: (props: Partial<DrawerProps>) => {
         getInstance()?.setDrawerProps(props);
       },
-    }
-  ]
+    },
+  ];
 };

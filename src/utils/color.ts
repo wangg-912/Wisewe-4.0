@@ -155,7 +155,7 @@ function subtractLight(color: string, amount: number) {
 /**
  * @description 反转颜色根据已知颜色
  * @param hex {String} 待转换颜色
- * @returns 
+ * @returns
  */
 export function invertColor(hex: string) {
   if (hex.indexOf('#') === 0) {
@@ -174,7 +174,7 @@ export function invertColor(hex: string) {
   const r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
     // eslint-disable-next-line prefer-const
     g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
-    b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16)
+    b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
   // pad each with zeros and return
   return '#' + padZero(r) + padZero(g) + padZero(b);
 }

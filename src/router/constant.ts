@@ -7,7 +7,7 @@ const EXCEPTION_COMPONENT = () => import('/@/views/error/404.vue');
 /**
  * @description: page-layout
  */
- export const getParentLayout = (name: string) => {
+export const getParentLayout = (name: string) => {
   return () =>
     new Promise((resolve) => {
       resolve({

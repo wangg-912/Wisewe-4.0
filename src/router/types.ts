@@ -1,4 +1,3 @@
-
 import { defineComponent } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
@@ -29,7 +28,6 @@ export interface IMenubarList {
   component?: Component;
   children?: Array<IMenubarList>;
 }
-
 
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   name: string;
