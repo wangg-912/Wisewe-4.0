@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import { routeStore } from '/@/store/modules/route';
+
 import { IMenubarList } from './types';
 import { transPinYin } from '/@/utils/pinyin';
 import router from '/@/router';
@@ -70,11 +71,10 @@ export function listToTree(data: Array<IMenubarList>, fullPath = '/'): Array<IMe
   });
   return d;
 }
-const asyncRouter: Array<IMenubarList> = [];
 
 export const generatorDynamicRouter = (data: Array<IMenubarList>): void => {
   /* const routerList: Array<IMenubarList> = listToTree(data); */
-  const routerList: Array<IMenubarList> = [
+  const asyncRouter: Array<IMenubarList> = [
     {
       id: '107455581442277376',
       name: 'DangWuXiTong',
@@ -319,9 +319,9 @@ export const generatorDynamicRouter = (data: Array<IMenubarList>): void => {
       ],
     },
   ];
-  const finallyRoutes = [...routerList, ...asyncRouter];
+  const finallyRoutes = [...asyncRouter];
   finallyRoutes.forEach((item) => {
-    router.addRoute('Layout', item as RouteRecordRaw);
+    router.addRoute(item.name, item as RouteRecordRaw);
   });
   routeStore.setRoutes(finallyRoutes);
 };

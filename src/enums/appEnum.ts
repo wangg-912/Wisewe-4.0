@@ -35,5 +35,52 @@ export enum SettingButtonPositionEnum {
 // 页面配置
 export enum PageEnum {
   BASE_HOME = '/home', // 默认页面path
-  ERROR_PAGE = '/exception', //错误页面path
+  ERROR_PAGE = '/404', //错误页面path
+}
+
+/**
+ * 权限模式
+ */
+export enum PermissionModeEnum {
+  // role
+  ROLE = 'ROLE',
+  // black
+  BACK = 'BACK',
+}
+
+// 用户&角色
+/**
+ * @description: 用户ID信息的枚举
+ */
+export interface GetUserInfoByUserIdParams {
+  userId: string | number;
+}
+/**
+ * @description 角色信息枚举
+ */
+export interface RoleInfo {
+  code: string;
+  id: string | number;
+  name: string;
+  permissionType: number;
+  typeCode: string | number;
+}
+/**
+ * @description: 用户完整信息的枚举
+ */
+export interface GetUserInfoByUserIdModel {
+  roles: RoleInfo[];
+  code: string | number;
+  email?: string;
+  userId: string | number;
+  initialPsd: boolean;
+  name: string;
+  tel?: string;
+}
+
+export enum RoleEnum {
+  // super admin
+  SUPER = 'systemAdmin',
+  // tester
+  TEST = 'test',
 }

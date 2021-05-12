@@ -1,6 +1,6 @@
 <template>
   <el-submenu
-    v-if="haChild"
+    v-if="haChild && !menu.meta?.hidden"
     :index="menu.path"
     :class="[
       `${prefixCls}--${theme}`,
@@ -8,6 +8,7 @@
       `${prefixCls}--${siderType}`,
     ]"
   >
+  
     <template #title>
       <font-icon
         v-if="menu.meta.icon"
@@ -18,7 +19,11 @@
           `${prefixCls}--${siderType}-icon`,
         ]"
         :color="
-          `${siderType}` !== 'top-menu' ? (`${collapse}` == 'collapse' ? '#ffffff' : '') : '#333333'
+          `${siderType}` !== 'top-menu'
+            ? `${collapse}` == 'collapse'
+              ? '#ffffff'
+              : ''
+            : '#333333'
         "
       />
       <span v-if="menu.meta && menu.meta.title" :class="`${prefixCls}--${theme}_sub-title`">{{
@@ -38,6 +43,7 @@
   </el-submenu>
   <MenuItem
     v-else
+    v-if="!menu.meta?.hidden"
     :index="menu.path"
     :item="menu"
     :class="[

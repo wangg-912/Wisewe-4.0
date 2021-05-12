@@ -26,6 +26,5 @@ export function getTransitionName({
   if (openCache) {
     name = isInCache && route.meta.loaded && enableTransition ? transitionName : null;
   }
-
   return name || route.meta.transitionName || def;
 }

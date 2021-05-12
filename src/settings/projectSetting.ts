@@ -2,16 +2,22 @@ import type { ProjectConfig } from '/@/types/config'; //系统配置接口
 /* import { variable } from '/@/style/variables/color.scss' */
 import {
   ContentEnum,
+  PermissionModeEnum,
   ThemeEnum,
   RouterTransitionEnum,
   SettingButtonPositionEnum,
 } from '/@/enums/appEnum'; // app 枚举
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum } from '/@/enums/menuEnum';
+import { CacheTypeEnum } from '/@/enums/cacheEnum';
 const setting: ProjectConfig = {
   //是否显示配置按钮
   showSetting: true,
   //配置按钮显示位置
   settingButtonPosition: SettingButtonPositionEnum.HEADER,
+  //权限模式
+  permissionMode: PermissionModeEnum.ROLE,
+  //权限相关的缓存存储在sessionStorage或localStorage中
+  permissionCacheType: CacheTypeEnum.LOCAL,
   //应用主题颜色
   themeColor: '#409eff',
   // 网站为灰色模式

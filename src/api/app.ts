@@ -2,11 +2,10 @@ import qs from 'qs';
 import request from '/@/utils/request';
 import { AxiosResponse } from 'axios';
 
-export function login(param: object): Promise<AxiosResponse> {
+export function getWorkVo(): Promise<AxiosResponse> {
   return request({
-    url: '/test',
-    method: 'post',
-    data: param,
+    url: '/api/platform/workspace',
+    method: 'get',
   });
 }
 export function getMenusDate(): Promise<AxiosResponse> {

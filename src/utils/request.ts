@@ -82,6 +82,9 @@ request.interceptors.request.use(
 request.interceptors.response.use((response: AxiosResponse) => {
   const { data } = response;
   /* loading.close(); */
+  if (!(typeof data == 'object') && data.includes('workspaceVo')) {
+    return JSON.parse(data.split('=')[1]);
+  };
   if (!data.success) {
     ElMessage({
       message: data.message,

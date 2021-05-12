@@ -13,7 +13,7 @@
           :mode="navMode"
           :collapse="isCollapse"
           :uniqueOpened="true"
-          :default-openeds="['/DangWuXiTong']"
+          :default-openeds="['/dangwuxitong']"
           :class="[
             `${prefixCls}-aside`,
             `${prefixCls}-aside--${theme}`,
@@ -88,14 +88,10 @@
       });
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
+      /* debugger; */
       const theme = computed(() => unref(getMenuTheme));
-
-      /*  onMounted(() => {
-        setTimeout(() => {
-          console.log($routes, '3');
-        }, 1000);
-      }); */
       function menuHandle(path: string) {
+        debugger;
         if (currentRoute.value.fullPath === path) return;
         push(path);
       }

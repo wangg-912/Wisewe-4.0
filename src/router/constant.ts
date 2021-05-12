@@ -24,16 +24,19 @@ export const PAGE_NOT_FOUND_ROUTE: IMenubarList = {
   component: LAYOUT,
   meta: {
     title: 'ErrorPage',
-    hideBreadcrumb: true,
+    hidden: true,
   },
   children: [
     {
-      path: '/:path(.*)*',
-      name: 'ErrorPage',
+      path: '/404',
       component: EXCEPTION_COMPONENT,
+      name: 'ErrorPage',
       meta: {
-        title: 'ErrorPage',
-        hideBreadcrumb: true,
+        hidden: true,
+        title: '404',
+        hidden: true,
+        hideTag: true,
+        hideMenu: true,
       },
     },
   ],
@@ -46,7 +49,7 @@ export const REDIRECT_ROUTE: IMenubarList = {
   component: LAYOUT,
   meta: {
     title: REDIRECT_NAME,
-    hideBreadcrumb: true,
+    hidden: true,
   },
   children: [
     {
@@ -55,7 +58,7 @@ export const REDIRECT_ROUTE: IMenubarList = {
       component: () => import('/@/views/system/redirect.vue'),
       meta: {
         title: REDIRECT_NAME,
-        hideBreadcrumb: true,
+        hidden: true,
       },
     },
   ],

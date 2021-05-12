@@ -82,7 +82,7 @@ export const isServer = typeof window === 'undefined';
 export const isClient = !isServer;
 
 export function isUrl(path: string): boolean {
-  const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
+  const reg = /(((^http|https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
   return reg.test(path);
 }
 
@@ -92,4 +92,24 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
     src[key] = isObject(src[key]) ? deepMerge(src[key], target[key]) : (src[key] = target[key]);
   }
   return src;
+}
+
+/**
+ * 对象数组深拷贝
+ * @param {Array,Object} source 需要深拷贝的对象数组
+ * @param {Array} noClone 不需要深拷贝的属性集合
+ */
+export function deepClone(source: any, noClone: string[] = []): any {
+  if (!source && typeof source !== 'object') {
+    throw new Error('error arguments deepClone')
+  }
+  const targetObj: any = source.constructor === Array ? [] : {}
+  Object.keys(source).forEach((keys: string) => {
+    if (source[keys] && typeof source[keys] === 'object' && noClone.indexOf(keys) === -1) {
+      targetObj[keys] = deepClone(source[keys], noClone)
+    } else {
+      targetObj[keys] = source[keys]
+    }
+  })
+  return targetObj
 }

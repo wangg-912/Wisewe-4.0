@@ -47,17 +47,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, unref, ref, reactive, onMounted } from 'vue';
+  import { defineComponent, computed, unref, ref, reactive, watch } from 'vue';
+  import type { RouteRecordRaw } from 'vue-router';
+  import { useRouter } from 'vue-router';
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { useTagSetting } from '/@/hooks/setting/useTagSetting';
-  import { generatorDynamicRouter } from '/@/router/asyncRouter';
+  import { routeStore } from '/@/store/modules/route';
   import { useAppInject } from '/@/hooks/web/useAppInject';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useFiles } from '/@/hooks/theme/useFiles';
   import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
   import { getMenusDate } from '/@/api/app';
+  
   /* import router from '/@/router'; */
   export default defineComponent({
     name: 'Layout',
@@ -70,6 +73,8 @@
       LayoutFooter: createAsyncComponent(() => import('/@/layout/components/footer/index.vue')),
     },
     setup() {
+      const { push, addRoute, currentRoute } = useRouter();
+      const redirect = ref<string>('');
       const fonts = ref(null);
       const styleFiles = ref(null);
       const originalStyle = ref('');
@@ -84,7 +89,7 @@
       const colors = reactive({
         primary: '#409eff',
       });
-      generatorDynamicRouter();
+      /* generatorDynamicRouter(); */
       const originalStylesheetCount = computed(() => {
         return document.styleSheets.length || -1;
       });
@@ -116,13 +121,29 @@
       /**
        * ==============初始化主题完毕================== *
        */
-      /* getMenusDate().then(res=>{  
-        const {success, content} = res.data; 
-        if(success){
-            
-           generatorDynamicRouter(content)
-          } 
-          }).then(err=>{}) */
+      watch(
+        () => currentRoute.value,
+        (route) => {
+          redirect.value = (route.query && route.query.redirect) as string;
+        },
+        {
+          immediate: true,
+        }
+      );
+      getMenusDate()
+        .then((res) => {
+          const { success, content } = res.data;
+          if (success) {
+            routeStore.GenerateRoutes().then(() => {
+              routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
+                await addRoute(route.name!, route); // 动态添加可访问路由表
+              });
+              routeStore.setIsAddRouters(true);
+              push({ path: redirect.value || '/' });
+            });
+          }
+        })
+        .then((err) => {});
       return {
         prefixCls,
         getShowMenu,

@@ -16,13 +16,12 @@ export interface IMenuMeta {
   noCache?: boolean;
   hidden?: boolean;
   hideTag?: boolean;
-  hideMenu?: boolean;
 }
 export interface IMenubarList {
   id?: number | string;
   name?: string;
   path: string;
-  fullPath: string;
+  /* fullPath: string; */
   redirect?: string | { name: string };
   meta?: Partial<IMenuMeta>;
   component?: Component;
@@ -35,7 +34,8 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   component?: Component | string;
   children?: AppRouteRecordRaw[];
   props?: Recordable;
-  fullPath?: string;
+  /* fullPath?: string; */
+  redirect?: string | { name: string };
 }
 
 export type AppRouteModule = AppRouteRecordRaw;
