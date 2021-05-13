@@ -12,6 +12,7 @@
               def: getBasicTransition,
             })
           "
+          mode="out-in"
         >
           <keep-alive v-if="openCache" :include="getCaches">
             <component :is="Component" v-bind="getKey(Component, route)" />

@@ -27,9 +27,9 @@
             v-for="v in menuLists"
             :key="v.name"
             :menu="v"
-            :index="v.path"
             :theme="theme"
             :siderType="siderType"
+            :base-path="v.path"
           />
         </el-menu>
       </el-scrollbar>

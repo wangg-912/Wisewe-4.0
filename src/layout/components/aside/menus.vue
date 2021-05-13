@@ -1,14 +1,26 @@
 <template>
+  <template v-if="hasOneShowingChild(menu.children, menu) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !menu.meta?.affix">
+    <MenuItem
+      v-if="!menu.meta?.hidden"
+      :vpath="resolvePath(onlyOneChild.path,'')"
+      :item="menu"
+      :class="[
+        `${prefixCls}--${theme}-item`,
+        `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
+        `${prefixCls}--${siderType}-icon`,
+      ]"
+      :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
+    />
+  </template>
   <el-submenu
-    v-if="haChild && !menu.meta?.hidden"
-    :index="menu.path"
+    v-else
+    :index="resolvePath(menu.path, '')"
     :class="[
       `${prefixCls}--${theme}`,
       `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}`,
       `${prefixCls}--${siderType}`,
     ]"
   >
-  
     <template #title>
       <font-icon
         v-if="menu.meta.icon"
@@ -19,11 +31,7 @@
           `${prefixCls}--${siderType}-icon`,
         ]"
         :color="
-          `${siderType}` !== 'top-menu'
-            ? `${collapse}` == 'collapse'
-              ? '#ffffff'
-              : ''
-            : '#333333'
+          `${siderType}` !== 'top-menu' ? (`${collapse}` == 'collapse' ? '#ffffff' : '') : '#333333'
         "
       />
       <span v-if="menu.meta && menu.meta.title" :class="`${prefixCls}--${theme}_sub-title`">{{
@@ -32,33 +40,23 @@
     </template>
     <!-- TODO -->
     <MenuItems
-      v-if="menu.children && menu.children.length"
       v-for="c in menu.children"
       :key="c.name"
       :menu="c"
-      :index="c.path"
       :theme="theme"
       :siderType="siderType"
+      :base-path="resolvePath(c.path)"
     />
   </el-submenu>
-  <MenuItem
-    v-else
-    v-if="!menu.meta?.hidden"
-    :index="menu.path"
-    :item="menu"
-    :class="[
-      `${prefixCls}--${theme}-item`,
-      `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
-      `${prefixCls}--${siderType}-icon`,
-    ]"
-    :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
-  />
+  
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref, PropType } from 'vue';
+  import { resolve } from 'path';
+  import { defineComponent, computed, unref, PropType, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { isExternal } from '/@/utils/tools';
   import FontIcon from '/@/components/FontIcon/index.vue';
   import MenuItem from './item.vue';
   export default defineComponent({
@@ -73,18 +71,52 @@
         type: String as PropType<string>,
         default: 'sidebar',
       },
+      basePath: {
+        type: String as PropType<string>,
+        default: '',
+      },
     },
     components: { MenuItem, FontIcon },
     setup(context) {
+      const onlyOneChild = ref<any>(null);
       const { prefixCls } = useDesign('sider-menu');
       const { getCollapsed } = useMenuSetting();
-      const { menu } = context;
+      const { menu, basePath } = context;
       const collapse = computed(() => (unref(getCollapsed) ? 'collapse' : 'expend'));
       /* debugger; */
       const cmenuList = computed(() => {
         if (menu.children) return menu.children.filter((v) => !v.meta.hidden);
         return [];
       });
+      function hasOneShowingChild(children: RouteRecordRaw[] = [], parent: RouteRecordRaw): boolean {
+        const showingChildren: RouteRecordRaw[] = children.filter((item: RouteRecordRaw) => {
+          if (item.meta && item.meta.hidden) {
+            return false;
+          } else {
+            // Temp set(will be used if only has one showing child)
+            onlyOneChild.value = item;
+            return true;
+          }
+        })
+        // When there is only one child router, the child router is displayed by default
+        if (showingChildren.length === 1) {
+          return true;
+        }
+        // Show parent if there are no child router to display
+        if (showingChildren.length === 0) {
+          onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
+          return true;
+        }
+        return false;
+      }
+
+      function resolvePath(routePath: string, otherPath: string): string {
+        if (isExternal(routePath)) {
+          return routePath;
+        }
+        console.log(resolve(otherPath || basePath, routePath),'123')
+        return resolve(otherPath || basePath, routePath);
+      }
 
       /* onMounted(() => {
         console.log(context.menu);
@@ -93,7 +125,10 @@
       return {
         prefixCls,
         collapse,
+        onlyOneChild,
         haChild: menu.children && menu.children.length > 0,
+        hasOneShowingChild,
+        resolvePath,
       };
     },
   });

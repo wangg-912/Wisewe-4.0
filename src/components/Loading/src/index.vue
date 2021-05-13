@@ -9,10 +9,17 @@
     :customClass="customClass"
     :spinner="spinner"
   >
-    <div class="el-loading-spinner">
-      <svg class="circular" viewBox="25 25 50 50">
+    <div class="el-loading-spinner loading-spin">
+      <!-- <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" />
-      </svg>
+      </svg> -->
+      <span class="loading-spin-dot loading-spin-dot-spin">
+        <i class="loading-spin-dot-item"></i>
+        <i class="loading-spin-dot-item"></i>
+        <i class="loading-spin-dot-item"></i>
+        <i class="loading-spin-dot-item"></i>
+      </span>
+      <div class="loading-spin-text">智汇校园管理系统</div>
     </div>
   </section>
 </template>
@@ -71,6 +78,28 @@
   });
 </script>
 <style lang="scss" scoped>
+  @keyframes spinRotate {
+    to {
+      -webkit-transform: rotate(405deg);
+      transform: rotate(405deg);
+    }
+  }
+  @-webkit-keyframes spinRotate {
+    to {
+      -webkit-transform: rotate(405deg);
+      transform: rotate(405deg);
+    }
+  }
+  @keyframes spinSpinMove {
+    to {
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes spinSpinMove {
+    to {
+      opacity: 1;
+    }
+  }
   .full-loading {
     position: fixed;
     top: 0;
@@ -86,6 +115,62 @@
       top: 0;
       left: 0;
       z-index: 300;
+    }
+    .loading-spin {
+      &-dot {
+        position: relative;
+        display: inline-block;
+        font-size: 48px;
+        width: 1em;
+        height: 1em;
+        &-item {
+          position: absolute;
+          display: block;
+          width: 18px;
+          height: 18px;
+          background-color: #0084f4;
+          border-radius: 100%;
+          transform: scale(.75);
+          transform-origin: 50% 50%;
+          opacity: .3;
+          -webkit-animation: spinSpinMove 1s linear infinite alternate;
+          animation: spinSpinMove 1s linear infinite alternate;
+          &:first-child {
+            top: 0;
+            left: 0;
+          }
+          &:nth-child(2) {
+            top: 0;
+            right: 0;
+            -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+          }
+          &:nth-child(3) {
+            right: 0;
+            bottom: 0;
+            -webkit-animation-delay: 0.8s;
+            animation-delay: 0.8s;
+          }
+          &:nth-child(4) {
+            bottom: 0;
+            left: 0;
+            -webkit-animation-delay: 1.2s;
+            animation-delay: 1.2s;
+          }
+        }
+      }
+      &-dot-spin {
+        transform: rotate(45deg);
+        -webkit-animation: spinRotate 1.2s linear infinite;
+        animation: spinRotate 1.2s linear infinite;
+      }
+      &-text{
+        padding-top: 15px;
+        text-shadow: 0 1px 2px #fff;
+        font-size:20px;
+        font-weight: 600;
+        color: #0084f4;
+      }
     }
   }
 </style>

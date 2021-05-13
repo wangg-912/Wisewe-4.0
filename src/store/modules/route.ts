@@ -8,14 +8,16 @@ import { IMenubarList } from '/@/router/types';
 import { deepClone } from '/@/utils/tools';
 
 import { resolve } from 'path';
+import { isExternal } from '../../utils/tools';
 const NAME = 'route';
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class App extends VuexModule {
   //路由
-  private routes: IMenubarList = [];
+  public routes: IMenubarList = [];
   public addRouters = [] as any[];
   public isAddRouters = false;
+  public activeTag = '';
   get getRoutes() {
     return this.routes;
   }
@@ -38,6 +40,11 @@ class App extends VuexModule {
     ])
    /*  this.routes = routes; */
     this.routes = deepClone(constantRouterMap, ['component']).concat(routes)
+  }
+
+  @Mutation
+  private SET_ACTIVETAB(activeTag: string): void {
+    this.activeTag = activeTag;
   }
 
 
@@ -64,22 +71,29 @@ class App extends VuexModule {
       resolve();
     })
   }
+
+  @Action
+  public setAcitveTab(activeTag: string): void {
+    this.SETACTIVETAB(activeTag)
+  }
 }
 
-function generateRoutes(
-  routes: AppRouteRecordRaw[],
-  basePath = '/',
-  isRoot = true
-): AppRouteRecordRaw[] {
+function generateRoutes(routes: AppRouteRecordRaw[], basePath = '/'): AppRouteRecordRaw[] {
   const res: AppRouteRecordRaw[] = [];
   for (const route of routes) {
     if (route.meta && route.meta.hidden) {
       continue;
     }
+    let onlyOneChild = null;
+    if (route.children && route.children.length === 1 && !route.meta.affix) {
+      onlyOneChild = isExternal(route.children[0].path)
+        ? route.children[0].path
+        : resolve(resolve(basePath, route.path), route.children[0].path)
+    }
     let data: any = null;
     data = Object.assign({}, route);
     if (route.children && data) {
-      data.children = generateRoutes(route.children, resolve(basePath, data.path))
+      data.children = generateRoutes(route.children, resolve(basePath, onlyOneChild || data.path))
       /* const _path = isRoot ? data.path : `${basePath}/${data.path}`;
       console.log(_path,'333')
       data.children = generateRoutes(route.children, _path, false) */
