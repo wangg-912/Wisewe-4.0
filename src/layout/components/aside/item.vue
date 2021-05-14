@@ -27,7 +27,7 @@
     },
     components: { FontIcon },
     setup(context) {
-      console.log(context.vpath,"456")
+      //console.log(context.vpath,"456")
       return {
         iPath: context.vpath,
         iName: context.item.name,

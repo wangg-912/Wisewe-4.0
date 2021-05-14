@@ -42,13 +42,22 @@ export const constantRouterMap: Array<IMenubarList> = [
   },
   {
     path: '/404',
-    component: () => components['404'],
-    name: 'NoFind',
+    component: components['Layout'],
+    name: 'PageError',
+    redirect: '/404/noFind',
     meta: {
       hidden: true,
       title: '404',
       hideTag: true,
     },
+    children: [
+      {
+        path: 'noFind',
+        component: components['404'],
+        name: 'NoFind',
+        meta: {},
+      },
+    ]
   },
   {
     path: '/',
@@ -286,64 +295,6 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         ],
       },
     ],
-  },
-  {
-    path: '/level',
-    component: components['Layout'],
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
-    meta: {
-      title: '多级菜单缓存',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        name: 'Menu1Demo',
-        component: components['PagePanel'],
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
-        meta: {
-          title: 'Menu1'
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11Demo',
-            component: components['PagePanel'],
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: 'Menu1-1',
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111Demo',
-                component: () => import('/@/views/level/Menu111.vue'),
-                meta: {
-                  title: 'Menu1-1-1'
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12Demo',
-            component: () => import('/@/views/level/Menu12.vue'),
-            meta: {
-              title: 'Menu1-2'
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        name: 'Menu2Demo',
-        component: () => import('/@/views/level/Menu2.vue'),
-        meta: {
-          title: 'Menu2'
-        }
-      }
-    ]
   },
 ];
 

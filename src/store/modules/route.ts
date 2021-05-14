@@ -93,10 +93,7 @@ function generateRoutes(routes: AppRouteRecordRaw[], basePath = '/'): AppRouteRe
     let data: any = null;
     data = Object.assign({}, route);
     if (route.children && data) {
-      data.children = generateRoutes(route.children, resolve(basePath, onlyOneChild || data.path))
-      /* const _path = isRoot ? data.path : `${basePath}/${data.path}`;
-      console.log(_path,'333')
-      data.children = generateRoutes(route.children, _path, false) */
+      data.children = generateRoutes(route.children, resolve(basePath, onlyOneChild || data.path));
     }
     if (data) {
       res.push(data as AppRouteRecordRaw)

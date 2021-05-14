@@ -91,7 +91,6 @@
       /* debugger; */
       const theme = computed(() => unref(getMenuTheme));
       function menuHandle(path: string) {
-        debugger;
         if (currentRoute.value.fullPath === path) return;
         push(path);
       }

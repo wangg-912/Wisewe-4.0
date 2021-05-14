@@ -114,7 +114,7 @@
         if (isExternal(routePath)) {
           return routePath;
         }
-        console.log(resolve(otherPath || basePath, routePath),'123')
+        //console.log(resolve(otherPath || basePath, routePath),'123')
         return resolve(otherPath || basePath, routePath);
       }
 

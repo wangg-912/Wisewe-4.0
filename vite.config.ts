@@ -1,4 +1,4 @@
-import { loadEnv, defineConfig } from 'vite';
+import { loadEnv } from 'vite';
 import { resolve, join } from 'path';
 import { UserConfig } from 'vite';
 import dotenv from 'dotenv';
@@ -7,6 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import html from 'vite-plugin-html';
 import viteImagemin from 'vite-plugin-imagemin';
 import resolveExternalsPlugin from 'vite-plugin-resolve-externals';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { createProxy } from './build/vite/proxy';
 import { wrapperEnv } from './build/utils';
 
@@ -22,12 +23,20 @@ export default ({ command, mode }): UserConfig => {
 
   const viteEnv = wrapperEnv(env);
 
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE, VITE_LEGACY } = viteEnv;
+  const {
+    VITE_PORT,
+    VITE_PUBLIC_PATH,
+    VITE_PROXY,
+    VITE_DROP_CONSOLE,
+    VITE_LEGACY,
+    VITE_GLOB_APP_TITLE,
+  } = viteEnv;
 
   return {
     base: VITE_PUBLIC_PATH,
     define: {
-      'process.env': {},
+      'process.platform': null,
+      'process.version': null,
     },
     resolve: {
       alias: [
@@ -81,7 +90,7 @@ export default ({ command, mode }): UserConfig => {
       html({
         inject: {
           injectData: {
-            title: `${process.env.VITE_GLOB_APP_TITLE}`,
+            title: VITE_GLOB_APP_TITLE,
           },
         },
       }),
@@ -119,6 +128,10 @@ export default ({ command, mode }): UserConfig => {
         vuex: 'Vuex',
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
+      }),
+      visualizer({
+        filename: './node_modules/.cache/visualizer/stats.html',
+        open: true,
       }),
     ],
   };

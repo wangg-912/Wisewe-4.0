@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+  import { defineComponent, onMounted, PropType, ref, unref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   export default defineComponent({
     name: 'FrameView',
@@ -15,9 +15,24 @@
       },
     },
     setup() {
+      const frameRef = ref<HTMLElement | null>(null);
       const { prefixCls } = useDesign('iframe-page');
+      onMounted(()=>{
+        frameLoad();
+      })
+      function frameLoad(){
+        const $frame = unref(frameRef);
+        $frame.onload = function(){
+          const { contentWindow } = $frame;
+          if(contentWindow.document.body && !contentWindow.document.body.innerHTML){
+            $frame.src = import.meta.env.MODE=='development'?'/public/404.html':'/404.html';
+          }
+          
+        }
+      }
       return {
         prefixCls,
+        frameRef,
       };
     },
   });
