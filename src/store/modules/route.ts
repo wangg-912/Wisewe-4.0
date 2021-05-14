@@ -17,6 +17,7 @@ class App extends VuexModule {
   public routes: IMenubarList = [];
   public addRouters = [] as any[];
   public isAddRouters = false;
+  public menuTabRouters = [] as any[];
   public activeTag = '';
   get getRoutes() {
     return this.routes;
@@ -27,7 +28,7 @@ class App extends VuexModule {
     this.isAddRouters = state;
   }
   @Mutation
-  SETROUTES(routes: IMenubarList): void {
+  private SETROUTES(routes: IMenubarList): void {
     this.addRouters = routes.concat([
       {
         path: '/:path(.*)*',
@@ -43,22 +44,31 @@ class App extends VuexModule {
   }
 
   @Mutation
-  private SET_ACTIVETAB(activeTag: string): void {
+  private SETMENUTABROUTERS(routers: AppRouteRecordRaw[]): void {
+    this.menuTabRouters = routers;
+  }
+
+  @Mutation
+  private SETACTIVETAB(activeTag: string): void {
     this.activeTag = activeTag;
   }
 
 
-  /* @Action
-  public async setRoutes(routes: Array<IMenubarList>): Promise<unknown> {
-    return new Promise((resolve) => {
-      this.SETROUTES(routes);
-      resolve({});
-    });
-  } */
+  @Action
+  public setMenuTabRouters(routers: AppRouteRecordRaw[]): void {
+    this.SETMENUTABROUTERS(routers)
+  }
+
   @Action
   public setIsAddRouters(state: boolean): void {
     this.SETISADDROUTERS(state)
   }
+
+  @Action
+  public setAcitveTab(activeTag: string): void {
+    this.SETACTIVETAB(activeTag)
+  }
+
   @Action
   public GenerateRoutes(): Promise<unknown> {
     return new Promise((resolve) => {
@@ -70,11 +80,6 @@ class App extends VuexModule {
       this.SETROUTES(routerMap);
       resolve();
     })
-  }
-
-  @Action
-  public setAcitveTab(activeTag: string): void {
-    this.SETACTIVETAB(activeTag)
   }
 }
 

@@ -44,6 +44,21 @@
     </el-container>
     <LayoutFooter />
   </el-container>
+  <!-- Mix-Sidebar -->
+  <el-container
+    v-if="siderType == 'mix-sidebar'"
+    :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]"
+  >
+    <LayoutFeatures />
+    <MixTabs :class="`${prefixCls}--${siderType}--tabs`" />
+    <Sider v-if="getShowMenu || getIsMobile" />
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
+      <LayoutHeader fixed />
+      <LayoutTags v-if="getTagsShow" />
+      <LayoutContent />
+      <LayoutFooter />
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts">
@@ -60,7 +75,7 @@
   import { useFiles } from '/@/hooks/theme/useFiles';
   import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
   import { getMenusDate } from '/@/api/app';
-  
+
   /* import router from '/@/router'; */
   export default defineComponent({
     name: 'Layout',
@@ -71,6 +86,7 @@
       LayoutTags: createAsyncComponent(() => import('/@/layout/components/tags/index.vue')),
       LayoutContent: createAsyncComponent(() => import('/@/layout/components/content/index.vue')),
       LayoutFooter: createAsyncComponent(() => import('/@/layout/components/footer/index.vue')),
+      MixTabs: createAsyncComponent(() => import('/@/layout/components/mix-tabs/index.vue')),
     },
     setup() {
       const { push, addRoute, currentRoute } = useRouter();
@@ -158,5 +174,43 @@
   .#{$namespace}-default-layout--sidebar {
     height: inherit;
     min-height: inherit;
+  }
+  .#{$namespace}-default-layout--mix-sidebar {
+    &--tabs {
+      width: 90px;
+      height: 100%;
+      background: #fff;
+      ::v-deep(.is-left::after),
+      ::v-deep(.el-tabs__active-bar) {
+        display: none;
+      }
+      ::v-deep(.el-tabs) {
+        height: 100%;
+        .el-tabs__header {
+          height: 100%;
+          margin-right: 0;
+          width: 90px;
+          .el-tabs__nav-wrap {
+            height: 100%;
+            .el-tabs__item {
+              padding: 0;
+              line-height: 0;
+              height: 70px;
+              text-align: center;
+              color: #000;
+              transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            }
+            .el-tabs__item:hover {
+              color: #fff;
+              background: #2d8cf0;
+            }
+            .is-active {
+              color: #fff;
+              background: #2d8cf0;
+            }
+          }
+        }
+      }
+    }
   }
 </style>

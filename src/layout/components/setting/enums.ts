@@ -14,11 +14,15 @@ export const menuTypeList = [
     mode: MenuModeEnum.INLINE,
     type: MenuTypeEnum.MIX,
   },
-
   {
     title: '顶栏菜单布局',
     mode: MenuModeEnum.HORIZONTAL,
     type: MenuTypeEnum.TOP_MENU,
+  },
+  {
+    title: '左栏固定菜单布局',
+    mode: MenuModeEnum.INLINE,
+    type: MenuTypeEnum.MIX_SIDEBAR,
   },
 ];
 
