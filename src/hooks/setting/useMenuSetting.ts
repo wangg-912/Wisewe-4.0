@@ -14,7 +14,10 @@ const getMenuType = computed(() => unref(getMenuSetting).type);
 const getMenuTheme = computed(() => unref(getMenuSetting).theme);
 const getMenuMode = computed(() => unref(getMenuSetting).mode);
 const getTopMenuAlign = computed(() => unref(getMenuSetting).topMenuAlign);
-const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
+const getIsSidebarType = computed(
+  () =>
+    unref(getMenuType) === MenuTypeEnum.SIDEBAR || unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR
+);
 const getTrigger = computed(() => unref(getMenuSetting).trigger);
 const getSplit = computed(() => unref(getMenuSetting).split);
 const getShowMenu = computed(() => unref(getMenuSetting).show);

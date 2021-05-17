@@ -24,7 +24,7 @@
           @select="menuHandle"
         >
           <menu-items
-            v-for="v in menuLists"
+            v-for="v in (showMenuTab ? menuTabLists : menuLists)"
             :key="v.name"
             :menu="v"
             :theme="theme"
@@ -83,16 +83,22 @@
         }
       });
       const logoTitle = computed(() => unref(getShowLogoTitle));
+
       const showLogo = computed(() => {
-        return unref(getShowLogo) && unref(getMenuType) === 'sidebar';
+        return unref(getShowLogo) && (unref(getMenuType) === 'sidebar' || unref(getMenuType) === 'mix-sidebar');
       });
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
-      /* debugger; */
+      const showMenuTab = computed(() => props.siderType === 'mix-sidebar');
+      const menuTabLists = computed(() =>routeStore.menuTabRouters);
       const theme = computed(() => unref(getMenuTheme));
+      /**
+       * @description 菜单点击事件
+       */
       function menuHandle(path: string) {
         if (currentRoute.value.fullPath === path) return;
-        push(path);
+        /* push(path); */
+        go(path);
       }
 
       return {
@@ -106,6 +112,8 @@
         getMenuType,
         menuLists,
         menuHandle,
+        showMenuTab,
+        menuTabLists,
       };
     },
   });

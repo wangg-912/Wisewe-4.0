@@ -1,13 +1,13 @@
 <template>
-  <el-tabs v-model="activeName" tab-position="left" @tab-click="changeTab">
+  <el-tabs :class="`${prefixCls}`" v-model="activeName" tab-position="left" @tab-click="changeTab">
     <el-tab-pane
       v-for="(item, $index) in tabRoutes"
       :key="$index"
-      :name="item.path === '/' ? '/dashboard' : item.path"
+      :name="item.path === '/' ? '/home' : item.path"
     >
       <template #label>
         <div class="label-item">
-          <svg-icon :icon-class="filterTab(item, 'icon')" />
+          <div style="height:30px"><FontIcon :type="filterTab(item, 'icon')" :size='20' /></div>
           <div class="title-item">{{ filterTab(item, 'title') }}</div>
         </div>
       </template>
@@ -16,13 +16,17 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, watch, onMounted, computed } from 'vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
   import { routeStore } from '/@/store/modules/route';
   import type { RouteRecordRaw } from 'vue-router';
   import { useRouter } from 'vue-router';
   import { findIndex, isExternal } from '/@/utils/tools';
+  import FontIcon from '/@/components/FontIcon/index.vue';
   export default defineComponent({
     name: 'MixTabs',
+    components: { FontIcon },
     setup() {
+      const prefixCls = useDesign('mix-sidebar');
       const { currentRoute, push } = useRouter();
       const activeName = ref<string>('');
       const routers = computed((): RouteRecordRaw[] => routeStore.routes);
@@ -33,7 +37,7 @@
         const currentPath = currentRoute.value.fullPath.split('/');
         const index = findIndex(tabRoutes.value, (v: RouteRecordRaw) => {
           if (v.path === '/') {
-            return `/${currentPath[1]}` === '/dashboard';
+            return `/${currentPath[1]}` === '/home';
           } else {
             return v.path === `/${currentPath[1]}`;
           }
@@ -41,7 +45,7 @@
         if (index > -1) {
           activeName.value = `/${currentPath[1]}`;
           setActive(index);
-          permissionStore.SetAcitveTab(activeName.value);
+          routeStore.setAcitveTab(activeName.value);
         }
       }
       function filterTab(item: RouteRecordRaw | any, key: string): any {
@@ -50,6 +54,7 @@
 
       function setActive(index: number): void {
         const currRoute: any = tabRoutes.value[index];
+        debugger;
         routeStore.setMenuTabRouters(currRoute.children);
       }
 
@@ -83,6 +88,7 @@
         }
       );
       return {
+        prefixCls,
         activeName,
         tabRoutes,
         filterTab,
@@ -92,3 +98,8 @@
     },
   });
 </script>
+<style lang="scss" scoped>
+  .#{$namespace}-mix-sidebar{
+    
+  }
+</style>

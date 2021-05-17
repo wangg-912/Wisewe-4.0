@@ -16,7 +16,6 @@ dotenv.config({ path: join(__dirname, '.env') });
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir);
 }
-
 export default ({ command, mode }): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);

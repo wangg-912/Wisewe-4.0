@@ -1,8 +1,14 @@
 <template>
-  <template v-if="hasOneShowingChild(menu.children, menu) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !menu.meta?.affix">
+  <template
+    v-if="
+      hasOneShowingChild(menu.children, menu) &&
+      (!onlyOneChild.children || onlyOneChild.noShowingChildren) &&
+      !menu.meta?.affix
+    "
+  >
     <MenuItem
       v-if="!menu.meta?.hidden"
-      :vpath="resolvePath(onlyOneChild.path,'')"
+      :vpath="resolvePath(onlyOneChild.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
       :item="menu"
       :class="[
         `${prefixCls}--${theme}-item`,
@@ -14,7 +20,7 @@
   </template>
   <el-submenu
     v-else
-    :index="resolvePath(menu.path, '')"
+    :index="resolvePath(menu.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
     :class="[
       `${prefixCls}--${theme}`,
       `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}`,
@@ -48,15 +54,16 @@
       :base-path="resolvePath(c.path)"
     />
   </el-submenu>
-  
 </template>
 <script lang="ts">
   import { resolve } from 'path';
   import { defineComponent, computed, unref, PropType, ref } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { isExternal } from '/@/utils/tools';
+  import { routeStore } from '/@/store/modules/route';
   import FontIcon from '/@/components/FontIcon/index.vue';
   import MenuItem from './item.vue';
   export default defineComponent({
@@ -81,54 +88,52 @@
       const onlyOneChild = ref<any>(null);
       const { prefixCls } = useDesign('sider-menu');
       const { getCollapsed } = useMenuSetting();
-      const { menu, basePath } = context;
+      const { basePath, siderType } = context;
       const collapse = computed(() => (unref(getCollapsed) ? 'collapse' : 'expend'));
-      /* debugger; */
-      const cmenuList = computed(() => {
-        if (menu.children) return menu.children.filter((v) => !v.meta.hidden);
-        return [];
-      });
-      function hasOneShowingChild(children: RouteRecordRaw[] = [], parent: RouteRecordRaw): boolean {
+      const activeTab = computed(() => routeStore.activeTag);
+      //console.log(activeTab.value, basePath, '123');
+      const showMenuTab = computed(() => siderType === 'mix-sidebar');
+      function hasOneShowingChild(
+        children: RouteRecordRaw[] = [],
+        parent: RouteRecordRaw
+      ): boolean {
         const showingChildren: RouteRecordRaw[] = children.filter((item: RouteRecordRaw) => {
           if (item.meta && item.meta.hidden) {
             return false;
           } else {
-            // Temp set(will be used if only has one showing child)
             onlyOneChild.value = item;
             return true;
           }
-        })
-        // When there is only one child router, the child router is displayed by default
+        });
         if (showingChildren.length === 1) {
           return true;
         }
-        // Show parent if there are no child router to display
         if (showingChildren.length === 0) {
-          onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
+          onlyOneChild.value = { ...parent, path: '', noShowingChildren: true };
           return true;
         }
         return false;
       }
-
+      /**
+       * @description 路径整合
+       * @param {String} routePath
+       * @param {String} otherPath
+       */
       function resolvePath(routePath: string, otherPath: string): string {
         if (isExternal(routePath)) {
           return routePath;
         }
-        //console.log(resolve(otherPath || basePath, routePath),'123')
+        //console.log(resolve(otherPath || basePath, routePath), '123');
         return resolve(otherPath || basePath, routePath);
       }
-
-      /* onMounted(() => {
-        console.log(context.menu);
-      }); */
-      /*  */
       return {
         prefixCls,
         collapse,
         onlyOneChild,
-        haChild: menu.children && menu.children.length > 0,
         hasOneShowingChild,
         resolvePath,
+        activeTab,
+        showMenuTab,
       };
     },
   });

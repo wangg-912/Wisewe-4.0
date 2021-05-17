@@ -65,7 +65,7 @@ export const constantRouterMap: Array<IMenubarList> = [
     redirect: '/home',
     name: 'Root',
     meta: {
-      hidden: true,
+      hidden:true,
     },
     children: [
       {
@@ -75,8 +75,8 @@ export const constantRouterMap: Array<IMenubarList> = [
         meta: {
           title: '首页',
           icon: 'el-icon-s-home',
-          noCache: true,
           affix: true,
+          hidden:true,
         },
       },
     ],
