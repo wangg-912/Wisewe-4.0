@@ -54,11 +54,11 @@
 
       function setActive(index: number): void {
         const currRoute: any = tabRoutes.value[index];
-        debugger;
         routeStore.setMenuTabRouters(currRoute.children);
       }
 
       function changeTab(item: any) {
+        debugger;
         const currRoute: any = tabRoutes.value[item.index];
         routeStore.setMenuTabRouters(currRoute.children);
         if (isExternal(currRoute.children[0].path)) {

@@ -58,7 +58,6 @@ export default defineComponent({
             menuTypeList={menuTypeList}
             handler={(item: typeof menuTypeList[0]) => {
               baseHandler(HandlerEnum.CHANGE_LAYOUT, {
-                bgColor: unref(getMenuType) == 'top-menu' ? '#ffffff' : unref(getMenuType),
                 mode: item.mode,
                 type: item.type,
                 split: unref(getIsHorizontal) ? false : undefined,

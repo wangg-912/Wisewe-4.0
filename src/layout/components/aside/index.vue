@@ -13,7 +13,7 @@
           :mode="navMode"
           :collapse="isCollapse"
           :uniqueOpened="true"
-          :default-openeds="['/dangwuxitong']"
+          :default-active="activeMenu"
           :class="[
             `${prefixCls}-aside`,
             `${prefixCls}-aside--${theme}`,
@@ -75,6 +75,13 @@
       const { getIsMobile } = useAppInject();
       const { currentRoute, push } = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
+      const activeMenu = computed(() => {
+        const { meta, path } = currentRoute.value;
+        if (meta.activeMenu) {
+          return meta.activeMenu;
+        }
+        return path;
+      })
       const menusWidth = computed(() => {
         if (props.siderType == 'top-menu') {
           return 'auto';
@@ -105,6 +112,7 @@
         isCollapse,
         getIsMobile,
         logoTitle,
+        activeMenu,
         menusWidth,
         showLogo,
         prefixCls,

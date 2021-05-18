@@ -83,12 +83,14 @@
         default: '',
       },
     },
+    // eslint-disable-next-line vue/order-in-components
     components: { MenuItem, FontIcon },
     setup(context) {
       const onlyOneChild = ref<any>(null);
       const { prefixCls } = useDesign('sider-menu');
       const { getCollapsed } = useMenuSetting();
       const { basePath, siderType } = context;
+      console.log(basePath)
       const collapse = computed(() => (unref(getCollapsed) ? 'collapse' : 'expend'));
       const activeTab = computed(() => routeStore.activeTag);
       //console.log(activeTab.value, basePath, '123');
@@ -119,12 +121,12 @@
        * @param {String} routePath
        * @param {String} otherPath
        */
-      function resolvePath(routePath: string, otherPath: string): string {
+      function resolvePath(routePath: string, otherPath: string ): string {
+        
         if (isExternal(routePath)) {
           return routePath;
         }
-        //console.log(resolve(otherPath || basePath, routePath), '123');
-        return resolve(otherPath || basePath, routePath);
+        return otherPath ? resolve(otherPath || basePath, routePath) : resolve(basePath, routePath);
       }
       return {
         prefixCls,

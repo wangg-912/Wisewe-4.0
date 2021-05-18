@@ -138,6 +138,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         name: 'DangYuanDangAnGuanLi',
         path: 'dangyuandanganguanli',
         component: components['PagePanel'],
+        redirect: '/dangwuxitong/dangyuandanganguanli/dangyuandangan',
         meta: {
           icon: 'iconfont icon-shujuku',
           title: '党员档案管理',
@@ -175,6 +176,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         id: '107455581991731200',
         name: 'DangYuanYiDongGuanLi',
         path: 'dangyuanyidongguanli',
+        redirect: '/dangwuxitong/dangyuanyidongguanli/dangzuzhiguanxizhuanru',
         meta: {
           icon: 'iconfont icon-renwufenpei',
           title: '党员异动管理',
@@ -236,6 +238,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       {
         name: 'DangFeiGuanLi',
         path: 'dangfeiguanli',
+        redirect: '/dangwuxitong/dangfeiguanli/dangfeijiaonachaxun',
         meta: {
           icon: 'iconfont icon-qian1',
           title: '党费管理',
