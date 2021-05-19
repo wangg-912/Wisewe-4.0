@@ -38,4 +38,13 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   redirect?: string | { name: string };
 }
 
+export interface Menu {
+  name: string;
+  icon?: string;
+  path: string;
+  children?: Menu[];
+  meta?: Partial<RouteMeta>;
+  hideMenu?: boolean;
+}
+
 export type AppRouteModule = AppRouteRecordRaw;

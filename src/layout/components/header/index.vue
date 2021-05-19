@@ -27,7 +27,7 @@
     </div>
     <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
       <div :class="`${prefixCls}-right--item`" v-if="!getIsMobile">
-        <i class="el-icon-search" size="18"></i>
+        <AppSearch />
       </div>
       <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
         <el-badge is-dot type="danger">
@@ -70,7 +70,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { SettingButtonPositionEnum } from '/@/enums/appEnum';
-  import { AppLogo } from '/@/components/Applications';
+  import { AppLogo, AppSearch } from '/@/components/Applications';
   import BreadCrumb from './components/BreadCrumb.vue';
   import LayoutTrigger from './components/Trigger.vue';
   import Screenfull from './components/Screenfull.vue';
@@ -89,6 +89,7 @@
     },
     components: {
       AppLogo,
+      AppSearch,
       LayoutTrigger,
       BreadCrumb,
       Screenfull,
