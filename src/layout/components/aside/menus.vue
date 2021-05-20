@@ -90,7 +90,7 @@
       const { prefixCls } = useDesign('sider-menu');
       const { getCollapsed } = useMenuSetting();
       const { basePath, siderType } = context;
-      console.log(basePath)
+     // console.log(basePath)
       const collapse = computed(() => (unref(getCollapsed) ? 'collapse' : 'expend'));
       const activeTab = computed(() => routeStore.activeTag);
       //console.log(activeTab.value, basePath, '123');

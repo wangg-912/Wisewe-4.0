@@ -1,6 +1,6 @@
 <template>
   <span v-if="type" :calss="`${prefixCls}`">
-    <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px` }"></i>
+    <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px`, padding:closely?'0':'0 4px'}"></i>
   </span>
 </template>
 <script lang="ts">
@@ -20,6 +20,10 @@
       size: {
         type: String as PropType<string>,
         default: '16',
+      },
+      closely: {
+        type: Boolean as PropType<boolean>,
+        default: false,
       },
     },
     setup(props) {
@@ -41,7 +45,6 @@
     align-items: center;
     justify-content: center;
     &-icon {
-      padding: 4px;
       color: inherit !important;
     }
   }

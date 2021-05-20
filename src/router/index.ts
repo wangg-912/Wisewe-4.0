@@ -2,7 +2,6 @@ import type { App } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { createGuard } from './guard/';
-/* import { basicRoutes } from './routes/'; */
 import { scrollBehavior } from './scrollBehavior';
 import { IMenubarList, AppRouteRecordRaw } from './types';
 
@@ -65,7 +64,9 @@ export const constantRouterMap: Array<IMenubarList> = [
     redirect: '/home',
     name: 'Root',
     meta: {
-      hidden:true,
+      title: '首页',
+      icon: 'el-icon-s-home',
+      hidden: true,
     },
     children: [
       {
@@ -76,7 +77,6 @@ export const constantRouterMap: Array<IMenubarList> = [
           title: '首页',
           icon: 'el-icon-s-home',
           affix: true,
-          hidden:true,
         },
       },
     ],
@@ -173,7 +173,6 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         ],
       },
       {
-        id: '107455581991731200',
         name: 'DangYuanYiDongGuanLi',
         path: 'dangyuanyidongguanli',
         redirect: '/dangwuxitong/dangyuanyidongguanli/dangzuzhiguanxizhuanru',
