@@ -90,13 +90,20 @@
 
 [MIT © Wisewe-V4](./LICENSE)
 ## 项目目录
+
 ```
 evolution-v4
 ├─ .editorconfig
 ├─ .env
+├─ .env.development
+├─ .env.production
 ├─ .eslintignore
 ├─ .eslintrc.js
 ├─ babel.config.js
+├─ build
+│  ├─ utils.ts
+│  └─ vite
+│     └─ proxy.ts
 ├─ favicon.ico
 ├─ index.html
 ├─ LICENSE
@@ -105,16 +112,16 @@ evolution-v4
 ├─ postcss.config.js
 ├─ prettier.config.js
 ├─ public
-│  └─ favicon.ico
+│  ├─ 404.html
+│  ├─ favicon.ico
+│  └─ logo.png
 ├─ README.md
-├─ reusify
 ├─ src
 │  ├─ api
 │  │  └─ app.ts
 │  ├─ App.vue
 │  ├─ assets
 │  │  ├─ fonts
-│  │  │  ├─ iconfont.eot
 │  │  │  ├─ iconfont.ttf
 │  │  │  ├─ iconfont.woff
 │  │  │  └─ iconfont.woff2
@@ -137,6 +144,12 @@ evolution-v4
 │  │  │     │  └─ index.vue
 │  │  │     ├─ AppProvider
 │  │  │     │  └─ index.vue
+│  │  │     ├─ search
+│  │  │     │  ├─ AppSearch.vue
+│  │  │     │  ├─ AppSearchFooter.vue
+│  │  │     │  ├─ AppSearchModal.vue
+│  │  │     │  ├─ useSearch.ts
+│  │  │     │  └─ useSearchScroll.ts
 │  │  │     └─ useAppContext.ts
 │  │  ├─ Drawer
 │  │  │  ├─ index.ts
@@ -161,6 +174,8 @@ evolution-v4
 │  ├─ config
 │  │  ├─ initAppConfig.ts
 │  │  └─ shortName.ts
+│  ├─ directives
+│  │  └─ clickOutside.ts
 │  ├─ enums
 │  │  ├─ appEnum.ts
 │  │  ├─ cacheEnum.ts
@@ -171,9 +186,11 @@ evolution-v4
 │  │  │  ├─ useAttrs.ts
 │  │  │  ├─ useContext.ts
 │  │  │  ├─ useDebounce.ts
+│  │  │  ├─ useRefs.ts
 │  │  │  └─ useThrottle.ts
 │  │  ├─ event
-│  │  │  └─ useEventListener.ts
+│  │  │  ├─ useEventListener.ts
+│  │  │  └─ useKeyPress.ts
 │  │  ├─ setting
 │  │  │  ├─ index.ts
 │  │  │  ├─ useHeaderSetting.ts
@@ -210,6 +227,8 @@ evolution-v4
 │  │  │  │  │  └─ Trigger.vue
 │  │  │  │  ├─ enums.ts
 │  │  │  │  ├─ index.scss
+│  │  │  │  └─ index.vue
+│  │  │  ├─ mix-tabs
 │  │  │  │  └─ index.vue
 │  │  │  ├─ setting
 │  │  │  │  ├─ components
@@ -250,8 +269,9 @@ evolution-v4
 │  │  ├─ helper
 │  │  │  └─ routeHelper.ts
 │  │  ├─ index.ts
+│  │  ├─ routes
 │  │  ├─ scrollBehavior.ts
-│  │  └─ types.ts
+│  │  └─ types.d.ts
 │  ├─ settings
 │  │  ├─ designSetting.ts
 │  │  ├─ encryptionSetting.ts
@@ -261,7 +281,8 @@ evolution-v4
 │  │  └─ modules
 │  │     ├─ app.ts
 │  │     ├─ route.ts
-│  │     └─ tag.ts
+│  │     ├─ tag.ts
+│  │     └─ user.ts
 │  ├─ style
 │  │  ├─ common.scss
 │  │  ├─ icons.scss
@@ -286,6 +307,8 @@ evolution-v4
 │  │  │  └─ storageCache.ts
 │  │  ├─ color.ts
 │  │  ├─ constant.ts
+│  │  ├─ date.ts
+│  │  ├─ dom.ts
 │  │  ├─ encryption
 │  │  │  └─ aesEncryption.ts
 │  │  ├─ env.ts
@@ -296,17 +319,23 @@ evolution-v4
 │  │  ├─ helper
 │  │  │  ├─ envHelper.ts
 │  │  │  ├─ persistent.ts
+│  │  │  ├─ treeHelper.ts
 │  │  │  ├─ vueHelper.ts
 │  │  │  └─ vuexHelper.ts
 │  │  ├─ log.ts
 │  │  ├─ pinyin.ts
 │  │  ├─ propTypes.ts
 │  │  ├─ request.ts
+│  │  ├─ resolve.ts
 │  │  ├─ themeColor.ts
 │  │  └─ tools.ts
 │  └─ views
 │     ├─ error
 │     │  └─ 404.vue
+│     ├─ level
+│     │  ├─ Menu111.vue
+│     │  ├─ Menu12.vue
+│     │  └─ Menu2.vue
 │     └─ system
 │        └─ redirect.vue
 ├─ stylelint.config.js
