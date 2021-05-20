@@ -26,7 +26,7 @@
       />
     </div>
     <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
-      <div :class="`${prefixCls}-right--item`" v-if="!getIsMobile">
+      <div :class="`${prefixCls}-right--item`">
         <AppSearch />
       </div>
       <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">

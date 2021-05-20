@@ -94,7 +94,7 @@
       const getIsNotData = computed(() => {
         return !keyword || unref(searchResult).length === 0;
       });
-      
+
       function handleClose() {
         searchResult.value = [];
         emit('close');
@@ -131,6 +131,42 @@
     padding-top: 50px;
     background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
+
+    &--mobile {
+      padding: 0;
+
+      > div {
+        width: 100%;
+      }
+      .#{$namespace}-app-search-modal-input {
+        width: calc(100% - 38px);
+      }
+
+      .#{$namespace}-app-search-modal-cancel {
+        display: inline-block;
+      }
+
+      .#{$namespace}-app-search-modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+      }
+
+      .#{$namespace}-app-search-footer{
+        display: none;
+      }
+
+      .#{$namespace}-app-search-modal-list {
+        height: calc(100% - 80px);
+        max-height: unset;
+
+        &__item {
+          &-enter {
+            opacity: 0 !important;
+          }
+        }
+      }
+    }
 
     &-content {
       position: relative;
