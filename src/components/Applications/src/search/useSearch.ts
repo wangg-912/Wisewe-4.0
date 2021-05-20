@@ -47,7 +47,6 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   });
 
   function search(searchKey: string) {
-    debugger;
     keyword.value = searchKey.trim();
     if (!searchKey) {
       searchResult.value = [];
@@ -127,7 +126,6 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
 
   async function handleEnter() {
-    debugger;
     if (!searchResult.value.length) return;
     const result = unref(searchResult);
     const index = unref(activeIndex);
@@ -141,7 +139,6 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
 
   function handleClose() {
-    debugger;
     searchResult.value = [];
     emit('close');
   }
