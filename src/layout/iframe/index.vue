@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFrame" style="height:inherit">
+  <div v-if="showFrame" style="height: inherit" :style="styles">
     <template v-for="frame in getFramePages" :key="frame.path">
       <FrameView
         v-if="frame.meta.frameSrc && hasRenderFrame(frame.name)"
@@ -10,7 +10,8 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+  import { defineComponent, computed, unref, reactive, watch, toRefs } from 'vue';
+  import { useRouter } from 'vue-router'
   import FrameView from './iframeView.vue';
   import { useFrameKeepAlive } from './useFrameKeepAlive';
   export default defineComponent({
@@ -18,13 +19,28 @@
     components: { FrameView },
     setup() {
       const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
-      const showFrame = computed(() => unref(getFramePages).length > 0);
-      /* console.log(getFramePages) */
+      const showFrame = computed(() =>unref(getFramePages).length > 0);
+      const state = reactive({
+        styles: {
+          display: 'none',
+        }
+      })
+      const useRouterCurrent = reactive(useRouter());
+      watch(useRouterCurrent, (o) => {
+        const { meta } = o.currentRoute;
+        state.styles = Object.assign(
+          {},
+          {
+            display: meta?.frameSrc ? 'block' : 'none',
+          }
+        );
+      });
       return {
         getFramePages,
         hasRenderFrame,
         showIframe,
         showFrame,
+        ...toRefs(state),
       };
     },
   });
