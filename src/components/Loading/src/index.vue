@@ -120,14 +120,14 @@
       &-dot {
         position: relative;
         display: inline-block;
-        font-size: 48px;
-        width: 1em;
-        height: 1em;
+        font-size: 32px;
+        width: 48px;
+        height: 48px;
         &-item {
           position: absolute;
           display: block;
-          width: 18px;
-          height: 18px;
+          width: 20px;
+          height: 20px;
           background-color: #0084f4;
           border-radius: 100%;
           transform: scale(.75);
@@ -165,11 +165,12 @@
         animation: spinRotate 1.2s linear infinite;
       }
       &-text{
-        padding-top: 15px;
+        margin-top: 30px;
+        font-size: 22px;
         text-shadow: 0 1px 2px #fff;
-        font-size:20px;
-        font-weight: 600;
-        color: #0084f4;
+        color: rgba(0, 0, 0, 0.85);
+        justify-content: center;
+        align-items: center;
       }
     }
   }

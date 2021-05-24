@@ -1,7 +1,7 @@
 <template>
-  <span v-if="type" :calss="`${prefixCls}`">
+  <em v-if="type" :calss="`${prefixCls}`">
     <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px`, padding:closely?'0':'0 4px'}"></i>
-  </span>
+  </em>
 </template>
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';

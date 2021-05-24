@@ -29,20 +29,23 @@
       <div :class="`${prefixCls}-right--item`">
         <AppSearch />
       </div>
-      <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
-        <el-badge is-dot type="danger">
-          <i class="el-icon-bell" size="18"></i>
-        </el-badge>
-      </div>
       <div v-if="getShowFullScreen && !getIsMobile" :class="`${prefixCls}-right--item`">
         <Screenfull />
+      </div>
+      <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
+        <el-badge type="danger" :value="200" :max="99">
+          <i class="el-icon-bell" size="18"></i>
+        </el-badge>
       </div>
       <div :class="`${prefixCls}-right--item`">
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown>
-          <span class="el-dropdown-link drop--user--text" style="font-size: 12px">管理员</span>
+          <span class="el-dropdown-link drop--user--text" style="font-size: 12px">
+            管理员
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="modify">
