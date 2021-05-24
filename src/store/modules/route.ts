@@ -3,7 +3,7 @@ import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-dec
 import { appStore } from '/@/store/modules/app';
 import { userStore } from '/@/store/modules/user';
 import store from '/@/store';
-import { asyncRouterMap, constantRouterMap } from '/@/router'
+import { constantRouterMap, asyncRouterMap } from '/@/router'
 import { IMenubarList } from '/@/router/types';
 import { deepClone } from '/@/utils/tools';
 
@@ -16,6 +16,7 @@ class App extends VuexModule {
   //路由
   public routes: IMenubarList = [];
   public addRouters = [] as any[];
+  public dynamicRoutes = [] as any[];
   public isAddRouters = false;
   public menuTabRouters = [] as any[];
   public activeTag = '';
@@ -41,6 +42,10 @@ class App extends VuexModule {
     ])
    /*  this.routes = routes; */
     this.routes = deepClone(constantRouterMap, ['component']).concat(routes)
+  }
+  @Mutation
+  private SETDYNAMICROUTES(routes: IMenubarList): void {
+    this.dynamicRoutes = [...routes];
   }
 
   @Mutation
@@ -68,14 +73,17 @@ class App extends VuexModule {
   public setAcitveTab(activeTag: string): void {
     this.SETACTIVETAB(activeTag)
   }
-
+  @Action
+  public setDynamicRoutes(routes: AppRouteRecordRaw[]): void {
+    this.SETDYNAMICROUTES(routes);
+  }
   @Action
   public GenerateRoutes(): Promise<unknown> {
     return new Promise((resolve) => {
       let routerMap: AppRouteRecordRaw[] = [];
-      if (asyncRouterMap.length) {
-        routerMap = generateRoutes(deepClone(asyncRouterMap, ['component']));
-        //routerMap = [...asyncRouterMap];
+      const dyRoutes = this.dynamicRoutes || asyncRouterMap;
+      if (dyRoutes.length) {
+        routerMap = generateRoutes(deepClone(dyRoutes, ['component']));
       }
       this.SETROUTES(routerMap);
       resolve();

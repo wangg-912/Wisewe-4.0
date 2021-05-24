@@ -19,7 +19,7 @@
     components: { FrameView },
     setup() {
       const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
-      const showFrame = computed(() =>unref(getFramePages).length > 0);
+      const showFrame = computed(() => unref(getFramePages).length > 0);
       const state = reactive({
         styles: {
           display: 'none',

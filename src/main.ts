@@ -25,4 +25,4 @@ if (isDevMode()) {
   app.config.performance = true;
   window.__APP__ = app;
 }
-window.process.cwd = () => '';
+window.process = { cwd: () => '' };

@@ -16,8 +16,6 @@ export interface ViteEnv {
 export function wrapperEnv(envConf: any): ViteEnv {
   const ret: any = {};
   const env = import.meta.env;
-  console.log(env)
-  console.log(process.env)
   for (const envName of Object.keys(envConf)) {
     let realName = envConf[envName].replace(/\\n/g, '\n');
     realName = realName === 'true' ? true : realName === 'false' ? false : realName;

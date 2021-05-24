@@ -75,6 +75,7 @@
   import { useFiles } from '/@/hooks/theme/useFiles';
   import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
   import { getMenusDate } from '/@/api/app';
+  import { generatorDynamicRouter } from '/@/router/utils'
 
   /* import router from '/@/router'; */
   export default defineComponent({
@@ -150,16 +151,34 @@
         .then((res) => {
           const { success, content } = res.data;
           if (success) { */
-            routeStore.GenerateRoutes().then(() => {
+            /* routeStore.GenerateRoutes().then(() => {
               routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
                 await addRoute(route.name!, route); // 动态添加可访问路由表
               });
               routeStore.setIsAddRouters(true);
               push({ path: redirect.value || '/' });
-            });
+            }); */
          /*  }
         })
         .then((err) => {}); */
+
+      getMenusDate()
+        .then((res) => {
+          const { success, content } = res.data;
+          if (success) { 
+            generatorDynamicRouter(content).then((routes)=>{
+              routeStore.setDynamicRoutes(routes);
+              routeStore.GenerateRoutes().then(() => {
+                routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
+                  await addRoute(route.name!, route); // 动态添加可访问路由表
+                });
+                routeStore.setIsAddRouters(true);
+                push({ path: redirect.value || '/' });
+              });
+            });
+          }
+        })
+        .then((err) => {});
       return {
         prefixCls,
         getShowMenu,
