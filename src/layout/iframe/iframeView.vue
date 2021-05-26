@@ -25,7 +25,7 @@
         $frame.onload = function(){
           const { contentWindow } = $frame;
           if(contentWindow.document.body && !contentWindow.document.body.innerHTML){
-            $frame.src = import.meta.env.MODE=='development'?'/public/404.html':'/404.html';
+            $frame.src = '/404.html';
           }
           
         }

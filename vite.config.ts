@@ -78,7 +78,7 @@ export default ({ command, mode }): UserConfig => {
       rollupOptions: {
         output: { manualChunks: { 'element-plus': ['element-plus'] } },
       },
-      chunkSizeWarningLimit: 1500,
+      chunkSizeWarningLimit: 1900,
     },
     optimizeDeps: {
       include: ['axios', 'nprogress'],

@@ -147,21 +147,6 @@
           immediate: true,
         }
       );
-      /* getMenusDate()
-        .then((res) => {
-          const { success, content } = res.data;
-          if (success) { */
-            /* routeStore.GenerateRoutes().then(() => {
-              routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
-                await addRoute(route.name!, route); // 动态添加可访问路由表
-              });
-              routeStore.setIsAddRouters(true);
-              push({ path: redirect.value || '/' });
-            }); */
-         /*  }
-        })
-        .then((err) => {}); */
-
       getMenusDate()
         .then((res) => {
           const { success, content } = res.data;
