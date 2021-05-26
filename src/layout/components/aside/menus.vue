@@ -1,25 +1,6 @@
 <template>
-  <template
-    v-if="
-      hasOneShowingChild(menu.children, menu) &&
-      (!onlyOneChild.children || onlyOneChild.noShowingChildren) &&
-      !menu.meta?.affix
-    "
-  >
-    <MenuItem
-      v-if="!menu.meta?.hidden"
-      :vpath="resolvePath(onlyOneChild.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
-      :item="menu"
-      :class="[
-        `${prefixCls}--${theme}-item`,
-        `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
-        `${prefixCls}--${siderType}-icon`,
-      ]"
-      :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
-    />
-  </template>
   <el-submenu
-    v-else
+    v-if="menu.children && menu.children.length && !menu.meta?.hidden"
     :index="resolvePath(menu.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
     :class="[
       `${prefixCls}--${theme}`,
@@ -54,6 +35,19 @@
       :base-path="resolvePath(c.path)"
     />
   </el-submenu>
+  <template v-else-if="hasOneShowingChild(menu.children, menu) && !menu.meta?.hidden">
+    <MenuItem
+      v-if="!menu.meta?.hidden"
+      :vpath="resolvePath(onlyOneChild.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
+      :item="menu"
+      :class="[
+        `${prefixCls}--${theme}-item`,
+        `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
+        `${prefixCls}--${siderType}-icon`,
+      ]"
+      :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
+    />
+  </template>
 </template>
 <script lang="ts">
   import { resolve } from 'path';
@@ -107,9 +101,6 @@
             return true;
           }
         });
-        if (showingChildren.length === 1) {
-          return true;
-        }
         if (showingChildren.length === 0) {
           onlyOneChild.value = { ...parent, path: '', noShowingChildren: true };
           return true;
@@ -121,8 +112,7 @@
        * @param {String} routePath
        * @param {String} otherPath
        */
-      function resolvePath(routePath: string, otherPath: string ): string {
-        
+      function resolvePath(routePath: string, otherPath: string): string {
         if (isExternal(routePath)) {
           return routePath;
         }

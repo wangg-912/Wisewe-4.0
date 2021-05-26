@@ -12,7 +12,6 @@ export interface IMenuMeta {
   affix?: boolean;
   frameSrc?: string;
   frameOpenType?: string;
-  activeMenu?: string;
   noCache?: boolean;
   hidden?: boolean;
   hideTag?: boolean;

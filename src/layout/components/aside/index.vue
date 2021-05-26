@@ -12,7 +12,7 @@
         <el-menu
           :mode="navMode"
           :collapse="isCollapse"
-          :uniqueOpened="true"
+          :unique-opened="false"
           :default-active="activeMenu"
           :class="[
             `${prefixCls}-aside`,
@@ -73,13 +73,13 @@
         getMenuType,
       } = useMenuSetting();
       const { getIsMobile } = useAppInject();
-      const { currentRoute, push } = useRouter();
+      const { currentRoute } = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const activeMenu = computed(() => {
-        const { meta, path } = currentRoute.value;
-        if (meta.activeMenu) {
-          return meta.activeMenu;
-        }
+        const { matched, path } = currentRoute.value;
+        /* if(!meta.leaf){
+          
+        } */
         return path;
       })
       const menusWidth = computed(() => {

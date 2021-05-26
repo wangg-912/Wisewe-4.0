@@ -32,7 +32,9 @@ export const constantRouterMap: Array<IMenubarList> = [
       {
         path: '/redirect/:path*',
         component: components['Redirect'],
-        meta: {},
+        meta: {
+          title: 'Redirect',
+        },
       },
     ],
     meta: {
@@ -60,9 +62,9 @@ export const constantRouterMap: Array<IMenubarList> = [
   },
   {
     path: '/',
-    component: components['Layout'],
-    redirect: '/home',
     name: 'Root',
+    redirect: '/home',
+    component: components['Layout'],
     meta: {
       title: '工作台',
       icon: 'el-icon-s-home',
@@ -70,11 +72,12 @@ export const constantRouterMap: Array<IMenubarList> = [
     children: [
       {
         path: 'home',
-        component: components['Home'],
         name: 'Home',
+        component: components['Home'],
         meta: {
           title: '统计分析',
           icon: 'el-icon-s-home',
+          noCache: true,
           affix: true,
         },
       },
