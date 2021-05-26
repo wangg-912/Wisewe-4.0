@@ -1,5 +1,5 @@
 <template>
-  <em v-if="type" :calss="`${prefixCls}`">
+  <em v-if="type" :class="`${prefixCls}`">
     <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px`, padding:closely?'0':'0 4px'}"></i>
   </em>
 </template>

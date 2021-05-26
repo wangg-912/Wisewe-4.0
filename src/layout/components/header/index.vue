@@ -19,11 +19,14 @@
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
-      <LayoutSider
-        v-if="`${siderType}` == 'top-menu'"
-        :navMode="siderType == 'top-menu' ? 'horizontal' : 'vertical'"
-        :siderType="siderType"
-      />
+      <el-scrollbar>
+        <LayoutSider
+          v-if="`${siderType}` == 'top-menu'"
+          style="max-width: 1280px;display: flex;"
+          :navMode="siderType == 'top-menu' ? 'horizontal' : 'vertical'"
+          :siderType="siderType"
+        />
+      </el-scrollbar>
     </div>
     <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
       <div :class="`${prefixCls}-right--item`">
