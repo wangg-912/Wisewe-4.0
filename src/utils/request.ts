@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
-
+const ENV = import.meta.env;
+const { VITE_SERVICE_BASE_API } = ENV;
+console.log(import.meta.env)
 /* let loading: { close(): void }; */
 const request = axios.create({
   // API 请求的默认前缀
-  baseURL: import.meta.env.VUE_APP_API_BASE_URL as string | undefined,
+  baseURL: `${VITE_SERVICE_BASE_API}`,
   timeout: 60000, // 请求超时时间
 });
 
