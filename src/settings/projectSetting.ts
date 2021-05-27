@@ -34,6 +34,7 @@ const setting: ProjectConfig = {
   mobileTrigger: false,
   // 显示底部版权
   showfooter: false,
+  waterMark: false,
   // 头部配置
   headerSetting: {
     // 头部背景颜色

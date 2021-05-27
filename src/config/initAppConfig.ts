@@ -7,12 +7,14 @@ import { appStore } from '/@/store/modules/app';
 import { updateHeaderBgColor, updateSidebarBgColor } from '/@/theme/updateBackground';
 import { updateColorWeak } from '/@/theme/updateColorWeak';
 import { updateGrayMode } from '/@/theme/updateGrayMode';
+import { useWatermark } from '/@/hooks/web/useWatermark';
 
 import { deepMerge } from '/@/utils/tools';
 
 export function initAppConfigStore() {
   let projCfg: ProjectConfig = getLocal(PROJ_CFG_KEY) as ProjectConfig;
   projCfg = deepMerge(projectSetting, projCfg || {});
+  const { setWatermark, clear } = useWatermark();
   /* debugger; */
   try {
     const {
@@ -21,6 +23,7 @@ export function initAppConfigStore() {
       themeColor,
       headerSetting: { bgColor: headerBgColor } = {},
       menuSetting: { bgColor } = {},
+      waterMark,
     } = projCfg;
     if (themeColor && themeColor !== '#409eff') {
       //changeTheme(themeColor);
@@ -29,6 +32,7 @@ export function initAppConfigStore() {
     bgColor && updateSidebarBgColor(bgColor);
     grayMode && updateGrayMode(grayMode);
     colorWeak && updateColorWeak(colorWeak);
+    waterMark ? setWatermark('智汇校园管理系统') : clear();
   } catch (error) {
     console.log(error);
   }

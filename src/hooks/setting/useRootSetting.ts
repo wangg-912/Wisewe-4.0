@@ -18,6 +18,7 @@ const getGrayMode = computed(() => unref(getRootSetting).grayMode);
 const getColorWeak = computed(() => unref(getRootSetting).colorWeak);
 const getShowFooter = computed(() => unref(getRootSetting).showfooter);
 const getMobileTriggrState = computed(() => unref(getRootSetting).mobileTrigger);
+const getWaterMark = computed(() => unref(getRootSetting).waterMark);
 function toggleMobileTriggerState(value: boolean) {
   appStore.COMMITPROJECTCONFIGSTATE({
     mobileTrigger: value,
@@ -40,6 +41,7 @@ export function useRootSetting() {
     getColorWeak,
     getShowFooter,
     getMobileTriggrState,
+    getWaterMark,
     toggleMobileTriggerState,
   };
 }

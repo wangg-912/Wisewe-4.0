@@ -58,4 +58,5 @@ export enum HandlerEnum {
   /* transition */
   OPEN_NPROGRESS,
   OPEN_PAGE_LOADING,
+  WATER_MARK,
 }

@@ -9,6 +9,7 @@ import { updateGrayMode } from '/@/theme/updateGrayMode';
 import { updateColorWeak } from '/@/theme/updateColorWeak';
 import { useTagSetting } from '/@/hooks/setting/useTagSetting';
 import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
+import { useWatermark } from '/@/hooks/web/useWatermark';
 /**
  * @description 配置类基础事件处理器
  * @param {HandlerEnum} event 事件枚举
@@ -72,6 +73,7 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
   const { getThemeColor } = useRootSetting();
   const { setMenuSetting } = useTagSetting();
   const { setTransitionSetting } = useTransitionSetting();
+  const { setWatermark, clear } = useWatermark();
   switch (event) {
     /* 更换布局结构 */
     case HandlerEnum.CHANGE_LAYOUT:
@@ -129,6 +131,9 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.COLOR_WEAK:
       updateColorWeak(value);
       return { colorWeak: value };
+    case HandlerEnum.WATER_MARK:
+      value ? setWatermark('智汇校园管理系统') : clear();
+      return { waterMark: value };
     case HandlerEnum.SHOW_FOOTER:
       return { showfooter: value };
     case HandlerEnum.TABS_SHOW:

@@ -25,7 +25,7 @@ function getContextPath(parentPath: string, parent: any, children: any) {
 }
 export function transformDateByRoute(data: any, basePath = '/', level = 'root') {
   const d: Array<IMenubarList> = [];
-  data.forEach((val, index) => {
+  data.forEach((val) => {
     const { text, iconCls, children, leaf, attributes } = val;
     const obj = {
       name: transPinYin(text),
@@ -40,20 +40,16 @@ export function transformDateByRoute(data: any, basePath = '/', level = 'root') 
     };
     if (!leaf) {
       obj.component = level == 'root' ? components['Layout'] : components['PagePanel'];
-      /* obj.redirect =  */
     } else {
       if (attributes && attributes.url && attributes.url.indexOf('html') > -1) {
         obj.meta.frameSrc = attributes.url;
         obj.meta.frameOpenType = attributes.openType;
         obj.component = components['PagePanel'];
       } else {
-        obj.component = ((() => import(`${attributes.url}`)) as unknown) as () => Promise<
-          typeof import('*.vue')
-        >;
+        obj.component = () => import(`${attributes.url}.vue`);
       }
     }
     if (children && children.length) {
-      //TODO 路由拦截逻辑待完善
       let bPath =
         level == 'root'
           ? `/${transPinYin(text, 'lower')}`
