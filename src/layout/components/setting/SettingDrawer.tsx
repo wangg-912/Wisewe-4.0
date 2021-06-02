@@ -173,12 +173,7 @@ export default defineComponent({
           <SwitchItem title="显示水印" event={HandlerEnum.WATER_MARK} def={unref(getWaterMark)} />
           <SwitchItem title="灰色模式" event={HandlerEnum.GRAY_MODE} def={unref(getGrayMode)} />
           <SwitchItem title="色弱模式" event={HandlerEnum.COLOR_WEAK} def={unref(getColorWeak)} />
-
-          <SwitchItem
-            title="显示底部版权"
-            event={HandlerEnum.SHOW_FOOTER}
-            def={unref(getShowFooter)}
-          />
+          <SwitchItem title="显示底部版权" event={HandlerEnum.SHOW_FOOTER} def={unref(getShowFooter)} />
         </>
       );
     }

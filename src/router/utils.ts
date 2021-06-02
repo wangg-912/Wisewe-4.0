@@ -64,7 +64,6 @@ export function transformDateByRoute(data: any, basePath = '/', level = 'root') 
 export function generatorDynamicRouter(data: any): Promise<unknown> {
   return new Promise((resolve) => {
     const routerList: Array<IMenubarList> = transformDateByRoute(data);
-    /* console.log(routerList); */
     const finallyRoutes = [...routerList, ...asyncRouterMap];
     resolve(finallyRoutes);
   });

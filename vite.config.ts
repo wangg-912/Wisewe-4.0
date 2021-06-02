@@ -3,9 +3,11 @@ import { resolve, join } from 'path';
 import { UserConfig } from 'vite';
 import dotenv from 'dotenv';
 import vue from '@vitejs/plugin-vue';
+import legacy from '@vitejs/plugin-legacy'
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import html from 'vite-plugin-html';
 import viteImagemin from 'vite-plugin-imagemin';
+import WindiCSS from 'vite-plugin-windicss'
 import resolveExternalsPlugin from 'vite-plugin-resolve-externals';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createProxy } from './build/vite/proxy';
@@ -35,7 +37,6 @@ export default ({ command, mode }): UserConfig => {
     base: VITE_PUBLIC_PATH,
     define: {
       'process.platform': null,
-      'process.version': null,
     },
     resolve: {
       alias: [
@@ -56,6 +57,7 @@ export default ({ command, mode }): UserConfig => {
     },
     assetsInclude: ['png', 'jpe?g', 'gif', 'svg', 'ico', 'woff2?', 'eot', 'ttf', 'otf'],
     server: {
+      host: '192.168.2.44',
       port: VITE_PORT,
       open: true,
       https: false,
@@ -65,8 +67,6 @@ export default ({ command, mode }): UserConfig => {
       },
     },
     build: {
-      outDir: 'dist',
-      assetsDir: 'assets',
       polyfillDynamicImport: VITE_LEGACY,
       terserOptions: {
         compress: {
@@ -82,10 +82,15 @@ export default ({ command, mode }): UserConfig => {
     },
     optimizeDeps: {
       include: ['axios', 'nprogress'],
+      exclude: ['vue-demi'],
     },
     plugins: [
       vue(),
       vueJsx(),
+      WindiCSS(),
+      legacy({
+        targets: ['defaults', 'not IE 11']
+      }),
       html({
         inject: {
           injectData: {

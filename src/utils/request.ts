@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
 const ENV = import.meta.env;
 const { VITE_SERVICE_BASE_API } = ENV;
-console.log(import.meta.env)
+/* console.log(import.meta.env) */
 /* let loading: { close(): void }; */
 const request = axios.create({
   // API 请求的默认前缀
@@ -61,19 +61,13 @@ const errorHandler = (error: any) => {
       const code = message.substr(message.length - 3);
       message = '服务接口' + code + '异常';
     }
-    ElMessage.error(message || `后端接口未知异常`);
+    ElMessage.error(message || `服务接口未知异常`);
     return Promise.reject(error);
   }
 };
 
 request.interceptors.request.use(
   (config) => {
-    /* loading = ElLoading.service({
-      lock: true,
-      text: 'Loading',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.4)',
-    }); */
     return config;
   },
   (error) => {
@@ -86,7 +80,7 @@ request.interceptors.response.use((response: AxiosResponse) => {
   /* loading.close(); */
   if (!(typeof data == 'object') && data.includes('workspaceVo')) {
     return JSON.parse(data.split('=')[1]);
-  };
+  }
   if (!data.success) {
     ElMessage({
       message: data.message,
