@@ -19,7 +19,7 @@ export function getTransitionName({
   cacheTabs: string[];
 }) {
   const isInCache = cacheTabs.includes(route.name as string);
-  const transitionName = 'el-fade-in-linear';
+  const transitionName = 'fade';
   /* debugger; */
   let name: string | null = transitionName;
 

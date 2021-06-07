@@ -26,7 +26,7 @@ export default defineConfig({
  * @param maxOutput The larger the maxOutput output, the larger the generated css volume
  */
 function createEnterPlugin(maxOutput = 10) {
-  const createCss = (index: number, d = 'x') => {
+  const createCss = (index, d = 'x') => {
     const upd = d.toUpperCase();
     return {
       [`*> .enter-${d}:nth-child(${index})`]: {

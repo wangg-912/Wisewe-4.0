@@ -589,7 +589,7 @@ export function isChinese(temp: string) {
   return true;
 }
 // 转换成拼音（若有空格、特殊字符将被移除）
-export function transPinYin(val: string) {
+export function transPinYin(val: string, type='capital') {
   // 目标数据
   let targetStr = '';
   // 匹配中文
@@ -607,7 +607,7 @@ export function transPinYin(val: string) {
       const searchResult = searchPinYin(str, PinYin);
       if (searchResult) {
         // targetStr += searchResult
-        targetStr += firstCapital(searchResult); // 首字母大写
+        targetStr += type == 'capital' ? firstCapital(searchResult) : searchResult; // 首字母大写
       }
     }
   }

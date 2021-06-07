@@ -1,7 +1,7 @@
 <template>
-  <span v-if="type" :calss="`${prefixCls}`">
-    <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px` }"></i>
-  </span>
+  <em v-if="type" :class="`${prefixCls}`">
+    <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px`, padding:closely?'0':'0 4px'}"></i>
+  </em>
 </template>
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
@@ -21,6 +21,10 @@
         type: String as PropType<string>,
         default: '16',
       },
+      closely: {
+        type: Boolean as PropType<boolean>,
+        default: false,
+      },
     },
     setup(props) {
       const { type, color, size } = props;
@@ -35,13 +39,12 @@
   });
 </script>
 <style lang="scss" scoped>
-  @import './../../style/icons.scss';
+  @import 'https://at.alicdn.com/t/font_603057_wuzvuimjqrd.css';
   .#{$namespace}-font-type {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     &-icon {
-      padding: 4px;
       color: inherit !important;
     }
   }

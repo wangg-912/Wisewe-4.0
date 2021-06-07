@@ -4,13 +4,13 @@ import { AxiosResponse } from 'axios';
 
 export function getWorkVo(): Promise<AxiosResponse> {
   return request({
-    url: '/api/platform/workspace',
+    url: '/platform/workspace',
     method: 'get',
   });
 }
 export function getMenusDate(): Promise<AxiosResponse> {
   return request({
-    url: '/api/platform/permission/menu/tree',
+    url: '/platform/permission/menu/tree',
     method: 'get',
   });
 }

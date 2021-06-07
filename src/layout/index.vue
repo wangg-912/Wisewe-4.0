@@ -83,8 +83,7 @@
       const { getShowMenu, getMenuType } = useMenuSetting();
       const { getIsMobile } = useAppInject();
       const { getTagsShow } = useTagSetting();
-      const { getFontFiles, getIndexStyle, getSeparatedStyles } = useFiles();
-      const fontFiles = ['element-icons.ttf', 'element-icons.woff'];
+      const { getIndexStyle, getSeparatedStyles } = useFiles();
       const siderType = computed(() => unref(getMenuType));
       const colors = reactive({
         primary: '#409eff',
@@ -96,9 +95,9 @@
       /**
        * ==============初始化主题使用================== *
        */
-      getFontFiles(fontFiles).then((data) => {
+      /* getFontFiles(fontFiles).then((data) => {
         fonts.value = data;
-      });
+      }); */
 
       getIndexStyle().then((data) => {
         originalStyle.value = getStyleTemplate(data);
@@ -160,3 +159,4 @@
     min-height: inherit;
   }
 </style>
+

@@ -13,7 +13,6 @@ import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
 import { LoyoutTypePicker, AppTheme, ThemePicker, SwitchItem } from './components';
 import { baseHandler } from './handler';
 import { HandlerEnum, menuTypeList } from './enums';
-
 export default defineComponent({
   name: 'SettingDrawer',
   setup(_, { attrs }) {
@@ -27,6 +26,7 @@ export default defineComponent({
       getGrayMode,
       getThemeColor,
       getShowFooter,
+      getWaterMark,
     } = useRootSetting();
     const {
       getShowHeader,
@@ -47,6 +47,7 @@ export default defineComponent({
     } = useMenuSetting();
     const { getTagsShow, getShowContextmenu, getShowQuick } = useTagSetting();
     const { getOpenNProgress, getOpenPageLoading } = useTransitionSetting();
+   
     /**
      * @description 渲染系统主题
      * @returns {Element} ThemePicker
@@ -58,7 +59,6 @@ export default defineComponent({
             menuTypeList={menuTypeList}
             handler={(item: typeof menuTypeList[0]) => {
               baseHandler(HandlerEnum.CHANGE_LAYOUT, {
-                bgColor: unref(getMenuType) == 'top-menu' ? '#ffffff' : unref(getMenuType),
                 mode: item.mode,
                 type: item.type,
                 split: unref(getIsHorizontal) ? false : undefined,
@@ -170,16 +170,10 @@ export default defineComponent({
             def={unref(getShowBreadCrumbIcon)}
             disabled={!unref(getShowHeader)}
           />
-
+          <SwitchItem title="显示水印" event={HandlerEnum.WATER_MARK} def={unref(getWaterMark)} />
           <SwitchItem title="灰色模式" event={HandlerEnum.GRAY_MODE} def={unref(getGrayMode)} />
-
           <SwitchItem title="色弱模式" event={HandlerEnum.COLOR_WEAK} def={unref(getColorWeak)} />
-
-          <SwitchItem
-            title="显示底部版权"
-            event={HandlerEnum.SHOW_FOOTER}
-            def={unref(getShowFooter)}
-          />
+          <SwitchItem title="显示底部版权" event={HandlerEnum.SHOW_FOOTER} def={unref(getShowFooter)} />
         </>
       );
     }

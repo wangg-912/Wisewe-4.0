@@ -85,7 +85,30 @@ export function isUrl(path: string): boolean {
   const reg = /(((^http|https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
   return reg.test(path);
 }
-
+// 验证网址
+export function isExternal(path: any): boolean {
+  return /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/.test(path)
+}
+export const noop = () => {};
+/**
+ * 查找数组对象的某个下标
+ * @param {Array} ary 查找的数组
+ * @param {Functon} fn 判断的方法
+ */
+export function findIndex(ary: any, fn: Function): number {
+  if (ary.findIndex) {
+    return ary.findIndex(fn);
+  }
+  let index = -1;
+  ary.some((item: any, i: number, ary: any) => {
+    const ret: any = fn(item, i, ary);
+    if (ret) {
+      index = i;
+      return ret;
+    }
+  })
+  return index;
+}
 export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
   let key: string;
   for (key in target) {
@@ -111,5 +134,5 @@ export function deepClone(source: any, noClone: string[] = []): any {
       targetObj[keys] = source[keys]
     }
   })
-  return targetObj
+  return targetObj;
 }

@@ -4,6 +4,7 @@
   "scripts": {
     "bootstrap": "yarn install",
     "dev": "vite",
+    "dev:debug": "vite --debug",
     "build": "vite build",
     "build:no-cache": "yarn clean:cache && npm run build",
     "report": "cross-env REPORT=true npm run build",
@@ -35,6 +36,7 @@
     "@types/qs": "^6.9.5",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "@vitejs/plugin-legacy": "^1.4.1",
     "@vitejs/plugin-vue": "^1.1.4",
     "@vitejs/plugin-vue-jsx": "^1.1.2",
     "@vue/compiler-sfc": "^3.0.5",
@@ -49,6 +51,7 @@
     "path": "^0.12.7",
     "prettier": "^2.2.1",
     "qs": "^6.9.6",
+    "rollup-plugin-visualizer": "^5.5.0",
     "sass": "^1.32.8",
     "stylelint": "^13.11.0",
     "stylelint-config-prettier": "^8.0.2",
@@ -75,5 +78,8 @@
       "eslint --fix",
       "prettier"
     ]
+  },
+  "engines": {
+    "node": "^12 || ^14 || ^15 || ^16"
   }
 }

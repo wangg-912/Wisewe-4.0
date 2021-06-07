@@ -34,7 +34,6 @@ export const PAGE_NOT_FOUND_ROUTE: IMenubarList = {
       meta: {
         hidden: true,
         title: '404',
-        hidden: true,
         hideTag: true,
         hideMenu: true,
       },

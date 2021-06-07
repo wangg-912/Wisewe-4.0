@@ -27,8 +27,7 @@
       const fonts = ref(null);
       const styleFiles = ref(null);
       const originalStyle = ref('');
-      const { getFontFiles, getIndexStyle, getSeparatedStyles } = useFiles();
-      const fontFiles = ['element-icons.ttf', 'element-icons.woff'];
+       const { getIndexStyle, getSeparatedStyles } = useFiles();
       const { prefixCls } = useDesign('app-theme');
       const { getThemeColor } = useRootSetting();
       const colors = reactive({
@@ -38,9 +37,9 @@
         return document.styleSheets.length || -1;
       });
 
-      getFontFiles(fontFiles).then((data) => {
+      /* getFontFiles(fontFiles).then((data) => {
         fonts.value = data;
-      });
+      }); */
 
       getIndexStyle().then((data) => {
         originalStyle.value = getStyleTemplate(data);

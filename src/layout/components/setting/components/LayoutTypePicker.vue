@@ -21,7 +21,7 @@
 <script lang="ts">
   import { defineComponent, watchEffect, PropType, ref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { menuTypeList } from '/@/layout/components/header/enums';
+  import { menuTypeList } from '../enums';
   export default defineComponent({
     name: 'LayoutTypePicker',
     props: {
@@ -124,7 +124,33 @@
           background-color: #273352;
         }
       }
+      &--mix-sidebar {
+        &::before {
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 25%;
+          height: 100%;
+          background-color: #273352;
+          border-radius: 4px 0 0 4px;
+        }
 
+        &::after {
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 25%;
+          background-color: #fff;
+        }
+
+        .mix-sidebar {
+          position: absolute;
+          left: 25%;
+          width: 15%;
+          height: 100%;
+          background-color: #fff;
+        }
+      }
       // &::after {
       //   position: absolute;
       //   top: 50%;

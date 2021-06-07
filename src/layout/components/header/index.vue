@@ -19,30 +19,36 @@
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
-      <LayoutSider
-        v-if="`${siderType}` == 'top-menu'"
-        :navMode="siderType == 'top-menu' ? 'horizontal' : 'vertical'"
-        :siderType="siderType"
-      />
+      <el-scrollbar>
+        <LayoutSider
+          v-if="`${siderType}` == 'top-menu'"
+          style="max-width: 1280px;display: flex;"
+          :navMode="siderType == 'top-menu' ? 'horizontal' : 'vertical'"
+          :siderType="siderType"
+        />
+      </el-scrollbar>
     </div>
     <div :class="[`${prefixCls}-right`, `${prefixCls}-right--${headerTheme}`]">
-      <div :class="`${prefixCls}-right--item`" v-if="!getIsMobile">
-        <i class="el-icon-search" size="18"></i>
-      </div>
-      <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
-        <el-badge is-dot type="danger">
-          <i class="el-icon-bell" size="18"></i>
-        </el-badge>
+      <div :class="`${prefixCls}-right--item`">
+        <AppSearch />
       </div>
       <div v-if="getShowFullScreen && !getIsMobile" :class="`${prefixCls}-right--item`">
         <Screenfull />
+      </div>
+      <div v-if="getShowNotice" :class="`${prefixCls}-right--item`">
+        <el-badge type="danger" :value="200" :max="99">
+          <i class="el-icon-bell" size="18"></i>
+        </el-badge>
       </div>
       <div :class="`${prefixCls}-right--item`">
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown>
-          <span class="el-dropdown-link drop--user--text" style="font-size: 12px">管理员</span>
+          <span class="el-dropdown-link drop--user--text" style="font-size: 12px">
+            管理员
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="modify">
@@ -70,7 +76,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { SettingButtonPositionEnum } from '/@/enums/appEnum';
-  import { AppLogo } from '/@/components/Applications';
+  import { AppLogo, AppSearch } from '/@/components/Applications';
   import BreadCrumb from './components/BreadCrumb.vue';
   import LayoutTrigger from './components/Trigger.vue';
   import Screenfull from './components/Screenfull.vue';
@@ -89,6 +95,7 @@
     },
     components: {
       AppLogo,
+      AppSearch,
       LayoutTrigger,
       BreadCrumb,
       Screenfull,

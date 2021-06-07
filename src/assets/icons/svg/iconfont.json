@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "81050",
+      "name": "up",
+      "font_class": "shangjiantou",
+      "unicode": "e8a0",
+      "unicode_decimal": 59552
+    },
+    {
+      "icon_id": "8334285",
+      "name": "ESC",
+      "font_class": "ESC",
+      "unicode": "e8a2",
+      "unicode_decimal": 59554
+    },
+    {
+      "icon_id": "15170141",
+      "name": "down",
+      "font_class": "down",
+      "unicode": "e8a3",
+      "unicode_decimal": 59555
+    },
+    {
+      "icon_id": "20157809",
+      "name": "enter",
+      "font_class": "enter",
+      "unicode": "e8a4",
+      "unicode_decimal": 59556
+    },
+    {
       "icon_id": "61107",
       "name": "办理过程",
       "font_class": "banliguocheng",

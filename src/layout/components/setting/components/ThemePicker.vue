@@ -44,7 +44,6 @@
       },
     },
     setup(props) {
-      /* debugger; */
       const { prefixCls } = useDesign('setting-theme-picker');
       /**
        * @description 主题切换事件入口
