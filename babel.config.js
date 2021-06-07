@@ -13,6 +13,15 @@ module.exports = {
         'libraryName': 'element-plus',
         'styleLibraryName': 'theme-chalk'
       }
-    ]
+    ],
+    function () {
+      return {
+        visitor: {
+          MetaProperty(path) {
+            path.replaceWithSourceString('process')
+          },
+        },
+      }
+    },
   ]
 }

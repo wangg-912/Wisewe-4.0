@@ -20,11 +20,16 @@
         type: String as PropType<string>,
         default: '',
       },
+      vpath: {
+        type: String as PropType<string>,
+        default: '',
+      },
     },
     components: { FontIcon },
     setup(context) {
+      //console.log(context.vpath,"456")
       return {
-        iPath: context.item.path,
+        iPath: context.vpath,
         iName: context.item.name,
         iIcon: context.item.meta && context.item.meta.icon,
         iTitle: context.item.meta && context.item.meta.title,

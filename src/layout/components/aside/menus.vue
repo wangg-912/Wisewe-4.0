@@ -1,14 +1,13 @@
 <template>
   <el-submenu
-    v-if="haChild && !menu.meta?.hidden"
-    :index="menu.path"
+    v-if="menu.children && menu.children.length && !menu.meta?.hidden"
+    :index="resolvePath(menu.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
     :class="[
       `${prefixCls}--${theme}`,
       `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}`,
       `${prefixCls}--${siderType}`,
     ]"
   >
-  
     <template #title>
       <font-icon
         v-if="menu.meta.icon"
@@ -19,11 +18,7 @@
           `${prefixCls}--${siderType}-icon`,
         ]"
         :color="
-          `${siderType}` !== 'top-menu'
-            ? `${collapse}` == 'collapse'
-              ? '#ffffff'
-              : ''
-            : '#333333'
+          `${siderType}` !== 'top-menu' ? (`${collapse}` == 'collapse' ? '#ffffff' : '') : '#333333'
         "
       />
       <span v-if="menu.meta && menu.meta.title" :class="`${prefixCls}--${theme}_sub-title`">{{
@@ -32,33 +27,37 @@
     </template>
     <!-- TODO -->
     <MenuItems
-      v-if="menu.children && menu.children.length"
       v-for="c in menu.children"
       :key="c.name"
       :menu="c"
-      :index="c.path"
       :theme="theme"
       :siderType="siderType"
+      :base-path="resolvePath(c.path)"
     />
   </el-submenu>
-  <MenuItem
-    v-else
-    v-if="!menu.meta?.hidden"
-    :index="menu.path"
-    :item="menu"
-    :class="[
-      `${prefixCls}--${theme}-item`,
-      `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
-      `${prefixCls}--${siderType}-icon`,
-    ]"
-    :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
-  />
+  <template v-else-if="hasOneShowingChild(menu.children, menu) && !menu.meta?.hidden">
+    <MenuItem
+      v-if="!menu.meta?.hidden"
+      :vpath="resolvePath(onlyOneChild.path, showMenuTab ? `${activeTab}/${basePath}` : '')"
+      :item="menu"
+      :class="[
+        `${prefixCls}--${theme}-item`,
+        `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
+        `${prefixCls}--${siderType}-icon`,
+      ]"
+      :color="`${collapse}` == 'collapse' ? '#ffffff' : ''"
+    />
+  </template>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref, PropType } from 'vue';
+  import { resolve } from 'path';
+  import { defineComponent, computed, unref, PropType, ref } from 'vue';
+  import { RouteRecordRaw } from 'vue-router';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { isExternal } from '/@/utils/tools';
+  import { routeStore } from '/@/store/modules/route';
   import FontIcon from '/@/components/FontIcon/index.vue';
   import MenuItem from './item.vue';
   export default defineComponent({
@@ -73,27 +72,60 @@
         type: String as PropType<string>,
         default: 'sidebar',
       },
+      basePath: {
+        type: String as PropType<string>,
+        default: '',
+      },
     },
+    // eslint-disable-next-line vue/order-in-components
     components: { MenuItem, FontIcon },
     setup(context) {
+      const onlyOneChild = ref<any>(null);
       const { prefixCls } = useDesign('sider-menu');
       const { getCollapsed } = useMenuSetting();
-      const { menu } = context;
+      const { basePath, siderType } = context;
+      // console.log(basePath)
       const collapse = computed(() => (unref(getCollapsed) ? 'collapse' : 'expend'));
-      /* debugger; */
-      const cmenuList = computed(() => {
-        if (menu.children) return menu.children.filter((v) => !v.meta.hidden);
-        return [];
-      });
-
-      /* onMounted(() => {
-        console.log(context.menu);
-      }); */
-      /*  */
+      const activeTab = computed(() => routeStore.activeTag);
+      //console.log(activeTab.value, basePath, '123');
+      const showMenuTab = computed(() => siderType === 'mix-sidebar');
+      function hasOneShowingChild(
+        children: RouteRecordRaw[] = [],
+        parent: RouteRecordRaw
+      ): boolean {
+        const showingChildren: RouteRecordRaw[] = children.filter((item: RouteRecordRaw) => {
+          if (item.meta && item.meta.hidden) {
+            return false;
+          } else {
+            onlyOneChild.value = item;
+            return true;
+          }
+        });
+        if (showingChildren.length === 0) {
+          onlyOneChild.value = { ...parent, path: '', noShowingChildren: true };
+          return true;
+        }
+        return false;
+      }
+      /**
+       * @description 路径整合
+       * @param {String} routePath
+       * @param {String} otherPath
+       */
+      function resolvePath(routePath: string, otherPath: string): string {
+        if (isExternal(routePath)) {
+          return routePath;
+        }
+        return otherPath ? resolve(otherPath || basePath, routePath) : resolve(basePath, routePath);
+      }
       return {
         prefixCls,
         collapse,
-        haChild: menu.children && menu.children.length > 0,
+        onlyOneChild,
+        hasOneShowingChild,
+        resolvePath,
+        activeTab,
+        showMenuTab,
       };
     },
   });

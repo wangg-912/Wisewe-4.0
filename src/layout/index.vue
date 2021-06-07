@@ -44,6 +44,21 @@
     </el-container>
     <LayoutFooter />
   </el-container>
+  <!-- Mix-Sidebar -->
+  <el-container
+    v-if="siderType == 'mix-sidebar'"
+    :class="[`${prefixCls}--sidebar`, `${prefixCls}--${siderType}`]"
+  >
+    <LayoutFeatures />
+    <MixTabs :class="`${prefixCls}--${siderType}--tabs`" />
+    <Sider v-if="getShowMenu || getIsMobile" :siderType="siderType" />
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
+      <LayoutHeader fixed :siderType="siderType" />
+      <LayoutTags v-if="getTagsShow" />
+      <LayoutContent />
+      <LayoutFooter />
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts">
@@ -60,7 +75,8 @@
   import { useFiles } from '/@/hooks/theme/useFiles';
   import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
   import { getMenusDate } from '/@/api/app';
-  
+  import { generatorDynamicRouter } from '/@/router/utils'
+
   /* import router from '/@/router'; */
   export default defineComponent({
     name: 'Layout',
@@ -71,6 +87,7 @@
       LayoutTags: createAsyncComponent(() => import('/@/layout/components/tags/index.vue')),
       LayoutContent: createAsyncComponent(() => import('/@/layout/components/content/index.vue')),
       LayoutFooter: createAsyncComponent(() => import('/@/layout/components/footer/index.vue')),
+      MixTabs: createAsyncComponent(() => import('/@/layout/components/mix-tabs/index.vue')),
     },
     setup() {
       const { push, addRoute, currentRoute } = useRouter();
@@ -132,13 +149,16 @@
       getMenusDate()
         .then((res) => {
           const { success, content } = res.data;
-          if (success) {
-            routeStore.GenerateRoutes().then(() => {
-              routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
-                await addRoute(route.name!, route); // 动态添加可访问路由表
+          if (success) { 
+            generatorDynamicRouter(content).then((routes)=>{
+              routeStore.setDynamicRoutes(routes);
+              routeStore.GenerateRoutes().then(() => {
+                routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
+                  await addRoute(route.name!, route); // 动态添加可访问路由表
+                });
+                routeStore.setIsAddRouters(true);
+                push({ path: redirect.value || '/' });
               });
-              routeStore.setIsAddRouters(true);
-              push({ path: redirect.value || '/' });
             });
           }
         })
@@ -160,3 +180,42 @@
   }
 </style>
 
+ <style lang="scss">
+ .#{$namespace}-default-layout--mix-sidebar {
+    &--tabs {
+      width: 90px;
+      height: 100%;
+      background: #fff;
+      .is-left::after,
+      .el-tabs__active-bar {
+        display: none !important;
+      }
+      
+        
+      .el-tabs__header {
+        height: 100%;
+        margin-right: 0;
+        width: 90px;
+        .el-tabs__nav-wrap {
+          height: 100%;
+          .el-tabs__item {
+            padding: 0;
+            height: 70px;
+            text-align: center;
+            color: #000;
+            transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+          }
+          .el-tabs__item:hover {
+            color: #fff;
+            background: #2d8cf0;
+          }
+          .is-active {
+            color: #fff;
+            background: #2d8cf0;
+          }
+        }
+      }
+      
+    }
+  }
+ </style>

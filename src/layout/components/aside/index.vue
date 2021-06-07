@@ -12,8 +12,8 @@
         <el-menu
           :mode="navMode"
           :collapse="isCollapse"
-          :uniqueOpened="true"
-          :default-openeds="['/dangwuxitong']"
+          :unique-opened="false"
+          :default-active="activeMenu"
           :class="[
             `${prefixCls}-aside`,
             `${prefixCls}-aside--${theme}`,
@@ -24,12 +24,12 @@
           @select="menuHandle"
         >
           <menu-items
-            v-for="v in menuLists"
+            v-for="v in (showMenuTab ? menuTabLists : menuLists)"
             :key="v.name"
             :menu="v"
-            :index="v.path"
             :theme="theme"
             :siderType="siderType"
+            :base-path="v.path"
           />
         </el-menu>
       </el-scrollbar>
@@ -73,8 +73,15 @@
         getMenuType,
       } = useMenuSetting();
       const { getIsMobile } = useAppInject();
-      const { currentRoute, push } = useRouter();
+      const { currentRoute } = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
+      const activeMenu = computed(() => {
+        const { matched, path } = currentRoute.value;
+        /* if(!meta.leaf){
+          
+        } */
+        return path;
+      })
       const menusWidth = computed(() => {
         if (props.siderType == 'top-menu') {
           return 'auto';
@@ -83,23 +90,29 @@
         }
       });
       const logoTitle = computed(() => unref(getShowLogoTitle));
+
       const showLogo = computed(() => {
-        return unref(getShowLogo) && unref(getMenuType) === 'sidebar';
+        return unref(getShowLogo) && (unref(getMenuType) === 'sidebar' || unref(getMenuType) === 'mix-sidebar');
       });
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
-      /* debugger; */
+      const showMenuTab = computed(() => props.siderType === 'mix-sidebar');
+      const menuTabLists = computed(() =>routeStore.menuTabRouters);
       const theme = computed(() => unref(getMenuTheme));
+      /**
+       * @description 菜单点击事件
+       */
       function menuHandle(path: string) {
-        debugger;
         if (currentRoute.value.fullPath === path) return;
-        push(path);
+        /* push(path); */
+        go(path);
       }
 
       return {
         isCollapse,
         getIsMobile,
         logoTitle,
+        activeMenu,
         menusWidth,
         showLogo,
         prefixCls,
@@ -107,6 +120,8 @@
         getMenuType,
         menuLists,
         menuHandle,
+        showMenuTab,
+        menuTabLists,
       };
     },
   });

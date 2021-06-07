@@ -1,4 +1,4 @@
-import { loadEnv, defineConfig } from 'vite';
+import { loadEnv } from 'vite';
 import { resolve, join } from 'path';
 import { UserConfig } from 'vite';
 import dotenv from 'dotenv';
