@@ -91,6 +91,7 @@
 [MIT © Wisewe-V4](./LICENSE)
 ## 项目目录
 
+
 ```
 evolution-v4
 ├─ .editorconfig
@@ -121,10 +122,6 @@ evolution-v4
 │  │  └─ app.ts
 │  ├─ App.vue
 │  ├─ assets
-│  │  ├─ fonts
-│  │  │  ├─ iconfont.ttf
-│  │  │  ├─ iconfont.woff
-│  │  │  └─ iconfont.woff2
 │  │  ├─ icons
 │  │  │  ├─ index.js
 │  │  │  └─ svg
@@ -206,6 +203,7 @@ evolution-v4
 │  │     ├─ useDesign.ts
 │  │     ├─ usePage.ts
 │  │     ├─ useScrollTo.ts
+│  │     ├─ useWatermark.ts
 │  │     └─ useWindow.ts
 │  ├─ layout
 │  │  ├─ components
@@ -259,7 +257,6 @@ evolution-v4
 │  │     └─ useCache.ts
 │  ├─ main.ts
 │  ├─ router
-│  │  ├─ asyncRouter.ts
 │  │  ├─ constant.ts
 │  │  ├─ guard
 │  │  │  ├─ createPageLoadingGuard.ts
@@ -269,9 +266,9 @@ evolution-v4
 │  │  ├─ helper
 │  │  │  └─ routeHelper.ts
 │  │  ├─ index.ts
-│  │  ├─ routes
 │  │  ├─ scrollBehavior.ts
-│  │  └─ types.d.ts
+│  │  ├─ types.d.ts
+│  │  └─ utils.ts
 │  ├─ settings
 │  │  ├─ designSetting.ts
 │  │  ├─ encryptionSetting.ts
@@ -285,7 +282,6 @@ evolution-v4
 │  │     └─ user.ts
 │  ├─ style
 │  │  ├─ common.scss
-│  │  ├─ icons.scss
 │  │  ├─ index.scss
 │  │  └─ variables
 │  │     ├─ element-variables.scss
@@ -339,8 +335,10 @@ evolution-v4
 │     └─ system
 │        └─ redirect.vue
 ├─ stylelint.config.js
+├─ tailwind.config.js
 ├─ tsconfig.json
 ├─ vite.config.ts
+├─ windi.config.js
 ├─ yarn-error.log
 └─ yarn.lock
 
