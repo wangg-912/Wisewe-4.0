@@ -7,15 +7,15 @@
       <scroll-pane ref="scrollPane" :class="`${prefixCls}-wrapper-scroll`">
         <div class="scroll-container">
           <router-link
-            class="tag-item"
+            class="tag-item el-tag"
             v-for="tag in getTagsState"
             :ref="setTagRef"
             :key="tag.path"
-            :class="isActive(tag) ? 'selected' : ''"
+            :class="isActive(tag) ? 'el-tag--dark selected' : 'el-tag--info'"
             :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
             @contextmenu.prevent="openMenu(tag, $event)"
           >
-            {{ tag.meta.title }}
+            <span>{{ tag.meta.title }}</span>
             <i
               v-if="!(tag && tag.meta && tag.meta.affix)"
               class="el-icon-close icon-close"
@@ -332,9 +332,6 @@
         height: 30px;
         flex: 1;
         position: relative;
-        .tag-selected {
-          background: $--color-primary;
-        }
         .scroll-container {
           height: 30px;
           line-height: 30px;
@@ -345,8 +342,9 @@
             height: 24px;
             line-height: 22px;
             border: 1px solid #d8dce5;
-            color: #495060;
-            background: #fff;
+            border-radius: 0;
+            /* color: #495060;
+            background: #fff;*/ 
             padding: 0 6px;
             font-size: 12px;
             margin-left: 4px;
@@ -356,9 +354,6 @@
               margin-right: 8px;
             }
             &.selected {
-              background-color: $--color-primary !important;
-              color: #fff;
-              border-color: $--color-primary !important;
               &::before {
                 content: '';
                 background: #fff;
@@ -378,11 +373,12 @@
               line-height: 14px;
               transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
               transform-origin: 100% 50%;
+              right: -2px;
               &:before {
                 display: inline-block;
               }
               &:hover {
-                background-color: $base-color-danger;
+                background-color: #FC0202;
                 color: #fff;
               }
             }
