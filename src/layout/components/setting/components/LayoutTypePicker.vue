@@ -25,7 +25,7 @@
   export default defineComponent({
     name: 'LayoutTypePicker',
     props: {
-      menuTypeList: {
+      typeList: {
         type: Array as PropType<typeof menuTypeList>,
         default: () => [],
       },
@@ -44,7 +44,7 @@
       const { prefixCls } = useDesign('setting-layout-type-picker');
 
       watchEffect(() => {
-        layoutTypeList = [...menuTypeList];
+        layoutTypeList = [...props.typeList];
       });
 
       return {

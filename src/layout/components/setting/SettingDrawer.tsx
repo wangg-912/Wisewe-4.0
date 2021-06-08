@@ -56,7 +56,7 @@ export default defineComponent({
       return (
         <>
           <LoyoutTypePicker
-            menuTypeList={menuTypeList}
+            typeList={menuTypeList}
             handler={(item: typeof menuTypeList[0]) => {
               baseHandler(HandlerEnum.CHANGE_LAYOUT, {
                 mode: item.mode,

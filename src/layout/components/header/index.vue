@@ -46,7 +46,7 @@
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown>
           <span class="el-dropdown-link drop--user--text" style="font-size: 12px">
-            管理员
+            <span v-if="userInfo.name">{{userInfo.name}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <template #dropdown>
@@ -81,6 +81,7 @@
   import LayoutTrigger from './components/Trigger.vue';
   import Screenfull from './components/Screenfull.vue';
   import { useAppInject } from '/@/hooks/web/useAppInject';
+  import { userStore } from '/@/store/modules/user';
   export default defineComponent({
     name: 'LayoutHeader',
     props: {
@@ -121,6 +122,7 @@
         getShowHeader,
       } = useHeaderSetting();
       const showHeadLogo = computed(() => unref(getShowHeaderLogo));
+      const userInfo = computed(() => userStore.getUserInfoState);
       const { getIsMobile } = useAppInject();
       const getHeaderClass = computed(() => {
         const theme = unref(getHeaderTheme);
@@ -162,6 +164,7 @@
         getIsMobile,
         getMobileTriggrState,
         tgMobileTrigger,
+        userInfo,
       };
     },
   });

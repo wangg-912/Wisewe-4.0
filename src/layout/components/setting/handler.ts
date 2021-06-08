@@ -77,10 +77,9 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
   switch (event) {
     /* 更换布局结构 */
     case HandlerEnum.CHANGE_LAYOUT:
-      const { mode, type, split } = value;
+      const { mode, type } = value;
       const layoutSetting = setLayoutSetting(type);
       const { headerSetting, menuSetting } = layoutSetting;
-      const splitOpt = split === undefined ? { split } : {};
       updateHeaderBgColor(headerSetting.bgColor);
       updateSidebarBgColor(menuSetting.bgColor);
       return {
@@ -90,7 +89,6 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
           type,
           collapsed: false,
           show: true,
-          ...splitOpt,
         }),
       };
     case HandlerEnum.CHANGE_THEME_COLOR:
