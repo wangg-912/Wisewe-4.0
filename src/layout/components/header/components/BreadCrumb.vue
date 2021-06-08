@@ -1,17 +1,17 @@
 <template>
   <div :class="['wisewe-layout-header-breadcrumb', `wisewe-layout-header-breadcrumb--${theme}`]">
     <el-breadcrumb>
-      <el-breadcrumb-item v-for="(bc, index) in bcs" :key="index">
+      <el-breadcrumb-item v-for="(bc, index) in currentRoute.matched" :key="index">
         <span v-if="getShowBreadCrumbIcon">
           <font-icon :type="bc.meta.icon" size="14" closely />
         </span>
-        <span v-if="bc.meta && bc.meta.title">{{ bc.meta.title }}</span>
+        <span v-if="bc.meta && bc.meta.title" class="bc-title">{{ bc.meta.title }}</span>
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, watch, toRefs, reactive } from 'vue';
+  import { defineComponent } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useRouter } from 'vue-router';
@@ -24,29 +24,10 @@
     components:{ FontIcon },
     setup() {
       const { getShowBreadCrumbIcon } = useRootSetting();
-      const state = reactive({
-        bcs:[
-          {
-            meta: { title: '工作台', icon: 'el-icon-s-home' },
-            name: 'Root',
-            path: '/',
-            redirect: '/home',
-          },
-          {
-            meta: { title: '统计分析', icon: 'el-icon-s-data', noCache: true, affix: true },
-            name: 'Home',
-            path: '/home',
-          }
-        ]
-      })
-      const useRouterCurrent = reactive(useRouter());
-      watch(useRouterCurrent, (o) => {
-        const { matched } = o.currentRoute;
-        state.bcs = [...matched];
-      });
+      const { currentRoute } = useRouter();
       return {
-        ...toRefs(state),
         getShowBreadCrumbIcon,
+        currentRoute,
       };
     },
   });
@@ -61,7 +42,10 @@
     ::v-deep(.el-breadcrumb__separator) {
       margin: 0 2px !important;
     }
-
+    .bc-title{
+      font-size: 12px;
+      padding-left: 2px;
+    }
     &--light {
       ::v-deep(.el-breadcrumb__inner),
       ::v-deep(.el-breadcrumb__inner.is-link) {
