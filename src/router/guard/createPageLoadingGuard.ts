@@ -20,7 +20,7 @@ export function createPageLoadingGuard(router: Router) {
     if (unref(getOpenPageLoading)) {
       setTimeout(() => {
         appStore.SETPAGELOADINGSTATE(false);
-      }, 350);
+      }, 850);
     }
     return true;
   });

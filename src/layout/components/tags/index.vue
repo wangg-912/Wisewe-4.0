@@ -342,7 +342,7 @@
             display: inline-block;
             position: relative;
             cursor: pointer;
-            height: 22px;
+            height: 24px;
             line-height: 22px;
             border: 1px solid #d8dce5;
             color: #495060;

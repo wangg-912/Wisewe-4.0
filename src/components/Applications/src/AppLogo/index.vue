@@ -78,6 +78,7 @@
       padding-left: 8px;
     }
     &.mobile {
+      width: auto;
       height: 32px;
       padding-left: 8px;
       border: 0;

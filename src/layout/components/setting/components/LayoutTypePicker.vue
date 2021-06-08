@@ -60,8 +60,8 @@
     justify-content: center;
     &__item {
       position: relative;
-      width: 56px;
-      height: 48px;
+      width: 56px!important;
+      height: 48px!important;
       margin-right: 16px;
       overflow: hidden;
       cursor: pointer;
@@ -124,6 +124,7 @@
           background-color: #273352;
         }
       }
+
       &--mix-sidebar {
         &::before {
           top: 0;
@@ -151,16 +152,16 @@
           background-color: #fff;
         }
       }
-      // &::after {
-      //   position: absolute;
-      //   top: 50%;
-      //   left: 50%;
-      //   width: 0;
-      //   height: 0;
-      //   content: '';
-      //   opacity: 0;
-      //   transition: all 0.3s;
-      // }
+      /* &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        content: '';
+        opacity: 0;
+        transition: all 0.3s;
+      } */
 
       &:hover,
       &--active {

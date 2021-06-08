@@ -1,21 +1,20 @@
 <template>
-  <div :class="[`${prefixCls}`, `${prefixCls}--${theme}`]">
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item v-for="bc in bcLists" :key="bc.path">
+  <div :class="['wisewe-layout-header-breadcrumb', `wisewe-layout-header-breadcrumb--${theme}`]">
+    <el-breadcrumb>
+      <el-breadcrumb-item v-for="(bc, index) in bcs" :key="index">
         <span v-if="getShowBreadCrumbIcon">
           <font-icon :type="bc.meta.icon" size="14" closely />
         </span>
-        {{bc.meta.title }}
+        <span v-if="bc.meta && bc.meta.title">{{ bc.meta.title }}</span>
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, watch, toRefs, reactive } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-  import { useDesign } from '/@/hooks/web/useDesign';
   import { propTypes } from '/@/utils/propTypes';
+  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+  import { useRouter } from 'vue-router';
   import FontIcon from '/@/components/FontIcon/index.vue';
   export default defineComponent({
     name: 'BreadCrumb',
@@ -25,35 +24,35 @@
     components:{ FontIcon },
     setup() {
       const { getShowBreadCrumbIcon } = useRootSetting();
-      const { prefixCls } = useDesign('layout-breadcrumb');
       const state = reactive({
-        bcLists:[
+        bcs:[
           {
-            path: 'home',
+            meta: { title: '工作台', icon: 'el-icon-s-home' },
+            name: 'Root',
+            path: '/',
+            redirect: '/home',
+          },
+          {
+            meta: { title: '统计分析', icon: 'el-icon-s-data', noCache: true, affix: true },
             name: 'Home',
-            meta: {
-              title: '首页',
-              icon: 'el-icon-s-home',
-              affix: true,
-            }
+            path: '/home',
           }
         ]
       })
       const useRouterCurrent = reactive(useRouter());
       watch(useRouterCurrent, (o) => {
         const { matched } = o.currentRoute;
-        state.bcLists = [...matched];
-      } )
+        state.bcs = [...matched];
+      });
       return {
-        prefixCls,
-        getShowBreadCrumbIcon,
         ...toRefs(state),
+        getShowBreadCrumbIcon,
       };
     },
   });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-layout-breadcrumb {
+  .#{$namespace}-layout-header-breadcrumb {
     margin-top: -1px;
     ::v-deep(.el-breadcrumb__inner.is-link),
     ::v-deep(.el-breadcrumb__inner a) {

@@ -76,7 +76,7 @@ export const constantRouterMap: Array<IMenubarList> = [
         component: components['Home'],
         meta: {
           title: '统计分析',
-          icon: 'el-icon-s-home',
+          icon: 'el-icon-s-data',
           noCache: true,
           affix: true,
         },

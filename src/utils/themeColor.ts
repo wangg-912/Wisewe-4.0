@@ -49,8 +49,12 @@ export const writeNewStyle = (stylesheetCount, originalStyle, colors) => {
   Object.keys(colors).forEach((key) => {
     originalStyle = originalStyle.replace(new RegExp('(:|\\s+)' + key, 'g'), '$1' + colors[key]);
   });
-  if (stylesheetCount === document.styleSheets.length) {
+  const styleSheets = Array.from(document.styleSheets).filter(
+    (styleSheet) => !styleSheet.href || styleSheet.href.startsWith(window.location.origin)
+  );
+  if (stylesheetCount === styleSheets.length) {
     const style = document.createElement('style');
+    style.setAttribute('type', 'text/css');
     style.innerText = originalStyle;
     document.head.appendChild(style);
   } else {
