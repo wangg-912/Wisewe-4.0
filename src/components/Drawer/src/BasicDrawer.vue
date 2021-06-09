@@ -123,8 +123,8 @@
 <style lang="scss">
   .#{$namespace}-basic-drawer {
     &-title {
-      font-weight: 500;
       font-size: $--font-size-large;
+      font-weight: 500;
       color: $--color-drak;
     }
     .el-drawer__header {

@@ -247,7 +247,6 @@
       function closeMenu() {
         visible.value = false;
       }
-
       watch(
         () => currentRoute.value,
         () => {

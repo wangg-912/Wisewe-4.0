@@ -15,7 +15,7 @@
   </el-tabs>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, watch, onMounted, computed } from 'vue';
+  import { defineComponent, ref, watch, onMounted, computed, watchEffect } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { routeStore } from '/@/store/modules/route';
   import type { RouteRecordRaw } from 'vue-router';
@@ -73,7 +73,6 @@
       onMounted(() => {
         init();
       });
-
       watch(
         () => currentRoute.value,
         () => {

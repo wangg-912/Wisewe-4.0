@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref, reactive, watch, toRefs } from 'vue';
+  import { defineComponent, computed, unref, reactive, toRefs, watchEffect } from 'vue';
   import { useRouter } from 'vue-router'
   import FrameView from './iframeView.vue';
   import { useFrameKeepAlive } from './useFrameKeepAlive';
@@ -20,12 +20,22 @@
     setup() {
       const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
       const showFrame = computed(() => unref(getFramePages).length > 0);
+      const { currentRoute } = useRouter();
       const state = reactive({
         styles: {
           display: 'none',
         }
       })
-      const useRouterCurrent = reactive(useRouter());
+      watchEffect(() => {
+        const { meta } = currentRoute.value;
+        state.styles = Object.assign(
+          {},
+          {
+            display: meta?.frameSrc ? 'block' : 'none',
+          }
+        );
+      })
+      /* const useRouterCurrent = reactive(useRouter());
       watch(useRouterCurrent, (o) => {
         const { meta } = o.currentRoute;
         state.styles = Object.assign(
@@ -34,7 +44,7 @@
             display: meta?.frameSrc ? 'block' : 'none',
           }
         );
-      });
+      }); */
       return {
         getFramePages,
         hasRenderFrame,

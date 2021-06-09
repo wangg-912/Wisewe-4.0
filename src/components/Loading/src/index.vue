@@ -1,7 +1,7 @@
 <template>
   <section
     class="full-loading"
-    :class="{ absolute }"
+    :class="absolute"
     v-if="loading"
     :style="getStyle"
     :lock="lock"
@@ -62,17 +62,15 @@
       },
     },
     setup(props) {
-      const getStyle = computed(
-        (): CSSProperties => {
-          const { background, theme } = props;
-          const bgColor = background
-            ? background
-            : theme === ThemeEnum.DARK
-            ? 'rgba(0, 0, 0, 0.2)'
-            : 'rgba(240, 242, 245, 0.4)';
-          return { background: bgColor };
-        }
-      );
+      const getStyle = computed(() => {
+        const { background, theme } = props;
+        const bgColor = background
+          ? background
+          : theme === ThemeEnum.DARK
+          ? 'rgba(0, 0, 0, 0.2)'
+          : 'rgba(240, 242, 245, 0.4)';
+        return { background: bgColor };
+      });
       return { getStyle };
     },
   });

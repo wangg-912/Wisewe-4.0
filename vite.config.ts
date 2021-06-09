@@ -72,7 +72,7 @@ export default ({ command, mode }): UserConfig => {
         compress: {
           keep_infinity: true,
           drop_debugger: true,
-          /* drop_console: VITE_DROP_CONSOLE, */
+          drop_console: VITE_DROP_CONSOLE,
         },
       },
       brotliSize: false,
