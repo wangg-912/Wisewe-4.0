@@ -9,7 +9,7 @@ import html from 'vite-plugin-html';
 import viteImagemin from 'vite-plugin-imagemin';
 import WindiCSS from 'vite-plugin-windicss'
 import resolveExternalsPlugin from 'vite-plugin-resolve-externals';
-import { visualizer } from 'rollup-plugin-visualizer';
+/* import { visualizer } from 'rollup-plugin-visualizer'; */
 import { createProxy } from './build/vite/proxy';
 import { wrapperEnv } from './build/utils';
 
