@@ -30,7 +30,12 @@ export function useDrawer(): UseDrawerReturnType {
   const drawerRef = ref<DrawerInstance | null>(null);
   const loadedRef = ref<Nullable<boolean>>(false);
   const uidRef = ref<string>('');
-
+  /**
+   * @description 注册方法
+   * @param drawerInstance 
+   * @param uuid 
+   * @returns 
+   */
   function register(drawerInstance: DrawerInstance, uuid: string) {
     isProdMode() &&
       tryOnUnmounted(() => {
@@ -47,6 +52,10 @@ export function useDrawer(): UseDrawerReturnType {
       visibleData[uid] = visible;
     };
   }
+  /**
+   * @description 检测应用类型
+   * @returns instance
+   */
   const getInstance = () => {
     const instance = unref(drawerRef);
     if (!instance) {

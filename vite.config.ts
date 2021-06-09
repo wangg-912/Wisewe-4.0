@@ -67,6 +67,7 @@ export default ({ command, mode }): UserConfig => {
       },
     },
     build: {
+      assetsDir: './',
       polyfillDynamicImport: VITE_LEGACY,
       terserOptions: {
         compress: {
