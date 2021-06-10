@@ -10,12 +10,13 @@ import { updateGrayMode } from '/@/theme/updateGrayMode';
 import { useWatermark } from '/@/hooks/web/useWatermark';
 
 import { deepMerge } from '/@/utils/tools';
-
+/**
+ * @description 初始化App配置入状态机
+ */
 export function initAppConfigStore() {
   let projCfg: ProjectConfig = getLocal(PROJ_CFG_KEY) as ProjectConfig;
   projCfg = deepMerge(projectSetting, projCfg || {});
   const { setWatermark, clear } = useWatermark();
-  /* debugger; */
   try {
     const {
       colorWeak,

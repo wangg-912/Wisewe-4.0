@@ -16,13 +16,10 @@ export type DebounceAndThrottleProcedureResult<T extends unknown[]> = [
   CancelFn
 ];
 
-import {
-  // throttle,
-  useThrottle,
-} from './useThrottle';
+import { useThrottle } from './useThrottle';
 
 /**
- * @description: Applicable in components
+ * @description: 适用于组件
  */
 export function useDebounce<T extends unknown[]>(
   handle: DebounceAndThrottleProcedure<T>,

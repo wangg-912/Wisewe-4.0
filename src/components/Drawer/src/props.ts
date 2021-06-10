@@ -1,5 +1,8 @@
 import type { PropType } from 'vue';
 import { propTypes } from '/@/utils/propTypes';
+/**
+ * @description 创建基础属性配置
+ */
 export const basicProps = {
   title: propTypes.string.def(''),
   visible: propTypes.bool,

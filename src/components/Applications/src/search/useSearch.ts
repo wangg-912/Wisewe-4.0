@@ -21,17 +21,32 @@ const enum KeyCodeEnum {
   ENTER = 13,
   ESC = 27,
 }
-
+/**
+ * @description 正则转化匹配值
+ * @param c 
+ * @returns 
+ */
 function transform(c: string) {
   const code: string[] = ['$', '(', ')', '*', '+', '.', '[', ']', '?', '\\', '^', '{', '}', '|'];
   return code.includes(c) ? `\\${c}` : c;
 }
+/**
+ * @description 创建搜索正则
+ * @param key 
+ * @returns 
+ */
 function createSearchReg(key: string) {
   const keys = [...key].map((item) => transform(item));
   const str = ['', ...keys, ''].join('.*');
   return new RegExp(str);
 }
-
+/**
+ * @description 使用搜索钩子函数
+ * @param refs 
+ * @param scrollWrap 
+ * @param emit 
+ * @returns 
+ */
 export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit: EmitType) {
   const searchResult = ref<SearchResult[]>([]);
   const keyword = ref('');
@@ -45,7 +60,11 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     const list = routeStore.addRouters;
     menuList = cloneDeep(list);
   });
-
+  /**
+   * @description 搜索私有方法入口
+   * @param searchKey 
+   * @returns 
+   */
   function search(searchKey: string) {
     keyword.value = searchKey.trim();
     if (!searchKey) {
@@ -59,7 +78,14 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     searchResult.value = handlerSearchResult(filterMenu, reg);
     activeIndex.value = 0;
   }
-
+  /**
+   * @description 搜索事件返回结果
+   * @param filterMenu 
+   * @param reg 
+   * @param parent 
+   * @param basePath 
+   * @returns 
+   */
   function handlerSearchResult(filterMenu: Menu[], reg: RegExp, parent?: Menu, basePath = '') {
     const ret: SearchResult[] = [];
     filterMenu.forEach((item) => {
@@ -82,12 +108,18 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     });
     return ret;
   }
-
+  /**
+   * @description 滚轮监听事件
+   * @param e 
+   */
   function handleMouseenter(e: any) {
     const index = e.target.dataset.index;
     activeIndex.value = Number(index);
   }
-
+  /**
+   * @description 监听键盘向上
+   * @returns 
+   */
   function handleUp() {
     if (!searchResult.value.length) return;
     activeIndex.value--;
@@ -96,7 +128,10 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     }
     handleScroll();
   }
-
+  /**
+   * @description 监听键盘向下
+   * @returns 
+   */
   function handleDown() {
     if (!searchResult.value.length) return;
     activeIndex.value++;
@@ -105,7 +140,10 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     }
     handleScroll();
   }
-
+  /**
+   * @description 处理滚动逻辑
+   * @returns 
+   */
   function handleScroll() {
     const refList = unref(refs);
     if (!refList || !Array.isArray(refList) || refList.length === 0 || !unref(scrollWrap)) return;
@@ -124,7 +162,10 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     });
     start();
   }
-
+  /**
+   * @description 处理键盘回撤事件
+   * @returns 
+   */
   async function handleEnter() {
     if (!searchResult.value.length) return;
     const result = unref(searchResult);
@@ -137,12 +178,16 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
     await nextTick();
     go(to.path);
   }
-
+  /**
+   * @description 回调关闭分发事件
+   */
   function handleClose() {
     searchResult.value = [];
     emit('close');
   }
-
+  /**
+   * @description 键盘钩子函数 enter|up|down|esc
+   */
   useKeyPress(['enter', 'up', 'down', 'esc'], (events) => {
     const keyCode = events.keyCode;
     switch (keyCode) {
