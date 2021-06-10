@@ -20,14 +20,10 @@ export function initAppConfigStore() {
     const {
       colorWeak,
       grayMode,
-      themeColor,
       headerSetting: { bgColor: headerBgColor } = {},
       menuSetting: { bgColor } = {},
       waterMark,
     } = projCfg;
-    if (themeColor && themeColor !== '#409eff') {
-      //changeTheme(themeColor);
-    }
     headerBgColor && updateHeaderBgColor(headerBgColor);
     bgColor && updateSidebarBgColor(bgColor);
     grayMode && updateGrayMode(grayMode);
