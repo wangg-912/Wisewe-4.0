@@ -9,7 +9,6 @@ import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper';
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/constant';
 import { getRoute } from '/@/router/helper/routeHelper';
 import { useGo, useRedo } from '/@/hooks/web/usePage';
-import { cloneDeep } from 'lodash-es';
 
 const NAME = 'tag';
 
@@ -138,7 +137,7 @@ class Tag extends VuexModule {
       this.tagsState.splice(updateIndex, 1, curTab);
       return;
     }
-    this.tagsState = cloneDeep([...this.tagsState, route]);
+    this.tagsState = [...this.tagsState, route];
   }
   @Mutation
   DELETECACHEDTAG(): void {

@@ -44,7 +44,7 @@
         <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
-        <el-dropdown>
+        <el-dropdown @command="handCommand">
           <span class="el-dropdown-link drop--user--text" style="font-size: 12px">
             <span v-if="userInfo.name">{{userInfo.name}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
@@ -60,6 +60,13 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
+        <form
+          ref="loginOutForm"
+          style="dispaly: none"
+          action="/shiro-cas-logout"
+          method="GET"
+          @submit.prevent="submit"
+        ></form>
       </div>
       <SettingDrawer
         v-if="getShowSettingButton && !getIsMobile"
@@ -70,7 +77,7 @@
 </template>
 <script lang="ts">
   import type { PropType } from 'vue';
-  import { defineComponent, computed, unref } from 'vue';
+  import { defineComponent, computed, unref, ref } from 'vue';
   import { createAsyncComponent } from '/@/utils/factory/asyncComponents';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -106,6 +113,7 @@
       LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
     },
     setup(props) {
+      const loginOutForm = ref(null);
       const {
         getShowSetting,
         getSettingPosition,
@@ -150,6 +158,16 @@
       function tgMobileTrigger() {
         toggleMobileTriggerState(!getMobileTriggrState.value);
       }
+      function handCommand(name: string){
+        switch (name) {
+          case 'modify':
+            alert('修改密码');
+            break;
+          case 'loginout':
+            loginOutForm.value.submit();
+            break;
+        }
+      }
 
       return {
         prefixCls,
@@ -165,6 +183,8 @@
         getMobileTriggrState,
         tgMobileTrigger,
         userInfo,
+        handCommand,
+        loginOutForm,
       };
     },
   });

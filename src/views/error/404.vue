@@ -9,9 +9,9 @@
       </div>
       <div class="error">
         <div class="error__oops">抱歉!</div>
-        <div class="error__headline">当前页面不存在...</div>
-        <div class="error__info"> 请检查您输入的网址是否正确，或点击下面的按钮返回首页。 </div>
-        <a href="/" class="error__return-home">回到首页</a>
+        <div class="error__headline">当前页面加载错误或不存在...</div>
+        <div class="error__info"> 请检查您输入的网址是否正确，或稍后重试。 </div>
+        <!-- <a href="/" class="error__return-home">回到首页</a> -->
       </div>
     </div>
   </div>

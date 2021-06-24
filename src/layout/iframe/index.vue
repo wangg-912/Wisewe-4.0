@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFrame" style="height: inherit" :style="styles">
+  <div v-if="showFrame" style="height: inherit">
     <template v-for="frame in getFramePages" :key="frame.path">
       <FrameView
         v-if="frame.meta.frameSrc && hasRenderFrame(frame.name)"
@@ -19,14 +19,15 @@
     components: { FrameView },
     setup() {
       const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
+      //debugger;
       const showFrame = computed(() => unref(getFramePages).length > 0);
       const { currentRoute } = useRouter();
-      const state = reactive({
+      /* const state = reactive({
         styles: {
           display: 'none',
         }
-      })
-      watchEffect(() => {
+      }) */
+      /* watchEffect(() => {
         const { meta } = currentRoute.value;
         state.styles = Object.assign(
           {},
@@ -34,23 +35,13 @@
             display: meta?.frameSrc ? 'block' : 'none',
           }
         );
-      })
-      /* const useRouterCurrent = reactive(useRouter());
-      watch(useRouterCurrent, (o) => {
-        const { meta } = o.currentRoute;
-        state.styles = Object.assign(
-          {},
-          {
-            display: meta?.frameSrc ? 'block' : 'none',
-          }
-        );
-      }); */
+      }) */
       return {
         getFramePages,
         hasRenderFrame,
         showIframe,
-        showFrame,
-        ...toRefs(state),
+        showFrame,/* 
+        ...toRefs(state), */
       };
     },
   });

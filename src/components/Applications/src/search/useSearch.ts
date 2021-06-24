@@ -3,7 +3,7 @@ import type { Menu } from '/@/router/types';
 import { ref, onBeforeMount, unref, Ref, nextTick } from 'vue';
 /* import { asyncRouterMap } from '/@/router'; */
 import { routeStore } from '/@/store/modules/route'
-import { cloneDeep } from 'lodash-es';
+import _ from 'lodash-es';
 import { filter } from '/@/utils/helper/treeHelper';
 import { useDebounce } from '/@/hooks/core/useDebounce';
 import { useGo } from '/@/hooks/web/usePage';
@@ -58,7 +58,7 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
 
   onBeforeMount(() => {
     const list = routeStore.addRouters;
-    menuList = cloneDeep(list);
+    menuList = _.cloneDeep(list);
   });
   /**
    * @description 搜索私有方法入口

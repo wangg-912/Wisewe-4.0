@@ -1,11 +1,13 @@
 <template>
   <div :class="prefixCls">
     <iframe :src="frameSrc" :class="`${prefixCls}--main`" ref="frameRef"></iframe>
+    <page-nofind />
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, onMounted, PropType, ref, unref } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import pageNofind from '/@/views/error/404.vue'
   export default defineComponent({
     name: 'FrameView',
     props: {
@@ -14,22 +16,25 @@
         default: '',
       },
     },
+    components:{
+      pageNofind,
+    },
     setup() {
       const frameRef = ref<HTMLElement | null>(null);
       const { prefixCls } = useDesign('iframe-page');
-      onMounted(()=>{
-        frameLoad();
-      })
-      function frameLoad(){
+      /* function frameLoad(){
         const $frame = unref(frameRef);
         $frame.onload = function(){
           const { contentWindow } = $frame;
           if(contentWindow.document.body && !contentWindow.document.body.innerHTML){
-            $frame.src = '/404.html';
+            $frame.src = '404.html';
           }
-          
         }
       }
+      
+      setTimeout(()=>{
+        frameLoad();
+      },0); */
       return {
         prefixCls,
         frameRef,
