@@ -12,7 +12,7 @@ const components: IObject<() => Promise<typeof import('*.vue')>> = {
   PagePanel: ((() => import('/@/layout/page/pagePanel.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
-  Home: ((() => import('/@/components/home/index.vue')) as unknown) as () => Promise<
+  Home: ((() => import('/@/views/dashboard/index.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
   Redirect: ((() => import('/@/views/system/redirect.vue')) as unknown) as () => Promise<

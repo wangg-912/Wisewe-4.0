@@ -44,8 +44,8 @@ function createSearchReg(key: string) {
  * @description 使用搜索钩子函数
  * @param refs 
  * @param scrollWrap 
- * @param emit 
- * @returns 
+ * @param emit
+ * @returns
  */
 export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit: EmitType) {
   const searchResult = ref<SearchResult[]>([]);

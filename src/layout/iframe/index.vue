@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFrame" style="height: inherit">
+  <div v-if="showFrame" style="height: auto">
     <template v-for="frame in getFramePages" :key="frame.path">
       <FrameView
         v-if="frame.meta.frameSrc && hasRenderFrame(frame.name)"
