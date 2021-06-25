@@ -92,7 +92,6 @@
     setup() {
       const { push, addRoute, currentRoute } = useRouter();
       const redirect = ref<string>('');
-      const fonts = ref(null);
       const styleFiles = ref(null);
       const originalStyle = ref('');
       const { getThemeColor } = useRootSetting();

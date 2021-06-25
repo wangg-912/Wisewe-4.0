@@ -1,10 +1,10 @@
+import router from '/@/router';
 import type { AppRouteRecordRaw } from '/@/router/types';
 import { computed, toRaw, unref } from 'vue';
 import { tagStore } from '/@/store/modules/tag';
 import { uniqBy } from 'lodash-es';
 import { useTagSetting } from '/@/hooks/setting/useTagSetting';
 
-import router from '/@/router';
 
 export function useFrameKeepAlive() {
   const { currentRoute } = router;
@@ -17,7 +17,7 @@ export function useFrameKeepAlive() {
   });
 
   const getOpenTabList = computed((): string[] => {
-    return tagStore.getTagsState.reduce((prev: string[], next) => {
+    return tagStore.getTagsState.reduce((prev: string[], next: any) => {
       if (next.meta && Reflect.has(next.meta, 'frameSrc')) {
         prev.push(next.name as string);
       }

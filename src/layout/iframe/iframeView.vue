@@ -24,7 +24,7 @@
         default: '',
       },
     },
-    components:{
+    components: {
       pageNofind,
     },
     setup() {

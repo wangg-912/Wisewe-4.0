@@ -91,7 +91,7 @@ const setting: ProjectConfig = {
     // 基础动画
     basicTransition: RouterTransitionEnum.FADE,
     // 开启页面加载模式
-    openPageLoading: false,
+    openPageLoading: true,
     // 开启顶部进度
     openNProgress: true,
   },

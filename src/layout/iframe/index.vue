@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref, reactive, toRefs, watchEffect } from 'vue';
+  import { defineComponent, computed, unref } from 'vue';
   import FrameView from './iframeView.vue';
   import { useFrameKeepAlive } from './useFrameKeepAlive';
   export default defineComponent({
@@ -19,7 +19,6 @@
     setup() {
       const { getFramePages, hasRenderFrame, showIframe } = useFrameKeepAlive();
       const showFrame = computed(() => unref(getFramePages).length > 0);
-      
       return {
         getFramePages,
         hasRenderFrame,
