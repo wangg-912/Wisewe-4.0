@@ -1,12 +1,20 @@
 <template>
-  <div :class="prefixCls">
-    <iframe :src="frameSrc" :class="`${prefixCls}--main`" ref="frameRef"></iframe>
-    <page-nofind />
+  <div :class="prefixCls" :style="getWrapStyle">
+    <iframe
+      v-show="visibility"
+      :src="frameSrc"
+      :class="`${prefixCls}--main`"
+      ref="frameRef"
+    ></iframe>
+    <page-nofind v-show="!visibility" />
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, onMounted, PropType, ref, unref } from 'vue';
+  import type { CSSProperties } from 'vue';
+  import { defineComponent, computed, onMounted, PropType, ref, unref, nextTick } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+  import { useTagSetting } from '/@/hooks/setting/useTagSetting';
   import pageNofind from '/@/views/error/404.vue'
   export default defineComponent({
     name: 'FrameView',
@@ -20,24 +28,49 @@
       pageNofind,
     },
     setup() {
+      const heightRef = ref(window.innerHeight);
       const frameRef = ref<HTMLElement | null>(null);
+      const visibility = ref(true);
       const { prefixCls } = useDesign('iframe-page');
-      /* function frameLoad(){
-        const $frame = unref(frameRef);
-        $frame.onload = function(){
-          const { contentWindow } = $frame;
-          if(contentWindow.document.body && !contentWindow.document.body.innerHTML){
-            $frame.src = '404.html';
-          }
+      const { getShowHeader } = useHeaderSetting();
+      const { getTagsShow } = useTagSetting();
+      const headerHeight = computed(() => (unref(getShowHeader) ? 56 : 0));
+      const tagsHeight = computed(() => (unref(getTagsShow) ? 37 : 0));
+      const getWrapStyle = computed(
+        (): CSSProperties => {
+          return {
+            height: `${unref(heightRef) - headerHeight.value - tagsHeight.value - 8}px`,
+          };
         }
+      );
+      function init() {
+        nextTick(() => {
+          const iframe = unref(frameRef);
+          if (!iframe) return;
+
+          const _frame = iframe as any;
+          if (_frame.attachEvent) {
+            _frame.attachEvent('onload', () => {
+              //TODO
+            });
+          } else {
+            iframe.onload = () => {
+              const { contentWindow } = _frame;
+              if(contentWindow.document.body && !contentWindow.document.body.innerHTML){
+                visibility.value = false;
+              }
+            };
+          }
+        });
       }
-      
-      setTimeout(()=>{
-        frameLoad();
-      },0); */
+      onMounted(() => {
+        init();
+      });
       return {
         prefixCls,
+        getWrapStyle,
         frameRef,
+        visibility,
       };
     },
   });
