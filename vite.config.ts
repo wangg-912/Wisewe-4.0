@@ -1,6 +1,6 @@
 import { loadEnv } from 'vite';
 import { resolve, join } from 'path';
-import { UserConfig } from 'vite';
+import { UserConfigExport, ConfigEnv  } from 'vite';
 import dotenv from 'dotenv';
 import vue from '@vitejs/plugin-vue';
 import legacy from '@vitejs/plugin-legacy';
@@ -10,6 +10,7 @@ import viteImagemin from 'vite-plugin-imagemin';
 import WindiCSS from 'vite-plugin-windicss';
 import resolveExternalsPlugin from 'vite-plugin-resolve-externals';
 /* import { visualizer } from 'rollup-plugin-visualizer'; */
+import { viteMockServe } from 'vite-plugin-mock'
 import { createProxy } from './build/vite/proxy';
 import { wrapperEnv } from './build/utils';
 
@@ -18,7 +19,7 @@ dotenv.config({ path: join(__dirname, '.env') });
 function pathResolve(dir: string) {
   return resolve(__dirname, '.', dir);
 }
-export default ({ command, mode }): UserConfig => {
+export default ({ command, mode }:ConfigEnv): UserConfigExport => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
 
@@ -134,6 +135,15 @@ export default ({ command, mode }): UserConfig => {
         vuex: 'Vuex',
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
+      }),
+      viteMockServe({
+        mockPath: 'mock',
+        supportTs: true,
+        localEnabled: command === 'serve',
+        injectCode: `
+          import { setupProdMockServer } from './mockProdServer';
+          setupProdMockServer();
+        `
       }),
       /* visualizer({
         filename: './node_modules/.cache/visualizer/stats.html',

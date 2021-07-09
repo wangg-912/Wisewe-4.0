@@ -11,7 +11,8 @@
     "preview": "npm run build && vite preview",
     "lint:eslint": "eslint \"src/**/*.{ts,tsx,js,json,vue}\" --fix",
     "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
-    "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" \"!dist/**/*\""
+    "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" \"!dist/**/*\"",
+    "test": "jest"
   },
   "dependencies": {
     "@types/nprogress": "^0.2.0",
@@ -19,19 +20,25 @@
     "crypto-es": "^1.2.7",
     "css-color-function": "^1.3.3",
     "echarts": "^5.1.2",
-    "element-plus": "^1.0.2-beta.32",
+    "element-plus": "^1.0.2-beta.54",
     "lodash-es": "^4.17.21",
+    "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "screenfull": "^5.1.0",
     "vite-plugin-html": "^2.0.7",
-    "vue": "^3.0.5",
-    "vue-router": "^4.0.4",
+    "vue": "^3.1.4",
+    "vue-router": "^4.0.10",
     "vue-types": "^3.0.2",
-    "vuex": "^4.0.0",
+    "vuex": "^4.0.2",
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-typescript": "^7.14.5",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@types/http-proxy": "^1.17.5",
+    "@types/jest": "^26.0.20",
     "@types/lodash-es": "^4.17.4",
     "@types/qs": "^6.9.5",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
@@ -40,7 +47,9 @@
     "@vitejs/plugin-vue": "^1.1.4",
     "@vitejs/plugin-vue-jsx": "^1.1.2",
     "@vue/compiler-sfc": "^3.0.5",
+    "@vue/test-utils": "^2.0.0-rc.10",
     "autoprefixer": "^10.2.4",
+    "babel-jest": "^27.0.6",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "element-theme-chalk": "^2.15.1",
@@ -48,6 +57,8 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.6.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
     "path": "^0.12.7",
     "prettier": "^2.2.1",
     "qs": "^6.9.6",
@@ -57,11 +68,14 @@
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.1.3",
     "vite": "^2.2.4",
     "vite-plugin-imagemin": "^0.3.0",
+    "vite-plugin-mock": "^2.9.1",
     "vite-plugin-resolve-externals": "^0.1.0",
     "vite-plugin-windicss": "^0.15.10",
+    "vue-jest": "^5.0.0-alpha.10",
     "windicss": "^2.5.14"
   },
   "resolutions": {
@@ -70,13 +84,15 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS" //git commit -m <type>[optional scope]: <description>
     }
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier"
+      "npm run lint:eslint",
+      "npm run lint:prettier",
+      "npm run lint:stylelint",
+      "git add ."
     ]
   },
   "engines": {
