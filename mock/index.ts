@@ -1,3 +1,3 @@
-import AppModules from './modules/app'
+import systemModules from './modules/system';
 
-export default [...AppModules]
+export default [...systemModules];

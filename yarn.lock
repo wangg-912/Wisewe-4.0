@@ -1718,7 +1718,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.20":
+"@types/jest@^26.0.24":
   version "26.0.24"
   resolved "https://registry.nlark.com/@types/jest/download/@types/jest-26.0.24.tgz#943d11976b16739185913a1936e0de0c4a7d595a"
   integrity sha1-lD0Rl2sWc5GFkToZNuDeDEp9WVo=
@@ -3053,7 +3053,7 @@ cosmiconfig@^7.0.0:
 
 cross-env@^7.0.3:
   version "7.0.3"
-  resolved "https://registry.npm.taobao.org/cross-env/download/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
+  resolved "https://registry.nlark.com/cross-env/download/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
   integrity sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=
   dependencies:
     cross-spawn "^7.0.1"

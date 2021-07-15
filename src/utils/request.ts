@@ -44,7 +44,6 @@ const handleCode = (code: number, msg?: string) => {
 const errorHandler = (error: any) => {
   /* loading.close(); */
   const { response, message } = error;
-
   if (response && !response.data) {
     const { status, data } = response;
     handleCode(status, data.msg || message);

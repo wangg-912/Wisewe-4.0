@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "bootstrap": "yarn install",
-    "dev": "vite",
+    "dev": "cross-env NODE_ENV=development vite",
     "dev:debug": "vite --debug",
     "build": "vite build",
     "build:no-cache": "yarn clean:cache && npm run build",

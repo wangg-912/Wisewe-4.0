@@ -17,7 +17,7 @@ export function getMenusDate(): Promise<AxiosResponse> {
 
 export function testget(param?: any): Promise<AxiosResponse> {
   return request({
-    url: '/test/get',
+    url: 'test/get',
     method: 'get',
     params: param,
   });
@@ -25,7 +25,7 @@ export function testget(param?: any): Promise<AxiosResponse> {
 
 export function testpostform(data: any): Promise<AxiosResponse> {
   return request({
-    url: '/test/posrform',
+    url: 'test/posrform',
     method: 'post',
     headers: { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
     data: qs.stringify(data),

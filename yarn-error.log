@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\lenovo\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js test
+  C:\Program Files\nodejs\node.exe C:\Users\lenovo\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
 
 PATH: 
-  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;E:\Work\apache-maven-3.3.9\bin;C:\Program Files\Java\jdk1.8.0_131\bin;D:\Program Files\Microsoft VS Code\bin;C:\WINDOWS\System32\OpenSSH\;C:\Python27\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Users\lenovo\AppData\Local\Microsoft\WindowsApps;C:\Users\lenovo\.dotnet\tools;C:\Users\lenovo\AppData\Roaming\npm
+  C:\Users\lenovo\AppData\Roaming\npm-cache\_npx\14712;E:\wp-evolution\evolution-v4\node_modules\.bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;E:\Work\apache-maven-3.3.9\bin;C:\Program Files\Java\jdk1.8.0_131\bin;D:\Program Files\Microsoft VS Code\bin;C:\WINDOWS\System32\OpenSSH\;C:\Python27\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Users\lenovo\AppData\Local\Microsoft\WindowsApps;C:\Users\lenovo\.dotnet\tools;C:\Users\lenovo\AppData\Roaming\npm
 
 Yarn version: 
   1.22.10
@@ -14,12 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: E:\wp-evolution\evolution-v4\package.json: Unexpected token / in JSON at position 2806
-      at JSON.parse (<anonymous>)
-      at C:\Users\lenovo\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Users\lenovo\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\lenovo\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+  Error: EPERM: operation not permitted, copyfile 'C:\Users\lenovo\AppData\Local\Yarn\Cache\v6\npm-@commitlint-cli-12.1.4-af4d9dd3c0122c7b39a61fa1cd2abbad0422dbe0-integrity\node_modules\@commitlint\cli\package.json' -> 'E:\wp-evolution\evolution-v4\node_modules\@commitlint\cli\package.json'
 
 npm manifest: 
   {
@@ -62,7 +57,7 @@ npm manifest:
       "@commitlint/cli": "^12.1.4",
       "@commitlint/config-conventional": "^12.1.4",
       "@types/http-proxy": "^1.17.5",
-      "@types/jest": "^26.0.20",
+      "@types/jest": "^26.0.24",
       "@types/lodash-es": "^4.17.4",
       "@types/qs": "^6.9.5",
       "@typescript-eslint/eslint-plugin": "^4.15.2",
@@ -106,11 +101,6 @@ npm manifest:
       "bin-wrapper": "npm:bin-wrapper-china"
     },
     "license": "MIT",
-    "husky": {
-      "hooks": {
-        "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS" //git commit -m <type>[optional scope]: <description>
-      }
-    },
     "lint-staged": {
       "src/**/*.{ts,tsx}": [
         "npm run lint:eslint",
