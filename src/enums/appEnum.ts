@@ -84,3 +84,9 @@ export enum RoleEnum {
   // tester
   TEST = 'test',
 }
+
+export enum SizeButtonEnum {
+  DEFAULT = 'medium',
+  SMALL = 'small',
+  MINI = 'mini',
+}

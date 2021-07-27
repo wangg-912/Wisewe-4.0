@@ -59,7 +59,7 @@
 </script>
 <style lang="scss" scoped>
   .#{$namespace}-layout-wrapper {
-    width: 100%;
+    width: 99.9%;
     height: 100%;
   }
 </style>

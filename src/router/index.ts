@@ -58,7 +58,7 @@ export const constantRouterMap: Array<IMenubarList> = [
         name: 'NoFind',
         meta: {},
       },
-    ]
+    ],
   },
   {
     path: '/',
@@ -76,6 +76,17 @@ export const constantRouterMap: Array<IMenubarList> = [
         component: components['Home'],
         meta: {
           title: '统计分析',
+          icon: 'el-icon-s-data',
+          noCache: true,
+          affix: true,
+        },
+      },
+      {
+        path: 'test',
+        name: 'Test',
+        component: () => import('/@/views/demo/dialog/index.vue'),
+        meta: {
+          title: '功能测试',
           icon: 'el-icon-s-data',
           noCache: true,
           affix: true,

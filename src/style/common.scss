@@ -1,24 +1,23 @@
-
-
 #app {
-  margin: 0;
-  color: rgba(0,0,0,.85);
-  font-size: 14px;
-  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
-  font-variant: tabular-nums;
-  line-height: 1.5715;
-  background-color: #fff;
+  margin               : 0;
+  color                : rgba(0, 0, 0, .85);
+  font-size            : 14px;
+  font-family          : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-variant         : tabular-nums;
+  line-height          : 1.5715;
+  background-color     : #fff;
   font-feature-settings: 'tnum';
-  height: 100vh;
-  text-align: left;
+  height               : 100vh;
+  text-align           : left;
 
-  
+
 }
+
 // =================================
 // ==============scrollbar==========
 // =================================
 ::-webkit-scrollbar {
-  width: 6px;
+  width : 6px;
   height: 6px;
 }
 
@@ -27,11 +26,93 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background   : rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow   : inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b6b7b9;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* fade-slide */
+.fade-slide-leave-active,
+.fade-slide-enter-active {
+  transition: all 0.3s;
+}
+
+.fade-slide-enter-from {
+  opacity  : 0;
+  transform: translateX(-30px);
+}
+
+.fade-slide-leave-to {
+  opacity  : 0;
+  transform: translateX(30px);
+}
+
+// ///////////////////////////////////////////////
+// Fade Bottom
+// ///////////////////////////////////////////////
+
+// Speed: 1x
+.fade-bottom-enter-active,
+.fade-bottom-leave-active {
+  transition: opacity 0.25s, transform 0.3s;
+}
+
+.fade-bottom-enter-from {
+  opacity  : 0;
+  transform: translateY(-10%);
+}
+
+.fade-bottom-leave-to {
+  opacity  : 0;
+  transform: translateY(10%);
+}
+
+// fade-scale
+.fade-scale-leave-active,
+.fade-scale-enter-active {
+  transition: all 0.28s;
+}
+
+.fade-scale-enter-from {
+  opacity  : 0;
+  transform: scale(1.2);
+}
+
+.fade-scale-leave-to {
+  opacity  : 0;
+  transform: scale(0.8);
+}
+
+// ///////////////////////////////////////////////
+// Fade Top
+// ///////////////////////////////////////////////
+
+// Speed: 1x
+.fade-top-enter-active,
+.fade-top-leave-active {
+  transition: opacity 0.2s, transform 0.25s;
+}
+
+.fade-top-enter-from {
+  opacity  : 0;
+  transform: translateY(8%);
+}
+
+.fade-top-leave-to {
+  opacity  : 0;
+  transform: translateY(-8%);
 }

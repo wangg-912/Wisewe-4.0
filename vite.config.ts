@@ -9,7 +9,7 @@ import html from 'vite-plugin-html';
 import viteImagemin from 'vite-plugin-imagemin';
 import WindiCSS from 'vite-plugin-windicss';
 import resolveExternalsPlugin from 'vite-plugin-resolve-externals';
-/* import { visualizer } from 'rollup-plugin-visualizer'; */
+import { visualizer } from 'rollup-plugin-visualizer';
 import { viteMockServe } from 'vite-plugin-mock';
 import { createProxy } from './build/vite/proxy';
 import { wrapperEnv } from './build/utils';
@@ -136,19 +136,18 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
       }),
-      viteMockServe({
+      /* viteMockServe({
         mockPath: 'mock',
         supportTs: true,
         logger: true,
-        /* injectCode: `
-          import { setupProdMockServer } from '../mock/index.ts;
-          setupProdMockServer();
-        `, */
-      }),
-      /* visualizer({
+      }), */
+      visualizer({
         filename: './node_modules/.cache/visualizer/stats.html',
         open: true,
-      }), */
+        template: 'treemap', //sunburst, treemap, network
+        gzipSize: true,
+        brotliSize: true,
+      }),
     ],
   };
 };
