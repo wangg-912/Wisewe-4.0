@@ -1,19 +1,11 @@
 <template>
   <div>
     <slot name="insertFooter"></slot>
-    <el-button
-      plain
-      type="info"
-      v-bind="cancelButtonProps"
-      @click="handleCancel"
-      v-if="showCancelBtn"
-    >
+    <el-button type="info" @click="handleCancel" v-if="showCancelBtn">
       {{ cancelText }}
     </el-button>
     <slot name="centerFooter"></slot>
-    <el-button :type="okType" @click="handleOk" v-bind="okButtonProps" v-if="showOkBtn">
-      {{ okText }}</el-button
-    >
+    <el-button :type="okType" @click="handleOk" v-if="showOkBtn"> {{ okText }}</el-button>
     <slot name="appendFooter"></slot>
   </div>
 </template>
@@ -23,14 +15,15 @@
   export default defineComponent({
     name: 'DialogFooter',
     props: basicProps,
-    emits: ['ok', 'cancel'],
-    setup(_, { emit }) {
+    emits: ['save', 'close'],
+    setup(props, { emit }) {
+      console.log(props);
       function handleOk() {
-        emit('ok');
+        emit('save');
       }
 
       function handleCancel() {
-        emit('cancel');
+        emit('close');
       }
       return { handleOk, handleCancel };
     },

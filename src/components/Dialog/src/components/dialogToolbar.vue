@@ -1,10 +1,22 @@
 <template>
   <div :class="getToolCls">
     <template v-if="canFullscreen">
-      <i class="el-icon-full-screen" role="full" @click="handleFullScreen" v-if="fullScreen"></i>
-      <i class="el-icon-crop" role="close" @click="handleFullScreen" v-else></i>
+      <i
+        class="el-icon-full-screen"
+        :class="`${prefixCls}__icon`"
+        role="full"
+        @click="handleFullScreen"
+        v-if="!fullscreen"
+      ></i>
+      <i
+        class="el-icon-crop"
+        :class="`${prefixCls}__icon`"
+        role="close"
+        @click="handleFullScreen"
+        v-else
+      ></i>
     </template>
-    <i class="el-icon-close" @click="handleCancel"></i>
+    <i class="el-icon-close" :class="`${prefixCls}__icon`" @click="handleCancel"></i>
   </div>
 </template>
 <script lang="ts">
@@ -15,9 +27,9 @@
     name: 'DialogToolbar',
     props: {
       canFullscreen: propTypes.bool.def(true),
-      fullScreen: propTypes.bool,
+      fullscreen: propTypes.bool,
     },
-    emits: ['cancel', 'fullscreen'],
+    emits: ['close', 'fullscreen'],
 
     setup(props, { emit }) {
       const { prefixCls } = useDesign('basic-modal-toolbar');
@@ -32,7 +44,7 @@
        * @description 关闭模态窗
        */
       function handleCancel() {
-        emit('cancel');
+        emit('close');
       }
       /**
        * @description 切换全屏事件

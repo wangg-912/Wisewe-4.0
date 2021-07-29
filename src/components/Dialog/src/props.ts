@@ -1,55 +1,53 @@
 import type { PropType, CSSProperties } from 'vue';
 import { propTypes, VueNode } from '/@/utils/propTypes';
-
-import type { IDWrapperProps, ButtonProps } from './types';
-
-export const modalProps = {
+import { IDWrapperProps, ButtonSize, ButtonTypes, ButtonShapes } from './types';
+/**
+ * @description 模态窗默认配置
+ */
+export const dialogProps = {
   visible: propTypes.bool,
-  height: propTypes.number,
-  // open drag
+  width: propTypes.number.def(640),
+  height: propTypes.number.def(400),
   draggable: propTypes.bool.def(true),
-  center: propTypes.bool,
   cancelText: propTypes.string.def('取消'),
   okText: propTypes.string.def('确定'),
-
-  close: Function as PropType<() => Promise<boolean>>,
+  okType: propTypes.string.def('primary'),
+  showClose: propTypes.bool.def(false),
+  modal: propTypes.bool.def(true),
+  /* 按钮级别扩展配置*/
+  size: propTypes.oneOf(ButtonSize).def('mini'),
+  type: propTypes.oneOf(ButtonTypes).def('info'),
+  shape: propTypes.oneOf(ButtonShapes).def('plain'),
+  disabled: propTypes.bool.def(false),
+  icon: propTypes.string,
+  autofocus: propTypes.bool.def(false),
+  'native-type': propTypes.oneOf(['button', 'submit', 'reset']).def('button'),
+  /* }, */
 };
-
-export const basicProps = Object.assign({}, modalProps, {
+/**
+ * @description {All} 模态窗全配置
+ */
+export const basicProps = Object.assign({}, dialogProps, {
+  title: propTypes.string,
   fullscreen: propTypes.bool.def('false'),
-  // 开启全屏
   canFullscreen: propTypes.bool.def(true),
-  // After enabling the wrapper, the bottom can be increased in height
   wrapperFooterOffset: propTypes.number.def(0),
-  // Whether to setting wrapper
+  /* 插槽必须开启次配置，计算属性使用的 */
   useWrapper: propTypes.bool.def(true),
   loading: propTypes.bool,
-  loadingTip: propTypes.string.def('加载中...'),
-  // 显示取消按钮
   showCancelBtn: propTypes.bool.def(true),
-  //显示保存按钮
   showOkBtn: propTypes.bool.def(true),
   wrapperProps: Object as PropType<Partial<IDWrapperProps>>,
-  beforeClose: Function as PropType<() => Promise<VueNode>>,
   bodyStyle: Object as PropType<CSSProperties>,
-  showClose: propTypes.bool.def(true),
   closeIcon: Object as PropType<VueNode>,
   destroyOnClose: propTypes.bool,
   footer: Object as PropType<VueNode>,
-  getContainer: Function as PropType<() => any>,
-  modal: propTypes.bool.def(true),
+  open: Function as PropType<() => any>,
+  close: Function as PropType<() => any>,
+  save: Function as PropType<() => any>,
+  beforeClose: Function as PropType<() => Promise<VueNode>>,
   closeOnClickModal: propTypes.bool.def(false),
-  keyboard: propTypes.bool.def(true),
-  okType: propTypes.string.def('primary'),
-  okButtonProps: Object as PropType<ButtonProps>,
-  cancelButtonProps: Object as PropType<ButtonProps>,
-  title: propTypes.string.def('标题'),
   visible: propTypes.bool,
-  width: {
-    type: [String, Number] as PropType<string | number>,
-    default: 640,
-  },
-  height: propTypes.number.def(400),
   customClass: propTypes.string,
   closeOnPressEscape: propTypes.bool.def(false),
 });

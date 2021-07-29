@@ -1,11 +1,10 @@
 import type {
-  UseModalReturnType,
-  ModalMethods,
-  ModalProps,
+  UseDialogReturnType,
+  DialogMethods,
+  DialogProps,
   ReturnMethods,
   UseModalInnerReturnType,
 } from '../types';
-
 import {
   ref,
   onUnmounted,
@@ -27,17 +26,24 @@ const dataTransferRef = reactive<any>({});
 const visibleData = reactive<{ [key: number]: boolean }>({});
 
 /**
- * @description: Applicable to independent modal and call outside
+ * @description: 适用于独立模态和外部独立使用
  */
-export function useDialog(): UseModalReturnType {
+export function useDialog(): UseDialogReturnType {
   isInSetup();
-  const modalRef = ref<Nullable<ModalMethods>>(null);
+  const modalRef = ref<Nullable<DialogMethods>>(null);
   const loadedRef = ref<Nullable<boolean>>(false);
   const uidRef = ref<string>('');
-
-  function register(modalMethod: ModalMethods, uuid: string) {
+  /**
+   * @description 注册模态窗的所有事件及上下文独立ID
+   * @param modalMethod
+   * @param uuid
+   * @returns
+   */
+  function register(modalMethod: DialogMethods, uuid: string) {
     uidRef.value = uuid;
-
+    /**
+     * @description 生产模式
+     */
     isProdMode() &&
       onUnmounted(() => {
         modalRef.value = null;
@@ -61,25 +67,37 @@ export function useDialog(): UseModalReturnType {
   };
 
   const methods: ReturnMethods = {
-    setModalProps: (props: Partial<ModalProps>): void => {
+    /**
+     * @description 设置模态窗的属性
+     * @param props
+     */
+    setModalProps: (props: Partial<DialogProps>): void => {
       getInstance()?.setModalProps(props);
     },
-
+    /**
+     * @description 获取显示状态
+     */
     getVisible: computed((): boolean => {
       return visibleData[~~unref(uidRef)];
     }),
-
+    /**
+     * @description 重置模态窗的高度
+     */
     redoModalHeight: () => {
       getInstance()?.redoModalHeight?.();
     },
-
-    openModal: <T = any>(visible = true, data?: T, openOnSet = true): void => {
+    /**
+     * @description 打开模态窗
+     * @param visible
+     * @param data
+     * @param openOnSet
+     * @returns
+     */
+    openDialog: <T = any>(visible = true, data?: T, openOnSet = true): void => {
       getInstance()?.setModalProps({
         visible: visible,
       });
-
       if (!data) return;
-
       if (openOnSet) {
         dataTransferRef[unref(uidRef)] = null;
         dataTransferRef[unref(uidRef)] = data;
@@ -93,9 +111,13 @@ export function useDialog(): UseModalReturnType {
   };
   return [register, methods];
 }
-
+/**
+ * @description 适用于模态窗内部使用  TODO
+ * @param callbackFn
+ * @returns
+ */
 export const useDialogInner = (callbackFn?: Fn): UseModalInnerReturnType => {
-  const modalInstanceRef = ref<Nullable<ModalMethods>>(null);
+  const modalInstanceRef = ref<Nullable<DialogMethods>>(null);
   const currentInstance = getCurrentInstance();
   const uidRef = ref<string>('');
 
@@ -110,7 +132,7 @@ export const useDialogInner = (callbackFn?: Fn): UseModalInnerReturnType => {
     return instance;
   };
 
-  const register = (modalInstance: ModalMethods, uuid: string) => {
+  const register = (modalInstance: DialogMethods, uuid: string) => {
     isProdMode() &&
       tryOnUnmounted(() => {
         modalInstanceRef.value = null;
@@ -147,7 +169,7 @@ export const useDialogInner = (callbackFn?: Fn): UseModalInnerReturnType => {
         getInstance()?.setModalProps({ visible: false });
       },
 
-      setModalProps: (props: Partial<ModalProps>) => {
+      setModalProps: (props: Partial<DialogProps>) => {
         getInstance()?.setModalProps(props);
       },
     },

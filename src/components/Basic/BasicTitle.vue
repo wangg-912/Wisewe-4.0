@@ -22,7 +22,7 @@
   .#{$namespace}-basic-title {
     position: relative;
     display: flex;
-    padding-left: 7px;
+    padding-left: 0;
     font-size: 16px;
     font-weight: 700;
     line-height: 24px;

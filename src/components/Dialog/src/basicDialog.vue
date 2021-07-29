@@ -1,10 +1,18 @@
 <template>
-  <Dialog @close="handleCancel" v-bind="getBindValue">
+  <Dialog @close="handleCancel" v-bind="getBindValue" :fullscreen="fullScreenRef">
     <template #title v-if="!$slots.title">
-      <DialogHeader :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
+      <div class="dialog-slot-title">
+        <DialogHeader :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
+        <DialogToolbar
+          v-if="!getBindValue.showClose"
+          :fullscreen="fullScreenRef"
+          @close="handleCancel"
+          @fullscreen="handleFullScreen"
+        />
+      </div>
     </template>
     <template #footer v-if="!$slots.footer">
-      <DialogFooter v-bind="getProps" @ok="handleOk" @close="handleCancel">
+      <DialogFooter v-bind="getProps" @save="handleOk" @close="handleCancel">
         <template #[item]="data" v-for="item in Object.keys($slots)">
           <slot :name="item" v-bind="data"></slot>
         </template>
@@ -13,18 +21,19 @@
     <DialogWrapper
       :useWrapper="getProps.useWrapper"
       :footerOffset="wrapperFooterOffset"
-      :fullscreen="fullScreenRef"
       ref="modalWrapperRef"
       :loading="getProps.loading"
-      :minHeight="getProps.minHeight"
       :width="getProps.width"
       :height="getProps.height"
       :visible="visibleRef"
+      :fullscreen="fullScreenRef"
       :modalFooterHeight="footer !== undefined && !footer ? 0 : undefined"
       v-bind="omit(getProps.wrapperProps, 'visible', 'height')"
       @ext-height="handleExtHeight"
       @height-change="handleHeightChange"
-    />
+    >
+      <slot></slot>
+    </DialogWrapper>
 
     <template #[item]="data" v-for="item in Object.keys(omit($slots, 'default'))">
       <slot :name="item" v-bind="data"></slot>
@@ -32,7 +41,7 @@
   </Dialog>
 </template>
 <script lang="ts">
-  import type { ModalProps, ModalMethods } from './types';
+  import './dialog.scss';
   import {
     defineComponent,
     computed,
@@ -44,6 +53,7 @@
     getCurrentInstance,
     nextTick,
   } from 'vue';
+  import type { DialogProps, DialogMethods } from './types';
   import Dialog from './components/Dialog';
   import DialogToolbar from './components/dialogToolbar.vue';
   import DialogHeader from './components/dialogHeader.vue';
@@ -59,15 +69,16 @@
     components: { Dialog, DialogToolbar, DialogHeader, DialogWrapper, DialogFooter },
     inheritAttrs: false,
     props: basicProps,
-    emits: ['visible-change', 'height-change', 'cancel', 'ok', 'register'],
+    emits: ['visible-change', 'height-change', 'cancel', 'save', 'register'],
     setup(props, { emit, attrs }) {
+      /* console.log(props); */
       const visibleRef = ref(false);
-      const propsRef = ref<Partial<ModalProps> | null>(null);
+      const propsRef = ref<Partial<DialogProps> | null>(null);
       const modalWrapperRef = ref<ComponentRef>(null);
 
       // modal   Bottom and top height
       const extHeightRef = ref(0);
-      const modalMethods: ModalMethods = {
+      const modalMethods: DialogMethods = {
         setModalProps,
         emitVisible: undefined,
         redoModalHeight: () => {
@@ -84,9 +95,11 @@
         emit('register', modalMethods, instance.uid);
       }
 
-      // Custom title component: get title
+      /**
+       * @description 获取合并后的配置
+       */
       const getMergeProps = computed(
-        (): ModalProps => {
+        (): DialogProps => {
           return {
             ...props,
             ...(unref(propsRef) as any),
@@ -100,9 +113,11 @@
         customClass: toRef(getMergeProps.value, 'customClass'),
       });
 
-      // modal component does not need title
+      /**
+       * @description 获取属性|不需要设置title
+       */
       const getProps = computed(
-        (): ModalProps => {
+        (): DialogProps => {
           const opt = {
             ...unref(getMergeProps),
             visible: unref(visibleRef),
@@ -114,15 +129,16 @@
           };
         }
       );
-
+      /**
+       *
+       */
       const getBindValue = computed((): any => {
         return { ...attrs, ...unref(getProps) };
       });
-      console.log(getBindValue);
 
       watchEffect(() => {
         visibleRef.value = !!props.visible;
-        fullScreenRef.value = !!props.defaultFullscreen;
+        fullScreenRef.value = !!props.fullscreen;
       });
 
       watch(
@@ -131,6 +147,7 @@
           emit('visible-change', v);
           instance && modalMethods.emitVisible?.(v, instance.uid);
           nextTick(() => {
+            //TODO 保留滚动顶部的配置供后续扩展使用
             /* if (props.scrollTop && v && unref(modalWrapperRef)) {
               (unref(modalWrapperRef) as any).scrollTop();
             } */
@@ -158,7 +175,7 @@
       /**
        * @description: 设置modal参数
        */
-      function setModalProps(props: Partial<ModalProps>): void {
+      function setModalProps(props: Partial<DialogProps>): void {
         // Keep the last setModalProps
         propsRef.value = deepMerge(unref(propsRef) || {}, props);
         if (!Reflect.has(props, 'visible')) return;
@@ -166,7 +183,7 @@
       }
 
       function handleOk() {
-        emit('ok');
+        emit('save');
       }
 
       function handleHeightChange(height: string) {

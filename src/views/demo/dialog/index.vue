@@ -1,6 +1,14 @@
 <template>
   <el-button type="primary" @click="openDialogLoading">测试模态窗</el-button>
-  <BasicDialog v-bind="$attrs" title="Modal Title" @register="register1"> 123 </BasicDialog>
+  <BasicDialog
+    v-bind="$attrs"
+    title="Modal Title"
+    @register="register1"
+    @cancel="testCancel"
+    @save="testSave"
+  >
+    123
+  </BasicDialog>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
@@ -8,18 +16,26 @@
   export default defineComponent({
     components: { BasicDialog },
     setup() {
-      const [register1, { openModal: openDailog1, setModalProps }] = useDialog();
+      const [register1, { openDialog: openDailog1, setModalProps }] = useDialog();
       function openDialogLoading() {
         openDailog1();
-        setModalProps({ loading: true });
+        setModalProps({ loading: true, title: '新增' });
         setTimeout(() => {
           setModalProps({ loading: false });
-        }, 650);
+        }, 1200);
+      }
+      function testCancel() {
+        console.log('关闭');
+      }
+      function testSave(obj) {
+        console.log(obj, 'ok');
       }
       return {
         register1,
         openDailog1,
         openDialogLoading,
+        testCancel,
+        testSave,
       };
     },
   });

@@ -216,10 +216,11 @@
        */
       async function refreshTag(tag: RouteLocationNormalized) {
         await tagStore.deleteCacheTag();
-        const { path } = tag;
+        const { fullPath } = tag;
+        //debugger;
         nextTick(() => {
           replace({
-            path: '/redirect' + path,
+            path: '/redirect' + fullPath,
           });
         });
       }
@@ -343,7 +344,7 @@
             border: 1px solid #d8dce5;
             border-radius: 0;
             /* color: #495060;
-            background: #fff;*/ 
+            background: #fff;*/
             padding: 0 6px;
             font-size: 12px;
             margin-left: 4px;
@@ -377,7 +378,7 @@
                 display: inline-block;
               }
               &:hover {
-                background-color: #FC0202;
+                background-color: #fc0202;
                 color: #fff;
               }
             }

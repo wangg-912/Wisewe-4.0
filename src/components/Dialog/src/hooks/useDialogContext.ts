@@ -7,7 +7,7 @@ export interface ModalContextProps {
 
 const key: InjectionKey<ModalContextProps> = Symbol();
 
-export function createModalContext(context: ModalContextProps) {
+export function createDialogContext(context: ModalContextProps) {
   return createContext<ModalContextProps>(context, key);
 }
 

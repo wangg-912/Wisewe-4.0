@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar ref="wrapperRef">
+  <el-scrollbar ref="wrapperRef" :class="prefixCls">
     <div ref="spinRef" :style="spinStyle" v-loading="loading" :element-loading-text="loadingTip">
       <slot></slot>
     </div>
@@ -19,25 +19,28 @@
     nextTick,
     onUnmounted,
   } from 'vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
   import { IDWrapperProps } from './../types';
   import { useWindow } from '/@/hooks/web/useWindow';
+  import { createDialogContext } from '../hooks/useDialogContext';
   export default defineComponent({
     name: 'DialogWrapper',
     inheritAttrs: false,
     props: {
       loading: propTypes.bool,
       useWrapper: propTypes.bool.def(true),
-      modalHeaderHeight: propTypes.number.def(57),
-      modalFooterHeight: propTypes.number.def(74),
-      minHeight: propTypes.number.def(200),
+      modalHeaderHeight: propTypes.number.def(45),
+      modalFooterHeight: propTypes.number.def(55),
+      width: propTypes.number.def(640),
       height: propTypes.number,
       footerOffset: propTypes.number.def(0),
       visible: propTypes.bool,
-      fullScreen: propTypes.bool,
+      fullscreen: propTypes.bool,
       loadingTip: propTypes.string,
     },
     emits: ['height-change', 'ext-height'],
     setup(props: IDWrapperProps, { emit }) {
+      const { prefixCls } = useDesign('dialog-wrapper');
       const wrapperRef = ref<ComponentRef>(null);
       const spinRef = ref<ElRef>(null);
       const realHeightRef = ref(0);
@@ -48,16 +51,17 @@
 
       useWindow(setModalHeight.bind(null, false));
 
-      createModalContext({
+      createDialogContext({
         redoModalHeight: setModalHeight,
       });
 
       const spinStyle = computed(
         (): CSSProperties => {
           return {
-            minHeight: `${props.minHeight}px`,
+            width: `${props.width}px`,
             // padding 28
             height: `${unref(realHeightRef)}px`,
+            padding: `8px`,
           };
         }
       );
@@ -66,7 +70,7 @@
         props.useWrapper && setModalHeight();
       });
       watch(
-        () => props.fullScreen,
+        () => props.fullscreen,
         (v) => {
           setModalHeight();
           if (!v) {
@@ -111,10 +115,10 @@
             props.modalFooterHeight -
             props.modalHeaderHeight;
 
-          // 距离顶部过进会出现滚动条
+          /* // 距离顶部过进会出现滚动条
           if (modalTop < 40) {
             maxHeight -= 26;
-          }
+          } */
           await nextTick();
           const spinEl = unref(spinRef);
 
@@ -124,9 +128,9 @@
           realHeight = spinEl.scrollHeight;
           // }
 
-          if (props.fullScreen) {
+          if (props.fullscreen) {
             realHeightRef.value =
-              window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight - 28;
+              window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight;
           } else {
             realHeightRef.value = props.height
               ? props.height
@@ -140,7 +144,7 @@
         }
       }
 
-      return { wrapperRef, spinRef, spinStyle, setModalHeight };
+      return { prefixCls, wrapperRef, spinRef, spinStyle, setModalHeight };
     },
   });
 </script>

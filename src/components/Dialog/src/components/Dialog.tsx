@@ -5,7 +5,6 @@ import { useDialogDragMove } from '../hooks/useDialogDrag';
 import { useAttrs } from '/@/hooks/core/useAttrs';
 import { extendSlots } from '/@/utils/helper/tsxHelper';
 
-
 export default defineComponent({
   name: 'Dialog',
   inheritAttrs: false,
@@ -20,7 +19,9 @@ export default defineComponent({
     })
     return () => {
       const propsData = { ...unref(attrs), ...props } as Recordable;
-      return <ElDialog model-value={ propsData.visible} {...propsData}> {extendSlots(slots)} </ElDialog>;
+      return <ElDialog model-value={propsData.visible} {...propsData}>
+        {extendSlots(slots)}
+      </ElDialog>;
     }
   }
 })

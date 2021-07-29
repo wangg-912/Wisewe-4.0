@@ -1,37 +1,37 @@
 import { tuple } from '/@/type/utils';
 import type { ExtractPropTypes } from 'vue';
 import type { CSSProperties, VNodeChild, ComputedRef } from 'vue';
-import { propTypes } from '/@/utils/propTypes';
-
-const ButtonTypes = tuple('primary', 'success', 'warning', 'danger', 'info', 'text');
-const ButtonShapes = tuple('plain', 'circle', 'round');
-const ButtonSize = tuple('medium ', 'small', 'mini');
-
+/**
+ * @description 按钮类型约束
+ */
 const buttonProps = () => ({
-  size: propTypes.oneOf(ButtonSize).def('small'),
-  type: propTypes.oneOf(ButtonTypes).def('info'),
-  shape: propTypes.oneOf(ButtonShapes).def('plain'),
-  loading: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  icon: {
-    type: String,
-    default: '',
-  },
-  autofocus: {
-    type: Boolean,
-    default: false,
-  },
-  'native-type': propTypes.oneOf(['button', 'submit', 'reset']).def('button'),
+  size: String,
+  type: String,
+  shape: String,
+  loading: Boolean,
+  disabled: Boolean,
+  icon: String,
+  autofocus: Boolean,
+  'native-type': String,
 });
+/**
+ * @description 按钮可选类型
+ */
+export const ButtonTypes = tuple('primary', 'success', 'warning', 'danger', 'info', 'text');
+/**
+ * @description 按钮可选形状
+ */
+export const ButtonShapes = tuple('plain', 'circle', 'round');
+/**
+ * @description 按钮可选大小
+ */
+export const ButtonSize = tuple('medium ', 'small', 'mini');
+/**
+ * @description 按钮全类型约束
+ */
 export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonProps>>>;
 /* TODO 旧框架配置 */
-export interface IDialog {
+/* export interface IDialog {
   dialogId: number;
   iframeId: number | string;
   title: string;
@@ -45,22 +45,24 @@ export interface IDialog {
   showClose: boolean;
   validator: Array<unknown>;
   callback: Array<any>;
-}
-
-export interface ModalProps {
+} */
+/**
+ * @description 模态窗接口全配置
+ */
+export interface DialogProps {
   /* 模态窗的标题 */
   title?: VNodeChild | JSX.Element;
   /* 模态窗的默认宽度; */
   width?: string | number;
   /* 模态窗的默高度; */
   height?: number;
-  minHeight?: number;
+  fullscreen: boolean;
+  /* 是否可以进行全屏 */
+  canFullscreen: boolean;
   /* 启用wrapper后 底部可以适当增加高度 */
   wrapperFooterOffset?: number;
   /* 拖拽 */
   draggable?: boolean;
-  /* 是否可以进行全屏 */
-  canFullscreen?: boolean;
   /* 是否展示 */
   visible?: boolean;
   /* 是否使用modalWrapper */
@@ -72,8 +74,11 @@ export interface ModalProps {
   /* 按钮 */
   showOkBtn: boolean;
   showCancelBtn: boolean;
+  /* 打开事件 */
+  open: () => Promise<any>;
   /* 关闭事件 */
   close: () => Promise<any>;
+  save: () => Promise<any>;
   /* 模态窗关闭之前的调用; */
   beforeClose?: () => any;
   /* 模态窗整体父容器样式; */
@@ -102,12 +107,6 @@ export interface ModalProps {
    * @type any (string | slot)
    */
   footer?: VNodeChild | JSX.Element;
-  /**
-   * Return the mount node for Modal
-   * @default () => document.body
-   * @type Function
-   */
-  getContainer?: (instance: any) => HTMLElement;
 
   /* 是否需要遮罩层; */
   modal?: boolean;
@@ -117,43 +116,41 @@ export interface ModalProps {
   okText?: string;
   /* 确定按钮可选的类型 */
   okType?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'text';
-  /**
-   * 确定按钮的属性，遵循jsx的规则
-   * @type object
-   */
-  okButtonProps?: ButtonProps;
-
-  /**
-   * 取消按钮的属性，遵循jsx的规则
-   * @type object
-   */
-  cancelButtonProps?: ButtonProps;
 
   /* Dialog 的自定义类名 */
   customClass?: string;
   /* 是否可以通过按下 ESC 关闭 Dialog */
   closeOnPressEscape: boolean;
+  buttonOptions?: object;
 }
 
 /**
- * @description: 弹窗对外暴露的方法
+ * @description: 模态窗对外暴露的方法
  */
-export interface ModalMethods {
-  setModalProps: (props: Partial<ModalProps>) => void;
+export interface DialogMethods {
+  setModalProps: (props: Partial<DialogProps>) => void;
   emitVisible?: (visible: boolean, uid: number) => void;
   redoModalHeight?: () => void;
 }
-
-export type RegisterFn = (modalMethods: ModalMethods, uuid?: string) => void;
-
-export interface ReturnMethods extends ModalMethods {
-  openModal: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;
+/**
+ * @description 注册机制类型
+ */
+export type RegisterFn = (modalMethods: DialogMethods, uuid?: string) => void;
+/**
+ * @description 封装模态窗的函数接口
+ */
+export interface ReturnMethods extends DialogMethods {
+  openDialog: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;
   getVisible?: ComputedRef<boolean>;
 }
-
-export type UseModalReturnType = [RegisterFn, ReturnMethods];
-
-export interface ReturnInnerMethods extends ModalMethods {
+/**
+ * @description 使用模态窗返回类型
+ */
+export type UseDialogReturnType = [RegisterFn, ReturnMethods];
+/**
+ * @description 使用模态窗内部触发方法
+ */
+export interface ReturnInnerMethods extends DialogMethods {
   closeModal: () => void;
   changeLoading: (loading: boolean) => void;
   changeOkLoading: (loading: boolean) => void;
@@ -173,7 +170,7 @@ export interface IDWrapperProps {
   minHeight: number;
   height: number;
   visible: boolean;
-  fullScreen: boolean;
+  fullscreen: boolean;
   renderFrame: boolean;
   useWrapper: boolean;
 }
