@@ -35,84 +35,47 @@
   background: #b6b7b9;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease-in-out;
+
+.el-button+.el-button {
+  position: relative;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.el-button:not(.is-disabled) {
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:after {
+    content            : "";
+    display            : block;
+    position           : absolute;
+    top                : -6px;
+    left               : -6px;
+    right              : -6px;
+    bottom             : -6px;
+    pointer-events     : none;
+    background-color   : inherit;
+    background-repeat  : no-repeat;
+    background-position: 50%;
+    opacity            : 0;
+    transition         : all .3s;
+    border-radius      : inherit;
+  }
+
+  &:active:after {
+    opacity   : .7;
+    top       : 0;
+    left      : 0;
+    right     : 0;
+    bottom    : 0;
+    transition: 0s;
+  }
 }
 
-/* fade-slide */
-.fade-slide-leave-active,
-.fade-slide-enter-active {
-  transition: all 0.3s;
-}
-
-.fade-slide-enter-from {
-  opacity  : 0;
-  transform: translateX(-30px);
-}
-
-.fade-slide-leave-to {
-  opacity  : 0;
-  transform: translateX(30px);
-}
-
-// ///////////////////////////////////////////////
-// Fade Bottom
-// ///////////////////////////////////////////////
-
-// Speed: 1x
-.fade-bottom-enter-active,
-.fade-bottom-leave-active {
-  transition: opacity 0.25s, transform 0.3s;
-}
-
-.fade-bottom-enter-from {
-  opacity  : 0;
-  transform: translateY(-10%);
-}
-
-.fade-bottom-leave-to {
-  opacity  : 0;
-  transform: translateY(10%);
-}
-
-// fade-scale
-.fade-scale-leave-active,
-.fade-scale-enter-active {
-  transition: all 0.28s;
-}
-
-.fade-scale-enter-from {
-  opacity  : 0;
-  transform: scale(1.2);
-}
-
-.fade-scale-leave-to {
-  opacity  : 0;
-  transform: scale(0.8);
-}
-
-// ///////////////////////////////////////////////
-// Fade Top
-// ///////////////////////////////////////////////
-
-// Speed: 1x
-.fade-top-enter-active,
-.fade-top-leave-active {
-  transition: opacity 0.2s, transform 0.25s;
-}
-
-.fade-top-enter-from {
-  opacity  : 0;
-  transform: translateY(8%);
-}
-
-.fade-top-leave-to {
-  opacity  : 0;
-  transform: translateY(-8%);
+.el-button--default {
+  &:after {
+    background-color: lightgrey !important;
+  }
 }

@@ -3,9 +3,8 @@
 -->
 <template>
   <div>
-    <RouterView>
-      <template #default="{ Component, route }">
-        <transition
+    <router-view v-slot="{ Component, route }">
+      <!-- <transition
           :name="
             getTransitionName({
               route,
@@ -17,14 +16,14 @@
           "
           mode="out-in"
           appear
-        >
-          <keep-alive v-if="openCache" :include="getCaches">
-            <component :is="Component" v-bind="getKey(Component, route)" />
-          </keep-alive>
-          <component v-else :is="Component" v-bind="getKey(Component, route)" />
-        </transition>
-      </template>
-    </RouterView>
+        > -->
+      <transition name="fade" mode="out-in" appear>
+        <keep-alive v-if="openCache" :include="getCaches">
+          <component :is="Component" v-bind="getKey(Component, route)" />
+        </keep-alive>
+        <component v-else :is="Component" v-bind="getKey(Component, route)" />
+      </transition>
+    </router-view>
   </div>
 </template>
 <script lang="ts">

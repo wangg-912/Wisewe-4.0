@@ -1,7 +1,7 @@
 <template>
   <div class="bashbord-wrap">
     <panel-group />
-    <el-row :gutter="20" style="margin-bottom:16px;flex:0.4">
+    <el-row :gutter="20" style="margin-bottom: 16px; flex: 0.4">
       <el-col :span="10">
         <div class="chart__wrap chart__wrap-left">
           <echart :options="pieEchatOptions" :height="'300px'" />
@@ -13,7 +13,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="20" style="margin-bottom:10px;flex:0.5">
+    <el-row :gutter="20" style="margin-bottom: 10px; flex: 0.5">
       <el-col :span="24">
         <div class="chart__wrap">
           <echart :options="lineEchatOptions" :height="'350px'" />
@@ -49,7 +49,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .bashbord-wrap{
+  .bashbord-wrap {
     background: #f1f1f1;
     display: flex;
     flex-direction: column;
@@ -60,12 +60,11 @@
       margin: 0 16px;
       height: inherit;
     }
-    .chart__wrap-left{
-      margin-right: 0;;
+    .chart__wrap-left {
+      margin-right: 0;
     }
-    .chart__wrap-right{
-      margin-left: 0;;
+    .chart__wrap-right {
+      margin-left: 0;
     }
   }
-  
 </style>

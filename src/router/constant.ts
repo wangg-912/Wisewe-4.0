@@ -20,10 +20,10 @@ export const getParentLayout = (name: string) => {
 // 404 on a page
 export const PAGE_NOT_FOUND_ROUTE: IMenubarList = {
   path: '/:path(.*)*',
-  name: 'ErrorPage',
+  name: 'PageError',
   component: LAYOUT,
   meta: {
-    title: 'ErrorPage',
+    title: '404',
     hidden: true,
   },
   children: [

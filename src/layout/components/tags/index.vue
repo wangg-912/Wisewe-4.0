@@ -64,13 +64,14 @@
     nextTick,
   } from 'vue';
   import ScrollPane from './ScrollPane.vue';
-  import { RouteLocationNormalized } from 'vue-router';
-  import { useRouter } from 'vue-router';
+
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useTagSetting } from '/@/hooks/setting/useTagSetting';
   import { tagStore } from '/@/store/modules/tag';
   import { initAffixTags } from './useTag';
   import QuickPicker from './components/QuickPicker.vue';
+  import { useRouter } from 'vue-router';
+  import { RouteLocationNormalizedLoaded } from 'vue-router';
   export default defineComponent({
     name: 'LayoutTags',
     components: { ScrollPane, QuickPicker },
@@ -112,8 +113,8 @@
       /**
        * @description 判断是否激活
        */
-      function isActive(tag) {
-        return currentRoute.value.path === tag.path;
+      function isActive(route: RouteLocationNormalizedLoaded): boolean {
+        return currentRoute.value.path === route.path;
       }
       /**
        * @description 点击每个标签
@@ -163,18 +164,18 @@
       function addTags() {
         const { name, meta, path } = currentRoute.value;
         if (name) {
-          tagStore.addTagAction(({
+          tagStore.addTagAction({
             meta: meta,
             name: meta,
             path: path,
-          } as unknown) as RouteLocationNormalized);
+          });
         }
         return false;
       }
       /**
        * @description 右键菜单功能
        */
-      function openMenu(tag: RouteLocationNormalized, e: any) {
+      function openMenu(tag: RouteLocationNormalizedLoaded, e: any) {
         if (!getShowContextmenu) return;
         const { path } = tag;
         if (path == '/home') {
@@ -198,7 +199,7 @@
       /**
        * @description 关闭tag标签
        */
-      async function closeTag(tag: RouteLocationNormalized) {
+      async function closeTag(tag: RouteLocationNormalizedLoaded) {
         const tags: any = await tagStore.deleteTag(tag);
         if (isActive(tag)) {
           toLastTag(tags.tagsState);
@@ -207,14 +208,14 @@
       /**
        * @description 回到上一次标签
        */
-      function toLastTag(tags: RouteLocationNormalized) {
+      function toLastTag(tags: RouteLocationNormalizedLoaded) {
         const latestView = tags.slice(-1)[0];
         latestView ? push(latestView.path) : push('/');
       }
       /**
        * @description 刷新指定标签页面
        */
-      async function refreshTag(tag: RouteLocationNormalized) {
+      async function refreshTag(tag: RouteLocationNormalizedLoaded) {
         await tagStore.deleteCacheTag();
         const { fullPath } = tag;
         //debugger;

@@ -27,6 +27,7 @@ const components: IObject<() => Promise<typeof import('*.vue')>> = {
 export const constantRouterMap: Array<IMenubarList> = [
   {
     path: '/redirect',
+    name: 'Redirect',
     component: components['Layout'],
     children: [
       {
@@ -34,6 +35,8 @@ export const constantRouterMap: Array<IMenubarList> = [
         component: components['Redirect'],
         meta: {
           title: 'Redirect',
+          hidden: true,
+          hideTag: true,
         },
       },
     ],
@@ -81,22 +84,54 @@ export const constantRouterMap: Array<IMenubarList> = [
           affix: true,
         },
       },
+    ],
+  },
+];
+
+export const asyncRouterMap: AppRouteRecordRaw[] = [
+  {
+    path: '/components-demo',
+    name: 'Components-Demo',
+    redirect: '/components-demo/count-to',
+    component: components['Layout'],
+    meta: {
+      title: '组件管理',
+      icon: 'el-icon-box',
+    },
+    children: [
       {
-        path: 'test',
-        name: 'Test',
+        path: 'count-to',
+        name: 'CountTo',
+        component: () => import('/@/views/demo/countTo/index.vue'),
+        meta: {
+          title: '数字滚动组件',
+          icon: 'el-icon-c-scale-to-original',
+          noCache: true,
+        },
+      },
+      {
+        path: 'dialog',
+        name: 'Dialog',
         component: () => import('/@/views/demo/dialog/index.vue'),
         meta: {
-          title: '功能测试',
+          title: '弹窗组件',
           icon: 'el-icon-s-data',
           noCache: true,
-          affix: true,
+        },
+      },
+      {
+        path: 'button',
+        name: 'Button',
+        component: () => import('/@/views/demo/button/index.vue'),
+        meta: {
+          title: '按钮组件',
+          icon: 'el-icon-s-data',
+          noCache: true,
         },
       },
     ],
   },
 ];
-
-export const asyncRouterMap: AppRouteRecordRaw[] = [];
 
 const router = createRouter({
   history: createWebHashHistory(), // createWebHistory
