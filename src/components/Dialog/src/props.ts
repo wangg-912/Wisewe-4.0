@@ -1,6 +1,7 @@
 import type { PropType, CSSProperties } from 'vue';
 import { propTypes, VueNode } from '/@/utils/propTypes';
 import { IDWrapperProps, ButtonSize, ButtonTypes, ButtonShapes } from './types';
+import { object } from 'vue-types';
 /**
  * @description 模态窗默认配置
  */
@@ -12,7 +13,7 @@ export const dialogProps = {
   cancelText: propTypes.string.def('取消'),
   okText: propTypes.string.def('确定'),
   okType: propTypes.string.def('primary'),
-  showClose: propTypes.bool.def(false),
+  showClose: propTypes.bool.def(true),
   modal: propTypes.bool.def(true),
   /* 按钮级别扩展配置*/
   size: propTypes.oneOf(ButtonSize).def('mini'),
@@ -28,7 +29,8 @@ export const dialogProps = {
  * @description {All} 模态窗全配置
  */
 export const basicProps = Object.assign({}, dialogProps, {
-  title: propTypes.string,
+  title: propTypes.string.def('标题'),
+  titleIcon: propTypes.bool,
   fullscreen: propTypes.bool.def('false'),
   canFullscreen: propTypes.bool.def(true),
   wrapperFooterOffset: propTypes.number.def(0),
@@ -49,5 +51,10 @@ export const basicProps = Object.assign({}, dialogProps, {
   closeOnClickModal: propTypes.bool.def(false),
   visible: propTypes.bool,
   customClass: propTypes.string,
+  renderFrame: propTypes.bool.def(false),
+  initData: {
+    type: Object as PropType<object | string>,
+    default: null,
+  },
   closeOnPressEscape: propTypes.bool.def(false),
 });

@@ -19,7 +19,7 @@ export default defineComponent({
     })
     return () => {
       const propsData = { ...unref(attrs), ...props } as Recordable;
-      return <ElDialog model-value={propsData.visible} {...propsData}>
+      return <ElDialog model-value={propsData.visible} {...propsData}  showClose={false}>
         {extendSlots(slots)}
       </ElDialog>;
     }

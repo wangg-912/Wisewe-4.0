@@ -32,18 +32,6 @@ export const ButtonSize = tuple('medium ', 'small', 'mini');
 export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonProps>>>;
 /* TODO 旧框架配置 */
 /* export interface IDialog {
-  dialogId: number;
-  iframeId: number | string;
-  title: string;
-  indata: string | object;
-  width: number;
-  height: number;
-  iconCls: string;
-  buttons: Array<unknown>;
-  minimizable: boolean;
-  maximizable: boolean;
-  showClose: boolean;
-  validator: Array<unknown>;
   callback: Array<any>;
 } */
 /**
@@ -52,6 +40,7 @@ export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonProps
 export interface DialogProps {
   /* 模态窗的标题 */
   title?: VNodeChild | JSX.Element;
+  titleIcon?: string;
   /* 模态窗的默认宽度; */
   width?: string | number;
   /* 模态窗的默高度; */
@@ -74,6 +63,7 @@ export interface DialogProps {
   /* 按钮 */
   showOkBtn: boolean;
   showCancelBtn: boolean;
+  initData: object;
   /* 打开事件 */
   open: () => Promise<any>;
   /* 关闭事件 */
@@ -121,7 +111,8 @@ export interface DialogProps {
   customClass?: string;
   /* 是否可以通过按下 ESC 关闭 Dialog */
   closeOnPressEscape: boolean;
-  buttonOptions?: object;
+  renderFrame: boolean;
+  [key: string]: any;
 }
 
 /**
@@ -142,6 +133,7 @@ export type RegisterFn = (modalMethods: DialogMethods, uuid?: string) => void;
 export interface ReturnMethods extends DialogMethods {
   openDialog: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;
   getVisible?: ComputedRef<boolean>;
+  getTransferData?: ComputedRef<object>;
 }
 /**
  * @description 使用模态窗返回类型
@@ -172,5 +164,7 @@ export interface IDWrapperProps {
   visible: boolean;
   fullscreen: boolean;
   renderFrame: boolean;
+  initData?: any;
+  url?: any;
   useWrapper: boolean;
 }

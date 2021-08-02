@@ -1,10 +1,16 @@
 <template>
-  <Dialog @close="handleCancel" v-bind="getBindValue" :fullscreen="fullScreenRef">
+  <Dialog
+    ref="dialogRef"
+    @open="handleOpen"
+    @close="handleCancel"
+    v-bind="getBindValue"
+    :fullscreen="fullScreenRef"
+  >
     <template #title v-if="!$slots.title">
       <div class="dialog-slot-title">
         <DialogHeader :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
         <DialogToolbar
-          v-if="!getBindValue.showClose"
+          :showClose="getBindValue.showClose"
           :fullscreen="fullScreenRef"
           @close="handleCancel"
           @fullscreen="handleFullScreen"
@@ -27,12 +33,23 @@
       :height="getProps.height"
       :visible="visibleRef"
       :fullscreen="fullScreenRef"
+      :renderFrame="getProps.renderFrame"
+      :initData="getProps.initData"
+      :url="getProps.url"
       :modalFooterHeight="footer !== undefined && !footer ? 0 : undefined"
       v-bind="omit(getProps.wrapperProps, 'visible', 'height')"
       @ext-height="handleExtHeight"
       @height-change="handleHeightChange"
     >
-      <slot></slot>
+      <iframe
+        ref="frameRef"
+        :id="getBindValue.iframeId"
+        v-if="getBindValue.renderFrame && getBindValue.url"
+        :src="getBindValue.url"
+        frameborder="0"
+        style="width: 100%; min-height: 100%; overflow: auto"
+      ></iframe>
+      <slot v-else> </slot>
     </DialogWrapper>
 
     <template #[item]="data" v-for="item in Object.keys(omit($slots, 'default'))">
@@ -72,10 +89,11 @@
     emits: ['visible-change', 'height-change', 'cancel', 'save', 'register'],
     setup(props, { emit, attrs }) {
       /* console.log(props); */
+      const dialogRef = ref<ComponentRef>(null);
       const visibleRef = ref(false);
       const propsRef = ref<Partial<DialogProps> | null>(null);
       const modalWrapperRef = ref<ComponentRef>(null);
-
+      const frameRef = ref<HTMLElement | null>(null);
       // modal   Bottom and top height
       const extHeightRef = ref(0);
       const modalMethods: DialogMethods = {
@@ -103,6 +121,10 @@
           return {
             ...props,
             ...(unref(propsRef) as any),
+            ...{
+              dialogId: `dialog_${instance.uid}`,
+              iframeId: `iframe_${instance.uid}`,
+            },
           };
         }
       );
@@ -133,6 +155,19 @@
        *
        */
       const getBindValue = computed((): any => {
+        const { url, dialogId } = unref(getProps);
+        if (url && (/^(http|https|www)/g.test(url) || url.includes('.html'))) {
+          return {
+            ...attrs,
+            ...unref(getProps),
+            ...{
+              url: url.includes('?')
+                ? `${url}&dialogId=${dialogId}`
+                : `${url}?dialogId=${dialogId}`,
+              renderFrame: true,
+            },
+          };
+        }
         return { ...attrs, ...unref(getProps) };
       });
 
@@ -148,15 +183,20 @@
           instance && modalMethods.emitVisible?.(v, instance.uid);
           nextTick(() => {
             //TODO 保留滚动顶部的配置供后续扩展使用
-            /* if (props.scrollTop && v && unref(modalWrapperRef)) {
-              (unref(modalWrapperRef) as any).scrollTop();
-            } */
           });
         },
         {
           immediate: false,
         }
       );
+      /**
+       *@description 模态窗打开之后未渲染之前的操作
+       */
+      function handleOpen() {
+        // TODO
+        //const { initData } = getBindValue.value;
+        //console.log(initData);
+      }
 
       // 取消事件
       async function handleCancel(e: Event) {
@@ -176,16 +216,22 @@
        * @description: 设置modal参数
        */
       function setModalProps(props: Partial<DialogProps>): void {
-        // Keep the last setModalProps
+        // 保持最新属性配置
         propsRef.value = deepMerge(unref(propsRef) || {}, props);
         if (!Reflect.has(props, 'visible')) return;
         visibleRef.value = !!props.visible;
       }
 
       function handleOk() {
-        emit('save');
+        const frameEle = unref(frameRef) as any;
+        if (frameEle) {
+          const $frame = frameEle.contentWindow;
+          const frameData = $frame.dialogOk();
+          emit('save', frameData);
+        } else {
+          emit('save');
+        }
       }
-
       function handleHeightChange(height: string) {
         emit('height-change', height);
       }
@@ -200,6 +246,9 @@
         handleFullScreen(e);
       }
       return {
+        frameRef,
+        dialogRef,
+        handleOpen,
         handleCancel,
         getBindValue,
         getProps,

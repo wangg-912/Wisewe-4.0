@@ -81,6 +81,15 @@ export function useDialog(): UseDialogReturnType {
       return visibleData[~~unref(uidRef)];
     }),
     /**
+     * @description 获取初始化参数
+     */
+    getTransferData: computed((): object =>
+      Object.assign(
+        { initData: dataTransferRef[unref(uidRef)] },
+        { dialogId: unref(uidRef), iframeId: unref(uidRef) }
+      )
+    ),
+    /**
      * @description 重置模态窗的高度
      */
     redoModalHeight: () => {
@@ -94,9 +103,11 @@ export function useDialog(): UseDialogReturnType {
      * @returns
      */
     openDialog: <T = any>(visible = true, data?: T, openOnSet = true): void => {
-      getInstance()?.setModalProps({
-        visible: visible,
-      });
+      getInstance()?.setModalProps(
+        Object.assign({}, data, {
+          visible: visible,
+        })
+      );
       if (!data) return;
       if (openOnSet) {
         dataTransferRef[unref(uidRef)] = null;

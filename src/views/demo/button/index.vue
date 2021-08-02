@@ -1,13 +1,5 @@
 <template>
   <div>
-    <el-alert
-      effect="dark"
-      :closable="false"
-      title="对 Element 的 Button 组件进行美化，实现水波纹样式，如不需要，可在 src/styles/button.less 进行更改注释。"
-      type="info"
-      style="margin-bottom: 20px"
-    />
-
     <el-row style="margin-bottom: 20px">
       <el-button>默认按钮</el-button>
       <el-button type="primary">主要按钮</el-button>

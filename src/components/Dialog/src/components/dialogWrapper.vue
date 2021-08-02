@@ -36,7 +36,7 @@
       footerOffset: propTypes.number.def(0),
       visible: propTypes.bool,
       fullscreen: propTypes.bool,
-      loadingTip: propTypes.string,
+      renderFrame: propTypes.bool.def(false),
     },
     emits: ['height-change', 'ext-height'],
     setup(props: IDWrapperProps, { emit }) {
@@ -45,6 +45,7 @@
       const spinRef = ref<ElRef>(null);
       const realHeightRef = ref(0);
       const minRealHeightRef = ref(0);
+      const frameRef = ref(null);
 
       let realHeight = 0;
       let stopElResizeFn: Fn = () => {};

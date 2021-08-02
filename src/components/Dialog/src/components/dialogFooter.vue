@@ -1,11 +1,13 @@
 <template>
   <div>
     <slot name="insertFooter"></slot>
-    <el-button type="info" @click="handleCancel" v-if="showCancelBtn">
+    <el-button type="info" @click="handleCancel" v-if="showCancelBtn" :size="size">
       {{ cancelText }}
     </el-button>
     <slot name="centerFooter"></slot>
-    <el-button :type="okType" @click="handleOk" v-if="showOkBtn"> {{ okText }}</el-button>
+    <el-button :type="okType" @click="handleOk" v-if="showOkBtn" :size="size">
+      {{ okText }}</el-button
+    >
     <slot name="appendFooter"></slot>
   </div>
 </template>
@@ -17,7 +19,7 @@
     props: basicProps,
     emits: ['save', 'close'],
     setup(props, { emit }) {
-      console.log(props);
+      //debugger;
       function handleOk() {
         emit('save');
       }

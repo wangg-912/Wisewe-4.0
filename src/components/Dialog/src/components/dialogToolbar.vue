@@ -16,7 +16,12 @@
         v-else
       ></i>
     </template>
-    <i class="el-icon-close" :class="`${prefixCls}__icon`" @click="handleCancel"></i>
+    <i
+      v-if="showClose"
+      class="el-icon-close"
+      :class="`${prefixCls}__icon`"
+      @click="handleCancel"
+    ></i>
   </div>
 </template>
 <script lang="ts">
@@ -26,6 +31,7 @@
   export default defineComponent({
     name: 'DialogToolbar',
     props: {
+      showClose: propTypes.bool.def(true),
       canFullscreen: propTypes.bool.def(true),
       fullscreen: propTypes.bool,
     },
