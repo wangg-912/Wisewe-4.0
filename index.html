@@ -204,7 +204,7 @@
       var name = browserVersionStr[0];
       var version = browserVersionStr[1];
       if (!limitObj[name] || (limitObj[name] && version < limitObj[name])) {
-        window.location.href="/public/browser.html"
+        window.location.href = "./browser.html"
       };
     }());
   </script>
