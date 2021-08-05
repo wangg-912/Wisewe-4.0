@@ -63,7 +63,7 @@ export interface DialogProps {
   /* 按钮 */
   showOkBtn: boolean;
   showCancelBtn: boolean;
-  initData: object;
+  indata: object;
   /* 打开事件 */
   open: () => Promise<any>;
   /* 关闭事件 */
@@ -122,6 +122,7 @@ export interface DialogMethods {
   setModalProps: (props: Partial<DialogProps>) => void;
   emitVisible?: (visible: boolean, uid: number) => void;
   redoModalHeight?: () => void;
+  callbackFn: <T = any>(type: string, data?: T) => void;
 }
 /**
  * @description 注册机制类型
@@ -131,9 +132,8 @@ export type RegisterFn = (modalMethods: DialogMethods, uuid?: string) => void;
  * @description 封装模态窗的函数接口
  */
 export interface ReturnMethods extends DialogMethods {
-  openDialog: <T = any>(props?: boolean, data?: T, openOnSet?: boolean) => void;
+  openDialog: <T = any>(data?: T, props?: boolean, openOnSet?: boolean) => void;
   getVisible?: ComputedRef<boolean>;
-  getTransferData?: ComputedRef<object>;
 }
 /**
  * @description 使用模态窗返回类型
@@ -164,7 +164,7 @@ export interface IDWrapperProps {
   visible: boolean;
   fullscreen: boolean;
   renderFrame: boolean;
-  initData?: any;
+  indata?: any;
   url?: any;
   useWrapper: boolean;
 }

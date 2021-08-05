@@ -1,5 +1,11 @@
 <template>
   <BasicTitle>
+    <i
+      v-if="icon"
+      :class="icon"
+      size="18"
+      style="display: flex; justify-content: center; align-items: center; padding-right: 4px"
+    ></i>
     {{ title }}
   </BasicTitle>
 </template>
@@ -15,6 +21,7 @@
     },
     props: {
       title: propTypes.string,
+      icon: propTypes.string,
     },
   });
 </script>

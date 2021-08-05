@@ -42,7 +42,7 @@ export const basicProps = Object.assign({}, dialogProps, {
   wrapperProps: Object as PropType<Partial<IDWrapperProps>>,
   bodyStyle: Object as PropType<CSSProperties>,
   closeIcon: Object as PropType<VueNode>,
-  destroyOnClose: propTypes.bool,
+  destroyOnClose: propTypes.bool.def(true),
   footer: Object as PropType<VueNode>,
   open: Function as PropType<() => any>,
   close: Function as PropType<() => any>,
@@ -52,7 +52,7 @@ export const basicProps = Object.assign({}, dialogProps, {
   visible: propTypes.bool,
   customClass: propTypes.string,
   renderFrame: propTypes.bool.def(false),
-  initData: {
+  indata: {
     type: Object as PropType<object | string>,
     default: null,
   },

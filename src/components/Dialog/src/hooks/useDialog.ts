@@ -14,6 +14,7 @@ import {
   watchEffect,
   nextTick,
   toRaw,
+  toRefs,
 } from 'vue';
 import { isProdMode } from '/@/utils/env';
 import { isFunction } from '/@/utils/tools';
@@ -57,16 +58,41 @@ export function useDialog(): UseDialogReturnType {
       visibleData[uid] = visible;
     };
   }
-
+  /**
+   * @description 跨frame级别的管理器
+   * @param detail
+   */
+  const messageClient = (detail: any) => {
+    const { gid, callbackData } = detail.data;
+    if (uidRef.value == gid) {
+      const { indata } = dataTransferRef[unref(uidRef)];
+      if (indata) {
+        const transforDataStr = JSON.stringify(indata);
+        detail.source.postMessage(Object.assign({}, JSON.parse(transforDataStr)));
+      }
+      if (callbackData) {
+        //TODO
+        getInstance()?.callbackFn({ type: 'ok', data: callbackData });
+      }
+    }
+  };
+  window.addEventListener('message', messageClient, false);
   const getInstance = () => {
     const instance = unref(modalRef);
     if (!instance) {
-      error('useModal instance is undefined!');
+      error('useDialog instance is undefined!');
     }
     return instance;
   };
 
   const methods: ReturnMethods = {
+    /**
+     *
+     * @returns
+     */
+    callbackFn: <T = any>(type = 'ok', data?: T) => {
+      return getInstance()?.callbackFn?.({ type: 'ok', data });
+    },
     /**
      * @description 设置模态窗的属性
      * @param props
@@ -81,15 +107,6 @@ export function useDialog(): UseDialogReturnType {
       return visibleData[~~unref(uidRef)];
     }),
     /**
-     * @description 获取初始化参数
-     */
-    getTransferData: computed((): object =>
-      Object.assign(
-        { initData: dataTransferRef[unref(uidRef)] },
-        { dialogId: unref(uidRef), iframeId: unref(uidRef) }
-      )
-    ),
-    /**
      * @description 重置模态窗的高度
      */
     redoModalHeight: () => {
@@ -102,13 +119,21 @@ export function useDialog(): UseDialogReturnType {
      * @param openOnSet
      * @returns
      */
-    openDialog: <T = any>(visible = true, data?: T, openOnSet = true): void => {
-      getInstance()?.setModalProps(
-        Object.assign({}, data, {
-          visible: visible,
-        })
-      );
-      if (!data) return;
+    openDialog: <T = any>(data?: T, visible = true, openOnSet = true): void => {
+      let t;
+      const options = Object.assign({ loading: true }, data, {
+        visible: visible,
+        renderFrame: !!data?.url,
+      });
+      //debugger;
+      getInstance()?.setModalProps(options);
+      /* 检测loading state true执行 */
+      options.loading &&
+        setTimeout(() => {
+          getInstance()?.setModalProps({ loading: false });
+          clearTimeout(t);
+        }, 650);
+      //if (!data) return;
       if (openOnSet) {
         dataTransferRef[unref(uidRef)] = null;
         dataTransferRef[unref(uidRef)] = data;

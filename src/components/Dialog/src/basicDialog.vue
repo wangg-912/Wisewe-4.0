@@ -8,7 +8,11 @@
   >
     <template #title v-if="!$slots.title">
       <div class="dialog-slot-title">
-        <DialogHeader :title="getMergeProps.title" @dblclick="handleTitleDbClick" />
+        <DialogHeader
+          :title="getMergeProps.title"
+          :icon="getMergeProps.titleIcon"
+          @dblclick="handleTitleDbClick"
+        />
         <DialogToolbar
           :showClose="getBindValue.showClose"
           :fullscreen="fullScreenRef"
@@ -34,7 +38,7 @@
       :visible="visibleRef"
       :fullscreen="fullScreenRef"
       :renderFrame="getProps.renderFrame"
-      :initData="getProps.initData"
+      :indata="getProps.indata"
       :url="getProps.url"
       :modalFooterHeight="footer !== undefined && !footer ? 0 : undefined"
       v-bind="omit(getProps.wrapperProps, 'visible', 'height')"
@@ -79,7 +83,7 @@
   import { isFunction, deepMerge } from '/@/utils/tools';
   import { basicProps } from './props';
   import { useFullScreen } from './hooks/useDialogFullScreen';
-  import { omit } from 'lodash-es';
+  import { omit, isEmpty } from 'lodash-es';
 
   export default defineComponent({
     name: 'BasicDialog',
@@ -106,8 +110,11 @@
             }
           });
         },
+        callbackFn: (res) => handleCallBack(res),
       };
-
+      /**
+       * @description 获取当前实例
+       */
       const instance = getCurrentInstance();
       if (instance) {
         emit('register', modalMethods, instance.uid);
@@ -122,13 +129,15 @@
             ...props,
             ...(unref(propsRef) as any),
             ...{
-              dialogId: `dialog_${instance.uid}`,
+              dialogId: `${instance.uid}`,
               iframeId: `iframe_${instance.uid}`,
             },
           };
         }
       );
-
+      /**
+       * @description 使用全屏响应式方法
+       */
       const { handleFullScreen, getCustomClass, fullScreenRef } = useFullScreen({
         modalWrapperRef,
         extHeightRef,
@@ -152,7 +161,7 @@
         }
       );
       /**
-       *
+       *@description 获取绑定参数
        */
       const getBindValue = computed((): any => {
         const { url, dialogId } = unref(getProps);
@@ -190,29 +199,6 @@
         }
       );
       /**
-       *@description 模态窗打开之后未渲染之前的操作
-       */
-      function handleOpen() {
-        // TODO
-        //const { initData } = getBindValue.value;
-        //console.log(initData);
-      }
-
-      // 取消事件
-      async function handleCancel(e: Event) {
-        e?.stopPropagation();
-
-        if (props.close && isFunction(props.close)) {
-          const isClose: boolean = await props.close();
-          visibleRef.value = !isClose;
-          return;
-        }
-
-        visibleRef.value = false;
-        emit('cancel');
-      }
-
-      /**
        * @description: 设置modal参数
        */
       function setModalProps(props: Partial<DialogProps>): void {
@@ -221,7 +207,27 @@
         if (!Reflect.has(props, 'visible')) return;
         visibleRef.value = !!props.visible;
       }
-
+      /* ======================事件类================================= */
+      /**
+       *@description 模态窗关闭之前的回调操作
+       */
+      function handleCallBack<T = any>(res: T) {
+        const { type, data } = res;
+        if (type && !isEmpty(data)) {
+          //debugger;
+          //console.log(getBindValue.value);
+          const { callback } = getBindValue.value;
+          if (callback && isFunction(callback)) {
+            callback.call(this, data);
+            visibleRef.value = false;
+            emit('close');
+          }
+          emit('callback');
+        }
+      }
+      /**
+       * @description 模态窗的保存事件
+       */
       function handleOk() {
         const frameEle = unref(frameRef) as any;
         if (frameEle) {
@@ -232,15 +238,36 @@
           emit('save');
         }
       }
+      /**
+       *@description 模态窗的取消事件
+       */
+      async function handleCancel(e: Event) {
+        e?.stopPropagation();
+
+        if (props.close && isFunction(props.close)) {
+          const isClose: boolean = await props.close();
+          visibleRef.value = !isClose;
+          return;
+        }
+        visibleRef.value = false;
+        emit('cancel');
+      }
+      /**
+       * @description 模态窗容器高度变化事件
+       */
       function handleHeightChange(height: string) {
         emit('height-change', height);
       }
-
+      /**
+       * @description 预留高度扩展事件
+       */
       function handleExtHeight(height: number) {
         extHeightRef.value = height;
       }
-
-      function handleTitleDbClick(e: ChangeEvent) {
+      /**
+       * @description 快速头部双击最大化事件
+       */
+      function handleTitleDbClick(e: Event) {
         if (!props.canFullscreen) return;
         e.stopPropagation();
         handleFullScreen(e);
@@ -248,17 +275,17 @@
       return {
         frameRef,
         dialogRef,
-        handleOpen,
-        handleCancel,
-        getBindValue,
+        visibleRef,
+        modalWrapperRef,
         getProps,
-        handleFullScreen,
         fullScreenRef,
         getMergeProps,
-        handleOk,
-        visibleRef,
+        getBindValue,
+        handleFullScreen,
         omit,
-        modalWrapperRef,
+        handleOk,
+        handleCancel,
+        handleCallBack,
         handleExtHeight,
         handleHeightChange,
         handleTitleDbClick,
