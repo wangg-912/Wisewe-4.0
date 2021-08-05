@@ -24,9 +24,11 @@
     }
 
     function dialogOk() {
+      const tmpData = { "name": "zs", "age": "65" };
       innerHandle();
-      closeIframeDialog(dialogId, { "name": "zs", "age": "65" })
-      
+      closeIframeDialog(dialogId, tmpData);
+      return tmpData;
+
     }
     function dialogCancel() {
       console.log("关闭")

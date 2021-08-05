@@ -4,7 +4,7 @@
   <el-button type="primary" @click="openDialogThree">测试无参数模态窗</el-button>
   <BasicDialog @register="register1" @cancel="testCancel" @save="testSave">
     <template #insertFooter>
-      <el-button type="primary" plain>插入左边</el-button>
+      <el-button type="primary" plain icon="el-icon-message" @click="testHandler">插入左边</el-button>
     </template>
     <template #centerFooter>
       <el-button type="primary" round>插入中间</el-button>
@@ -44,7 +44,7 @@
             },
           },
           callback: function (data) {
-            console.log('ok', data);
+            console.log('回调事件', data);
           },
         });
       }
@@ -56,7 +56,9 @@
           indata: { name: 'zs', age: '28' },
         });
       }
-      function testHandler() {}
+      function testHandler() {
+        //TODO
+      }
       function openDialogThree() {
         openDailog3();
       }
@@ -64,7 +66,7 @@
         console.log('关闭');
       }
       function testSave(obj) {
-        console.log(obj, 'ok');
+        console.log(obj, '保存操作');
       }
       function testCpSave() {
         console.log('组件模态窗确认关闭 ，ok');

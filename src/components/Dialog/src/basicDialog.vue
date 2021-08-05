@@ -92,7 +92,6 @@
     props: basicProps,
     emits: ['visible-change', 'height-change', 'cancel', 'save', 'register'],
     setup(props, { emit, attrs }) {
-      /* console.log(props); */
       const dialogRef = ref<ComponentRef>(null);
       const visibleRef = ref(false);
       const propsRef = ref<Partial<DialogProps> | null>(null);
