@@ -3496,6 +3496,11 @@ duplexer3@^0.1.4:
   resolved "https://registry.npm.taobao.org/duplexer3/download/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
+easyui-186@^1.8.6:
+  version "1.8.6"
+  resolved "https://registry.nlark.com/easyui-186/download/easyui-186-1.8.6.tgz#e752ed7d821dfbb7745a70a67eab66ebfc74a913"
+  integrity sha1-51LtfYId+7d0WnCmfqtm6/x0qRM=
+
 echarts@^5.1.2:
   version "5.1.2"
   resolved "https://registry.nlark.com/echarts/download/echarts-5.1.2.tgz?cache=0&sync_timestamp=1623167246710&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fecharts%2Fdownload%2Fecharts-5.1.2.tgz#aa1ab0cef5b74fa2f7c620261a5f286893d30fd1"
@@ -5558,6 +5563,11 @@ jest@^27.0.6:
     "@jest/core" "^27.0.6"
     import-local "^3.0.2"
     jest-cli "^27.0.6"
+
+jquery@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha1-xyoJ8Vwb3OFC9J2/EXC9+K2sJHA=
 
 js-tokens@^4.0.0:
   version "4.0.0"
