@@ -111,7 +111,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       },
       {
         path: 'dialog',
-        name: 'Dialog',
+        name: 'WDialog',
         component: () => import('/@/views/demo/dialog/index.vue'),
         meta: {
           title: '弹窗组件',
@@ -121,7 +121,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       },
       {
         path: 'button',
-        name: 'Button',
+        name: 'WButton',
         component: () => import('/@/views/demo/button/index.vue'),
         meta: {
           title: '按钮组件',

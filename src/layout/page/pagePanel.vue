@@ -4,20 +4,19 @@
 <template>
   <div>
     <router-view v-slot="{ Component, route }">
-      <!-- <transition
-          :name="
-            getTransitionName({
-              route,
-              openCache: openCache,
-              enableTransition: getEnableTransition,
-              cacheTabs: getCaches,
-              def: getBasicTransition,
-            })
-          "
-          mode="out-in"
-          appear
-        > -->
-      <transition name="fade" mode="out-in" appear>
+      <transition
+        :name="
+          getTransitionName({
+            route,
+            openCache: openCache,
+            enableTransition: getEnableTransition,
+            cacheTabs: getCaches,
+            def: getBasicTransition,
+          })
+        "
+        mode="out-in"
+        appear
+      >
         <keep-alive v-if="openCache" :include="getCaches">
           <component :is="Component" v-bind="getKey(Component, route)" />
         </keep-alive>

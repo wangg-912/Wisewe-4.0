@@ -2,7 +2,6 @@
   <el-button type="primary" @click="openDialogOne">测试IFrame模态窗</el-button>
   <el-button type="primary" @click="openDialogTwo">测试Component模态窗</el-button>
   <el-button type="primary" @click="openDialogThree">测试无参数模态窗</el-button>
-  <el-button type="primary" @click="createDialog">动态创建</el-button>
   <BasicDialog @register="register1" @cancel="testCancel" @save="testSave">
     <!-- <template #insertFooter>
       <el-button type="primary" plain icon="el-icon-message" @click="testHandler"
@@ -30,8 +29,6 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { BasicDialog, useDialog } from '/@/components/Dialog';
-  /* import { CreateDialog } from './test'; */
-  /* import { renderAsyncDialog, beforeOpenDialod } from './extend'; */
   export default defineComponent({
     components: { BasicDialog },
     setup() {
@@ -83,29 +80,6 @@
       function testCpSave() {
         console.log('组件模态窗确认关闭 ，ok');
       }
-
-      function createDialog() {
-/*         CreateDialog({
-          title: '新增1',
-          titleIcon: 'el-icon-document-add',
-          width: 720,
-          height: 500,
-          url: `/src/html/test.html?t=${+new Date()}&id=123`,
-          indata: {
-            data: {
-              type: 'add',
-              id: '100121210',
-              infos: {
-                name: '测试一下',
-              },
-            },
-          },
-          callback: function (data) {
-            console.log('回调事件', data);
-          },
-        }); */
-      }
-
       return {
         register1,
         register2,
@@ -119,7 +93,6 @@
         testSave,
         testCpSave,
         testHandler,
-        createDialog,
       };
     },
   });

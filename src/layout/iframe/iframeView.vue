@@ -1,12 +1,7 @@
 <template>
   <div :class="prefixCls" :style="getWrapStyle">
-    <iframe
-      v-show="visibility"
-      :src="frameSrc"
-      :class="`${prefixCls}--main`"
-      ref="frameRef"
-    ></iframe>
-    <page-nofind v-show="!visibility" />
+    <iframe v-if="visibility" :src="frameSrc" :class="`${prefixCls}--main`" ref="frameRef"></iframe>
+    <page-nofind v-else />
   </div>
 </template>
 <script lang="ts">
@@ -15,7 +10,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { useTagSetting } from '/@/hooks/setting/useTagSetting';
-  import pageNofind from '/@/views/error/404.vue'
+  import pageNofind from '/@/views/error/404.vue';
   export default defineComponent({
     name: 'FrameView',
     props: {
@@ -47,20 +42,13 @@
         nextTick(() => {
           const iframe = unref(frameRef);
           if (!iframe) return;
-
           const _frame = iframe as any;
-          if (_frame.attachEvent) {
-            _frame.attachEvent('onload', () => {
-              //TODO
-            });
-          } else {
-            iframe.onload = () => {
-              const { contentWindow } = _frame;
-              if(contentWindow.document.body && !contentWindow.document.body.innerHTML){
-                visibility.value = false;
-              }
-            };
-          }
+          iframe.onload = () => {
+            const { contentWindow } = _frame;
+            if (contentWindow.document.body && !contentWindow.document.body.innerHTML) {
+              visibility.value = false;
+            }
+          };
         });
       }
       onMounted(() => {

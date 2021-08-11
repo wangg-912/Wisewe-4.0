@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <RouterView>
+    <router-view>
       <template #default="{ Component, route }">
         <transition
           :name="
@@ -21,7 +21,7 @@
           <component v-else :is="Component" v-bind="getKey(Component, route)" />
         </transition>
       </template>
-    </RouterView>
+    </router-view>
     <FramePanel v-if="getCanEmbedIFramePage" />
   </div>
 </template>

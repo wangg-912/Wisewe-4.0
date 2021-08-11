@@ -5,7 +5,13 @@
         <div :class="`${prefixCls}-content`" v-click-outside="handleClose">
           <!-- 搜索框 -->
           <div :class="`${prefixCls}-input__wrapper`">
-            <el-input  v-model="Input" size="small" placeholder="搜索" :class="`${prefixCls}-input`" clearable>
+            <el-input
+              v-model="Input"
+              size="small"
+              placeholder="搜索"
+              :class="`${prefixCls}-input`"
+              clearable
+            >
               <template #prefix>
                 <i class="el-input__icon el-icon-search"></i>
               </template>
@@ -48,7 +54,7 @@
   </Teleport>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref, ref, watch} from 'vue';
+  import { defineComponent, computed, unref, ref, watch } from 'vue';
   import clickOutside from '/@/directives/clickOutside';
   import { useDebounce } from '/@/hooks/core/useDebounce';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -101,7 +107,7 @@
       }
       watch(Input, (val) => {
         handleSearch(val);
-      })
+      });
 
       return {
         Input,
@@ -152,7 +158,7 @@
         border-radius: 0;
       }
 
-      .#{$namespace}-app-search-footer{
+      .#{$namespace}-app-search-footer {
         display: none;
       }
 
@@ -192,7 +198,7 @@
       color: #1c1e21;
       border-radius: 6px;
 
-      ::v-deep(.el-input__inner){
+      ::v-deep(.el-input__inner) {
         font-size: 14px;
       }
 

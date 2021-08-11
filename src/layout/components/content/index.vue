@@ -1,6 +1,6 @@
 <template>
   <el-main :class="[prefixCls, getLayoutContentMode]">
-    <transition name="fade" mode="out-in" appear>
+    <transition>
       <Loading
         v-if="getOpenPageLoading"
         :loading="getPageLoading"

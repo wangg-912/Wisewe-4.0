@@ -20,11 +20,12 @@ export enum ThemeEnum {
 
 //路由动画枚举
 export enum RouterTransitionEnum {
-  ZOOM_CENTER = 'el-zoom-in-center',
-  ZOOM_TOP = 'el-zoom-in-top',
-  ZOOM_BOTTOM = 'el-zoom-in-bottom',
-  FADE_SIDE = 'el-fade-in-linear',
-  FADE = 'el-fade-in',
+  ZOOM_FADE = 'zoom-fade',
+  ZOOM_OUT = 'zoom-out',
+  FADE_SIDE = 'fade-slide',
+  FADE = 'fade',
+  FADE_BOTTOM = 'fade-bottom',
+  FADE_SCALE = 'fade-scale',
 }
 // 配置按钮显示位置
 export enum SettingButtonPositionEnum {
