@@ -32,9 +32,9 @@ export function useDrawer(): UseDrawerReturnType {
   const uidRef = ref<string>('');
   /**
    * @description 注册方法
-   * @param drawerInstance 
-   * @param uuid 
-   * @returns 
+   * @param drawerInstance
+   * @param uuid
+   * @returns
    */
   function register(drawerInstance: DrawerInstance, uuid: string) {
     isProdMode() &&
@@ -85,10 +85,19 @@ export function useDrawer(): UseDrawerReturnType {
      * @returns
      */
     openDrawer: <T = any>(visible = true, data?: T, openOnSet = true): void => {
-      getInstance()?.setDrawerProps({
-        visible: visible,
-      });
-      if (!data) return;
+      const options = Object.assign(
+        {},
+        {
+          visible: visible,
+          loading: true,
+        }
+      );
+      getInstance()?.setDrawerProps(options);
+      /* if (!data) return; */
+      options.loading &&
+        setTimeout(() => {
+          getInstance()?.setDrawerProps({ loading: false });
+        }, 350);
       if (openOnSet) {
         dataTransferRef[unref(uidRef)] = null;
         dataTransferRef[unref(uidRef)] = data;

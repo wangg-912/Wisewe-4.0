@@ -5,7 +5,6 @@ import { tagStore } from '/@/store/modules/tag';
 import { uniqBy } from 'lodash-es';
 import { useTagSetting } from '/@/hooks/setting/useTagSetting';
 
-
 export function useFrameKeepAlive() {
   const { currentRoute } = router;
   const { getTagsShow } = useTagSetting();
@@ -51,6 +50,7 @@ export function useFrameKeepAlive() {
   }
 
   function hasRenderFrame(name: string) {
+    debugger;
     if (!unref(getTagsShow)) {
       return router.currentRoute.value.name === name;
     }

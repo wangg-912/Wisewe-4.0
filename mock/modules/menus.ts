@@ -36,7 +36,8 @@ const menus = [
             state: '',
             children: [],
             attributes: {
-              url: '/lsm/lm/repairManager/maintenancePerson/maintenancePerson.html',
+              /* url: '/lsm/lm/repairManager/maintenancePerson/maintenancePerson.html', */
+              url: 'https://2x.antdv.com/docs/vue/introduce-cn/',
               openType: 0,
             },
             checkState: 'unchecked',

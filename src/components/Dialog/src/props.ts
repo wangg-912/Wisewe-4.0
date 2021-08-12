@@ -1,7 +1,6 @@
 import type { PropType, CSSProperties } from 'vue';
 import { propTypes, VueNode } from '/@/utils/propTypes';
 import { IDWrapperProps, ButtonSize, ButtonTypes, ButtonShapes } from './types';
-import { object } from 'vue-types';
 /**
  * @description 模态窗默认配置
  */

@@ -22,7 +22,7 @@
         </transition>
       </template>
     </router-view>
-    <!-- <FramePanel v-if="getCanEmbedIFramePage" /> -->
+    <FramePanel v-if="getCanEmbedIFramePage" />
   </div>
 </template>
 <script lang="ts">
@@ -39,7 +39,7 @@
     components: { FramePanel },
     setup() {
       const { prefixCls } = useDesign('layout-wrapper');
-      const { getOpenKeepAlive } = useRootSetting();
+      const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
       const { getTagsShow } = useTagSetting();
       const { getCaches } = useCache(false);
       const { getBasicTransition, getEnableTransition } = useTransitionSetting();
@@ -48,6 +48,7 @@
         prefixCls,
         getKey,
         getOpenKeepAlive,
+        getCanEmbedIFramePage,
         getTransitionName,
         openCache,
         getEnableTransition,
