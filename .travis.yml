@@ -1,8 +1,13 @@
 language: node_js
 node_js:
   - lts/*
+
+cache:
+  yarn: true
+
 install:
-  - npm ci
+  - yarn install
+
 script:
   - npm run build
 deploy:
