@@ -16,12 +16,14 @@ export default defineComponent({
       visible,
       destroyOnClose,
       draggable,
-    })
+    });
     return () => {
       const propsData = { ...unref(attrs), ...props } as Recordable;
-      return <ElDialog model-value={propsData.visible} {...propsData}  showClose={false}>
-        {extendSlots(slots)}
-      </ElDialog>;
-    }
-  }
-})
+      return (
+        <ElDialog model-value={propsData.visible} {...propsData} showClose={false}>
+          {extendSlots(slots)}
+        </ElDialog>
+      );
+    };
+  },
+});

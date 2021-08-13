@@ -4,8 +4,8 @@ const domSymbol = Symbol('watermark-dom');
 
 /**
  * @description 使用水印钩子函数
- * @param appendEl 
- * @returns 
+ * @param appendEl
+ * @returns
  */
 export function useWatermark(appendEl: Ref<HTMLElement | null> = ref(document.body)) {
   let func: Fn = () => {};

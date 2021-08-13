@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import type { Menu } from '/@/router/types';
 import { ref, onBeforeMount, unref, Ref, nextTick } from 'vue';
 /* import { asyncRouterMap } from '/@/router'; */
-import { routeStore } from '/@/store/modules/route'
+import { routeStore } from '/@/store/modules/route';
 import _ from 'lodash-es';
 import { filter } from '/@/utils/helper/treeHelper';
 import { useDebounce } from '/@/hooks/core/useDebounce';
@@ -23,8 +23,8 @@ const enum KeyCodeEnum {
 }
 /**
  * @description 正则转化匹配值
- * @param c 
- * @returns 
+ * @param c
+ * @returns
  */
 function transform(c: string) {
   const code: string[] = ['$', '(', ')', '*', '+', '.', '[', ']', '?', '\\', '^', '{', '}', '|'];
@@ -32,8 +32,8 @@ function transform(c: string) {
 }
 /**
  * @description 创建搜索正则
- * @param key 
- * @returns 
+ * @param key
+ * @returns
  */
 function createSearchReg(key: string) {
   const keys = [...key].map((item) => transform(item));
@@ -42,8 +42,8 @@ function createSearchReg(key: string) {
 }
 /**
  * @description 使用搜索钩子函数
- * @param refs 
- * @param scrollWrap 
+ * @param refs
+ * @param scrollWrap
  * @param emit
  * @returns
  */
@@ -62,8 +62,8 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   });
   /**
    * @description 搜索私有方法入口
-   * @param searchKey 
-   * @returns 
+   * @param searchKey
+   * @returns
    */
   function search(searchKey: string) {
     keyword.value = searchKey.trim();
@@ -80,11 +80,11 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
   /**
    * @description 搜索事件返回结果
-   * @param filterMenu 
-   * @param reg 
-   * @param parent 
-   * @param basePath 
-   * @returns 
+   * @param filterMenu
+   * @param reg
+   * @param parent
+   * @param basePath
+   * @returns
    */
   function handlerSearchResult(filterMenu: Menu[], reg: RegExp, parent?: Menu, basePath = '') {
     const ret: SearchResult[] = [];
@@ -110,7 +110,7 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
   /**
    * @description 滚轮监听事件
-   * @param e 
+   * @param e
    */
   function handleMouseenter(e: any) {
     const index = e.target.dataset.index;
@@ -118,7 +118,7 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
   /**
    * @description 监听键盘向上
-   * @returns 
+   * @returns
    */
   function handleUp() {
     if (!searchResult.value.length) return;
@@ -130,7 +130,7 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
   /**
    * @description 监听键盘向下
-   * @returns 
+   * @returns
    */
   function handleDown() {
     if (!searchResult.value.length) return;
@@ -142,7 +142,7 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
   /**
    * @description 处理滚动逻辑
-   * @returns 
+   * @returns
    */
   function handleScroll() {
     const refList = unref(refs);
@@ -164,7 +164,7 @@ export function useSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, emit
   }
   /**
    * @description 处理键盘回撤事件
-   * @returns 
+   * @returns
    */
   async function handleEnter() {
     if (!searchResult.value.length) return;

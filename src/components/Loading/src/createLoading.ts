@@ -5,9 +5,9 @@ import { createVNode, render, reactive, h } from 'vue';
 import Loading from './index.vue';
 /**
  * @description 创建进度条
- * @param props 
- * @param target 
- * @returns 
+ * @param props
+ * @param target
+ * @returns
  */
 export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElement) {
   let vm: Nullable<VNode> = null;

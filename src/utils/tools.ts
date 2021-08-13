@@ -87,7 +87,9 @@ export function isUrl(path: string): boolean {
 }
 // 验证网址
 export function isExternal(path: any): boolean {
-  return /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/.test(path)
+  return /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/.test(
+    path
+  );
 }
 export const noop = () => {};
 /**
@@ -106,7 +108,7 @@ export function findIndex(ary: any, fn: Function): number {
       index = i;
       return ret;
     }
-  })
+  });
   return index;
 }
 export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
@@ -124,15 +126,15 @@ export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
  */
 export function deepClone(source: any, noClone: string[] = []): any {
   if (!source && typeof source !== 'object') {
-    throw new Error('error arguments deepClone')
+    throw new Error('error arguments deepClone');
   }
-  const targetObj: any = source.constructor === Array ? [] : {}
+  const targetObj: any = source.constructor === Array ? [] : {};
   Object.keys(source).forEach((keys: string) => {
     if (source[keys] && typeof source[keys] === 'object' && noClone.indexOf(keys) === -1) {
-      targetObj[keys] = deepClone(source[keys], noClone)
+      targetObj[keys] = deepClone(source[keys], noClone);
     } else {
-      targetObj[keys] = source[keys]
+      targetObj[keys] = source[keys];
     }
-  })
+  });
   return targetObj;
 }

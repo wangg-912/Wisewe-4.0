@@ -1,62 +1,62 @@
-import { PropType } from 'vue'
+import { PropType } from 'vue';
 export const countToProps = {
   startVal: {
     type: Number as PropType<number>,
     required: false,
-    default: 0
+    default: 0,
   },
   endVal: {
     type: Number as PropType<number>,
     required: false,
-    default: 2017
+    default: 2017,
   },
   duration: {
     type: Number as PropType<number>,
     required: false,
-    default: 3000
+    default: 3000,
   },
   autoplay: {
     type: Boolean as PropType<boolean>,
     required: false,
-    default: true
+    default: true,
   },
   decimals: {
     type: Number as PropType<number>,
     required: false,
     default: 0,
     validator(value: number) {
-      return value >= 0
-    }
+      return value >= 0;
+    },
   },
   decimal: {
     type: String as PropType<string>,
     required: false,
-    default: '.'
+    default: '.',
   },
   separator: {
     type: String as PropType<string>,
     required: false,
-    default: ','
+    default: ',',
   },
   prefix: {
     type: String as PropType<string>,
     required: false,
-    default: ''
+    default: '',
   },
   suffix: {
     type: String as PropType<string>,
     required: false,
-    default: ''
+    default: '',
   },
   useEasing: {
     type: Boolean as PropType<boolean>,
     required: false,
-    default: true
+    default: true,
   },
   easingFn: {
     type: Function as PropType<(t: number, b: number, c: number, d: number) => number>,
     default(t: number, b: number, c: number, d: number) {
-      return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
-    }
-  }
-}
+      return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
+    },
+  },
+};

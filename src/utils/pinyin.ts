@@ -589,7 +589,7 @@ export function isChinese(temp: string) {
   return true;
 }
 // 转换成拼音（若有空格、特殊字符将被移除）
-export function transPinYin(val: string, type='capital') {
+export function transPinYin(val: string, type = 'capital') {
   // 目标数据
   let targetStr = '';
   // 匹配中文
