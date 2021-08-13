@@ -204,12 +204,30 @@
       var name = browserVersionStr[0];
       var version = browserVersionStr[1];
       if (!limitObj[name] || (limitObj[name] && version < limitObj[name])) {
-        window.location.href="/public/browser.html"
+        window.location.href = "./browser.html"
       };
     }());
   </script>
   <script type="module" crossorigin src="/src/main.ts"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/underscore.js/1.13.1/underscore-min.min.js"></script>
+  <!-- <link rel="stylesheet" href="./extend/esayui-1.8.6/themes/material-teal/easyui.css" /> -->
+  <script src="./extend/esayui-1.8.6/easyloader.js"></script>
+  <script src="./extend/framework.extend.js"></script>
+  <script>
+    function loadStyle(url) {
+      var link = document.createElement('link');
+      link.type = 'text/css';
+      link.rel = 'stylesheet';
+      link.href = url;
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(link);
+    }
+    loadStyle('./extend/esayui-1.8.6/themes/material-teal/easyui.css');
+    $(function () {
+      using(["dialog", "messager"])
+    })
+  </script>
 </body>
 
 </html>

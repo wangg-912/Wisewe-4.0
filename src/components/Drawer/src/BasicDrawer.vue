@@ -11,7 +11,7 @@
       <div :class="`${prefixCls}-title`">{{ getMergeProps.title }}</div>
     </template>
 
-    <el-scrollbar>
+    <el-scrollbar v-loading="getBindValues.loading">
       <slot></slot>
     </el-scrollbar>
   </el-drawer>
@@ -129,6 +129,7 @@
     }
     .el-drawer__header {
       margin-bottom: 0 !important;
+      padding: 12px 12px 0;
     }
     .el-drawer__body {
       height: calc(100% - 50px);

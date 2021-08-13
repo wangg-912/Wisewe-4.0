@@ -89,7 +89,7 @@ const setting: ProjectConfig = {
     // 开启动画
     enable: true,
     // 基础动画
-    basicTransition: RouterTransitionEnum.FADE,
+    basicTransition: RouterTransitionEnum.FADE_SIDE,
     // 开启页面加载模式
     openPageLoading: true,
     // 开启顶部进度

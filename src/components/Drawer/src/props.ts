@@ -6,6 +6,7 @@ import { propTypes } from '/@/utils/propTypes';
 export const basicProps = {
   title: propTypes.string.def(''),
   visible: propTypes.bool,
+  loading: propTypes.bool.def(true),
   modal: propTypes.bool.def(true),
   showClose: propTypes.bool.def(true),
   destroyOnClose: propTypes.bool.def(true),

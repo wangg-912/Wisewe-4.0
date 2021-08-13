@@ -10,6 +10,9 @@ const components: IObject<() => Promise<typeof import('*.vue')>> = {
   PagePanel: ((() => import('/@/layout/page/pagePanel.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
+  FramePage: ((() => import('/@/layout/page/pageFrame.vue')) as unknown) as () => Promise<
+    typeof import('*.vue')
+  >,
   404: ((() => import('/@/views/error/404.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
@@ -43,8 +46,8 @@ export function transformDateByRoute(data: any, basePath = '/', level = 'root') 
     } else {
       if (attributes && attributes.url && attributes.url.indexOf('html') > -1) {
         obj.meta.frameSrc = attributes.url;
-        obj.meta.frameOpenType = attributes.openType;
-        obj.component = components['PagePanel'];
+        obj.meta.frameOpenType = attributes.openType ?? 0;
+        obj.component = components['FramePage'];
       } else {
         obj.component = () => import(`${attributes.url}.vue`);
       }

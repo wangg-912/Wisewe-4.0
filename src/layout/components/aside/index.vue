@@ -24,7 +24,7 @@
           @select="menuHandle"
         >
           <menu-items
-            v-for="v in (showMenuTab ? menuTabLists : menuLists)"
+            v-for="v in showMenuTab ? menuTabLists : menuLists"
             :key="v.name"
             :menu="v"
             :theme="theme"
@@ -45,6 +45,7 @@
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
   import { useAppInject } from '/@/hooks/web/useAppInject';
   import { useGo } from '/@/hooks/web/usePage';
+  import { isExternal } from '/@/utils/tools';
   import { AppLogo } from '/@/components/Applications';
   import MenuItems from './menus.vue';
 
@@ -81,7 +82,7 @@
           
         } */
         return path;
-      })
+      });
       const menusWidth = computed(() => {
         if (props.siderType == 'top-menu') {
           return 'auto';
@@ -92,20 +93,26 @@
       const logoTitle = computed(() => unref(getShowLogoTitle));
 
       const showLogo = computed(() => {
-        return unref(getShowLogo) && (unref(getMenuType) === 'sidebar' || unref(getMenuType) === 'mix-sidebar');
+        return (
+          unref(getShowLogo) &&
+          (unref(getMenuType) === 'sidebar' || unref(getMenuType) === 'mix-sidebar')
+        );
       });
       const { prefixCls } = useDesign('layout-sider');
       const menuLists = computed(() => routeStore.getRoutes);
       const showMenuTab = computed(() => props.siderType === 'mix-sidebar');
-      const menuTabLists = computed(() =>routeStore.menuTabRouters);
+      const menuTabLists = computed(() => routeStore.menuTabRouters);
       const theme = computed(() => unref(getMenuTheme));
       /**
        * @description 菜单点击事件
        */
       function menuHandle(path: string) {
         if (currentRoute.value.fullPath === path) return;
-        /* push(path); */
-        go(path);
+        if (isExternal(path)) {
+          window.open(path);
+        } else {
+          go(path);
+        }
       }
 
       return {

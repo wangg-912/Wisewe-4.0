@@ -1,7 +1,6 @@
 <template>
   <el-main :class="[prefixCls, getLayoutContentMode]">
     <transition>
-      <!-- <router-view /> -->
       <Loading
         v-if="getOpenPageLoading"
         :loading="getPageLoading"

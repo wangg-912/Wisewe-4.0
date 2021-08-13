@@ -22,6 +22,7 @@ export type UseDrawerReturnType = [RegisterFn, ReturnMethods];
 export type UseDrawerInnerReturnType = [RegisterFn, ReturnInnerMethods];
 
 export interface DrawerProps {
+  loading: boolean;
   visible?: boolean;
   closeFunc?: () => Promise<any>;
   showClose?: boolean;

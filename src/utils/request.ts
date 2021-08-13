@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
+import { addPendingRequest, removePendingRequest } from './commonAxios';
 const ENV = import.meta.env;
 const { VITE_SERVICE_BASE_API } = ENV;
 /* console.log(import.meta.env) */
@@ -42,32 +43,41 @@ const handleCode = (code: number, msg?: string) => {
 
 // 异常拦截处理器
 const errorHandler = (error: any) => {
-  /* loading.close(); */
-  const { response, message } = error;
-
-  if (response && !response.data) {
-    const { status, data } = response;
-    handleCode(status, data.msg || message);
-    return Promise.reject(error);
+  removePendingRequest(error.config || {}); // 从pendingRequest对象中移除请求
+  if (axios.isCancel(error)) {
+    console.log('取消同时间内重复请求：' + error.message);
   } else {
-    let { message } = error;
-    if (message === 'Network Error') {
-      message = '服务接口连接异常';
+    const { response, message } = error;
+    if (response && !response.data) {
+      const { status, data } = response;
+      handleCode(status, data.msg || message);
+      return Promise.reject(error);
+    } else {
+      let { message } = error;
+      if (message === 'Network Error') {
+        message = '网络错误，请检查网络！';
+      }
+      if (message.includes('timeout')) {
+        message = '请求服务超时！';
+      }
+      if (message.includes('Request failed with status code')) {
+        const code = message.substr(message.length - 3);
+        message = '服务接口' + code + '异常';
+      }
+      ElMessage.error(message || `服务接口未知异常`);
+      return Promise.reject(error);
     }
-    if (message.includes('timeout')) {
-      message = '服务接口请求超时';
-    }
-    if (message.includes('Request failed with status code')) {
-      const code = message.substr(message.length - 3);
-      message = '服务接口' + code + '异常';
-    }
-    ElMessage.error(message || `服务接口未知异常`);
-    return Promise.reject(error);
   }
 };
 
 request.interceptors.request.use(
   (config) => {
+    /**
+     * removePendingRequest 检查是否存在重复请求，若存在则取消已发的请求
+     * addPendingRequest 把当前请求添加到pendingRequest对象中
+     */
+    removePendingRequest(config);
+    addPendingRequest(config);
     return config;
   },
   (error) => {
@@ -76,8 +86,9 @@ request.interceptors.request.use(
 );
 
 request.interceptors.response.use((response: AxiosResponse) => {
+  removePendingRequest(response.config); // 从pendingRequest对象中移除请求
   const { data } = response;
-  /* loading.close(); */
+
   if (!(typeof data == 'object') && data.includes('workspaceVo')) {
     return JSON.parse(data.split('=')[1]);
   }

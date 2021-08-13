@@ -9,9 +9,6 @@ const components: IObject<() => Promise<typeof import('*.vue')>> = {
   Layout: ((() => import('/@/layout/index.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
-  PagePanel: ((() => import('/@/layout/page/pagePanel.vue')) as unknown) as () => Promise<
-    typeof import('*.vue')
-  >,
   Home: ((() => import('/@/views/dashboard/index.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
   >,
@@ -27,6 +24,7 @@ const components: IObject<() => Promise<typeof import('*.vue')>> = {
 export const constantRouterMap: Array<IMenubarList> = [
   {
     path: '/redirect',
+    name: 'Redirect',
     component: components['Layout'],
     children: [
       {
@@ -34,6 +32,8 @@ export const constantRouterMap: Array<IMenubarList> = [
         component: components['Redirect'],
         meta: {
           title: 'Redirect',
+          hidden: true,
+          hideTag: true,
         },
       },
     ],
@@ -58,7 +58,7 @@ export const constantRouterMap: Array<IMenubarList> = [
         name: 'NoFind',
         meta: {},
       },
-    ]
+    ],
   },
   {
     path: '/',
@@ -85,7 +85,50 @@ export const constantRouterMap: Array<IMenubarList> = [
   },
 ];
 
-export const asyncRouterMap: AppRouteRecordRaw[] = [];
+export const asyncRouterMap: AppRouteRecordRaw[] = [
+  {
+    path: '/components-demo',
+    name: 'Components-Demo',
+    redirect: '/components-demo/count-to',
+    component: components['Layout'],
+    meta: {
+      title: '组件管理',
+      icon: 'el-icon-box',
+    },
+    children: [
+      {
+        path: 'count-to',
+        name: 'CountTo',
+        component: () => import('/@/views/demo/countTo/index.vue'),
+        meta: {
+          title: '数字滚动组件',
+          icon: 'el-icon-c-scale-to-original',
+          noCache: true,
+        },
+      },
+      {
+        path: 'dialog',
+        name: 'WDialog',
+        component: () => import('/@/views/demo/dialog/index.vue'),
+        meta: {
+          title: '弹窗组件',
+          icon: 'el-icon-s-data',
+          noCache: true,
+        },
+      },
+      {
+        path: 'button',
+        name: 'WButton',
+        component: () => import('/@/views/demo/button/index.vue'),
+        meta: {
+          title: '按钮组件',
+          icon: 'el-icon-s-data',
+          noCache: true,
+        },
+      },
+    ],
+  },
+];
 
 const router = createRouter({
   history: createWebHashHistory(), // createWebHistory

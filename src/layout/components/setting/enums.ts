@@ -1,4 +1,4 @@
-import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum';
+/* import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum'; */
 import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
 /**
  * @description 布局类型枚举

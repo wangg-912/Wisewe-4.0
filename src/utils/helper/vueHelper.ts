@@ -57,6 +57,6 @@ export function tryTsxEmit<T extends any = ComponentInternalInstance>(
  */
 export function isInSetup() {
   if (!getCurrentInstance()) {
-    error('Please put useForm function in the setup function!');
+    error('Please put Function in the setup function!');
   }
 }

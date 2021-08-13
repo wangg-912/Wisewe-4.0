@@ -1,12 +1,17 @@
 import store from '/@/store/index';
 import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators';
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper';
-import { PageEnum, GetUserInfoByUserIdModel, GetUserInfoByUserIdParams, RoleEnum} from '/@/enums/appEnum';
+import {
+  PageEnum,
+  GetUserInfoByUserIdModel,
+  GetUserInfoByUserIdParams,
+  RoleEnum,
+} from '/@/enums/appEnum';
 import { CacheTypeEnum, ROLES_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import router from '/@/router';
 import { setLocal, getLocal, getSession, setSession } from '/@/utils/helper/persistent';
 import { useProjectSetting } from '/@/hooks/setting';
-import { getWorkVo } from '/@/api/app'
+import { getWorkVo } from '/@/api/app';
 
 export type UserInfo = Omit<GetUserInfoByUserIdModel, 'roles'>;
 const NAME = 'user';
@@ -67,8 +72,8 @@ class User extends VuexModule {
   @Action
   async getAppPermission(): Promise<unknown> {
     try {
-      const AppPermission = await getWorkVo();
-      const { roles, user } = AppPermission;
+      const { data } = await getWorkVo();
+      const { roles, user } = data.content;
       const roleList = roles.map((item) => item.code) as RoleEnum[];
       const userInfo: UserInfo = {
         roles,

@@ -75,7 +75,7 @@
   import { useFiles } from '/@/hooks/theme/useFiles';
   import { writeNewStyle, getStyleTemplate, generateColors } from '/@/utils/themeColor';
   import { getMenusDate } from '/@/api/app';
-  import { generatorDynamicRouter } from '/@/router/utils'
+  import { generatorDynamicRouter } from '/@/router/utils';
 
   /* import router from '/@/router'; */
   export default defineComponent({
@@ -145,11 +145,17 @@
           immediate: true,
         }
       );
+      /* getMenusDate();
+      getMenusDate(); */
+      /* setTimeout(() => {
+        getMenusDate();
+      }, 1000); */
       getMenusDate()
         .then((res) => {
           const { success, content } = res.data;
-          if (success) { 
-            generatorDynamicRouter(content).then((routes)=>{
+          if (success) {
+            generatorDynamicRouter(content).then((routes) => {
+              //console.log(routes);
               routeStore.setDynamicRoutes(routes);
               routeStore.GenerateRoutes().then(() => {
                 routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
@@ -179,8 +185,8 @@
   }
 </style>
 
- <style lang="scss">
- .#{$namespace}-default-layout--mix-sidebar {
+<style lang="scss">
+  .#{$namespace}-default-layout--mix-sidebar {
     &--tabs {
       width: 90px;
       height: 100%;
@@ -189,8 +195,7 @@
       .el-tabs__active-bar {
         display: none !important;
       }
-      
-        
+
       .el-tabs__header {
         height: 100%;
         margin-right: 0;
@@ -214,7 +219,6 @@
           }
         }
       }
-      
     }
   }
- </style>
+</style>

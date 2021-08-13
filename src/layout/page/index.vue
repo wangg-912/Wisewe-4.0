@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <RouterView>
+    <router-view>
       <template #default="{ Component, route }">
         <transition
           :name="
@@ -13,6 +13,7 @@
             })
           "
           mode="out-in"
+          appear
         >
           <keep-alive v-if="openCache" :include="getCaches">
             <component :is="Component" v-bind="getKey(Component, route)" />
@@ -20,8 +21,8 @@
           <component v-else :is="Component" v-bind="getKey(Component, route)" />
         </transition>
       </template>
-    </RouterView>
-    <FramePanel v-if="getCanEmbedIFramePage" />
+    </router-view>
+    <!-- <FramePanel v-if="getCanEmbedIFramePage" /> -->
   </div>
 </template>
 <script lang="ts">
@@ -38,7 +39,7 @@
     components: { FramePanel },
     setup() {
       const { prefixCls } = useDesign('layout-wrapper');
-      const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
+      const { getOpenKeepAlive } = useRootSetting();
       const { getTagsShow } = useTagSetting();
       const { getCaches } = useCache(false);
       const { getBasicTransition, getEnableTransition } = useTransitionSetting();
@@ -47,7 +48,6 @@
         prefixCls,
         getKey,
         getOpenKeepAlive,
-        getCanEmbedIFramePage,
         getTransitionName,
         openCache,
         getEnableTransition,
@@ -59,7 +59,7 @@
 </script>
 <style lang="scss" scoped>
   .#{$namespace}-layout-wrapper {
-    width: 100%;
+    width: 99.9%;
     height: 100%;
   }
 </style>

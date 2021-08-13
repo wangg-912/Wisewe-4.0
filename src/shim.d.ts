@@ -1,8 +1,12 @@
 /* eslint-disable */
-import type { DefineComponent } from 'vue'
+import type { DefineComponent } from 'vue';
 
 declare module '*.vue' {
-  const component: DefineComponent<{}, {}, any>
-  export default component
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
 }
-declare module 'mockjs'
+declare module 'jQuery';
+declare let $: any;
+declare let jQuery: any;
+
+declare module 'mockjs';

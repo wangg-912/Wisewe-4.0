@@ -3,7 +3,7 @@ import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-dec
 import { appStore } from '/@/store/modules/app';
 import { userStore } from '/@/store/modules/user';
 import store from '/@/store';
-import { constantRouterMap, asyncRouterMap } from '/@/router'
+import { constantRouterMap, asyncRouterMap } from '/@/router';
 import { IMenubarList } from '/@/router/types';
 import { deepClone } from '/@/utils/tools';
 
@@ -37,11 +37,11 @@ class App extends VuexModule {
         name: '404',
         meta: {
           hidden: true,
-        }
-      }
-    ])
-   /*  this.routes = routes; */
-    this.routes = deepClone(constantRouterMap, ['component']).concat(routes)
+        },
+      },
+    ]);
+    /*  this.routes = routes; */
+    this.routes = deepClone(constantRouterMap, ['component']).concat(routes);
   }
   @Mutation
   private SETDYNAMICROUTES(routes: IMenubarList): void {
@@ -58,20 +58,19 @@ class App extends VuexModule {
     this.activeTag = activeTag;
   }
 
-
   @Action
   public setMenuTabRouters(routers: AppRouteRecordRaw[]): void {
-    this.SETMENUTABROUTERS(routers)
+    this.SETMENUTABROUTERS(routers);
   }
 
   @Action
   public setIsAddRouters(state: boolean): void {
-    this.SETISADDROUTERS(state)
+    this.SETISADDROUTERS(state);
   }
 
   @Action
   public setAcitveTab(activeTag: string): void {
-    this.SETACTIVETAB(activeTag)
+    this.SETACTIVETAB(activeTag);
   }
   @Action
   public setDynamicRoutes(routes: AppRouteRecordRaw[]): void {
@@ -87,7 +86,7 @@ class App extends VuexModule {
       }
       this.SETROUTES(routerMap);
       resolve();
-    })
+    });
   }
 }
 
@@ -101,7 +100,7 @@ function generateRoutes(routes: AppRouteRecordRaw[], basePath = '/'): AppRouteRe
     if (route.children && route.children.length === 1 && !route.meta.affix) {
       onlyOneChild = isExternal(route.children[0].path)
         ? route.children[0].path
-        : resolve(resolve(basePath, route.path), route.children[0].path)
+        : resolve(resolve(basePath, route.path), route.children[0].path);
     }
     let data: any = null;
     data = Object.assign({}, route);
@@ -109,7 +108,7 @@ function generateRoutes(routes: AppRouteRecordRaw[], basePath = '/'): AppRouteRe
       data.children = generateRoutes(route.children, resolve(basePath, onlyOneChild || data.path));
     }
     if (data) {
-      res.push(data as AppRouteRecordRaw)
+      res.push(data as AppRouteRecordRaw);
     }
   }
   return res;

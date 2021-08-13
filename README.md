@@ -93,6 +93,7 @@
 ## 项目目录
 
 
+
 ```
 evolution-v4
 ├─ .editorconfig
@@ -101,20 +102,30 @@ evolution-v4
 ├─ .env.production
 ├─ .eslintignore
 ├─ .eslintrc.js
+├─ .travis.yml
 ├─ babel.config.js
 ├─ build
 │  ├─ utils.ts
 │  └─ vite
 │     └─ proxy.ts
+├─ commitlint.config.js
 ├─ favicon.ico
 ├─ index.html
+├─ jest.config.js
 ├─ LICENSE
+├─ mock
+│  ├─ index.ts
+│  ├─ modules
+│  │  ├─ menus.ts
+│  │  ├─ promission.ts
+│  │  └─ system.ts
+│  └─ utils.ts
 ├─ package-lock.json
 ├─ package.json
 ├─ postcss.config.js
 ├─ prettier.config.js
 ├─ public
-│  ├─ 404.html
+│  ├─ browser.html
 │  ├─ favicon.ico
 │  └─ logo.png
 ├─ README.md
@@ -123,6 +134,7 @@ evolution-v4
 │  │  └─ app.ts
 │  ├─ App.vue
 │  ├─ assets
+│  │  ├─ fonts
 │  │  ├─ icons
 │  │  │  ├─ index.js
 │  │  │  └─ svg
@@ -149,6 +161,31 @@ evolution-v4
 │  │  │     │  ├─ useSearch.ts
 │  │  │     │  └─ useSearchScroll.ts
 │  │  │     └─ useAppContext.ts
+│  │  ├─ Basic
+│  │  │  ├─ BasicTitle.vue
+│  │  │  └─ index.ts
+│  │  ├─ CountTo
+│  │  │  ├─ index.vue
+│  │  │  └─ props.ts
+│  │  ├─ Dialog
+│  │  │  ├─ index.ts
+│  │  │  ├─ src
+│  │  │  │  ├─ basicDialog.vue
+│  │  │  │  ├─ components
+│  │  │  │  │  ├─ Dialog.tsx
+│  │  │  │  │  ├─ dialogFooter.vue
+│  │  │  │  │  ├─ dialogHeader.vue
+│  │  │  │  │  ├─ dialogToolbar.vue
+│  │  │  │  │  └─ dialogWrapper.vue
+│  │  │  │  ├─ dialog.scss
+│  │  │  │  ├─ hooks
+│  │  │  │  │  ├─ useDialog.ts
+│  │  │  │  │  ├─ useDialogContext.ts
+│  │  │  │  │  ├─ useDialogDrag.ts
+│  │  │  │  │  └─ useDialogFullScreen.ts
+│  │  │  │  ├─ props.ts
+│  │  │  │  └─ types.ts
+│  │  │  └─ __tests__
 │  │  ├─ Drawer
 │  │  │  ├─ index.ts
 │  │  │  └─ src
@@ -156,9 +193,13 @@ evolution-v4
 │  │  │     ├─ props.ts
 │  │  │     ├─ type.ts
 │  │  │     └─ useDrawer.ts
+│  │  ├─ Echart
+│  │  │  ├─ index.vue
+│  │  │  └─ theme.json
 │  │  ├─ FontIcon
 │  │  │  └─ index.vue
 │  │  ├─ home
+│  │  │  ├─ Header.vue
 │  │  │  └─ index.vue
 │  │  ├─ Loading
 │  │  │  ├─ index.ts
@@ -185,7 +226,8 @@ evolution-v4
 │  │  │  ├─ useContext.ts
 │  │  │  ├─ useDebounce.ts
 │  │  │  ├─ useRefs.ts
-│  │  │  └─ useThrottle.ts
+│  │  │  ├─ useThrottle.ts
+│  │  │  └─ useTimeout.ts
 │  │  ├─ event
 │  │  │  ├─ useEventListener.ts
 │  │  │  └─ useKeyPress.ts
@@ -206,6 +248,8 @@ evolution-v4
 │  │     ├─ useScrollTo.ts
 │  │     ├─ useWatermark.ts
 │  │     └─ useWindow.ts
+│  ├─ html
+│  │  └─ test.html
 │  ├─ layout
 │  │  ├─ components
 │  │  │  ├─ aside
@@ -274,6 +318,7 @@ evolution-v4
 │  │  ├─ designSetting.ts
 │  │  ├─ encryptionSetting.ts
 │  │  └─ projectSetting.ts
+│  ├─ shim.d.ts
 │  ├─ store
 │  │  ├─ index.ts
 │  │  └─ modules
@@ -296,7 +341,8 @@ evolution-v4
 │  │  └─ util.ts
 │  ├─ type
 │  │  ├─ config.d.ts
-│  │  └─ global.d.ts
+│  │  ├─ global.d.ts
+│  │  └─ utils.ts
 │  ├─ utils
 │  │  ├─ animation.ts
 │  │  ├─ cache
@@ -317,6 +363,7 @@ evolution-v4
 │  │  │  ├─ envHelper.ts
 │  │  │  ├─ persistent.ts
 │  │  │  ├─ treeHelper.ts
+│  │  │  ├─ tsxHelper.tsx
 │  │  │  ├─ vueHelper.ts
 │  │  │  └─ vuexHelper.ts
 │  │  ├─ log.ts
@@ -325,18 +372,31 @@ evolution-v4
 │  │  ├─ request.ts
 │  │  ├─ resolve.ts
 │  │  ├─ themeColor.ts
-│  │  └─ tools.ts
+│  │  ├─ tools.ts
+│  │  └─ uuid.ts
 │  └─ views
+│     ├─ dashboard
+│     │  ├─ components
+│     │  │  └─ PanelGroup.vue
+│     │  ├─ echart-data.ts
+│     │  └─ index.vue
+│     ├─ demo
+│     │  ├─ button
+│     │  │  └─ index.vue
+│     │  ├─ countTo
+│     │  │  └─ index.vue
+│     │  └─ dialog
+│     │     └─ index.vue
 │     ├─ error
 │     │  └─ 404.vue
-│     ├─ level
-│     │  ├─ Menu111.vue
-│     │  ├─ Menu12.vue
-│     │  └─ Menu2.vue
 │     └─ system
 │        └─ redirect.vue
 ├─ stylelint.config.js
 ├─ tailwind.config.js
+├─ tests
+│  └─ unit
+│     └─ utils
+│        └─ Test.spec.ts
 ├─ tsconfig.json
 ├─ vite.config.ts
 ├─ windi.config.js

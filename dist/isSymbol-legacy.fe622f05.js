@@ -1,0 +1,1 @@
+System.register(["./isObject-legacy.2ad11661.js"],(function(t){"use strict";var e,n;return{setters:[function(t){e=t.a,n=t.b}],execute:function(){t("i",(function(t){return"symbol"==typeof t||e(t)&&"[object Symbol]"==n(t)}))}}}));
