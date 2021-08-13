@@ -145,12 +145,17 @@
           immediate: true,
         }
       );
+      /* getMenusDate();
+      getMenusDate(); */
+      /* setTimeout(() => {
+        getMenusDate();
+      }, 1000); */
       getMenusDate()
         .then((res) => {
           const { success, content } = res.data;
           if (success) {
             generatorDynamicRouter(content).then((routes) => {
-              console.log(routes);
+              //console.log(routes);
               routeStore.setDynamicRoutes(routes);
               routeStore.GenerateRoutes().then(() => {
                 routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {

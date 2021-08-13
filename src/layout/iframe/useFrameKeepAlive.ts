@@ -50,7 +50,6 @@ export function useFrameKeepAlive() {
   }
 
   function hasRenderFrame(name: string) {
-    debugger;
     if (!unref(getTagsShow)) {
       return router.currentRoute.value.name === name;
     }
