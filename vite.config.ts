@@ -3,7 +3,7 @@ import { resolve, join } from 'path';
 import { UserConfigExport, ConfigEnv } from 'vite';
 import dotenv from 'dotenv';
 import vue from '@vitejs/plugin-vue';
-import legacy from '@vitejs/plugin-legacy';
+/* import legacy from '@vitejs/plugin-legacy'; */
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import html from 'vite-plugin-html';
 import viteImagemin from 'vite-plugin-imagemin';
@@ -91,9 +91,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       vue(),
       vueJsx(),
       WindiCSS(),
-      legacy({
+      /* legacy({
         targets: ['defaults', 'not IE 11'],
-      }),
+      }), */
       html({
         inject: {
           injectData: {
@@ -136,11 +136,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
       }),
-      viteMockServe({
+      /*  viteMockServe({
         mockPath: 'mock',
         supportTs: true,
         logger: true,
-      }),
+      }), */
       visualizer({
         filename: './node_modules/.cache/visualizer/stats.html',
         open: true,

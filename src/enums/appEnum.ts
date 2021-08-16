@@ -53,8 +53,14 @@ export enum PermissionModeEnum {
 /**
  * @description: 用户ID信息的枚举
  */
-export interface GetUserInfoByUserIdParams {
+export interface GetUserId {
   userId: string | number;
+}
+/**
+ * @description: 用户权限的枚举
+ */
+export interface GetUserPermission {
+  userPermission: object | any;
 }
 /**
  * @description 角色信息枚举

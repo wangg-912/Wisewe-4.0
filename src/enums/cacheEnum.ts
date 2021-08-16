@@ -1,5 +1,7 @@
 // user info key
 export const USER_INFO_KEY = 'USER__INFO__';
+export const USER_ID_KEY = 'USER__ID__';
+export const USER_PERMISSION_KEY = 'USER__PERMISSION__';
 
 // role info key
 export const ROLES_KEY = 'ROLES__KEY__';
