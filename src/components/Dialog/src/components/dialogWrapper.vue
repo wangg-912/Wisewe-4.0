@@ -45,7 +45,7 @@
       const spinRef = ref<ElRef>(null);
       const realHeightRef = ref(0);
       const minRealHeightRef = ref(0);
-      const frameRef = ref(null);
+      /* const frameRef = ref(null); */
 
       let realHeight = 0;
       let stopElResizeFn: Fn = () => {};

@@ -35,13 +35,24 @@
       <el-button type="warning" icon="el-icon-star-off" circle />
       <el-button type="danger" icon="el-icon-delete" circle />
     </el-row>
+    <el-row>
+      <el-date-picker v-model="value1" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+    </el-row>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, reactive, toRefs } from 'vue';
   export default defineComponent({
     name: 'ButtonDemo',
+    setup() {
+      const state = reactive({
+        value1: '',
+      });
+      return {
+        ...toRefs(state),
+      };
+    },
   });
 </script>
 

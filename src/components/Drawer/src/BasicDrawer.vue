@@ -127,14 +127,17 @@
       font-weight: 500;
       color: $--color-drak;
     }
+
     .el-drawer__header {
-      margin-bottom: 0 !important;
       padding: 12px 12px 0;
+      margin-bottom: 0 !important;
     }
+
     .el-drawer__body {
       height: calc(100% - 50px);
       padding-bottom: 18px;
     }
+
     .el-divider--horizontal {
       margin: 20px 0;
     }

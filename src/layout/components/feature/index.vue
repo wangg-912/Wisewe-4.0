@@ -47,14 +47,14 @@
       position: absolute;
       top: 70px;
       right: 0;
+      display: flex;
       width: 34px;
       height: 34px;
       background: #0960bd;
-      display: flex;
+      border-bottom-left-radius: 8px;
+      border-top-left-radius: 8px;
       align-items: center;
       justify-content: center;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
     }
   }
 </style>

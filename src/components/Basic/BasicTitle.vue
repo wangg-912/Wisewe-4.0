@@ -29,6 +29,7 @@
     color: $base-color-font;
     cursor: pointer;
     user-select: none;
+
     &.show-span::before {
       position: absolute;
       top: 4px;

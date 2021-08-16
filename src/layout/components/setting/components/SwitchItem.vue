@@ -48,9 +48,10 @@
 <style lang="scss" scoped>
   .#{$namespace}-setting-switch {
     display: flex;
-    justify-content: space-between;
-    margin: 16px 0;
     padding: 0 12px;
+    margin: 16px 0;
+    justify-content: space-between;
+
     &-label {
       font-size: $--font-size-base;
       color: $--color-drak;

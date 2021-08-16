@@ -58,10 +58,11 @@
   .#{$namespace}-setting-layout-type-picker {
     display: flex;
     justify-content: center;
+
     &__item {
       position: relative;
-      width: 56px!important;
-      height: 48px!important;
+      width: 56px !important;
+      height: 48px !important;
       margin-right: 16px;
       overflow: hidden;
       cursor: pointer;
@@ -152,6 +153,7 @@
           background-color: #fff;
         }
       }
+
       /* &::after {
         position: absolute;
         top: 50%;

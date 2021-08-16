@@ -6,7 +6,7 @@
   >
     <LayoutFeatures />
     <Sider v-if="getShowMenu || getIsMobile" />
-    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee;">
       <LayoutHeader fixed />
       <LayoutTags v-if="getTagsShow" />
       <LayoutContent />
@@ -23,7 +23,7 @@
     <LayoutHeader fixed :siderType="siderType" />
     <el-container>
       <Sider />
-      <el-container direction="vertical" style="border-left: 1px solid #eeeeee">
+      <el-container direction="vertical" style="border-left: 1px solid #eee;">
         <LayoutTags v-if="getTagsShow" />
         <LayoutContent />
         <LayoutFooter />
@@ -52,7 +52,7 @@
     <LayoutFeatures />
     <MixTabs :class="`${prefixCls}--${siderType}--tabs`" />
     <Sider v-if="getShowMenu || getIsMobile" :siderType="siderType" />
-    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee;">
       <LayoutHeader fixed :siderType="siderType" />
       <LayoutTags v-if="getTagsShow" />
       <LayoutContent />
@@ -150,24 +150,22 @@
       /* setTimeout(() => {
         getMenusDate();
       }, 1000); */
-      getMenusDate()
-        .then((res) => {
-          const { success, content } = res.data;
-          if (success) {
-            generatorDynamicRouter(content).then((routes) => {
-              //console.log(routes);
-              routeStore.setDynamicRoutes(routes);
-              routeStore.GenerateRoutes().then(() => {
-                routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
-                  await addRoute(route.name!, route); // 动态添加可访问路由表
-                });
-                routeStore.setIsAddRouters(true);
-                push({ path: redirect.value || '/' });
+      getMenusDate().then((res) => {
+        const { success, content } = res.data;
+        if (success) {
+          generatorDynamicRouter(content).then((routes) => {
+            //console.log(routes);
+            routeStore.setDynamicRoutes(routes);
+            routeStore.GenerateRoutes().then(() => {
+              routeStore.addRouters.forEach(async (route: RouteRecordRaw) => {
+                await addRoute(route.name!, route); // 动态添加可访问路由表
               });
+              routeStore.setIsAddRouters(true);
+              push({ path: redirect.value || '/' });
             });
-          }
-        })
-        .then((err) => {});
+          });
+        }
+      });
       return {
         prefixCls,
         getShowMenu,
@@ -191,28 +189,33 @@
       width: 90px;
       height: 100%;
       background: #fff;
+
       .is-left::after,
       .el-tabs__active-bar {
         display: none !important;
       }
 
       .el-tabs__header {
+        width: 90px;
         height: 100%;
         margin-right: 0;
-        width: 90px;
+
         .el-tabs__nav-wrap {
           height: 100%;
+
           .el-tabs__item {
-            padding: 0;
             height: 70px;
-            text-align: center;
+            padding: 0;
             color: #000;
+            text-align: center;
             transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
           }
+
           .el-tabs__item:hover {
             color: #fff;
             background: #2d8cf0;
           }
+
           .is-active {
             color: #fff;
             background: #2d8cf0;

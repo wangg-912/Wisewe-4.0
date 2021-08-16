@@ -49,12 +49,14 @@
 <style lang="scss">
   .mobile-menu-drawer {
     height: 100%;
+
     .el-drawer__header {
       display: none !important;
       width: 0;
       height: 0;
       padding: 0;
     }
+
     .mobile-menu-content {
       height: 100%;
       overflow: hidden;

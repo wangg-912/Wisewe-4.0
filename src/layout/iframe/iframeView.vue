@@ -66,14 +66,16 @@
 <style lang="scss" scoped>
   .#{$namespace}-iframe-page {
     height: inherit;
+
     &--main {
-      border: 0;
       width: 100%;
       height: 100%;
       overflow: auto;
+      border: 0;
+
       & > body {
-        margin: 0;
         padding: 0;
+        margin: 0;
       }
     }
   }

@@ -1,4 +1,4 @@
-import { defineComponent, computed, unref } from 'vue';
+import { defineComponent, unref } from 'vue';
 import { BasicDrawer } from '/@/components/Drawer/index';
 import {
   APP_PRESET_COLOR_LIST,
@@ -17,11 +17,11 @@ export default defineComponent({
   name: 'SettingDrawer',
   setup(_, { attrs }) {
     const {
-      getContentMode,
+      /* getContentMode, */
       getShowBreadCrumb,
       getShowBreadCrumbIcon,
       getShowLogo,
-      getFullContent,
+      /* getFullContent, */
       getColorWeak,
       getGrayMode,
       getThemeColor,
@@ -30,20 +30,20 @@ export default defineComponent({
     } = useRootSetting();
     const {
       getShowHeader,
-      getFixed: getHeaderFixed,
+      /* getFixed: getHeaderFixed, */
       getHeaderBgColor,
-      getShowSearch,
+      /*  */ getShowSearch,
     } = useHeaderSetting();
 
     const {
       getIsHorizontal,
       getMenuBgColor,
       getMenuType,
-      getMenuFixed,
-      getTopMenuAlign,
+      /* getMenuFixed,
+      getTopMenuAlign, */
       getIsMixSidebar,
-      getMixSideTrigger,
-      getMixSideFixed,
+      /* getMixSideTrigger,
+      getMixSideFixed, */
     } = useMenuSetting();
     const { getTagsShow, getShowContextmenu, getShowQuick } = useTagSetting();
     const { getOpenNProgress, getOpenPageLoading } = useTransitionSetting();

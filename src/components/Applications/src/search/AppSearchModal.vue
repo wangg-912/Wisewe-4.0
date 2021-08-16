@@ -56,7 +56,6 @@
 <script lang="ts">
   import { defineComponent, computed, unref, ref, watch } from 'vue';
   import clickOutside from '/@/directives/clickOutside';
-  import { useDebounce } from '/@/hooks/core/useDebounce';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useRefs } from '/@/hooks/core/useRefs';
   import { useAppInject } from '/@/hooks/web/useAppInject';
@@ -68,11 +67,11 @@
     directives: {
       clickOutside,
     },
+    components: { FontIcon, AppSearchFooter },
     props: {
       visible: Boolean,
     },
     emits: ['close'],
-    components: { FontIcon, AppSearchFooter },
     setup(_, { emit }) {
       const scrollWrap = ref<ElRef>(null);
       const Input = ref('');
@@ -185,12 +184,14 @@
       // box-shadow: inset 1px 1px 0 0 hsla(0, 0%, 100%, 0.5), 0 3px 8px 0 #555a64;
       flex-direction: column;
     }
+
     &-input__wrapper {
       display: flex;
       padding: 14px 14px 0 14px;
       justify-content: space-between;
       align-items: center;
     }
+
     &-input {
       width: 100%;
       height: 48px;
@@ -240,7 +241,7 @@
         padding-left: 14px;
         margin-top: 8px;
         font-size: 14px;
-        color: #333333;
+        color: #333;
         cursor: pointer;
         // background: @primary-color;
         background: #fff;

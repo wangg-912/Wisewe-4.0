@@ -13,7 +13,7 @@
   import AppSearchModal from './AppSearchModal.vue';
   export default defineComponent({
     components: { AppSearchModal },
-    setup(){
+    setup() {
       const showModal = ref(false);
       const prefixCls = useDesign('app-search');
       const { getShowSearch } = useHeaderSetting();
@@ -24,13 +24,13 @@
       function handleClose() {
         showModal.value = false;
       }
-      return{
+      return {
         prefixCls,
         getShowSearch,
         showModal,
         handleSearch,
         handleClose,
-      }
-    }
-  })
+      };
+    },
+  });
 </script>

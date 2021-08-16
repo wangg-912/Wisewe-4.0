@@ -1,12 +1,5 @@
 {
-  "color": [
-    "#2d8cf0",
-    "#19be6b",
-    "#ff9900",
-    "#E46CBB",
-    "#9A66E4",
-    "#ed3f14"
-  ],
+  "color": ["#2d8cf0", "#19be6b", "#ff9900", "#E46CBB", "#9A66E4", "#ed3f14"],
   "backgroundColor": "rgba(0,0,0,0)",
   "textStyle": {},
   "title": {
@@ -170,14 +163,7 @@
     "symbolSize": "6",
     "symbol": "emptyCircle",
     "smooth": true,
-    "color": [
-      "#2d8cf0",
-      "#19be6b",
-      "#f5ae4a",
-      "#9189d5",
-      "#56cae2",
-      "#cbb0e3"
-    ],
+    "color": ["#2d8cf0", "#19be6b", "#f5ae4a", "#9189d5", "#56cae2", "#cbb0e3"],
     "label": {
       "normal": {
         "textStyle": {
@@ -260,18 +246,13 @@
     "splitLine": {
       "show": true,
       "lineStyle": {
-        "color": [
-          "#eeeeee"
-        ]
+        "color": ["#eeeeee"]
       }
     },
     "splitArea": {
       "show": false,
       "areaStyle": {
-        "color": [
-          "rgba(250,250,250,0.05)",
-          "rgba(200,200,200,0.02)"
-        ]
+        "color": ["rgba(250,250,250,0.05)", "rgba(200,200,200,0.02)"]
       }
     }
   },
@@ -297,18 +278,13 @@
     "splitLine": {
       "show": true,
       "lineStyle": {
-        "color": [
-          "#eeeeee"
-        ]
+        "color": ["#eeeeee"]
       }
     },
     "splitArea": {
       "show": false,
       "areaStyle": {
-        "color": [
-          "rgba(250,250,250,0.05)",
-          "rgba(200,200,200,0.02)"
-        ]
+        "color": ["rgba(250,250,250,0.05)", "rgba(200,200,200,0.02)"]
       }
     }
   },
@@ -334,18 +310,13 @@
     "splitLine": {
       "show": true,
       "lineStyle": {
-        "color": [
-          "#eeeeee"
-        ]
+        "color": ["#eeeeee"]
       }
     },
     "splitArea": {
       "show": false,
       "areaStyle": {
-        "color": [
-          "rgba(250,250,250,0.05)",
-          "rgba(200,200,200,0.02)"
-        ]
+        "color": ["rgba(250,250,250,0.05)", "rgba(200,200,200,0.02)"]
       }
     }
   },
@@ -371,18 +342,13 @@
     "splitLine": {
       "show": true,
       "lineStyle": {
-        "color": [
-          "#eeeeee"
-        ]
+        "color": ["#eeeeee"]
       }
     },
     "splitArea": {
       "show": false,
       "areaStyle": {
-        "color": [
-          "rgba(250,250,250,0.05)",
-          "rgba(200,200,200,0.02)"
-        ]
+        "color": ["rgba(250,250,250,0.05)", "rgba(200,200,200,0.02)"]
       }
     }
   },
@@ -457,11 +423,7 @@
     }
   },
   "visualMap": {
-    "color": [
-      "#516b91",
-      "#59c4e6",
-      "#a5e7f0"
-    ]
+    "color": ["#516b91", "#59c4e6", "#a5e7f0"]
   },
   "dataZoom": {
     "backgroundColor": "rgba(0,0,0,0)",

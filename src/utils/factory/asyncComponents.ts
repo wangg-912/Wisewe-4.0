@@ -13,6 +13,7 @@ interface Options {
 }
 
 export function createAsyncComponent(loader: Fn, options: Options = {}) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { size = 'small', delay = 650, timeout = 30000, loading = false, retry = true } = options;
   const dyCp = (loading: boolean) => {
     return loading ? Skeleton : undefined;

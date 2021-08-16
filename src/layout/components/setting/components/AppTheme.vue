@@ -24,10 +24,10 @@
       },
     },
     setup(props) {
-      const fonts = ref(null);
+      /* const fonts = ref(null); */
       const styleFiles = ref(null);
       const originalStyle = ref('');
-       const { getIndexStyle, getSeparatedStyles } = useFiles();
+      const { getIndexStyle, getSeparatedStyles } = useFiles();
       const { prefixCls } = useDesign('app-theme');
       const { getThemeColor } = useRootSetting();
       const colors = reactive({

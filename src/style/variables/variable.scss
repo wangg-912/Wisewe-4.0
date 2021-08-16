@@ -1,7 +1,7 @@
 @charset "utf-8";
 
-$namespace: 'wisewe';
-$headers-height:50px;
+$namespace     : 'wisewe';
+$headers-height: 50px;
 
 :root {
   // header
@@ -16,86 +16,74 @@ $headers-height:50px;
   --sider-dark-lighten-2-bg-color: #273352;
 }
 
-$base-color-white:#ffffff;
-$base-color-font:#333333;
-$base-color-primary: #1890ff;
-$base-color-success: #67c23a;
-$base-color-warning: #e6a23c;
-$base-color-danger: #f56c6c;
-$base-color-info: #909399;
-$base-font-color-disabled-base:#bbbbbb;
-
+$base-color-white             : #fff;
+$base-color-font              : #333;
+$base-color-primary           : #1890ff;
+$base-color-success           : #67c23a;
+$base-color-warning           : #e6a23c;
+$base-color-danger            : #f56c6c;
+$base-color-info              : #909399;
+$base-font-color-disabled-base: #bbb;
 
 /* ================动画================ */
-$ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
-$ease-base-in: cubic-bezier(0.9, 0, 0.3, 0.7);
-$ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
-$ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-$ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
-$ease-out-back: cubic-bezier(0.12, 0.4, 0.29, 1.46);
-$ease-in-back: cubic-bezier(0.71, -0.46, 0.88, 0.6);
-$ease-in-out-back: cubic-bezier(0.71, -0.46, 0.29, 1.46);
-$ease-out-circ: cubic-bezier(0.08, 0.82, 0.17, 1);
-$ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.34);
-$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
-$ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
-$ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$ease-base-out    : cubic-bezier(0.7, 0.3, 0.1, 1);
+$ease-base-in     : cubic-bezier(0.9, 0, 0.3, 0.7);
+$ease-out         : cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-in          : cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease-in-out      : cubic-bezier(0.645, 0.045, 0.355, 1);
+$ease-out-back    : cubic-bezier(0.12, 0.4, 0.29, 1.46);
+$ease-in-back     : cubic-bezier(0.71, -0.46, 0.88, 0.6);
+$ease-in-out-back : cubic-bezier(0.71, -0.46, 0.29, 1.46);
+$ease-out-circ    : cubic-bezier(0.08, 0.82, 0.17, 1);
+$ease-in-circ     : cubic-bezier(0.6, 0.04, 0.98, 0.34);
+$ease-in-out-circ : cubic-bezier(0.78, 0.14, 0.15, 0.86);
+$ease-out-quint   : cubic-bezier(0.23, 1, 0.32, 1);
+$ease-in-quint    : cubic-bezier(0.755, 0.05, 0.855, 0.06);
 $ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
 
 /* ================Header================ */
 
-$header-dark-bg-color: var(--header-bg-color);
-$header-dark-bg-hover-color: var(--header-bg-hover-color);
-$header-light-bg-hover-color: #f6f6f6;
-$header-light-desc-color: #7c8087;
+$header-dark-bg-color            : var(--header-bg-color);
+$header-dark-bg-hover-color      : var(--header-bg-hover-color);
+$header-light-bg-hover-color     : #f6f6f6;
+$header-light-desc-color         : #7c8087;
 $header-light-bottom-border-color: #eee;
 
 /* =================breadcrume=================== */
 $breadcrumb-item-normal-color: #999;
 
 /* ==================trigger===================== */
-$trigger-dark-hover-bg-color: rgba(0, 0, 0, 0.6);
-$trigger-dark-bg-color: rgba(0, 0, 0, 0.5);
-$trigger-light-bg-color: $base-color-white;
+$trigger-dark-hover-bg-color : rgba(0, 0, 0, 0.6);
+$trigger-dark-bg-color       : rgba(0, 0, 0, 0.5);
+$trigger-light-bg-color      : $base-color-white;
 $trigger-light-hover-bg-color: rgba(255, 255, 255, 0.7);
 
 /* Menus style */
-$border-color-dark:#b6b7b9;
+$border-color-dark: #b6b7b9;
 
 /* ===============Fonts=============== */
 
-$font-display: "auto";
-$font-size-extra-large: 20px;
+$font-display              : 'auto';
+$font-size-extra-large     : 20px;
 /// fontSize|1|Font Size|0
-$font-size-large: 18px;
+$font-size-large           : 18px;
 /// fontSize|1|Font Size|0
-$font-size-medium: 16px;
+$font-size-medium          : 16px;
 /// fontSize|1|Font Size|0
-$font-size-base: 14px;
+$font-size-base            : 14px;
 /// fontSize|1|Font Size|0
-$font-size-small: 12px;
+$font-size-small           : 12px;
 /// fontSize|1|Font Size|0
-$font-size-extra-small: 12px;
+$font-size-extra-small     : 12px;
 /// fontWeight|1|Font Weight|1
-$font-weight-primary: 500;
+$font-weight-primary       : 500;
 /// fontWeight|1|Font Weight|1
-$font-weight-secondary: 100;
+$font-weight-secondary     : 100;
 /// fontLineHeight|1|Line Height|2
-$font-line-height-primary: 24px;
+$font-line-height-primary  : 24px;
 /// fontLineHeight|1|Line Height|2
 $font-line-height-secondary: 16px;
 
-
-:export {
+/* :export {
   theme: $base-color-white;
-}
-
-
-
-
-
-
-
-
-
-
+} */

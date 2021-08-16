@@ -12,7 +12,7 @@
       <font-icon
         v-if="menu.meta.icon"
         :type="menu.meta.icon"
-        style="padding-right: 2px"
+        style="padding-right: 2px;"
         :class="[
           `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
           `${prefixCls}--${siderType}-icon`,
@@ -132,61 +132,73 @@
 </script>
 <style lang="scss" scoped>
   .#{$namespace}-sider-menu {
-    &--light {
-    }
     &--dark {
       &-collapse {
         ::v-deep(.el-submenu__title) {
           padding: 0 16px !important;
+
           i {
             color: $--color-white !important;
           }
         }
       }
+
       &-item,
       ::v-deep(.el-submenu__title) {
-        background-color: var(--sider-dark-bg-color);
         color: $--color-white !important;
+        background-color: var(--sider-dark-bg-color);
+
         & i {
           color: $--color-white !important;
         }
       }
+
       &-icon i {
         color: $--color-white !important;
       }
+
       &-collapse-icon {
         width: auto !important;
         height: 46px !important;
         visibility: visible !important;
       }
     }
+
     &--top-menu {
       border-bottom: none !important;
+
       &-item,
       ::v-deep(.el-submenu__title) {
-        background-color: var(--header-bg-color);
-        color: $--color-drak !important;
         padding: 0 12px !important;
+        color: $--color-drak !important;
+        background-color: var(--header-bg-color);
+
         & i {
           color: #333 !important;
         }
+
         &:hover {
-          background-color: rgb(217, 236, 255) !important;
           color: $--color-primary !important;
+          background-color: rgb(217, 236, 255) !important;
+
           i {
             color: $--color-primary !important;
           }
         }
       }
+
       &-icon {
         color: #333 !important;
+
         &:hover {
           color: $--color-primary !important;
           background-color: rgb(217, 236, 255) !important;
+
           i {
             color: $--color-primary !important;
           }
         }
+
         & i {
           color: #333 !important;
         }

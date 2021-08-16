@@ -1,5 +1,5 @@
 import { toRaw, unref } from 'vue';
-import { RouteLocationNormalized, RouteLocationRaw } from 'vue-router';
+import { RouteLocationNormalized } from 'vue-router';
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators';
 import { PageEnum } from '/@/enums/appEnum';
 import store from '/@/store';
@@ -8,18 +8,13 @@ import router from '/@/router';
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper';
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/constant';
 import { getRoute } from '/@/router/helper/routeHelper';
-import { useGo, useRedo } from '/@/hooks/web/usePage';
+import { useGo } from '/@/hooks/web/usePage';
 
 const NAME = 'tag';
 
 hotModuleUnregisterModule(NAME);
 
 export const PAGE_LAYOUT_KEY = '__PAGE_LAYOUT__';
-
-function isGotoPage() {
-  const go = useGo();
-  go(unref(router.currentRoute).path, true);
-}
 
 @Module({ namespaced: true, name: NAME, dynamic: true, store })
 class Tag extends VuexModule {

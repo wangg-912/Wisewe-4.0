@@ -7,7 +7,7 @@
     >
       <template #label>
         <div class="label-item">
-          <div style="height:30px"><FontIcon :type="filterTab(item, 'icon')" :size='20' /></div>
+          <div style="height: 30px;"><FontIcon :type="filterTab(item, 'icon')" :size="20" /></div>
           <div class="title-item">{{ filterTab(item, 'title') }}</div>
         </div>
       </template>
@@ -15,7 +15,7 @@
   </el-tabs>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, watch, onMounted, computed, watchEffect } from 'vue';
+  import { defineComponent, ref, watch, onMounted, computed } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { routeStore } from '/@/store/modules/route';
   import type { RouteRecordRaw } from 'vue-router';
@@ -96,8 +96,3 @@
     },
   });
 </script>
-<style lang="scss" scoped>
-  .#{$namespace}-mix-sidebar{
-    
-  }
-</style>

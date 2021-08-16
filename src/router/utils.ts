@@ -1,6 +1,6 @@
 import { IMenubarList } from '/@/utils/types';
 import { transPinYin } from '/@/utils/pinyin';
-import { routeStore } from '/@/store/modules/route';
+/* import { routeStore } from '/@/store/modules/route'; */
 import { asyncRouterMap } from '/@/router';
 // 引入动态路由页面
 const components: IObject<() => Promise<typeof import('*.vue')>> = {
@@ -53,7 +53,7 @@ export function transformDateByRoute(data: any, basePath = '/', level = 'root') 
       }
     }
     if (children && children.length) {
-      let bPath =
+      const bPath =
         level == 'root'
           ? `/${transPinYin(text, 'lower')}`
           : `${basePath}/${transPinYin(text, 'lower')}`;

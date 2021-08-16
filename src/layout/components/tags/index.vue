@@ -300,112 +300,132 @@
     height: 30px;
     line-height: 30px;
     border-bottom: 1px solid #eee;
+
     &-wrapper {
       position: relative;
-      height: inherit;
+
       /* overflow: hidden; */
       display: flex;
+      height: inherit;
       flex-direction: row;
+
       &::before,
       &::after {
         display: table;
         content: '';
       }
+
       &-prev,
       &-next {
         width: 20px;
         height: 30px;
+        text-align: center;
+        cursor: pointer;
+
         /*  position: absolute;
         z-index: 2; */
         border: 0;
-        text-align: center;
-        cursor: pointer;
       }
+
       &-prev {
         left: 0;
         border-right: 1px solid #eee;
       }
+
       &-next {
         right: 0;
         border-left: 1px solid #eee;
       }
+
       &-scroll {
+        position: relative;
         height: 30px;
         flex: 1;
-        position: relative;
+
         .scroll-container {
           height: 30px;
           line-height: 30px;
+
           .tag-item {
-            display: inline-block;
             position: relative;
-            cursor: pointer;
+            display: inline-block;
             height: 24px;
+
+            /* color: #495060;
+            background: #fff; */
+            padding: 0 6px;
+            margin-left: 4px;
+            font-size: 12px;
             line-height: 22px;
+            text-decoration: 0;
+            cursor: pointer;
             border: 1px solid #d8dce5;
             border-radius: 0;
-            /* color: #495060;
-            background: #fff;*/
-            padding: 0 6px;
-            font-size: 12px;
-            margin-left: 4px;
             outline: none;
-            text-decoration: 0;
+
             &:last-of-type {
               margin-right: 8px;
             }
+
             &.selected {
               &::before {
-                content: '';
-                background: #fff;
+                position: relative;
                 display: inline-block;
                 width: 8px;
                 height: 8px;
-                border-radius: 50%;
-                position: relative;
                 margin-right: 5px;
+                background: #fff;
+                border-radius: 50%;
+                content: '';
               }
             }
+
             .icon-close {
+              right: -2px;
               width: 14px;
               height: 14px;
-              border-radius: 50%;
-              text-align: center;
               line-height: 14px;
+              text-align: center;
+              border-radius: 50%;
               transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
               transform-origin: 100% 50%;
-              right: -2px;
-              &:before {
+
+              &::before {
                 display: inline-block;
               }
+
               &:hover {
-                background-color: #fc0202;
                 color: #fff;
+                background-color: #fc0202;
               }
             }
           }
         }
       }
+
       .contextmenu {
-        margin: 0;
-        background: #fff;
-        z-index: 200;
         position: absolute;
-        list-style-type: none;
+        z-index: 200;
         padding: 5px 0;
-        border-radius: 4px;
+        margin: 0;
         font-size: 12px;
         font-weight: 400;
         color: #333;
+        list-style-type: none;
+        background: #fff;
+        border-radius: 4px;
         box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+
         li {
+          padding: 0 16px;
           margin: 0;
-          padding: 0px 16px;
           cursor: pointer;
+
           &:hover {
             background: #eee;
           }
         }
+
         .line {
           margin: 0;
         }

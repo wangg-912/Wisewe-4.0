@@ -96,16 +96,18 @@
 </script>
 <style lang="scss" scoped>
   .#{$namespace}-quick-menu {
+    display: flex;
     width: 30px;
     height: 30px;
-    display: flex;
+    border-left: 1px solid #eee;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid #eee;
+
     .el-icon-arrow-down.el-icon--right {
       margin-left: 0;
       cursor: pointer;
     }
+
     &--item {
       font-size: 12px;
     }

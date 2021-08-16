@@ -98,6 +98,7 @@
       opacity: 1;
     }
   }
+
   .full-loading {
     position: fixed;
     top: 0;
@@ -108,19 +109,22 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+
     &.absolute {
       position: absolute;
       top: 0;
       left: 0;
       z-index: 300;
     }
+
     .loading-spin {
       &-dot {
         position: relative;
         display: inline-block;
-        font-size: 32px;
         width: 48px;
         height: 48px;
+        font-size: 32px;
+
         &-item {
           position: absolute;
           display: block;
@@ -128,27 +132,31 @@
           height: 20px;
           background-color: #0084f4;
           border-radius: 100%;
-          transform: scale(.75);
-          transform-origin: 50% 50%;
-          opacity: .3;
-          -webkit-animation: spinSpinMove 1s linear infinite alternate;
+          opacity: 0.3;
+          transform: scale(0.75);
+          -webkit-animation: spinspinmove 1s linear infinite alternate;
           animation: spinSpinMove 1s linear infinite alternate;
+          transform-origin: 50% 50%;
+
           &:first-child {
             top: 0;
             left: 0;
           }
+
           &:nth-child(2) {
             top: 0;
             right: 0;
             -webkit-animation-delay: 0.4s;
             animation-delay: 0.4s;
           }
+
           &:nth-child(3) {
             right: 0;
             bottom: 0;
             -webkit-animation-delay: 0.8s;
             animation-delay: 0.8s;
           }
+
           &:nth-child(4) {
             bottom: 0;
             left: 0;
@@ -157,16 +165,18 @@
           }
         }
       }
+
       &-dot-spin {
         transform: rotate(45deg);
-        -webkit-animation: spinRotate 1.2s linear infinite;
+        -webkit-animation: spinrotate 1.2s linear infinite;
         animation: spinRotate 1.2s linear infinite;
       }
-      &-text{
+
+      &-text {
         margin-top: 30px;
         font-size: 22px;
-        text-shadow: 0 1px 2px #fff;
         color: rgba(0, 0, 0, 0.85);
+        text-shadow: 0 1px 2px #fff;
         justify-content: center;
         align-items: center;
       }

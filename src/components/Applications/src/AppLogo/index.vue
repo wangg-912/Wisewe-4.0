@@ -3,7 +3,7 @@
     :class="[`${prefixCls}`, `${prefixCls}--${theme}`, `${prefixCls}--${siderType}`, `${isMobile}`]"
   >
     <img
-      style="width: 32px; height: 32px; border-radius: 4px"
+      style="width: 32px; height: 32px; border-radius: 4px;"
       src="./../../../../assets/images/logo/logo.png"
       fit="contain"
     />
@@ -48,35 +48,41 @@
 <style lang="scss" scoped>
   .#{$namespace}-app-logo {
     display: flex;
-    align-items: center;
+    height: $headers-height;
     cursor: pointer;
     transition: all 0.2s ease;
+    align-items: center;
     justify-content: center;
-    height: $headers-height;
+
     .titlt {
+      width: 160px;
       padding-left: 8px;
       font-size: 16px;
       font-weight: 700;
       color: $--color-white;
-      width: 160px;
     }
+
     &--light {
       &-titlt {
         color: $--color-drak !important;
       }
     }
+
     &--dark {
       &-title {
         color: $--color-white !important;
       }
     }
+
     &--mix {
       width: 240px;
     }
+
     &--mix,
     &--top-menu {
       padding-left: 8px;
     }
+
     &.mobile {
       width: auto;
       height: 32px;

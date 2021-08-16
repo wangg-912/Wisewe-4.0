@@ -14,7 +14,7 @@
         <i
           v-if="def === color"
           class="el-icon-check"
-          style="fontsize: 14px"
+          style="font-size: 14px;"
           :style="{ color: transformColor(color) }"
         ></i>
       </span>
@@ -77,23 +77,23 @@
     flex: 1;
     margin: 16px 0;
     justify-content: space-around;
+
     &__box {
       width: 24px;
       height: 24px;
+      cursor: pointer;
       border: 1px solid #ddd;
       border-radius: 4px;
-      cursor: pointer;
     }
+
     &__item {
+      display: flex;
       width: 18px;
       height: 18px;
-      display: flex;
       margin: 3px;
       border-radius: 2px;
       align-items: center;
       justify-content: center;
-      &--active {
-      }
     }
   }
 </style>

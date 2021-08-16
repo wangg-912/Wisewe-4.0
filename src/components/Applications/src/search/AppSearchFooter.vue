@@ -24,17 +24,17 @@
   import FontIcon from '/@/components/FontIcon/index.vue';
   export default defineComponent({
     name: 'AppSearchFooter',
-    components:{FontIcon},
-    setup(){
+    components: { FontIcon },
+    setup() {
       const { prefixCls } = useDesign('app-search-footer');
-      return{
+      return {
         prefixCls,
-      }
-    }
-  })
+      };
+    },
+  });
 </script>
 <style lang="scss" scoped>
-  .#{$namespace}-app-search-footer{
+  .#{$namespace}-app-search-footer {
     position: relative;
     display: flex;
     height: 44px;

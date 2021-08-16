@@ -35,29 +35,36 @@
   }
   .#{$namespace}-layout-header-trigger {
     padding: 0 12px;
+
     i {
       font-size: 16px;
       cursor: pointer;
+
       &.el-icon--expend {
         transform: rotate(0deg);
         @include turnRotate(200ms, $ease-in);
       }
+
       &.el-icon--collapse {
         transform: rotate(90deg);
         transition: 200ms $ease-in;
       }
     }
+
     &--dark {
       .el-icon-s-fold {
         color: $trigger-light-bg-color;
+
         &:hover {
           color: $trigger-light-hover-bg-color;
         }
       }
     }
+
     &--light {
       .el-icon-s-fold {
         color: $trigger-dark-bg-color;
+
         &:hover {
           color: $trigger-dark-hover-bg-color;
         }

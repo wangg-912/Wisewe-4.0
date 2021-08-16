@@ -21,7 +21,7 @@
     props: {
       theme: propTypes.oneOf(['dark', 'light']),
     },
-    components:{ FontIcon },
+    components: { FontIcon },
     setup() {
       const { getShowBreadCrumbIcon } = useRootSetting();
       const { currentRoute } = useRouter();
@@ -35,31 +35,38 @@
 <style lang="scss" scoped>
   .#{$namespace}-layout-header-breadcrumb {
     margin-top: -1px;
+
     ::v-deep(.el-breadcrumb__inner.is-link),
     ::v-deep(.el-breadcrumb__inner a) {
       font-weight: 400 !important;
     }
+
     ::v-deep(.el-breadcrumb__separator) {
       margin: 0 2px !important;
     }
-    .bc-title{
-      font-size: 12px;
+
+    .bc-title {
       padding-left: 2px;
+      font-size: 12px;
     }
+
     &--light {
       ::v-deep(.el-breadcrumb__inner),
       ::v-deep(.el-breadcrumb__inner.is-link) {
         color: $breadcrumb-item-normal-color;
       }
+
       ::v-deep(.el-breadcrumb__inner.is-link:hover) {
         color: rgb(9, 96, 189);
       }
     }
+
     &--dark {
       ::v-deep(.el-breadcrumb__inner),
       ::v-deep(.el-breadcrumb__inner.is-link) {
         color: rgba(255, 255, 255, 0.6);
       }
+
       ::v-deep(.el-breadcrumb__inner.is-link:hover) {
         color: rgba(255, 255, 255, 0.8);
       }

@@ -24,8 +24,9 @@
 <style lang="scss" scoped>
   .#{$namespace}-layout-footer {
     height: 30px !important;
-    text-align: center;
     font-size: $--font-size-small;
+    text-align: center;
+
     a {
       color: $--color-primary;
     }

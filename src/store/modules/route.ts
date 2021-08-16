@@ -1,7 +1,7 @@
 import type { AppRouteRecordRaw } from '/@/router/types';
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators';
-import { appStore } from '/@/store/modules/app';
-import { userStore } from '/@/store/modules/user';
+/* import { appStore } from '/@/store/modules/app';
+import { userStore } from '/@/store/modules/user'; */
 import store from '/@/store';
 import { constantRouterMap, asyncRouterMap } from '/@/router';
 import { IMenubarList } from '/@/router/types';

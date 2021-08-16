@@ -1,6 +1,9 @@
 <template>
   <em v-if="type" :class="`${prefixCls}`">
-    <i :class="[`${prefixCls}-icon`, type]" :style="{ fontSize: `${size}px`, padding:closely?'0':'0 4px'}"></i>
+    <i
+      :class="[`${prefixCls}-icon`, type]"
+      :style="{ fontSize: `${size}px`, padding: closely ? '0' : '0 4px' }"
+    ></i>
   </em>
 </template>
 <script lang="ts">
@@ -44,6 +47,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     &-icon {
       color: inherit !important;
     }

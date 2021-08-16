@@ -100,9 +100,10 @@
 
 <style lang="scss" scoped>
   .scroll-container {
-    white-space: nowrap;
     position: relative;
     width: 100%;
+    white-space: nowrap;
+
     ::v-deep(.el-scrollbar__wrap) {
       overflow: hidden;
     }

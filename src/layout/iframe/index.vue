@@ -35,7 +35,3 @@
     },
   });
 </script>
-<style lang="scss" scoped>
-  .#{$namespace}-frame-wrapper {
-  }
-</style>

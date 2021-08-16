@@ -135,15 +135,17 @@
 </script>
 <style lang="scss" scoped>
   @mixin set-menu-item($background, $color) {
-    background-color: $background !important;
     color: $color !important;
+    background-color: $background !important;
   }
   .#{$namespace}-layout-sider {
-    background: var(--sider-dark-bg-color);
     height: inherit;
+    background: var(--sider-dark-bg-color);
+
     &-wrapper {
       height: inherit;
     }
+
     &-aside {
       border-right: none;
 
@@ -152,34 +154,42 @@
       .submenu__title span {
         background: transparent;
       }
+
       ::v-deep(.el-submenu .el-menu-item),
       ::v-deep(.el-menu-item),
       ::v-deep(.el-submenu__title) {
         height: 46px;
         line-height: 46px;
+
         &:not(.is-active):hover {
           @include set-menu-item(rgb(217, 236, 255), $--color-primary);
+
           & i {
             color: $--color-primary !important;
           }
         }
       }
+
       ::v-deep(.el-menu-item) {
         &.is-active {
           @include set-menu-item(#0960bd, $--color-white);
         }
       }
+
       &--light {
         background: var(--sider-dark-bg-color);
+
         ::v-deep(.el-submenu__title) {
           & i {
             color: #303133 !important;
           }
         }
       }
+
       &--dark {
         background: var(--sider-dark-bg-color);
       }
+
       &--top-menu {
         background: var(--header-bg-color);
         border-bottom: 0;

@@ -1,39 +1,36 @@
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./extend.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="./extend.js"></script>
-</head>
+  <body>
+    测试页面
+    <script>
+      var dialogId, indata;
+      $(async function () {
+        dialogId = $.getUrlParam('dialogId');
+        indata = await getDataFromIframeDialog(dialogId);
+        console.log(indata);
+      });
 
-<body>
-  测试页面
-  <script>
-    var dialogId, indata;
-    $(async function () {
-      dialogId = $.getUrlParam("dialogId");
-      indata = await getDataFromIframeDialog(dialogId);
-      console.log(indata)
-    })
+      function innerHandle() {
+        console.log('执行内部逻辑');
+      }
 
-    function innerHandle() {
-      console.log("执行内部逻辑")
-    }
-
-    function dialogOk() {
-      const tmpData = { "name": "zs", "age": "65" };
-      innerHandle();
-      closeIframeDialog(dialogId, tmpData);
-      return tmpData;
-
-    }
-    function dialogCancel() {
-      console.log("关闭")
-    }
-  </script>
-</body>
-
+      function dialogOk() {
+        const tmpData = { name: 'zs', age: '65' };
+        innerHandle();
+        closeIframeDialog(dialogId, tmpData);
+        return tmpData;
+      }
+      function dialogCancel() {
+        console.log('关闭');
+      }
+    </script>
+  </body>
 </html>
