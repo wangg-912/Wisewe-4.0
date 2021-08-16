@@ -1,6 +1,7 @@
 <div align="center"> <a href="https://gitee.com/bensen_admin/evolution-v4"> <img alt="中教智汇管理系统" width="200" height="56" src="http://cloud.wisewe.cn:8199/images/logo/logo_max.png"> </a> <br> <br>
 
 [![license](https://img.shields.io/badge/Wisewe-V4-blue)](LICENSE)
+[![Travis](https://api.travis-ci.com/wangg-912/Wisewe-4.0.svg)](Travis)
 
 <h1>Wisewe-V4</h1>
 </div>
