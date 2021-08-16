@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <router-view>
+    <RouterView>
       <template #default="{ Component, route }">
         <transition
           :name="
@@ -15,13 +15,13 @@
           mode="out-in"
           appear
         >
-          <keep-alive v-if="openCache" :include="getCaches">
-            <component :is="Component" v-bind="getKey(Component, route)" />
-          </keep-alive>
-          <component v-else :is="Component" v-bind="getKey(Component, route)" />
+          <!-- <keep-alive v-if="openCache" :include="getCaches"> -->
+          <component :is="Component" v-bind="getKey(Component, route)" />
+          <!--  </keep-alive>
+          <component v-else :is="Component" v-bind="getKey(Component, route)" /> -->
         </transition>
       </template>
-    </router-view>
+    </RouterView>
     <!-- <FramePanel v-if="getCanEmbedIFramePage" /> -->
   </div>
 </template>

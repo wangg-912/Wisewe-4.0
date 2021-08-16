@@ -4,34 +4,19 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+  import { defineComponent } from 'vue';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { useTagSetting } from '/@/hooks/setting/useTagSetting';
-  import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
   import FramePanel from '/@/layout/iframe/index.vue';
-  import { useCache, getKey } from './useCache';
-  import { getTransitionName } from './transition';
   export default defineComponent({
     name: 'PageLayout',
     components: { FramePanel },
     setup() {
       const { prefixCls } = useDesign('layout-wrapper');
-      const { getOpenKeepAlive, getCanEmbedIFramePage } = useRootSetting();
-      const { getTagsShow } = useTagSetting();
-      const { getCaches } = useCache(false);
-      const { getBasicTransition, getEnableTransition } = useTransitionSetting();
-      const openCache = computed(() => unref(getOpenKeepAlive) && unref(getTagsShow));
+      const { getCanEmbedIFramePage } = useRootSetting();
       return {
         prefixCls,
-        getKey,
-        getOpenKeepAlive,
         getCanEmbedIFramePage,
-        getTransitionName,
-        openCache,
-        getEnableTransition,
-        getBasicTransition,
-        getCaches,
       };
     },
   });
