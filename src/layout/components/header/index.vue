@@ -14,15 +14,15 @@
         <BreadCrumb v-if="getShowBread" :theme="headerTheme" />
       </div>
       <!-- mobile模式专用 -->
-      <div v-if="getIsMobile" style="padding: 0 8px;">
-        <i class="el-icon-s-fold" style="font-size: 16px;" @click="tgMobileTrigger"></i>
+      <div v-if="getIsMobile" style="padding: 0 8px">
+        <i class="el-icon-s-fold" style="font-size: 16px" @click="tgMobileTrigger"></i>
       </div>
     </div>
     <div :class="`${prefixCls}-center`">
       <el-scrollbar>
         <LayoutSider
           v-if="`${siderType}` == 'top-menu'"
-          style="display: flex; max-width: 1280px;"
+          style="display: flex; max-width: 1280px"
           :navMode="siderType == 'top-menu' ? 'horizontal' : 'vertical'"
           :siderType="siderType"
         />
@@ -45,7 +45,7 @@
       </div>
       <div :class="[`${prefixCls}-right--item`, `${prefixCls}-right--user`]">
         <el-dropdown @command="handCommand">
-          <span class="el-dropdown-link drop--user--text" style="font-size: 12px;">
+          <span class="el-dropdown-link drop--user--text" style="font-size: 12px">
             <span v-if="userInfo.name">{{ userInfo.name }}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
@@ -62,7 +62,7 @@
         </el-dropdown>
         <form
           ref="loginOutForm"
-          style="display: none;"
+          style="display: none"
           action="/shiro-cas-logout"
           method="GET"
           @submit.prevent="submit"

@@ -12,7 +12,7 @@
       <font-icon
         v-if="menu.meta.icon"
         :type="menu.meta.icon"
-        style="padding-right: 2px;"
+        style="padding-right: 2px"
         :class="[
           `${siderType}` !== 'top-menu' && `${prefixCls}--${theme}-${collapse}-icon`,
           `${prefixCls}--${siderType}-icon`,
@@ -83,6 +83,7 @@
       const onlyOneChild = ref<any>(null);
       const { prefixCls } = useDesign('sider-menu');
       const { getCollapsed } = useMenuSetting();
+      // eslint-disable-next-line vue/no-setup-props-destructure
       const { basePath, siderType } = context;
       // console.log(basePath)
       const collapse = computed(() => (unref(getCollapsed) ? 'collapse' : 'expend'));

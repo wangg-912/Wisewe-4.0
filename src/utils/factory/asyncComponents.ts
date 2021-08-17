@@ -3,7 +3,6 @@ import Skeleton from './Skeleton.vue';
 import Empty from './Empty.vue';
 
 const noop = () => {};
-
 interface Options {
   size?: 'default' | 'small' | 'large';
   delay?: number;
@@ -11,10 +10,15 @@ interface Options {
   loading?: boolean;
   retry?: boolean;
 }
-
+/**
+ * @description 异步加载组件
+ * @param loader 工厂模式
+ * @param options 加载配置
+ * @returns 异步加载完毕的组件
+ */
 export function createAsyncComponent(loader: Fn, options: Options = {}) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { size = 'small', delay = 650, timeout = 30000, loading = false, retry = true } = options;
+  const { delay = 650, timeout = 3000, loading = false, retry = true } = options;
   const dyCp = (loading: boolean) => {
     return loading ? Skeleton : undefined;
   };
@@ -24,9 +28,6 @@ export function createAsyncComponent(loader: Fn, options: Options = {}) {
     loadingComponent: dyCp(loading),
     errorComponent: Empty,
     timeout,
-    // errorComponent
-    //定义组件是否可疑。默认值：true。
-    //suspensible:false
     delay,
     /**
      *@param {*}错误错误消息对象

@@ -37,7 +37,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, computed, unref, reactive, toRefs } from 'vue';
+  import { defineComponent, PropType, computed, unref } from 'vue';
   import { useRouter } from 'vue-router';
   import { routeStore } from '/@/store/modules/route';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -77,10 +77,7 @@
       const { currentRoute } = useRouter();
       const isCollapse = computed(() => unref(getCollapsed));
       const activeMenu = computed(() => {
-        const { matched, path } = currentRoute.value;
-        /* if(!meta.leaf){
-          
-        } */
+        const { path } = currentRoute.value;
         return path;
       });
       const menusWidth = computed(() => {

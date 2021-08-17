@@ -7,7 +7,7 @@
     >
       <template #label>
         <div class="label-item">
-          <div style="height: 30px;"><FontIcon :type="filterTab(item, 'icon')" :size="20" /></div>
+          <div style="height: 30px"><FontIcon :type="filterTab(item, 'icon')" :size="20" /></div>
           <div class="title-item">{{ filterTab(item, 'title') }}</div>
         </div>
       </template>

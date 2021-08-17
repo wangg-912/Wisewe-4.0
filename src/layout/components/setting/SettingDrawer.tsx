@@ -32,7 +32,7 @@ export default defineComponent({
       getShowHeader,
       /* getFixed: getHeaderFixed, */
       getHeaderBgColor,
-      /*  */ getShowSearch,
+      /*getShowSearch,*/
     } = useHeaderSetting();
 
     const {

@@ -1,7 +1,7 @@
 import { computed, unref } from 'vue';
 import type { ProjectConfig } from '/@/type/config';
 import { appStore } from '/@/store/modules/app';
-import { ContentEnum } from '/@/enums/appEnum';
+/* import { ContentEnum } from '/@/enums/appEnum'; */
 type RootSetting = Omit<ProjectConfig, 'headerSetting' | 'menuSetting' | 'tagsSetting'>;
 const getRootSetting = computed((): RootSetting => appStore.getProjectConfig);
 const getFullContent = computed(() => unref(getRootSetting).fullContent);

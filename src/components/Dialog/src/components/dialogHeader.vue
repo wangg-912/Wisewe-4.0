@@ -4,7 +4,7 @@
       v-if="icon"
       :class="icon"
       size="18"
-      style="display: flex; justify-content: center; align-items: center; padding-right: 4px;"
+      style="display: flex; justify-content: center; align-items: center; padding-right: 4px"
     ></i>
     {{ title }}
   </BasicTitle>

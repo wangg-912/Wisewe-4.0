@@ -14,7 +14,7 @@
         <i
           v-if="def === color"
           class="el-icon-check"
-          style="font-size: 14px;"
+          style="font-size: 14px"
           :style="{ color: transformColor(color) }"
         ></i>
       </span>

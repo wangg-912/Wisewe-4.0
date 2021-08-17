@@ -70,7 +70,6 @@ export function useDialog(): UseDialogReturnType {
         detail.source.postMessage(Object.assign({}, JSON.parse(transforDataStr)));
       }
       if (callbackData) {
-        //TODO
         getInstance()?.callbackFn({ type: 'ok', data: callbackData });
       }
     }

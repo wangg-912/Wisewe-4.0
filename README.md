@@ -101,6 +101,7 @@ evolution-v4
 ├─ .env.production
 ├─ .eslintignore
 ├─ .eslintrc.js
+├─ .stylelintignore
 ├─ .travis.yml
 ├─ babel.config.js
 ├─ build
@@ -128,11 +129,9 @@ evolution-v4
 │  ├─ extend
 │  │  ├─ esayui-1.8.6
 │  │  │  ├─ easyloader.js
-│  │  │  ├─ jquery.easyui.min.js
 │  │  │  ├─ locale
 │  │  │  │  └─ easyui-lang-zh_CN.js
 │  │  │  ├─ plugins
-│  │  │  │  ├─ copy.js
 │  │  │  │  ├─ jquery.dialog.js
 │  │  │  │  ├─ jquery.draggable.js
 │  │  │  │  ├─ jquery.droppable.js
@@ -144,40 +143,6 @@ evolution-v4
 │  │  │  │  ├─ jquery.resizable.js
 │  │  │  │  └─ jquery.window.js
 │  │  │  └─ themes
-│  │  │     ├─ color.css
-│  │  │     ├─ icon.css
-│  │  │     ├─ icons
-│  │  │     │  ├─ back.png
-│  │  │     │  ├─ blank.gif
-│  │  │     │  ├─ cancel.png
-│  │  │     │  ├─ clear.png
-│  │  │     │  ├─ cut.png
-│  │  │     │  ├─ edit_add.png
-│  │  │     │  ├─ edit_remove.png
-│  │  │     │  ├─ filesave.png
-│  │  │     │  ├─ filter.png
-│  │  │     │  ├─ help.png
-│  │  │     │  ├─ large_chart.png
-│  │  │     │  ├─ large_clipart.png
-│  │  │     │  ├─ large_picture.png
-│  │  │     │  ├─ large_shapes.png
-│  │  │     │  ├─ large_smartart.png
-│  │  │     │  ├─ lock.png
-│  │  │     │  ├─ man.png
-│  │  │     │  ├─ mini_add.png
-│  │  │     │  ├─ mini_edit.png
-│  │  │     │  ├─ mini_refresh.png
-│  │  │     │  ├─ more.png
-│  │  │     │  ├─ no.png
-│  │  │     │  ├─ ok.png
-│  │  │     │  ├─ pencil.png
-│  │  │     │  ├─ print.png
-│  │  │     │  ├─ redo.png
-│  │  │     │  ├─ reload.png
-│  │  │     │  ├─ search.png
-│  │  │     │  ├─ sum.png
-│  │  │     │  ├─ tip.png
-│  │  │     │  └─ undo.png
 │  │  │     └─ material-teal
 │  │  │        ├─ easyui.css
 │  │  │        └─ images
@@ -260,9 +225,6 @@ evolution-v4
 │  │  │  ├─ index.vue
 │  │  │  └─ theme.json
 │  │  ├─ FontIcon
-│  │  │  └─ index.vue
-│  │  ├─ home
-│  │  │  ├─ Header.vue
 │  │  │  └─ index.vue
 │  │  ├─ Loading
 │  │  │  ├─ index.ts

@@ -3,7 +3,7 @@
     :class="[`${prefixCls}`, `${prefixCls}--${theme}`, `${prefixCls}--${siderType}`, `${isMobile}`]"
   >
     <img
-      style="width: 32px; height: 32px; border-radius: 4px;"
+      style="width: 32px; height: 32px; border-radius: 4px"
       src="./../../../../assets/images/logo/logo.png"
       fit="contain"
     />

@@ -5,7 +5,7 @@
   />
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref, reactive, toRefs } from 'vue';
+  import { defineComponent, computed, unref } from 'vue';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
   import { useDesign } from '/@/hooks/web/useDesign';

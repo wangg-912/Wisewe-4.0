@@ -6,7 +6,7 @@
   >
     <LayoutFeatures />
     <Sider v-if="getShowMenu || getIsMobile" />
-    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee;">
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
       <LayoutHeader fixed />
       <LayoutTags v-if="getTagsShow" />
       <LayoutContent />
@@ -23,7 +23,7 @@
     <LayoutHeader fixed :siderType="siderType" />
     <el-container>
       <Sider />
-      <el-container direction="vertical" style="border-left: 1px solid #eee;">
+      <el-container direction="vertical" style="border-left: 1px solid #eee">
         <LayoutTags v-if="getTagsShow" />
         <LayoutContent />
         <LayoutFooter />
@@ -52,7 +52,7 @@
     <LayoutFeatures />
     <MixTabs :class="`${prefixCls}--${siderType}--tabs`" />
     <Sider v-if="getShowMenu || getIsMobile" :siderType="siderType" />
-    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee;">
+    <el-container direction="vertical" :calss="!prefixCls" style="border-left: 1px solid #eee">
       <LayoutHeader fixed :siderType="siderType" />
       <LayoutTags v-if="getTagsShow" />
       <LayoutContent />

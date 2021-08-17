@@ -30,12 +30,16 @@
       },
     },
     setup(props) {
+      // eslint-disable-next-line vue/no-setup-props-destructure
       const { type, color, size } = props;
       const { prefixCls } = useDesign('font-type');
       return {
         prefixCls,
+        // eslint-disable-next-line vue/no-dupe-keys
         type,
+        // eslint-disable-next-line vue/no-dupe-keys
         color,
+        // eslint-disable-next-line vue/no-dupe-keys
         size,
       };
     },

@@ -36,7 +36,7 @@ export function createWindowListen(fn?: (opt: CreateCallbackParams) => void) {
     const sm = screenMap.get(sizeEnum.SM)!;
     const md = screenMap.get(sizeEnum.MD)!;
     const lg = screenMap.get(sizeEnum.LG)!;
-    const xl = screenMap.get(sizeEnum.XL)!;
+    /* const xl = screenMap.get(sizeEnum.XL)!; */
 
     if (width < xs) {
       screenRef.value = sizeEnum.XS;

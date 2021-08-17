@@ -24,7 +24,7 @@
   </section>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, CSSProperties, PropType } from 'vue';
+  import { defineComponent, computed, PropType } from 'vue';
   import { ThemeEnum } from '/@/enums/appEnum';
   export default defineComponent({
     name: 'Loading',

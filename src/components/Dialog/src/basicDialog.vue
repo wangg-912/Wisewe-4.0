@@ -51,7 +51,7 @@
         v-if="getBindValue.renderFrame && getBindValue.url"
         :src="getBindValue.url"
         frameborder="0"
-        style="width: 100%; min-height: 100%; overflow: auto;"
+        style="width: 100%; min-height: 100%; overflow: auto"
       ></iframe>
       <slot v-else> </slot>
     </DialogWrapper>

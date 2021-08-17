@@ -10,8 +10,8 @@ const {
   getMenuMode,
   getSplit,
   getIsSidebarType,
-  getShowHeaderTrigger,
-  getIsTopMenu,
+  /* getShowHeaderTrigger,
+  getIsTopMenu, */
 } = useMenuSetting();
 const { getShowBreadCrumb, getShowLogo } = useRootSetting();
 
@@ -19,14 +19,6 @@ const { getShowBreadCrumb, getShowLogo } = useRootSetting();
  * @description 获取头部配置
  */
 const getHeaderSetting = computed(() => appStore.getProjectConfig.headerSetting);
-
-/* bgColor: string;
-  fixed: boolean;
-  show: boolean;
-  theme: ThemeEnum;
-  showFullScreen: boolean;
-  showNotice: boolean;
-  showSearch: boolean; */
 const getHeaderTheme = computed(() => unref(getHeaderSetting).theme);
 const getShowHeader = computed(() => unref(getHeaderSetting).show);
 const getFixed = computed(() => unref(getHeaderSetting).fixed);
