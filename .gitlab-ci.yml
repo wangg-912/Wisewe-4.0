@@ -11,10 +11,4 @@ build project:
     paths:
       - public
 
-test artifact:
-  image: alpine
-  stage: test
-  script:
-    - grep -q "Gatsby" ./index.html
-
 
