@@ -1,0 +1,18 @@
+image: node:16.5.0
+pages:
+  stage: deploy
+  cache:
+    key:
+      files:
+        - package-lock.json
+      prefix: yarn
+    paths:
+      - node_modules/
+  script:
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - dist
+  rules:
+    - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
