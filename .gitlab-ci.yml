@@ -13,6 +13,6 @@ pages:
     - yarn build
   artifacts:
     paths:
-      - dist
+      - distgit remote add origin
   rules:
     - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
