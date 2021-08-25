@@ -45,7 +45,11 @@
           const _frame = iframe as any;
           iframe.onload = () => {
             const { contentWindow } = _frame;
-            if (contentWindow.document.body && !contentWindow.document.body.innerHTML) {
+            if (
+              contentWindow.document.body &&
+              (!contentWindow.document.body.innerHTML ||
+                contentWindow.document.body.innerHTML.includes('HTTP Status 404'))
+            ) {
               visibility.value = false;
             }
           };

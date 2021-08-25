@@ -1,1 +1,0 @@
-import{u as r}from"./index.2cb29b3d.js";import{d as e,u as a,j as t,k as s}from"./element-plus.34e177e2.js";var u=e({name:"Redirect",setup(){const{currentRoute:e,replace:t}=r(),{params:s,query:u}=a(e),{path:n}=s;return t({path:"/"+(Array.isArray(n)?n.join("/"):n),query:u}),{}}});u.render=function(r,e,a,u,n,o){return t(),s("div")};export default u;

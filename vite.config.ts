@@ -136,7 +136,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         'vue-router': 'VueRouter',
         'element-ui': 'ELEMENT',
       }),
-      /*  viteMockServe({
+      /* viteMockServe({
         mockPath: 'mock',
         supportTs: true,
         logger: true,

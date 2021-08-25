@@ -1,4 +1,4 @@
-import { createStorage } from '/@/utils/cache';
+import { createStorage } from './../cache';
 import { BASE_LOCAL_CACHE_KEY, BASE_SESSION_CACHE_KEY } from '/@/enums/cacheEnum';
 
 const ls = createStorage(localStorage);

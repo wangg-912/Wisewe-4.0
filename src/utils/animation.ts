@@ -1,4 +1,4 @@
-import { isServer } from '/@/utils/tools';
+import { isServer } from './tools';
 let lastTime = 0;
 const prefixes = 'webkit moz ms o'.split(' ');
 

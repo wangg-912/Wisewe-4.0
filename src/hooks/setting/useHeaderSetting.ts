@@ -2,13 +2,13 @@ import type { HeaderSetting } from '/@/type/config';
 import { computed, unref } from 'vue';
 import { appStore } from '/@/store/modules/app';
 
-import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+import { useMenuSetting } from './useMenuSetting';
+import { useRootSetting } from './useRootSetting';
 import { MenuModeEnum } from '/@/enums/menuEnum';
 
 const {
   getMenuMode,
-  getSplit,
+  /* getSplit, */
   getIsSidebarType,
   /* getShowHeaderTrigger,
   getIsTopMenu, */
@@ -28,9 +28,7 @@ const getShowFullScreen = computed(() => unref(getHeaderSetting).showFullScreen)
 const getShowNotice = computed(() => unref(getHeaderSetting).showNotice);
 
 const getShowBread = computed(() => {
-  return (
-    unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && unref(getShowBreadCrumb) && !unref(getSplit)
-  );
+  return unref(getMenuMode) !== MenuModeEnum.HORIZONTAL && unref(getShowBreadCrumb);
 });
 
 const getShowHeaderLogo = computed(() => {

@@ -1,8 +1,7 @@
 import { IMenubarList } from '/@/utils/types';
 import { transPinYin } from '/@/utils/pinyin';
 /* import { routeStore } from '/@/store/modules/route'; */
-import { asyncRouterMap } from '/@/router';
-// 引入动态路由页面
+import { asyncRouterMap } from '/@/router'; // 引入动态路由页面
 const components: IObject<() => Promise<typeof import('*.vue')>> = {
   Layout: ((() => import('/@/layout/index.vue')) as unknown) as () => Promise<
     typeof import('*.vue')
@@ -44,10 +43,16 @@ export function transformDateByRoute(data: any, basePath = '/', level = 'root') 
     if (!leaf) {
       obj.component = level == 'root' ? components['Layout'] : components['PagePanel'];
     } else {
-      if (attributes && attributes.url && attributes.url.indexOf('html') > -1) {
-        obj.meta.frameSrc = attributes.url;
-        obj.meta.frameOpenType = attributes.openType ?? 0;
+      const { url, openType } = attributes || {};
+      if (url) {
+        obj.meta.frameSrc = url;
+        obj.meta.frameOpenType = openType ?? 0;
         obj.component = components['FramePage'];
+        //console.log(text, openType);
+        if (openType) {
+          //debugger;
+          obj.path = url;
+        }
       } else {
         obj.component = () => import(`${attributes.url}.vue`);
       }

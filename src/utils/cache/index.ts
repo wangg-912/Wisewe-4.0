@@ -1,6 +1,6 @@
-import { getStorageShortName } from '/@/utils/helper/envHelper';
+import { getStorageShortName } from './../helper/envHelper';
 import { createStorage as create } from './storageCache';
-import { enableStorageEncryption } from '/@/settings/encryptionSetting';
+import { enableStorageEncryption } from './../encryption/encryptionSetting';
 /**
  * @description 创建配置
  * @param storage

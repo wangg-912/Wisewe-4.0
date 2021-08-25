@@ -1,5 +1,5 @@
-import { DEFAULT_CACHE_TIME, cacheCipher } from '/@/settings/encryptionSetting';
-import Encryption, { EncryptionParams } from '/@/utils/encryption/aesEncryption';
+import { DEFAULT_CACHE_TIME, cacheCipher } from './../encryption/encryptionSetting';
+import Encryption, { EncryptionParams } from './../encryption/aesEncryption';
 
 export interface CreateStorageParams extends EncryptionParams {
   storage: Storage;

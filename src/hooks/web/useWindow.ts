@@ -1,5 +1,5 @@
 import { ref, computed, ComputedRef, unref } from 'vue';
-import { useEventListener } from '/@/hooks/event/useEventListener';
+import { useEventListener } from './../event/useEventListener';
 import { screenMap, sizeEnum, screenEnum } from '/@/enums/windowEnum';
 /**
  * @description 全局常量 globalScreenRef|globalWidthRef|globalRealWidthRef

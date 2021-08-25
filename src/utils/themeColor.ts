@@ -1,5 +1,5 @@
 import color from 'css-color-function';
-import { formula } from '/@/utils/constant';
+import { formula } from './constant';
 /**
  * @description 颜色生成器
  * @param {String }primary

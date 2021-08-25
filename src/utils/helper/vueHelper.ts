@@ -9,7 +9,7 @@ import {
   reactive,
   ComponentInternalInstance,
 } from 'vue';
-import { error } from '../log';
+import { error } from './../log';
 /**
  * @description 根据监听值，返回值
  * @param {String} source 计算属性KEY

@@ -1,8 +1,8 @@
 import type { Ref } from 'vue';
 
 import { ref, watch, unref } from 'vue';
-import { useDebounce } from '/@/hooks/core/useDebounce';
-import { useThrottle } from '/@/hooks/core/useThrottle';
+import { useDebounce } from './../core/useDebounce';
+import { useThrottle } from './../core/useThrottle';
 export type RemoveEventFn = () => void;
 
 export interface UseEventParams {

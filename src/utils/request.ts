@@ -4,12 +4,9 @@ import { ElMessage } from 'element-plus';
 import { addPendingRequest, removePendingRequest } from './commonAxios';
 const ENV = import.meta.env;
 const { VITE_SERVICE_BASE_API } = ENV;
-/* console.log(import.meta.env) */
-/* let loading: { close(): void }; */
 const request = axios.create({
-  // API 请求的默认前缀
   baseURL: `${VITE_SERVICE_BASE_API}`,
-  timeout: 60000, // 请求超时时间
+  timeout: 60000,
 });
 
 const handleCode = (code: number, msg?: string) => {

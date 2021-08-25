@@ -1,5 +1,5 @@
 import { Slots } from 'vue';
-import { isFunction } from '/@/utils/tools';
+import { isFunction } from './../tools';
 
 /**
  * @description:  Get slot to prevent empty error

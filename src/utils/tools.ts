@@ -81,15 +81,10 @@ export const isServer = typeof window === 'undefined';
 
 export const isClient = !isServer;
 
-export function isUrl(path: string): boolean {
-  const reg = /(((^http|https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
-  return reg.test(path);
-}
 // 验证网址
 export function isExternal(path: any): boolean {
-  return /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/.test(
-    path
-  );
+  const reg = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/;
+  return reg.test(path);
 }
 export const noop = () => {};
 /**
@@ -137,4 +132,21 @@ export function deepClone(source: any, noClone: string[] = []): any {
     }
   });
   return targetObj;
+}
+/**
+ * @description 打开window窗口
+ * @param url
+ * @param opt
+ */
+export function openWindow(
+  url: string,
+  opt?: { target?: TargetContext | string; noopener?: boolean; noreferrer?: boolean }
+) {
+  const { target = '__blank', noopener = true, noreferrer = true } = opt || {};
+  const feature: string[] = [];
+
+  noopener && feature.push('noopener=yes');
+  noreferrer && feature.push('noreferrer=yes');
+
+  window.open(url, target, feature.join(','));
 }

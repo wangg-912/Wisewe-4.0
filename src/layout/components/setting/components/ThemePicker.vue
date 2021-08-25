@@ -90,7 +90,7 @@
       display: flex;
       width: 18px;
       height: 18px;
-      margin: 3px;
+      margin: 2px;
       border-radius: 2px;
       align-items: center;
       justify-content: center;
