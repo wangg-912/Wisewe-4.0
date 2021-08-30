@@ -8,6 +8,17 @@ export function getWorkVo(): Promise<AxiosResponse> {
     method: 'get',
   });
 }
+/**
+ * @description 获取密码权限规则
+ * @returns
+ */
+export function verifyPwdRules(): Promise<AxiosResponse> {
+  return request({
+    url:
+      '/platform/common/property/batch/platform.security.password.validate,platform.security.password.minLength',
+    method: 'get',
+  });
+}
 export function getMenusDate(): Promise<AxiosResponse> {
   return request({
     url: '/platform/permission/menu/tree',

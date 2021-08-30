@@ -162,11 +162,12 @@
         }
         return settingButtonPosition === SettingButtonPositionEnum.HEADER;
       });
-
       function tgMobileTrigger() {
         toggleMobileTriggerState(!getMobileTriggrState.value);
       }
+      /**修改密码弹窗相关 */
       const [register1, { openDialog: openDailog1 }] = useDialog();
+      //TODO verifyPwdRules v-bind
       function modifyPassWord() {
         debugger;
       }
@@ -176,8 +177,8 @@
             //alert('修改密码');
             openDailog1({
               title: '修改密码',
-              width: 360,
-              height: 430,
+              width: 300,
+              height: 260,
             });
             break;
           case 'loginout':
