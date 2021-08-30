@@ -32,12 +32,13 @@
     name: 'DialogToolbar',
     props: {
       showClose: propTypes.bool.def(true),
-      canFullscreen: propTypes.bool.def(true),
+      canFullscreen: propTypes.bool,
       fullscreen: propTypes.bool,
     },
     emits: ['close', 'fullscreen'],
 
     setup(props, { emit }) {
+      //debugger;
       const { prefixCls } = useDesign('basic-modal-toolbar');
       const getToolCls = computed(() => {
         return [

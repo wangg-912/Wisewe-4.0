@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot name="insertFooter"></slot>
-    <el-button type="info" @click="handleCancel" v-if="showCancelBtn" :size="size">
+    <el-button @click="handleCancel" v-if="showCancelBtn" :size="size">
       {{ cancelText }}
     </el-button>
     <slot name="centerFooter"></slot>

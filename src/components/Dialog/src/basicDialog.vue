@@ -15,6 +15,7 @@
         />
         <DialogToolbar
           :showClose="getBindValue.showClose"
+          :canFullscreen="getBindValue.canFullscreen"
           :fullscreen="fullScreenRef"
           @close="handleCancel"
           @fullscreen="handleFullScreen"
@@ -176,6 +177,7 @@
             },
           };
         }
+        //debugger;
         return { ...attrs, ...unref(getProps) };
       });
 

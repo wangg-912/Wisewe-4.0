@@ -72,6 +72,9 @@
         v-if="getShowSettingButton && !getIsMobile"
         :class="`${prefixCls}-right--item`"
       />
+      <BasicDialog @register="register1" @save="modifyPassWord">
+        <SettingPsd ref="setPsdRef" />
+      </BasicDialog>
     </div>
   </el-header>
 </template>
@@ -89,6 +92,8 @@
   import Screenfull from './components/Screenfull.vue';
   import { useAppInject } from '/@/hooks/web/useAppInject';
   import { userStore } from '/@/store/modules/user';
+  import { BasicDialog, useDialog } from '/@/components/Dialog';
+  import SettingPsd from './components/SettingPsd.vue';
   export default defineComponent({
     name: 'LayoutHeader',
     props: {
@@ -111,9 +116,12 @@
         loading: true,
       }),
       LayoutSider: createAsyncComponent(() => import('/@/layout/components/aside/index.vue')),
+      BasicDialog,
+      SettingPsd,
     },
     setup(props) {
       const loginOutForm = ref(null);
+      const setPsdRef = ref(null);
       const {
         getShowSetting,
         getSettingPosition,
@@ -158,10 +166,19 @@
       function tgMobileTrigger() {
         toggleMobileTriggerState(!getMobileTriggrState.value);
       }
+      const [register1, { openDialog: openDailog1 }] = useDialog();
+      function modifyPassWord() {
+        debugger;
+      }
       function handCommand(name: string) {
         switch (name) {
           case 'modify':
-            alert('修改密码');
+            //alert('修改密码');
+            openDailog1({
+              title: '修改密码',
+              width: 360,
+              height: 430,
+            });
             break;
           case 'loginout':
             loginOutForm.value.submit();
@@ -185,6 +202,10 @@
         userInfo,
         handCommand,
         loginOutForm,
+        register1,
+        openDailog1,
+        modifyPassWord,
+        setPsdRef,
       };
     },
   });

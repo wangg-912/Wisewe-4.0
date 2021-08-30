@@ -31,7 +31,7 @@ export const basicProps = Object.assign({}, dialogProps, {
   title: propTypes.string.def('标题'),
   titleIcon: propTypes.bool,
   fullscreen: propTypes.bool.def('false'),
-  canFullscreen: propTypes.bool.def(true),
+  canFullscreen: propTypes.bool,
   wrapperFooterOffset: propTypes.number.def(0),
   /* 插槽必须开启次配置，计算属性使用的 */
   useWrapper: propTypes.bool.def(true),
