@@ -20,6 +20,8 @@
       initAppConfigStore();
       async function runPermission() {
         const userInfo = await userStore.getAppPermission();
+        /*  const userPermission = await userStore.getUserPermission;
+        window.workspaceVo = Object.assign({}, userInfo, userPermission); */
         if (!userInfo) {
           //TODO
         }
